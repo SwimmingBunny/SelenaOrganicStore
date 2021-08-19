@@ -1,5 +1,6 @@
 import React from "react";
-import { Input } from "antd";
+import { Input, Menu, Dropdown, Button } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import "../../style/style.scss";
 import "../../style/base.scss";
@@ -9,8 +10,70 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(fab, faShoppingCart, faTrash);
+
 const Header = () => {
   const { Search } = Input;
+  const accountMenu = (
+    <Menu className="header__top-account-sub">
+      <Menu.Item>
+        <a>My Account </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a>Login</a>
+      </Menu.Item>
+      <Menu.Item>
+        <a>Register</a>
+      </Menu.Item>
+    </Menu>
+  );
+  const cartMenu = (
+    <Menu className="header__top-cart-sub">
+      <div className="header__top-cart-container">
+        <Menu.Item>
+          <div className="header__top-container">
+            <div>
+              <img
+                className="header__top-container-img"
+                src="https://template.hasthemes.com/selena/selena/assets/img/cart/cart-1.jpg"
+                alt=""
+              />
+            </div>
+            <div className="header__top-container-info">
+              <span className="header__top-container-info--prd">
+                SIMPLE PRODUCT
+              </span>
+              <span className="header__top-container-info--qty">Qty:</span>
+              <span className="header__top-container-info--prc">$60.00</span>
+            </div>
+            <div className="header__top-container-clear">x</div>
+          </div>
+        </Menu.Item>
+        <Menu.Item>
+          <span className="header__top-container-subtotal">SUBTOTAL:</span>
+        </Menu.Item>
+        <Menu.Item>
+          <Button id="header__top-container-btn" type="primary">
+            View Cart
+          </Button>
+        </Menu.Item>
+        <Menu.Item>
+          <Button id="header__top-container-btn" type="primary">
+            Check Out
+          </Button>
+        </Menu.Item>
+      </div>
+    </Menu>
+  );
+  const shoplist = (
+    <Menu className="header__top-submenu">
+      <Menu.Item>
+        <a className="header__top-submenu--a">Shop List Item </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a className="header__top-submenu--a">Product Detail</a>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <>
       <div className="header">
@@ -23,33 +86,24 @@ const Header = () => {
             />
             <div className="header__top-right">
               <div className="header__top-account">
-                <nav>
-                  <ul className="header__top-account-ul">
-                    <li className="header__top-account-li">
-                      <a href="" className="header__top-account-a">
-                        My Account
-                      </a>
-                      <div className="header__top-account-noti">
-                        <nav>
-                          <ul>
-                            <li>My account</li>
-                            <li>Login</li>
-                            <li>Register</li>
-                          </ul>
-                        </nav>
-                        {/* <p>My account </p>
-                        <p>Login</p>
-                        <p> Register</p> */}
-                      </div>
-                    </li>
-                  </ul>
-                </nav>
+                <Dropdown overlay={accountMenu}>
+                  <a className="header__top-account-a">
+                    My Account <DownOutlined />
+                  </a>
+                </Dropdown>
               </div>
               <div className="header__top-search">
                 <Search enterButton placeholder="search here" />
               </div>
               <div className="header__top-cart">
-                <FontAwesomeIcon icon="shopping-cart" />
+                <Dropdown overlay={cartMenu}>
+                  <a>
+                    <FontAwesomeIcon
+                      className="header__top-cart-icon"
+                      icon="shopping-cart"
+                    />
+                  </a>
+                </Dropdown>
               </div>
             </div>
           </div>
@@ -71,9 +125,13 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a className="header__top-menu-a" href="">
-                  SHOP
-                </a>
+                <div>
+                  <Dropdown overlay={shoplist}>
+                    <a className="header__top-menu-a">
+                      SHOP <DownOutlined />
+                    </a>
+                  </Dropdown>
+                </div>
               </li>
               <li>
                 <a className="header__top-menu-a" href="">
@@ -88,6 +146,7 @@ const Header = () => {
             </ul>
           </nav>
         </div>
+        <hr />
       </div>
     </>
   );
