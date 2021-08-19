@@ -1,0 +1,89 @@
+@import "./variable.scss";
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&display=swap");
+@import "./base.scss";
+@import "normalize.css";
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+// Header
+// Header
+.header {
+  padding: 20px 0;
+}
+.header__top {
+  display: flex;
+  justify-content: space-between;
+}
+.header__top-img {
+  padding: 0 22px;
+}
+.header__top-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 70%;
+}
+.header__top-account {
+  width: 20%;
+}
+.header__top-search {
+  width: 50%;
+}
+.header__top-cart {
+  width: 20%;
+}
+/* header account*/
+.header__top-account-ul {
+  list-style: none;
+  margin: 0;
+  &__li {
+    position: relative;
+  }
+}
+.header__top-account-li {
+  position: relative;
+}
+.header__top-account-a {
+  color: $textColor;
+}
+.header__top-account-noti {
+  display: none;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: $white;
+  padding: 5px;
+  min-width: 120px;
+  font-size: 1.4rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 20%);
+  // transition: height 3s ease-in;
+  animation: growth 0.5s ease-in;
+  --growth-from: 0.7;
+  --growth-to: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+.header__top-account-li:hover > .header__top-account-noti {
+  display: block;
+  // height: 100px;
+}
+//  Header Menu
+//  Header Menu
+.header__top-menu-ul {
+  display: flex;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 22px 0;
+}
+.header__top-menu-a {
+  padding: 22px;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: $headingColor;
+}
+
+.header__top-menu-a:hover {
+  color: $primaryColor;
+}
