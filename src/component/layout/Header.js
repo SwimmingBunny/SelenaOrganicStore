@@ -1,15 +1,14 @@
 import React from "react";
-import { Input, Menu, Dropdown, Button } from "antd";
+import { Input, Menu, Dropdown, Button, Row, Col } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import "../../style/style.scss";
 import "../../style/base.scss";
 import ReactDOM from "react-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-library.add(fab, faShoppingCart, faTrash);
+library.add(faShoppingCart, faTrash);
 
 const Header = () => {
   const { Search } = Input;
@@ -67,7 +66,7 @@ const Header = () => {
   const shoplist = (
     <Menu className="header__top-submenu">
       <Menu.Item>
-        <a className="header__top-submenu--a">Shop List Item </a>
+        <a className="header__top-submenu--a">Shop List Item</a>
       </Menu.Item>
       <Menu.Item>
         <a className="header__top-submenu--a">Product Detail</a>
@@ -76,26 +75,32 @@ const Header = () => {
   );
   return (
     <>
-      <div className="header">
+      <Row className="header">
         <div className="container">
           <div className="header__top">
-            <img
-              className="header__top-img"
-              src="https://template.hasthemes.com/selena/selena/assets/img/logo/logo.png"
-              alt="Logo image"
-            />
-            <div className="header__top-right">
-              <div className="header__top-account">
+            <Col lg={{ span: 10 }}>
+              <img
+                className="header__top-img"
+                src="Images/logo/logo.png"
+                alt="Logo image"
+              />
+            </Col>
+
+            <Col className="header__top-right" lg={{ span: 14 }}>
+              <Col className="header__top-account" lg={{ span: 6 }}>
                 <Dropdown overlay={accountMenu}>
                   <a className="header__top-account-a">
                     My Account <DownOutlined />
                   </a>
                 </Dropdown>
-              </div>
-              <div className="header__top-search">
-                <Search enterButton placeholder="search here" />
-              </div>
-              <div className="header__top-cart">
+              </Col>
+              <Col className="header__top-search" lg={{ span: 14 }}>
+                <Search
+                  className="header__top-search-input"
+                  placeholder="search here"
+                />
+              </Col>
+              <Col lg={{ span: 4 }} className="header__top-cart">
                 <Dropdown overlay={cartMenu}>
                   <a>
                     <FontAwesomeIcon
@@ -104,22 +109,22 @@ const Header = () => {
                     />
                   </a>
                 </Dropdown>
-              </div>
-            </div>
+              </Col>
+            </Col>
           </div>
         </div>
-      </div>
+      </Row>
       {/* Header Menu */}
       <div className="container">
         <div className="header__top-menu">
           <nav>
             <ul className="header__top-menu-ul">
-              <li>
+              <li className="header__top-menu-li">
                 <a className="header__top-menu-a" href="">
                   HOME
                 </a>
               </li>
-              <li>
+              <li className="header__top-menu-li">
                 <a className="header__top-menu-a" href="">
                   PAGES
                 </a>
@@ -133,12 +138,12 @@ const Header = () => {
                   </Dropdown>
                 </div>
               </li>
-              <li>
+              <li className="header__top-menu-li">
                 <a className="header__top-menu-a" href="">
                   ABOUT US
                 </a>
               </li>
-              <li>
+              <li className="header__top-menu-li">
                 <a className="header__top-menu-a" href="">
                   CONTACT
                 </a>
@@ -146,7 +151,6 @@ const Header = () => {
             </ul>
           </nav>
         </div>
-        <hr />
       </div>
     </>
   );

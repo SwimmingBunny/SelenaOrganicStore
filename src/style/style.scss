@@ -2,10 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
 @import "./base.scss";
-.container {
-  width: 80%;
-  margin: 0 auto;
-}
+
 // Header
 // Header
 .header {
@@ -21,25 +18,21 @@
   padding: 0 22px;
 }
 .header__top-right {
-  display: flex;
+  display: flex !important;
   justify-content: flex-end;
   align-items: center;
-  width: 70%;
+  // width: 70%;
 }
-.header__top-account {
-  width: 20%;
-}
-.header__top-search {
-  width: 50%;
-}
-.header__top-cart {
-  width: 20%;
-}
+
 /* header account*/
-.header__top-account-a {
-  color: $textColor;
-  &:hover {
-    color: $primaryColor;
+.header__top-account {
+  display: flex !important;
+  justify-content: center;
+  &-a {
+    color: $textColor;
+    &:hover {
+      color: $primaryColor;
+    }
   }
 }
 
@@ -57,10 +50,17 @@
     color: $primaryColor;
   }
 }
+.header__top-search-input {
+  border-radius: 2px;
+  border-color: $primaryColor;
 
+  &:hover {
+    border-color: $primaryColor;
+  }
+}
 // header cart
 .header__top-cart {
-  display: flex;
+  display: flex !important;
   justify-content: center;
 }
 
@@ -117,18 +117,19 @@
 }
 //  Header Menu
 //  Header Menu
-.header__top-menu {
-  border-bottom: 2px solid $borderColor;
-}
+
 .header__top-menu-ul {
   display: flex;
   justify-content: flex-start;
   list-style: none;
-  margin: 22px 0;
+  padding: 22px 0;
+  border-bottom: 2px solid $borderColor;
   font-family: "Raleway", sans-serif;
 }
+.header__top-menu-li {
+}
 .header__top-menu-a {
-  padding: 22px;
+  padding: 24px;
   font-weight: 400;
   font-size: 1.5rem;
   color: $headingColor;
@@ -136,14 +137,17 @@
     color: $primaryColor;
     font-size: 1.6rem;
     line-height: 1.6rem;
+    border-bottom: $primaryColor 2px solid;
   }
 }
 
 .header__top-submenu {
-  border-top: 2px solid $primaryColor;
+  // border-top: 2px solid $primaryColor;
   width: 200px;
+  font-family: "Raleway", sans-serif;
+
   &--a {
     margin: 10px;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 }

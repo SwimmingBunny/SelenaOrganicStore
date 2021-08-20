@@ -4,9 +4,13 @@
   padding: 0;
 }
 html {
-  font-size: 62.5%;
-  font-family: "Raleway", sans-serif;
+  font-size: 62.5% !important;
+  font-family: "Raleway", sans-serif !important;
   box-sizing: border-box;
+}
+.container {
+  width: 70%;
+  margin: 0 auto;
 }
 @keyframes growth {
   from {
@@ -14,5 +18,13 @@ html {
   }
   to {
     transform: scale(var(--growth-to));
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
