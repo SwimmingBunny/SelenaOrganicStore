@@ -117,6 +117,10 @@
     color: $white;
     padding-bottom: 80px;
     padding-top: 20px;
+    transition: 0.5s;
+    &:hover {
+      color: $black;
+    }
   }
   &--img {
     width: 100%;
