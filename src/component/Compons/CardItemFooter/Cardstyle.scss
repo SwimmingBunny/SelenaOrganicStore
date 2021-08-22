@@ -1,0 +1,37 @@
+@import "../../../style/variable.scss";
+
+
+.card{
+    display: flex;
+    margin-top: 3.5rem;
+    
+    &__img{
+        width: 20%;
+        margin-right: 2rem;
+        border: 1.5px solid $borderColor;
+        border-radius: 5px;
+        &:hover{
+            border: 1.5px solid $primaryColor;
+        }
+        & img{
+            width: 100%;
+        }
+    }
+    &__info{
+        &--name{
+            color: $textColor;
+            font-size: 2rem;
+            &:hover{
+                color: $primaryColor;
+            }
+        }
+        &--price{
+            width: 30%;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            font-weight: bold;
+            color: $primaryColor;
+            border-top: 1px solid $borderColor;
+        }
+    }
+}
