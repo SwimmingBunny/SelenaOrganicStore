@@ -68,6 +68,9 @@
   color: $primaryColor;
   cursor: pointer;
   font-size: 3.6rem;
+  &:hover{
+    color: $primaryHoverColor;
+  }
 }
 .header__top-container {
   display: flex;
