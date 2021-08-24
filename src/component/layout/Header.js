@@ -1,10 +1,22 @@
 import React from "react";
 import { Input, Menu, Dropdown, Button, Row, Col } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+
+import {ROUTE} from '../../constant/router.js';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink
+} from "react-router-dom";
+
 import "antd/dist/antd.css";
 import "../../style/style.scss";
 import "../../style/base.scss";
 import ReactDOM from "react-dom";
+
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,10 +30,10 @@ const Header = () => {
         <a>My Account </a>
       </Menu.Item>
       <Menu.Item>
-        <a>Login</a>
+        <NavLink to={ROUTE.LOGIN} exact>Login</NavLink>
       </Menu.Item>
       <Menu.Item>
-        <a>Register</a>
+        <NavLink to={ROUTE.REGISTER} exact>Register</NavLink>
       </Menu.Item>
     </Menu>
   );
