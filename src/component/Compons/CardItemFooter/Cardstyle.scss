@@ -8,10 +8,10 @@
     &__img{
         width: 20%;
         margin-right: 2rem;
-        border: 1.5px solid $borderColor;
-        border-radius: 5px;
+        border: 0.2rem solid $borderColor;
+        border-radius: 0.5rem;
         &:hover{
-            border: 1.5px solid $primaryColor;
+            border: 0.25rem solid $primaryColor;
         }
         & img{
             width: 100%;
@@ -31,7 +31,7 @@
             padding-top: 1rem;
             font-weight: bold;
             color: $primaryColor;
-            border-top: 1px solid $borderColor;
+            border-top: 0.1rem solid $borderColor;
         }
     }
 }

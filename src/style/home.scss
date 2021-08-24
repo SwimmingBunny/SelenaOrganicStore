@@ -4,7 +4,7 @@
 @import "./base.scss";
 
 .slider__content1 {
-  margin: 80px 0;
+  margin: 8rem 0;
   display: flex !important;
   font-size: 62.5%;
   font-family: "Raleway", sans-serif;
@@ -38,7 +38,7 @@
   border-color: $primaryColor;
   color: $primaryColor;
   font-weight: 700;
-  max-width: 150px;
+  max-width: 15rem;
   &:hover {
     background-color: $primaryColor;
     color: $white;
@@ -54,17 +54,17 @@
   font-family: "Raleway", sans-serif;
   box-sizing: border-box;
   background-color: #62d2a2;
-  padding: 20px 0;
-  border-radius: 10px;
+  padding: 2rem 0;
+  border-radius: 1rem;
   transform: translateY(-50%);
   &__detail {
     display: flex;
-    border-right: 1px solid#a5e5ca;
+    border-right: 0.1rem solid#a5e5ca;
     justify-content: center;
     &-plant {
       color: #a5e5ca;
       font-size: 4.4rem;
-      margin-right: 30px;
+      margin-right: 3rem;
       &--icon:hover {
         animation: rotate 1s linear;
       }
@@ -98,7 +98,7 @@
   font-family: "Raleway", sans-serif;
   box-sizing: border-box;
   background-color: #f3f6f5;
-  margin-top: 50px;
+  margin-top: 5rem;
 
   &-item {
     display: flex;
@@ -107,20 +107,20 @@
 }
 .categories-item-col {
   cursor: pointer;
-  border-radius: 20px;
-  min-height: 200px;
-  border: 1px $white solid;
+  border-radius: 2rem;
+  min-height: 20rem;
+  border: 0.1rem $white solid;
   &--h2 {
     font-family: "Berkshire Swash", cursive;
     font-weight: 700;
     font-size: 3.5rem;
     color: $white;
-    padding-bottom: 80px;
-    padding-top: 20px;
+    padding-bottom: 8rem;
+    padding-top: 2rem;
   }
   &--img {
     width: 100%;
-    padding-bottom: 30px;
+    padding-bottom: 3rem;
   }
 }
 .green {
@@ -146,20 +146,20 @@
     &::before {
       content: "";
       position: absolute;
-      width: 100px;
-      height: 2px;
+      width: 10rem;
+      height: 0.2rem;
       background: #62d2a2;
       bottom: 0;
       right: 47%;
-      margin: -8px;
+      margin: -0.8rem;
     }
   }
 }
 .categories-item-boder {
-  margin: 10px;
+  margin: 1rem;
 
   &:hover {
-    border: 2px solid $white;
-    border-radius: 20px;
+    border: 0.2rem solid $white;
+    border-radius: 2rem;
   }
 }
