@@ -129,10 +129,10 @@ const Header = () => {
                   PAGES
                 </a>
               </li>
-              <li>
+              <li className="header__top-menu-li">
                 <div>
                   <Dropdown overlay={shoplist}>
-                    <a className="header__top-menu-a">
+                    <a className="header__top-menu-a  boder-none">
                       SHOP <DownOutlined />
                     </a>
                   </Dropdown>
