@@ -1,14 +1,14 @@
 import React from "react";
 import { Input, Menu, Dropdown, Button, Row, Col } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-
-import {ROUTE} from '../../constant/router.js';
+import { useHistory } from "react-router-dom";
+import { ROUTE } from "../../constant/router.js";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  NavLink
+  NavLink,
 } from "react-router-dom";
 
 import "antd/dist/antd.css";
@@ -16,13 +16,16 @@ import "../../style/style.scss";
 import "../../style/base.scss";
 import ReactDOM from "react-dom";
 
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faShoppingCart, faTrash);
 
 const Header = () => {
+  const history = useHistory();
+  function goHome() {
+    history.push("/");
+  }
   const { Search } = Input;
   const accountMenu = (
     <Menu className="header__top-account-sub">
@@ -30,10 +33,14 @@ const Header = () => {
         <a>My Account </a>
       </Menu.Item>
       <Menu.Item>
-        <NavLink to={ROUTE.LOGIN} exact>Login</NavLink>
+        <NavLink to={ROUTE.LOGIN} exact>
+          Login
+        </NavLink>
       </Menu.Item>
       <Menu.Item>
-        <NavLink to={ROUTE.REGISTER} exact>Register</NavLink>
+        <NavLink to={ROUTE.REGISTER} exact>
+          Register
+        </NavLink>
       </Menu.Item>
     </Menu>
   );
@@ -95,6 +102,7 @@ const Header = () => {
                 className="header__top-img"
                 src="Images/logo/logo.png"
                 alt="Logo image"
+                onClick={goHome}
               />
             </Col>
 
@@ -108,7 +116,7 @@ const Header = () => {
               </Col>
               <Col className="header__top-search" lg={{ span: 14 }}>
                 <Search
-                  className="header__top-search-input"
+                  id="header__top-search-input"
                   placeholder="search here"
                 />
               </Col>
@@ -132,7 +140,7 @@ const Header = () => {
           <nav>
             <ul className="header__top-menu-ul">
               <li className="header__top-menu-li">
-                <a className="header__top-menu-a" href="">
+                <a className="header__top-menu-a" href="" onClick={goHome}>
                   HOME
                 </a>
               </li>

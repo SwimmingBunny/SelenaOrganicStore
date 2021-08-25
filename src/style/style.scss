@@ -6,7 +6,7 @@
 // Header
 // Header
 .header {
-  padding: 20px 0;
+  padding: 2rem 0;
 }
 .header__top {
   display: flex;
@@ -15,7 +15,8 @@
   font-size: 1.4rem;
 }
 .header__top-img {
-  padding: 0 22px;
+  padding: 0 2.2rem;
+  cursor: pointer;
 }
 .header__top-right {
   display: flex !important;
@@ -40,20 +41,21 @@
   font-family: "Raleway", sans-serif;
   font-size: 1.6rem;
   align-items: center;
-  width: 120px;
-  padding: 10px;
+  width: 12rem;
+  padding: 1rem;
 }
 /* header Search*/
 .header__top-search {
   border: $borderColor;
+  outline: none;
   &:hover {
     color: $primaryColor;
   }
 }
-.header__top-search-input {
-  border-radius: 2px;
-  border-color: $primaryColor;
-
+#header__top-search-input {
+  border-color: $borderColor;
+  padding: 1.5rem;
+  border-radius: 2rem 0 0 2rem;
   &:hover {
     border-color: $primaryColor;
   }
@@ -76,12 +78,12 @@
   display: flex;
 }
 .header__top-container-img {
-  width: 100px;
+  width: 10rem;
 }
 .header__top-container-info {
   display: flex;
   flex-direction: column;
-  margin: 0 10px;
+  margin: 0 0.1rem;
   &--prd {
     font-size: 1.6rem;
     &:hover {
@@ -98,7 +100,7 @@
   }
 }
 .header__top-container-clear {
-  margin: 10px;
+  margin: 0.1rem;
   font-size: 1.6rem;
   font-weight: 700;
   &:hover {
@@ -125,15 +127,15 @@
   display: flex;
   justify-content: flex-start;
   list-style: none;
-  padding: 22px 0;
-  border-bottom: 2px solid $borderColor;
+  padding: 2.2rem 0;
+  border-bottom: 0.2rem solid $borderColor;
   font-family: "Raleway", sans-serif;
 }
 .header__top-menu-li {
   min-width: 13rem;
 }
 .header__top-menu-a {
-  padding: 24px;
+  padding: 2.4rem;
   font-weight: 400;
   font-size: 1.5rem;
   color: $headingColor;
@@ -141,17 +143,17 @@
     color: $primaryColor;
     font-size: 1.6rem;
     line-height: 1.6rem;
-    border-bottom: $primaryColor 2px solid;
+    border-bottom: $primaryColor 0.2rem solid;
   }
 }
 
 .header__top-submenu {
   // border-top: 2px solid $primaryColor;
-  width: 200px;
+  width: 20rem;
   font-family: "Raleway", sans-serif;
 
   &--a {
-    margin: 10px;
+    margin: 0.1rem;
     font-size: 1.6rem;
   }
 }

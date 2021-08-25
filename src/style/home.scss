@@ -3,8 +3,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
 @import "./base.scss";
 @import "../component/commont/quickview.scss";
+@import "../style/ant.scss";
 .slider__content1 {
-  margin: 80px 0;
+  margin: 8rem 0;
   display: flex !important;
   font-size: 62.5%;
   font-family: "Raleway", sans-serif;
@@ -38,7 +39,7 @@
   border-color: $primaryColor;
   color: $primaryColor;
   font-weight: 700;
-  max-width: 150px;
+  max-width: 15rem;
   &:hover {
     background-color: $primaryColor;
     color: $white;
@@ -54,17 +55,17 @@
   font-family: "Raleway", sans-serif;
   box-sizing: border-box;
   background-color: #62d2a2;
-  padding: 20px 0;
-  border-radius: 10px;
+  padding: 2rem 0;
+  border-radius: 1rem;
   transform: translateY(-50%);
   &__detail {
     display: flex;
-    border-right: 1px solid#a5e5ca;
+    border-right: 0.1rem solid#a5e5ca;
     justify-content: center;
     &-plant {
       color: #a5e5ca;
       font-size: 4.4rem;
-      margin-right: 30px;
+      margin-right: 3rem;
       &--icon:hover {
         animation: rotate 1s linear;
       }
@@ -98,7 +99,7 @@
   font-family: "Raleway", sans-serif;
   box-sizing: border-box;
   background-color: #f3f6f5;
-  margin-top: 50px;
+  margin-top: 5rem;
 
   &-item {
     display: flex;
@@ -107,16 +108,16 @@
 }
 .categories-item-col {
   cursor: pointer;
-  border-radius: 20px;
-  min-height: 200px;
-  border: 1px $white solid;
+  border-radius: 2rem;
+  min-height: 20rem;
+  border: 0.1rem $white solid;
   &--h2 {
     font-family: "Berkshire Swash", cursive;
     font-weight: 700;
     font-size: 3.5rem;
     color: $white;
-    padding-bottom: 80px;
-    padding-top: 20px;
+    padding-bottom: 8rem;
+    padding-top: 2rem;
     transition: 0.5s linear;
     &:hover {
       color: $black;
@@ -124,7 +125,7 @@
   }
   &--img {
     width: 100%;
-    padding-bottom: 30px;
+    padding-bottom: 3rem;
   }
 }
 .green {
@@ -150,21 +151,21 @@
     &::before {
       content: "";
       position: absolute;
-      width: 100px;
-      height: 2px;
+      width: 10rem;
+      height: 0.2rem;
       background: #62d2a2;
       bottom: 0;
       right: 47%;
-      margin: -8px;
+      margin: -0.8rem;
     }
   }
 }
 .categories-item-boder {
-  margin: 10px;
+  margin: 1rem;
 
   &:hover {
-    border: 2px solid $white;
-    border-radius: 20px;
+    border: 0.2rem solid $white;
+    border-radius: 2rem;
   }
 }
 // Home best sell
@@ -189,7 +190,7 @@
         background: #62d2a2;
         bottom: 0;
         left: 15%;
-        margin: -8px;
+        margin: -0.8rem;
       }
     }
   }
@@ -215,7 +216,7 @@
 }
 .sell__img-eye {
   display: none;
-  border: 1px solid $primaryColor;
+  border: 0.1rem solid $primaryColor;
   right: 34%;
   position: absolute;
   top: 35%;
@@ -239,7 +240,7 @@
     background: $borderColor;
     font-size: 1.1rem;
     font-weight: 400;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     &:hover {
       background: $primaryColor;
       color: $white;
@@ -263,7 +264,7 @@
       background: $borderColor;
       bottom: 0;
       left: 40%;
-      margin: -8px;
+      margin: -0.8rem;
     }
   }
   &-price {
@@ -281,7 +282,7 @@
   text-decoration: line-through;
   color: $textColor !important;
   font-size: 1.4rem !important;
-  margin-left: 10px;
+  margin-left: 0.1rem;
 }
 // Products Item
 // Products Item
@@ -302,60 +303,36 @@
       &::before {
         content: "";
         position: absolute;
-        width: 100px;
-        height: 2px;
+        width: 10rem;
+        height: 0.2rem;
         background: #62d2a2;
         bottom: 0;
         right: 47%;
-        margin: -8px;
+        margin: -0.8rem;
       }
     }
   }
   &__item {
-    display: flex;
-    justify-content: center;
     margin-top: 5rem;
-    &-ul {
-      display: flex;
-      text-align: center;
-      &-li {
-        position: relative;
-        list-style: none;
-        min-width: 10rem;
-        padding-bottom: 1rem;
-        cursor: pointer;
-        &:hover {
-          &::before {
-            content: "";
-            position: absolute;
-            width: 8rem;
-            height: 0.1rem;
-            background: $primaryColor;
-            bottom: 0;
-            left: 20%;
-            margin: -8px;
-            animation: drag linear 1s;
-          }
-        }
-        &-a {
-          color: $textColor;
-          &:hover {
-            color: $primaryColor;
-          }
-        }
-      }
+    &-list {
+      color: $textColor;
     }
   }
   &__list {
     display: flex;
     cursor: pointer;
+    &-list {
+      &--tab {
+        display: flex;
+      }
+    }
     &-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: 1px solid $borderColor;
+      border: 0.1rem solid $borderColor;
       &:hover {
-        border: 1px solid $primaryColor;
+        border: 0.1rem solid $primaryColor;
         opacity: 0.8;
       }
       &:hover > .quickview__eye {
@@ -385,7 +362,7 @@
           background: $borderColor;
           bottom: 0;
           left: 40%;
-          margin: -8px;
+          margin: -0.8rem;
         }
       }
       &--price {
@@ -404,7 +381,7 @@
         display: flex;
         &-1 {
           z-index: 100;
-          border: 1px solid $primaryColor;
+          border: 0.1rem solid $primaryColor;
           padding: 1rem 1.4rem;
           border-radius: 50%;
           transform: translate(54%, 50%);
@@ -444,15 +421,16 @@
   }
   &__button {
     text-align: center;
+    margin: 2rem 0 rem;
     &-btn {
       font-size: 2rem;
-      padding-bottom: 3rem;
-      border: 1px solid $primaryColor;
-      color: $primaryColor;
+      padding-bottom: 3.2rem;
+      background: $primaryColor;
+      color: $white;
+
       &:hover {
-        background: $primaryColor;
-        color: $white;
-        border: none;
+        color: $primaryColor;
+        border: 0.1rem solid $primaryColor;
       }
     }
   }
