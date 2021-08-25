@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import { Row, Col } from 'antd';
 import { Form, Input, Button, Checkbox } from "antd";
 import "../../../style/form.scss";
 import "../../../style/base.scss";
@@ -8,7 +9,12 @@ import "../../../style/base.scss";
 const Login = () => {
   return (
     <div className='form container'>
-      <div className='form__group'>
+      <Row gutter={[16, 16]}>
+        <Col xs={{ span: 12}} lg={{ span: 12}}>
+          <img style={{width:'100%',height:'41rem'}} src="Images/banner/best-sellers.png"/>
+        </Col>
+        <Col xs={{ span: 12 }} lg={{ span: 12}}>
+        <div className='form__group'>
         <h1>Sign In</h1>
         <Form name='basic' initialValues={{ remember: true }}>
           <Form.Item
@@ -50,6 +56,9 @@ const Login = () => {
           </Form.Item>
         </Form>
       </div>
+        </Col>
+      </Row>
+      
     </div>
   );
 };

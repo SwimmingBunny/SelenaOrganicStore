@@ -6,6 +6,8 @@ import Shipping from "./Home.Shipping";
 import Categories from "./Home.Categories";
 import BestSell from "./Home.BestSell";
 import Product from "./Home.Product";
+import BannerStatistics from "./Home.BannerStatistics";
+import Brandarea from "./Home.Brandarea";
 //
 const Home = () => {
   return (
@@ -22,6 +24,8 @@ const Home = () => {
         <Product />
       </div>
       <BestSell />
+      <BannerStatistics/>
+      <Brandarea/>
     </>
   );
 };
