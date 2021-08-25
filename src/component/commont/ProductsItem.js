@@ -1,6 +1,6 @@
 import React from "react";
 import QuickView from "./QuickView";
-import { Col, Popover } from "antd";
+import { Row, Col, Popover } from "antd";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faShoppingBag,

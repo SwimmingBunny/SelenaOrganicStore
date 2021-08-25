@@ -16,6 +16,7 @@
 }
 .header__top-img {
   padding: 0 2.2rem;
+  cursor: pointer;
 }
 .header__top-right {
   display: flex !important;
@@ -41,19 +42,20 @@
   font-size: 1.6rem;
   align-items: center;
   width: 12rem;
-  padding: 0.1rem;
+  padding: 1rem;
 }
 /* header Search*/
 .header__top-search {
   border: $borderColor;
+  outline: none;
   &:hover {
     color: $primaryColor;
   }
 }
-.header__top-search-input {
-  border-radius: 0.2rem;
-  border-color: $primaryColor;
-
+#header__top-search-input {
+  border-color: $borderColor;
+  padding: 1.5rem;
+  border-radius: 2rem 0 0 2rem;
   &:hover {
     border-color: $primaryColor;
   }
