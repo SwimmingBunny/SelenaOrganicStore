@@ -68,7 +68,7 @@
   color: $primaryColor;
   cursor: pointer;
   font-size: 3.6rem;
-  &:hover{
+  &:hover {
     color: $primaryHoverColor;
   }
 }
@@ -130,6 +130,7 @@
   font-family: "Raleway", sans-serif;
 }
 .header__top-menu-li {
+  min-width: 13rem;
 }
 .header__top-menu-a {
   padding: 2.4rem;
@@ -152,5 +153,10 @@
   &--a {
     margin: 0.1rem;
     font-size: 1.6rem;
+  }
+}
+.boder-none {
+  &:hover {
+    // border: none !important;
   }
 }

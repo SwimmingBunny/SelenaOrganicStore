@@ -132,19 +132,17 @@ const Header = () => {
           <nav>
             <ul className="header__top-menu-ul">
               <li className="header__top-menu-li">
-                <a className="header__top-menu-a" href="">
-                  HOME
-                </a>
+                <NavLink to={ROUTE.HOME} className="header__top-menu-a" >HOME</NavLink>
               </li>
               <li className="header__top-menu-li">
                 <a className="header__top-menu-a" href="">
                   PAGES
                 </a>
               </li>
-              <li>
+              <li className="header__top-menu-li">
                 <div>
                   <Dropdown overlay={shoplist}>
-                    <a className="header__top-menu-a">
+                    <a className="header__top-menu-a  boder-none">
                       SHOP <DownOutlined />
                     </a>
                   </Dropdown>
