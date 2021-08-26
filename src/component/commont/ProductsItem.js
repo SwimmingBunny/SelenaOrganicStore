@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faShoppingBag, faHeart, faStar);
 const ProductItem = (props) => {
   return (
-    <Col lg={{ span: 6 }}>
+    <Col lg={{ span: 8 }}>
       <div style={{ padding: "2.4rem .8rem " }}>
         <div className="product__list-item">
           <div className="product__list-item--img">
