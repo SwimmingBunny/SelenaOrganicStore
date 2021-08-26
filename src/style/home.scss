@@ -100,7 +100,6 @@
   box-sizing: border-box;
   background-color: #f3f6f5;
   margin-top: 5rem;
-
   &-item {
     display: flex;
     text-align: center;
@@ -162,7 +161,6 @@
 }
 .categories-item-boder {
   margin: 1rem;
-
   &:hover {
     border: 0.2rem solid $white;
     border-radius: 2rem;
@@ -456,11 +454,10 @@
       width: 100%;
     }
     &--hover {
-      transition: transform 1s;
       &:hover {
         width: 100rem;
-        opacity: 0.8;
-        transform: rotate(370deg);
+        opacity: 0.5;
+        overflow: hidden;
       }
     }
   }

@@ -15,7 +15,7 @@ const Footer = () => {
           <Col  className="footer__top--contact" lg={{ span: 6}}>
               <h2>CONTACT INFO</h2>
               <h3 className='footer--padding'><EnvironmentOutlined className='footer__icon' />Location:</h3>
-              <a href="https://goo.gl/maps/qbG5TN9bEP3iWFGL7">127 Hung Vuong street,<br/> Vinh Trung, Da Nang City</a>
+              <a href="https://goo.gl/maps/qbG5TN9bEP3iWFGL7">127 Hung Vuong street,<br/> Vinh Trung Ward, Da Nang City</a>
               <h3 className='footer--padding'><PhoneOutlined className='footer__icon' />Call Us Now:</h3>
               <p>0943.11.9999</p>
               <h3 className='footer--padding'><MailOutlined className='footer__icon'/>Email:</h3>
@@ -29,7 +29,7 @@ const Footer = () => {
 
           </Col>
           <Col lg={{ span: 7}}>
-            <h2><StarOutlined className='footer__icon'/>TOP RATED PRODUCT</h2>
+            <h2>TOP RATED PRODUCT</h2>
             <CardItem img='images/product/product-12.jpg'  name="Pork" price="7.99" />
             <CardItem img='images/product/product-14.jpg'  name="Chicken meat" price="10.2" />
             <CardItem img='images/product/product-13.jpg'  name="Fish" price="8.2" />
