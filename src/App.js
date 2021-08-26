@@ -6,6 +6,7 @@ import { ROUTE } from "./constant/router.js";
 import Footer from "./component/layout/Footer";
 import Login from "./pages/form/formLogin/Login";
 import Register from "./pages/form/formRegister/Register";
+import ListItem from "./pages/shop/ShopListItem/ListItem";
 
 function App() {
   return (
@@ -19,15 +20,18 @@ function App() {
             <Home />
           </Route>
           <Route path={ROUTE.LOGIN} exact>
-            <Login/>
+            <Login />
           </Route>
           <Route path={ROUTE.REGISTER} exact>
-            <Register/>
+            <Register />
+          </Route>
+          <Route path={ROUTE.SHOPITEM} exact>
+            <ListItem />
           </Route>
         </Switch>
       </div>
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

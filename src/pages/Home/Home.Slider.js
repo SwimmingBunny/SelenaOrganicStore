@@ -24,7 +24,7 @@ const Slider = () => {
           <Col lg={{ span: 12 }}>
             <img
               className="slider__content1-text--img"
-              src="https://template.hasthemes.com/selena/selena/assets/img/slider/slide_1.jpg"
+              src="Images/slider/slide_1.jpg"
             />
           </Col>
         </Row>
@@ -44,7 +44,7 @@ const Slider = () => {
           <Col lg={{ span: 12 }}>
             <img
               className="slider__content1-text--img"
-              src="https://template.hasthemes.com/selena/selena/assets/img/slider/slide_2.jpg"
+              src="Images/slider/slide_2.jpg"
               style={contentStyle}
             />
           </Col>
