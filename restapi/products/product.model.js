@@ -45,17 +45,4 @@ const Products = (products)  => {
     });
   };
 
-  // Products.getAllProduct = result => {
-  //   sql.query("SELECT * FROM products", (err, res) => {
-  //     if (err) {
-  //       console.log("error: ", err);
-  //       result(null, err);
-  //       return;
-  //     }
-  
-  //     console.log("products: ", res);
-  //     result(null, res);
-  //   });
-  // };
-
   module.exports = Products;
