@@ -162,9 +162,11 @@ const Header = () => {
                 </div>
               </li>
               <li className="header__top-menu-li">
-                <a className="header__top-menu-a" href="">
-                  ABOUT US
-                </a>
+                <NavLink to={ROUTE.ABOUTUS} exact>
+                  <a className="header__top-menu-a" href="">
+                    ABOUT US
+                  </a>
+                </NavLink>
               </li>
               <li className="header__top-menu-li">
                 <a className="header__top-menu-a" href="">
