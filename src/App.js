@@ -7,6 +7,8 @@ import Footer from "./component/layout/Footer";
 import Login from "./pages/form/formLogin/Login";
 import Register from "./pages/form/formRegister/Register";
 import ListItem from "./pages/shop/ShopListItem/ListItem";
+import ProductDetail from "./pages/productDetails/ProductDetails";
+import Contact from "./pages/contact/Contact";
 
 function App() {
   return (
@@ -27,6 +29,12 @@ function App() {
           </Route>
           <Route path={ROUTE.SHOPITEM} exact>
             <ListItem />
+          </Route>
+          <Route  path={ROUTE.SHOPDETAIL} exact>
+            <ProductDetail />
+          </Route>
+          <Route  path={ROUTE.CONTACT} exact>
+            <Contact />
           </Route>
         </Switch>
       </div>
