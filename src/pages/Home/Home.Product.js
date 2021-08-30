@@ -1,9 +1,9 @@
 import React from "react";
 import { Tabs, Button, Row } from "antd";
 import ProductItem from "../../component/commont/ProductsItem";
-import { CATEGORIES } from "../../constant/router";
 import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { ROUTE } from "../../constant/router.js";
+
 const Product = () => {
   const { TabPane } = Tabs;
 
@@ -15,30 +15,7 @@ const Product = () => {
       <div className="product__heading">
         <h1 className="product__heading-h1">Our Products</h1>
       </div>
-      {/* <div  >
-        <ul className="product__item-ul">
-          <li className="product__item-ul-li">
-            <a className="product__item-ul-li-a" href="" exact>
-              Vegetable
-            </a>
-          </li>{" "}
-          <li className="product__item-ul-li">
-            <a className="product__item-ul-li-a" href="">
-              Fruits
-            </a>
-          </li>{" "}
-          <li className="product__item-ul-li">
-            <a className="product__item-ul-li-a" href="">
-              Juice
-            </a>
-          </li>{" "}
-          <li className="product__item-ul-li">
-            <a className="product__item-ul-li-a" href="">
-              Meats
-            </a>
-          </li>
-        </ul>
-      </div> */}
+
       <div className="product__item">
         <Tabs
           defaultActiveKey="1"
@@ -155,7 +132,9 @@ const Product = () => {
       </div>
 
       <div className="product__button">
-        <Button className="product__button-btn">View more</Button>
+        <NavLink to={ROUTE.SHOPITEM} exact>
+          <Button className="product__button-btn">View more</Button>
+        </NavLink>
       </div>
     </div>
   );

@@ -84,9 +84,12 @@ const Header = () => {
   );
   const shoplist = (
     <Menu className="header__top-submenu">
-      <Menu.Item>
-        <a className="header__top-submenu--a">Shop List Item</a>
-      </Menu.Item>
+      <NavLink to={ROUTE.SHOPITEM} exact>
+        <Menu.Item>
+          <a className="header__top-submenu--a">Shop List Item</a>
+        </Menu.Item>
+      </NavLink>
+
       <Menu.Item>
         <a className="header__top-submenu--a">Product Detail</a>
       </Menu.Item>
@@ -159,9 +162,11 @@ const Header = () => {
                 </div>
               </li>
               <li className="header__top-menu-li">
-                <a className="header__top-menu-a" href="">
-                  ABOUT US
-                </a>
+                <NavLink to={ROUTE.ABOUTUS} exact>
+                  <a className="header__top-menu-a" href="">
+                    ABOUT US
+                  </a>
+                </NavLink>
               </li>
               <li className="header__top-menu-li">
                 <a className="header__top-menu-a" href="">
