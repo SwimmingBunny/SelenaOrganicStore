@@ -1,0 +1,21 @@
+@import "./variable.scss";
+
+
+.form__contact{
+    &--user{
+        padding: 3rem;
+    }
+    &--our{
+        padding: 3rem;
+        background-color: $backgroundColor;
+        & p{
+            color: $textColor;
+            font-size: 1.6rem;
+        }
+    }
+    &--map{
+        width: 100%;
+        min-height: 50rem;
+        border: none;
+    }
+}
