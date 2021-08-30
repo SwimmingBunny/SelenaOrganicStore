@@ -1,8 +1,8 @@
 export const ROUTE = {
   HOME: "/",
-  SHOPITEM: "/shoplistitem",
-  SHOPDETAIL: "/shopdetail",
-  ABOUTUS: "/aboutus",
+  SHOPITEM: "/shop-product",
+  SHOPDETAIL: "/shop-product-detail",
+  ABOUTUS: "/about-us",
   REGISTER: "/register",
   LOGIN: "/login",
   CONTACT: "/contact",

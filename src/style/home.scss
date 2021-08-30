@@ -100,7 +100,6 @@
   box-sizing: border-box;
   background-color: #f3f6f5;
   margin-top: 5rem;
-
   &-item {
     display: flex;
     text-align: center;
@@ -109,7 +108,7 @@
 .categories-item-col {
   cursor: pointer;
   border-radius: 2rem;
-  min-height: 20rem;
+  min-height: 35rem;
   border: 0.1rem $white solid;
   &--h2 {
     font-family: "Berkshire Swash", cursive;
@@ -161,8 +160,8 @@
   }
 }
 .categories-item-boder {
+  max-height: 35rem;
   margin: 1rem;
-
   &:hover {
     border: 0.2rem solid $white;
     border-radius: 2rem;
