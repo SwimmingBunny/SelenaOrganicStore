@@ -1,7 +1,7 @@
 @import "./variable.scss";
 
 .footer{
-    margin-top: 1rem;
+    margin-top: 10rem;
     font-size: 1.5rem;
     &--padding{
         padding-top: 2rem;
@@ -9,9 +9,7 @@
     & p{
         color: $textColor;
     }
-    &__icon{
-          margin-right: 1rem; 
-    }
+    
     &__btn{
         background: $primaryColor;
         border-radius: 5rem;
@@ -22,8 +20,9 @@
         }
     }
     &__top{
-        padding-top: 1rem;
-        &a{
+        border-top: 0.2rem solid $borderColor;
+        padding-top: 4rem;
+        & a{
             color: $textColor;
         }
         &--newsletter{
@@ -43,4 +42,7 @@
         margin-top: 3rem;
         padding: 2.5rem 0;
     }
+}
+.icon{
+    margin-right: 1rem; 
 }

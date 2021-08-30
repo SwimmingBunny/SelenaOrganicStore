@@ -19,7 +19,7 @@ const ListItem = () => {
     <div className="homeshop">
       <div className="homeshop__header">
         <h1 className="homeshop__header-h1">Shop</h1>
-        <h3 className="homeshop__header-h3">Product List Item</h3>
+        <h3 className="homeshop__header-h3">Product </h3>
       </div>
       <div className="container">
         <Row>

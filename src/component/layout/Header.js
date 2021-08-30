@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Menu, Dropdown, Button, Row, Col } from "antd";
+import { Input, Menu, Dropdown, Button, Row, Col, Avatar, Image } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import { ROUTE } from "../../constant/router.js";
@@ -93,6 +93,11 @@ const Header = () => {
       <Menu.Item>
         <a className="header__top-submenu--a">Product Detail</a>
       </Menu.Item>
+      <NavLink to={ROUTE.CART} exact>
+        <Menu.Item>
+          <a className="header__top-submenu--a">Cart</a>
+        </Menu.Item>
+      </NavLink>
     </Menu>
   );
   return (
@@ -113,6 +118,10 @@ const Header = () => {
               <Col className="header__top-account" lg={{ span: 6 }}>
                 <Dropdown overlay={accountMenu}>
                   <a className="header__top-account-a">
+                    <Avatar
+                      size="small"
+                      src="Images/about/avata-2.jpg"
+                    ></Avatar>{" "}
                     My Account <DownOutlined />
                   </a>
                 </Dropdown>
@@ -148,11 +157,6 @@ const Header = () => {
                 </a>
               </li>
               <li className="header__top-menu-li">
-                <a className="header__top-menu-a" href="">
-                  PAGES
-                </a>
-              </li>
-              <li className="header__top-menu-li">
                 <div>
                   <Dropdown overlay={shoplist}>
                     <a className="header__top-menu-a  boder-none">
@@ -169,9 +173,7 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="header__top-menu-li">
-                <a className="header__top-menu-a" href="">
-                  CONTACT
-                </a>
+                <NavLink className="header__top-menu-a" to={ROUTE.CONTACT} exact>CONTACT</NavLink>
               </li>
             </ul>
           </nav>
