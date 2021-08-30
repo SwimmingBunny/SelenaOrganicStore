@@ -8,6 +8,7 @@ import Login from "./pages/form/formLogin/Login";
 import Register from "./pages/form/formRegister/Register";
 import ListItem from "./pages/shop/ShopListItem/ListItem";
 import AboutUs from "./pages/aboutUs/AboutUs";
+import Cart from "./pages/shop/Cart/Cart";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path={ROUTE.ABOUTUS} exact>
             <AboutUs />
+          </Route>
+          <Route path={ROUTE.CART} exact>
+            <Cart />
           </Route>
         </Switch>
       </div>

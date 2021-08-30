@@ -3,6 +3,7 @@ import { Tabs, Button, Row } from "antd";
 import ProductItem from "../../component/commont/ProductsItem";
 import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
 import { ROUTE } from "../../constant/router.js";
+import ScrollToTop from "../../component/commont/ScrollToTop";
 
 const Product = () => {
   const { TabPane } = Tabs;
@@ -133,6 +134,7 @@ const Product = () => {
 
       <div className="product__button">
         <NavLink to={ROUTE.SHOPITEM} exact>
+          <ScrollToTop />
           <Button className="product__button-btn">View more</Button>
         </NavLink>
       </div>
