@@ -173,9 +173,7 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="header__top-menu-li">
-                <a className="header__top-menu-a" href="">
-                  CONTACT
-                </a>
+                <NavLink className="header__top-menu-a" to={ROUTE.CONTACT} exact>CONTACT</NavLink>
               </li>
             </ul>
           </nav>

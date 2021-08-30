@@ -7,6 +7,8 @@ import Footer from "./component/layout/Footer";
 import Login from "./pages/form/formLogin/Login";
 import Register from "./pages/form/formRegister/Register";
 import ListItem from "./pages/shop/ShopListItem/ListItem";
+import ProductDetail from "./pages/productDetails/ProductDetails";
+import Contact from "./pages/contact/Contact";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import Cart from "./pages/shop/Cart/Cart";
 
@@ -30,10 +32,16 @@ function App() {
           <Route path={ROUTE.SHOPITEM} exact>
             <ListItem />
           </Route>
-          <Route path={ROUTE.ABOUTUS} exact>
-            <AboutUs />
+          <Route path={ROUTE.SHOPDETAIL} exact>
+            <ProductDetail />
+          </Route>
+          <Route path={ROUTE.CONTACT} exact>
+            <Contact />
           </Route>
           <Route path={ROUTE.CART} exact>
+            <Cart />
+          </Route>
+          <Route path={ROUTE.ABOUTUS} exact>
             <Cart />
           </Route>
         </Switch>
