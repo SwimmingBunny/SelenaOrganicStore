@@ -42,7 +42,7 @@ function App() {
             <Cart />
           </Route>
           <Route path={ROUTE.ABOUTUS} exact>
-            <Cart />
+            <AboutUs />
           </Route>
         </Switch>
       </div>
