@@ -9,7 +9,7 @@ const BannerStatistics = () => {
       <Row className="statistic__group" gutter={[24, 24]}>
         <Col
           className="statistic__group--boder statistic__group--hover"
-          xs={{ span: 12 }}
+          xs={{ span: 24 }}
           lg={{ span: 12 }}
         >
           <img
@@ -19,7 +19,7 @@ const BannerStatistics = () => {
         </Col>
         <Col
           className="statistic__group--boder statistic__group--hover"
-          xs={{ span: 12 }}
+          xs={{ span: 24 }}
           lg={{ span: 12 }}
         >
           <img
