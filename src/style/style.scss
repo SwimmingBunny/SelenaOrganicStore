@@ -7,6 +7,13 @@
 // Header
 .header {
   padding: 2rem 0;
+  top: 0;
+  row-gap: 0px;
+  position: fixed;
+  z-index: 1000;
+  background: $white;
+  left: 0;
+  right: 0;
 }
 .header__top {
   display: flex;
@@ -15,7 +22,7 @@
   font-size: 1.4rem;
 }
 .header__top-img {
-  padding: 0 2.2rem;
+  text-align: left;
   cursor: pointer;
 }
 .header__top-right {

@@ -59,13 +59,10 @@
   border-radius: 1rem;
   transform: translateY(-50%);
   &__detail {
-    display: flex;
-    border-right: 0.1rem solid#a5e5ca;
-    justify-content: center;
+    justify-content: space-between;
     &-plant {
       color: #a5e5ca;
       font-size: 4.4rem;
-      margin-right: 3rem;
       &--icon:hover {
         animation: rotate 1s linear;
       }
@@ -110,6 +107,7 @@
   border-radius: 2rem;
   min-height: 35rem;
   border: 0.1rem $white solid;
+
   &--h2 {
     font-family: "Berkshire Swash", cursive;
     font-weight: 700;

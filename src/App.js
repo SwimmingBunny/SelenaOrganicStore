@@ -11,6 +11,7 @@ import ProductDetail from "./pages/productDetails/ProductDetails";
 import Contact from "./pages/contact/Contact";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import Cart from "./pages/shop/Cart/Cart";
+import "./responsive/responsive.scss";
 
 function App() {
   return (
