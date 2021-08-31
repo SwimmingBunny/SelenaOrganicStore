@@ -7,6 +7,9 @@ import "../../../style/form.scss";
 import "../../../style/base.scss";
 
 const Login = () => {
+  const [form] = Form.useForm();
+
+
   return (
     <div className='form container'>
       <Row gutter={[16, 16]}>
@@ -16,7 +19,7 @@ const Login = () => {
         <Col xs={{ span: 12 }} lg={{ span: 12}}>
         <div className='form__group'>
         <h1>Sign In</h1>
-        <Form name='basic' initialValues={{ remember: true }}>
+        <Form name='basic' initialValues={{ remember: true }} Form={form}>
           <Form.Item
             name='username'
             rules={[

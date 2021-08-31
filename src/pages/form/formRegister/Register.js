@@ -9,6 +9,7 @@ import validateMessages from "../ValidateMessage";
 import "../../../style/form.scss";
 
 const Register = () => {
+  const [form] = Form.useForm();
   
   return (
     <div className='container'>
@@ -19,7 +20,7 @@ const Register = () => {
         <Col xs={{ span: 12}} lg={{ span: 12}}>
           <div className='form__group'>
           <h1>Sign Up</h1>
-          <Form name='basic' initialValues={{ remember: true }} validateMessages={validateMessages}>
+          <Form name='basic' initialValues={{ remember: true }} validateMessages={validateMessages} Form={form}>
             <Form.Item
               name='fullname'
               rules={[

@@ -18,6 +18,9 @@
                 }
             }
         }
+        &--backgroundColor{
+            background-color: $backgroundColor;
+        }
     }
     &__btn{
         background: $primaryColor;

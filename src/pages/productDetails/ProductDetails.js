@@ -9,6 +9,8 @@ import "../../style/ProductDetails.scss";
 import "../../style/form.scss";
 import "../../style/base.scss";
 import ProductItem from "../../component/commont/ProductsItem";
+import { NavLink } from "react-router-dom";
+import { ROUTE } from "../../constant/router";
 
 
 const ProductDetail = () => {
@@ -44,7 +46,7 @@ const ProductDetail = () => {
               nulla.
             </p>
             <Button className='form__btn detail__info--cart' size='large'>
-              ADD TO CART
+              <NavLink to={ROUTE.CHECKOUT} exact>ADD TO CART</NavLink>
             </Button>
             <Button className='detail__info--heart' size='large'>
               <HeartOutlined />
@@ -86,7 +88,19 @@ const ProductDetail = () => {
                   </p>
                 </div>
               </div>
-
+              <div className='detail--flex'>
+                <img className='detail__middle__review--avt' src='Images/product/product-1.jpg' alt='avatar' />
+                <div className='detail__middle__review--info'>
+                <h3>Admin</h3>
+                  <Rate />
+                  <p>{date}</p>
+                  <p className='detail__info--descrip'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+                    fringilla augue nec est tristique auctor. Donec non est at libero
+                    vulputate rutrum.
+                  </p>
+                </div>
+              </div>
               <div className='detail__middle__review--sb'>
                 <Input placeholder="Enter review product..." />
                   <Rate  className='detail__middle__review--sb--rate' tooltips={desc} onChange={handleChange} value={rate} />

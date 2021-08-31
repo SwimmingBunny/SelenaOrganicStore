@@ -22,27 +22,27 @@ const Contact = () => {
             <Form.Item
               name="name"
               rules={[{ required: true }]}>
-              <Input placeholder='Name' className='form__group--input form__contact--user--width'/>
+              <Input placeholder='Name' className='form__group--input form__contact--user--width form__group--backgroundColor'/>
             </Form.Item>
             <Form.Item
               name="phone"
               type='number'
               rules={[{ required: true }]}>
-              <Input placeholder='Phone'  className='form__group--input'/>
+              <Input placeholder='Phone'  className='form__group--input form__group--backgroundColor'/>
             </Form.Item>
           </div>
           <Form.Item
             name="subject"
             rules={[{ required: true }]}>
-            <Input placeholder='Subject' className='form__group--input' />
+            <Input placeholder='Subject' className='form__group--input form__group--backgroundColor' />
           </Form.Item>
           <Form.Item
             name="email"
             rules={[{ type: "email" }]}>
-            <Input placeholder='Email'  className='form__group--input'/>
+            <Input placeholder='Email'  className='form__group--input form__group--backgroundColor'/>
           </Form.Item>
           <Form.Item name="message">
-            <Input.TextArea placeholder='Message'  className='form__group--input'/>
+            <Input.TextArea placeholder='Message'  className='form__group--input form__group--backgroundColor'/>
           </Form.Item>
           <Form.Item>
             <Button type='primary' className='form__btn'>
