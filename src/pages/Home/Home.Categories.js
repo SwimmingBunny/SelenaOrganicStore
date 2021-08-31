@@ -8,10 +8,10 @@ const Categories = () => {
       </div>
       <br />
       <Row gutter={16} className="categories-item">
-        <Col lg={{ span: 6 }}>
+        <Col lg={{ span: 6 }} xs={{ span: 24 }}>
           <div style={{ padding: "8px" }}>
             <div className="categories-item-col green">
-              <div className="categories-item-boder ">
+              <div className="categories-item-boder">
                 <h2 className="categories-item-col--h2">Vegetables</h2>
                 <img
                   className="categories-item-col--img"
@@ -21,10 +21,10 @@ const Categories = () => {
             </div>
           </div>
         </Col>
-        <Col lg={{ span: 6 }}>
+        <Col lg={{ span: 6 }} xs={{ span: 24 }}>
           <div style={{ padding: "8px" }}>
             <div className="categories-item-col orange">
-              <div className="categories-item-boder ">
+              <div className="categories-item-boder">
                 <h2 className="categories-item-col--h2">Fruits</h2>
                 <img
                   className="categories-item-col--img"
@@ -34,10 +34,10 @@ const Categories = () => {
             </div>
           </div>
         </Col>
-        <Col lg={{ span: 6 }}>
+        <Col lg={{ span: 6 }} xs={{ span: 24 }}>
           <div style={{ padding: "8px" }}>
             <div className="categories-item-col blue">
-              <div className="categories-item-boder ">
+              <div className="categories-item-boder">
                 <h2 className="categories-item-col--h2">Juice</h2>
                 <img
                   className="categories-item-col--img"
@@ -47,10 +47,10 @@ const Categories = () => {
             </div>
           </div>
         </Col>
-        <Col lg={{ span: 6 }}>
+        <Col lg={{ span: 6 }} xs={{ span: 24 }}>
           <div style={{ padding: "8px" }}>
             <div className="categories-item-col red">
-              <div className="categories-item-boder ">
+              <div className="categories-item-boder">
                 <h2 className="categories-item-col--h2">Vegetables</h2>
                 <img
                   className="categories-item-col--img"

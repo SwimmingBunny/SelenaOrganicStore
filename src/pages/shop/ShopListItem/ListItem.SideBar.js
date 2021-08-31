@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu } from "antd";
+import { useMediaQuery } from "react-responsive";
 
 const SideBar = () => {
   const { SubMenu } = Menu;
@@ -13,6 +14,9 @@ const SideBar = () => {
       setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
     }
   };
+  const isMoblie = useMediaQuery({
+    query: "(max-width: 480px)",
+  });
 
   return (
     <div className="sidebar">
@@ -21,7 +25,6 @@ const SideBar = () => {
         mode="inline"
         openKeys={openKeys}
         onOpenChange={onOpenChange}
-        style={{ width: 256 }}
         className="sidebar__menu1"
       >
         <SubMenu key="sub1" title="Vegetable" className="sidebar__menu-submenu">
@@ -55,7 +58,6 @@ const SideBar = () => {
         mode="inline"
         openKeys={openKeys}
         onOpenChange={onOpenChange}
-        style={{ width: 256 }}
         className="sidebar__menu2"
       >
         <SubMenu key="sub5" title="Price" className="sidebar__menu-submenu">
@@ -67,7 +69,15 @@ const SideBar = () => {
         </SubMenu>
       </Menu>
       <div className="sidebar__img">
-        <img src="Images/banner/banner_left.jpg" alt="" />
+        {isMoblie ? (
+          <img
+            style={{ width: "100%" }}
+            src="Images/banner/slide_6.jpg"
+            alt=""
+          />
+        ) : (
+          <img src="Images/banner/banner_left.jpg" alt="" />
+        )}
       </div>
     </div>
   );

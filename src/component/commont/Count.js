@@ -14,6 +14,7 @@ const Count = () => {
     border: "1px solid #e5e5e5",
     margin: "0 1rem",
     padding: ".5rem 0",
+    maxWidth: "9rem",
   };
   const Plus = () => {
     if (count === 0) {

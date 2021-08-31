@@ -9,9 +9,13 @@ const Slider = () => {
   };
   return (
     <div className="container">
-      <Carousel autoplay effect="fade">
+      <Carousel autoplay effect="fade" className="slider">
         <Row className="slider__content1">
-          <Col className="slider__content1-text" lg={{ span: 12 }}>
+          <Col
+            className="slider__content1-text"
+            lg={{ span: 12 }}
+            xs={{ span: 24 }}
+          >
             <h1 className="slider__content1-text--h1">
               GREAT OFFERS <br /> ON FRUITS <br /> AND VEGETABLES
             </h1>
@@ -21,7 +25,7 @@ const Slider = () => {
             <br />
             <Button id="slider__content1-text--btn">SHOP NOW</Button>
           </Col>
-          <Col lg={{ span: 12 }}>
+          <Col lg={{ span: 12 }} xs={{ span: 24 }}>
             <img
               className="slider__content1-text--img"
               src="Images/slider/slide_1.jpg"
@@ -29,7 +33,11 @@ const Slider = () => {
           </Col>
         </Row>
         <Row className="slider__content1">
-          <Col className="slider__content1-text" lg={{ span: 12 }}>
+          <Col
+            className="slider__content1-text"
+            lg={{ span: 12 }}
+            xs={{ span: 24 }}
+          >
             <h1 className="slider__content1-text--h1">
               TASTY HEALTHY <br />
               WE SELL WHAT'S
@@ -41,7 +49,7 @@ const Slider = () => {
             <br />
             <Button id="slider__content1-text--btn">SHOP NOW</Button>
           </Col>
-          <Col lg={{ span: 12 }}>
+          <Col lg={{ span: 12 }} xs={{ span: 24 }}>
             <img
               className="slider__content1-text--img"
               src="Images/slider/slide_2.jpg"

@@ -23,10 +23,10 @@ const ListItem = () => {
       </div>
       <div className="container">
         <Row>
-          <Col lg={{ span: 6 }}>
+          <Col lg={{ span: 6 }} xs={{ span: 24 }}>
             <SideBar />
           </Col>
-          <Col lg={{ span: 18 }}>
+          <Col lg={{ span: 18 }} xs={{ span: 24 }}>
             <ShopItem />
           </Col>
         </Row>
