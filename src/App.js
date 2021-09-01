@@ -11,6 +11,7 @@ import ProductDetail from "./pages/productDetails/ProductDetails";
 import Contact from "./pages/contact/Contact";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import Cart from "./pages/shop/Cart/Cart";
+import WishList from "./pages/shop/wishlist/WishList";
 import "./responsive/responsive.scss";
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path={ROUTE.CART} exact>
             <Cart />
+          </Route>
+          <Route path={ROUTE.WISHLIST} exact>
+            <WishList />
           </Route>
           <Route path={ROUTE.ABOUTUS} exact>
             <AboutUs />

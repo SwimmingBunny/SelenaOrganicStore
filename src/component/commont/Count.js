@@ -5,6 +5,9 @@ const Count = () => {
   const [count, setCount] = React.useState(0);
   const [check, setCheck] = React.useState(true);
   const countStyle = {
+    minWidth: "3.7rem",
+    textAlign: "center",
+    transform: "translateY(-.4rem)",
     padding: "0 1rem",
   };
   const btnStyle = {
@@ -14,7 +17,11 @@ const Count = () => {
     border: "1px solid #e5e5e5",
     margin: "0 1rem",
     padding: ".5rem 0",
-    maxWidth: "9rem",
+    maxWidth: "10rem",
+    display: "flex",
+    justifyContent: "space-between",
+    maxHeight: "3.4rem",
+    // alignItems: "center",
   };
   const Plus = () => {
     if (count === 0) {
@@ -43,7 +50,7 @@ const Count = () => {
         </Button>
       )}
 
-      <span style={countStyle}>{count}</span>
+      <p style={countStyle}>{count}</p>
       <Button onClick={Plus} size="small" style={btnStyle}>
         <PlusOutlined />
       </Button>

@@ -14,9 +14,9 @@ import "../../style/formContact.scss";
 const Contact = () => {
   return (
     <>
-      <div className="homeshop__header">
-        <h1 className="homeshop__header-h1">Contact</h1>
-        <h3 className="homeshop__header-h3">Contact Us </h3>
+      <div className="contact__header">
+        <h1 className="contact__header-h1">Contact</h1>
+        <h3 className="contact__header-h3">Contact Us </h3>
       </div>
       <div className="container">
         <Row className="form__contact">

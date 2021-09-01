@@ -1,4 +1,5 @@
 import React from "react";
+import ScrollToTop from "../commont/ScrollToTop";
 import { Menu } from "antd";
 import { useHistory } from "react-router-dom";
 
@@ -50,6 +51,7 @@ const SubMenu = () => {
     >
       <SubMenu key="sub1" title="Menu">
         <Menu.Item key="1" onClick={goHome}>
+          <ScrollToTop />
           Home
         </Menu.Item>
         <SubMenu key="sub3" title="Shop">
