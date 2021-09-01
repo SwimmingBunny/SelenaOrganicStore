@@ -30,6 +30,26 @@
   .shopitem__sortitem {
     margin-top: 1rem;
   }
+  .cart__responsive {
+    overflow-x: auto;
+  }
+  .cart__form-col1--btn {
+    width: 100%;
+    margin: 1rem 0;
+  }
+  .cart__form-col1 {
+    flex-direction: column;
+    justify-content: center;
+    &--btn {
+      width: 100%;
+    }
+  }
+  .cart__form-col2 {
+    justify-content: center !important;
+  }
+  .wishlist__responsive {
+    overflow-x: auto;
+  }
 }
 .fixed {
   position: fixed;

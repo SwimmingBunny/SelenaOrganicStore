@@ -82,9 +82,11 @@ const Header = () => {
           <span className="header__top-container-subtotal">SUBTOTAL:</span>
         </Menu.Item>
         <Menu.Item>
-          <Button id="header__top-container-btn" type="primary">
-            View Cart
-          </Button>
+          <NavLink to={ROUTE.CART} exact>
+            <Button id="header__top-container-btn" type="primary">
+              View Cart
+            </Button>
+          </NavLink>
         </Menu.Item>
         <Menu.Item>
           <Button id="header__top-container-btn" type="primary">
@@ -101,10 +103,12 @@ const Header = () => {
           <a className="header__top-submenu--a">Shop Product</a>
         </Menu.Item>
       </NavLink>
+      <NavLink to={ROUTE.WISHLIST} exact>
+        <Menu.Item>
+          <a className="header__top-submenu--a">Wishlist</a>
+        </Menu.Item>
+      </NavLink>
 
-      <Menu.Item>
-        <a className="header__top-submenu--a">Product Detail</a>
-      </Menu.Item>
       <NavLink to={ROUTE.CART} exact>
         <Menu.Item>
           <a className="header__top-submenu--a">Cart</a>
