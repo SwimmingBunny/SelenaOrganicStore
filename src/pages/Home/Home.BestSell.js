@@ -5,7 +5,7 @@ const BestSell = () => {
   return (
     <div className="container">
       <Row>
-        <Col lg={{ span: 16 }}>
+        <Col lg={{ span: 16 }} xs={{ span: 24 }}>
           <div>
             <img
               width="100%"
@@ -15,7 +15,7 @@ const BestSell = () => {
           </div>
         </Col>
 
-        <Col lg={{ span: 8 }}>
+        <Col lg={{ span: 8 }} xs={{ span: 24 }}>
           <div className="sell">
             <div className="sell__heading">
               <h1 className="sell__heading-h1">Best Sellers</h1>

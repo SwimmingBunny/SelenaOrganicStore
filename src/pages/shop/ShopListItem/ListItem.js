@@ -19,14 +19,14 @@ const ListItem = () => {
     <div className="homeshop">
       <div className="homeshop__header">
         <h1 className="homeshop__header-h1">Shop</h1>
-        <h3 className="homeshop__header-h3">Product List Item</h3>
+        <h3 className="homeshop__header-h3">Product </h3>
       </div>
       <div className="container">
         <Row>
-          <Col lg={{ span: 6 }}>
+          <Col lg={{ span: 6 }} xs={{ span: 24 }}>
             <SideBar />
           </Col>
-          <Col lg={{ span: 18 }}>
+          <Col lg={{ span: 18 }} xs={{ span: 24 }}>
             <ShopItem />
           </Col>
         </Row>

@@ -12,6 +12,8 @@ import ListItem from "./pages/shop/ShopListItem/ListItem";
 import ProductDetail from "./pages/productDetails/ProductDetails";
 import Contact from "./pages/contact/Contact";
 import AboutUs from "./pages/aboutUs/AboutUs";
+import Cart from "./pages/shop/Cart/Cart";
+import "./responsive/responsive.scss";
 
 function App() {
   return (
@@ -40,7 +42,7 @@ function App() {
             <Contact />
           </Route>
           <Route path={ROUTE.CART} exact>
-            <Cart/>
+            <Cart />
           </Route>
           <Route path={ROUTE.ABOUTUS} exact>
             <AboutUs />

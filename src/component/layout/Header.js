@@ -1,5 +1,7 @@
 import React from "react";
-import { Input, Menu, Dropdown, Button, Row, Col } from "antd";
+import SubMenu from "./Header.subMenu.js";
+import { useMediaQuery } from "react-responsive";
+import { Input, Menu, Dropdown, Button, Row, Col, Avatar, Image } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import { ROUTE } from "../../constant/router.js";
@@ -10,18 +12,28 @@ import {
   Link,
   NavLink,
 } from "react-router-dom";
-
+import $ from "jquery";
 import "antd/dist/antd.css";
 import "../../style/style.scss";
 import "../../style/base.scss";
+import "../../responsive/responsive.scss";
 import ReactDOM from "react-dom";
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faShoppingCart, faTrash);
 
 const Header = () => {
+  $(window).bind("scroll", function () {
+    if ($(window).scrollTop() > 200) {
+      $(".header__submenu").addClass("fixed");
+    } else {
+      $(".header__submenu").removeClass("fixed");
+    }
+  });
+  const isMoblie = useMediaQuery({
+    query: "(max-width: 480px)",
+  });
   const history = useHistory();
   function goHome() {
     history.push("/");
@@ -86,96 +98,132 @@ const Header = () => {
     <Menu className="header__top-submenu">
       <NavLink to={ROUTE.SHOPITEM} exact>
         <Menu.Item>
-          <a className="header__top-submenu--a">Shop List Item</a>
+          <a className="header__top-submenu--a">Shop Product</a>
         </Menu.Item>
       </NavLink>
 
       <Menu.Item>
         <a className="header__top-submenu--a">Product Detail</a>
       </Menu.Item>
+      <NavLink to={ROUTE.CART} exact>
+        <Menu.Item>
+          <a className="header__top-submenu--a">Cart</a>
+        </Menu.Item>
+      </NavLink>
     </Menu>
   );
   return (
-    <>
-      <Row className="header">
+    <div style={{ paddingTop: isMoblie ? "0" : "12rem" }}>
+      <div className="header">
         <div className="container">
-          <div className="header__top">
-            <Col lg={{ span: 10 }}>
+          <Row className="header__top">
+            <Col
+              lg={{ span: 10 }}
+              xs={{ span: 24 }}
+              className="header__top-img"
+            >
               <img
-                className="header__top-img"
                 src="Images/logo/logo.png"
                 alt="Logo image"
                 onClick={goHome}
               />
             </Col>
 
-            <Col className="header__top-right" lg={{ span: 14 }}>
-              <Col className="header__top-account" lg={{ span: 6 }}>
-                <Dropdown overlay={accountMenu}>
-                  <a className="header__top-account-a">
-                    My Account <DownOutlined />
-                  </a>
-                </Dropdown>
-              </Col>
-              <Col className="header__top-search" lg={{ span: 14 }}>
-                <Search
-                  id="header__top-search-input"
-                  placeholder="search here"
-                />
-              </Col>
-              <Col lg={{ span: 4 }} className="header__top-cart">
-                <Dropdown overlay={cartMenu}>
-                  <a>
-                    <FontAwesomeIcon
-                      className="header__top-cart-icon"
-                      icon="shopping-cart"
-                    />
-                  </a>
-                </Dropdown>
-              </Col>
-            </Col>
-          </div>
-        </div>
-      </Row>
-      {/* Header Menu */}
-      <div className="container">
-        <div className="header__top-menu">
-          <nav>
-            <ul className="header__top-menu-ul">
-              <li className="header__top-menu-li">
-                <a className="header__top-menu-a" href="" onClick={goHome}>
-                  HOME
-                </a>
-              </li>
-              <li className="header__top-menu-li">
-                <a className="header__top-menu-a" href="">
-                  PAGES
-                </a>
-              </li>
-              <li className="header__top-menu-li">
-                <div>
-                  <Dropdown overlay={shoplist}>
-                    <a className="header__top-menu-a  boder-none">
-                      SHOP <DownOutlined />
+            <Col lg={{ span: 14 }} xs={{ span: 24 }}>
+              <Row className="header__top-right">
+                <Col
+                  className="header__top-account"
+                  lg={{ span: 6 }}
+                  xs={{ span: 12 }}
+                >
+                  <Dropdown overlay={accountMenu}>
+                    <a className="header__top-account-a">
+                      <Avatar
+                        size="small"
+                        src="Images/about/avata-3.jpg"
+                      ></Avatar>{" "}
+                      My Account <DownOutlined />
                     </a>
                   </Dropdown>
-                </div>
-              </li>
-              <li className="header__top-menu-li">
-                <NavLink to={ROUTE.ABOUTUS} exact>
-                  <a className="header__top-menu-a" href="">
-                    ABOUT US
-                  </a>
-                </NavLink>
-              </li>
-              <li className="header__top-menu-li">
-                <NavLink className="header__top-menu-a" to={ROUTE.CONTACT} exact>CONTACT</NavLink>
-              </li>
-            </ul>
-          </nav>
+                </Col>
+                <Col
+                  className="header__top-search"
+                  lg={{ span: 14 }}
+                  xs={{ span: 24 }}
+                >
+                  <Search
+                    id="header__top-search-input"
+                    placeholder="search here"
+                  />
+                </Col>
+                <Col
+                  lg={{ span: 4 }}
+                  className="header__top-cart"
+                  xs={{ span: 12 }}
+                >
+                  <Dropdown overlay={cartMenu}>
+                    <a>
+                      <FontAwesomeIcon
+                        className="header__top-cart-icon"
+                        icon="shopping-cart"
+                      />
+                    </a>
+                  </Dropdown>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
         </div>
       </div>
-    </>
+      {/* Header Menu */}
+
+      <div className="container">
+        {isMoblie ? (
+          <Row className="header__submenu">
+            <Col xs={{ span: 24 }}>
+              <SubMenu />
+            </Col>
+          </Row>
+        ) : (
+          <div className="header__top-menu">
+            <nav>
+              <ul className="header__top-menu-ul">
+                <li className="header__top-menu-li">
+                  <a className="header__top-menu-a" href="" onClick={goHome}>
+                    HOME
+                  </a>
+                </li>
+                <li className="header__top-menu-li">
+                  <div>
+                    <Dropdown overlay={shoplist}>
+                      <a className="header__top-menu-a  boder-none">
+                        SHOP <DownOutlined />
+                      </a>
+                    </Dropdown>
+                  </div>
+                </li>
+                <li className="header__top-menu-li">
+                  <NavLink to={ROUTE.ABOUTUS} exact>
+                    <a className="header__top-menu-a" href="">
+                      ABOUT US
+                    </a>
+                  </NavLink>
+                </li>
+                <li className="header__top-menu-li">
+                  <NavLink
+                    className="header__top-menu-a"
+                    to={ROUTE.CONTACT}
+                    exact
+                  >
+                    CONTACT
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 export default Header;

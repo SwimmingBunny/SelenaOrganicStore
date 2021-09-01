@@ -23,7 +23,7 @@
 // Header
 // Header
 .ant-input-search-button {
-  height: 5.4rem;
+  height: 5.4rem !important;
   border-radius: 0 2rem 2rem 0 !important;
   &:hover {
     border: 0.1rem solid $primaryColor !important;
@@ -43,10 +43,10 @@
   border-right: $primaryColor 3px solid !important;
 }
 .ant-menu-title-content:hover {
-  color: $primaryColor !important;
+  // color: $primaryColor !important;
 }
 .ant-menu-title-content {
-  color: $textColor !important;
+  color: $black !important;
 }
 
 .ant-menu-submenu-arrow::after {
