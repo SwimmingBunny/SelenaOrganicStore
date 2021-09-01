@@ -12,18 +12,13 @@ import { NavLink } from "react-router-dom";
 import { ROUTE } from "../../constant/router";
 library.add(faShoppingBag, faHeart, faStar);
 
-
-
 const ProductItem = (props) => {
-
-  const handelDetail = () =>{
-    return(
-      alert('hello my detail!')
-    )
-  }
+  const handelDetail = () => {
+    return alert("hello my detail!");
+  };
 
   return (
-    <Col lg={{ span: 8 }}>
+    <Col lg={{ span: 8 }} xs={{ span: 24 }}>
       <div style={{ padding: "2.4rem .8rem " }}>
         <div className="product__list-item">
           <div className="product__list-item--img">
@@ -49,7 +44,9 @@ const ProductItem = (props) => {
               <FontAwesomeIcon icon="star" />
             </span>
           </div>
-          <NavLink className="product__list-item--h3" to={ROUTE.SHOPDETAIL}>{props.name}</NavLink>
+          <NavLink className="product__list-item--h3" to={ROUTE.SHOPDETAIL}>
+            {props.name}
+          </NavLink>
           <div className="product__list-item--price">
             <p className="product__list-item--price--p">{props.price} </p>
             <p className="product__list-item--price--p discounted">
