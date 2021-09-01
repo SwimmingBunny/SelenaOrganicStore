@@ -1,3 +1,5 @@
+/** @format */
+
 import "./style/style.scss";
 import Header from "./component/layout/Header";
 import Home from "./pages/Home/Home";
