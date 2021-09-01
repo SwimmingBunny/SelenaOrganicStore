@@ -17,7 +17,9 @@ const TableRow = () => {
       <td className="cart__table-tr--td">PRODUCT</td>
       <td className="cart__table-tr--td">PRICE</td>
       <td className="cart__table-tr--td">
-        <Count />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Count />
+        </div>
       </td>
       <td className="cart__table-tr--td">PRICE * Count</td>
       <td className="cart__table-tr--td">

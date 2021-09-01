@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import { useMediaQuery } from "react-responsive";
 
 import {
   Row,
@@ -21,7 +22,9 @@ import "../../style/base.scss";
 import ProductItem from "../../component/commont/ProductsItem";
 
 const ProductDetail = () => {
-  const [tabPosition, setTabPosition] = React.useState("left");
+  const isMoblie = useMediaQuery({
+    query: "(max-width: 480px)",
+  });
   const [date, setDate] = React.useState(new Date().getDate());
   const [rate, setRate] = React.useState("");
   const { TabPane } = Tabs;
@@ -67,7 +70,7 @@ const ProductDetail = () => {
       </Row>
       <Row className="detail__middle">
         <Space style={{ marginBottom: 24 }}></Space>
-        <Tabs tabPosition={tabPosition}>
+        <Tabs tabPosition={isMoblie ? "top" : "left"}>
           <TabPane tab="Description" key="1" className="detail__middle--boder">
             <p className="detail__info--descrip">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam

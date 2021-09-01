@@ -12,7 +12,7 @@ import {
 const CartForm = () => {
   return (
     <Row className="cart__form">
-      <Col className="cart__form-col1" lg={{ span: 14 }}>
+      <Col className="cart__form-col1" lg={{ span: 14 }} xs={{ span: 24 }}>
         <Input
           placeholder="Enter your counpon here"
           required
@@ -22,7 +22,7 @@ const CartForm = () => {
           <span>APPLY COUPON</span>
         </Button>
       </Col>
-      <Col lg={{ span: 10 }} className="cart__form-col2">
+      <Col lg={{ span: 10 }} xs={{ span: 24 }} className="cart__form-col2">
         <NavLink to={ROUTE.SHOPITEM} exact>
           <ScrollToTop />
           <Button className="cart__form-col1--btn">UPDATE CART</Button>

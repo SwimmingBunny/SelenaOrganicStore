@@ -7,4 +7,5 @@ export const ROUTE = {
   LOGIN: "/login",
   CONTACT: "/contact",
   CART: "/cart",
+  WISHLIST: "/wish-list",
 };
