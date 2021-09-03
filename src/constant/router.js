@@ -9,4 +9,5 @@ export const ROUTE = {
   CHECKOUT: "/checkout",
   CART: "/cart",
   WISHLIST: "/wish-list",
+  MYACCOUNT: "/my-account",
 };
