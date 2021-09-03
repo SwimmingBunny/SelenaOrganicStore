@@ -1,0 +1,35 @@
+@import "./variable.scss";
+
+
+.myaccount{
+    padding: 2rem;
+    border-radius: 2rem;
+    background-color: $backgroundColor;
+    &__nav{
+        &--flex{
+            display: flex;
+        }
+        &--avt{
+            margin-right: 2rem;
+            width: 5%;
+            height: 15%;
+            border: 0.1rem solid;
+            border-radius: 50%;
+            & img{
+                width: 100%;
+                border-radius: 50%;
+            }
+        }
+        &__bot{
+            margin-top: 3rem;
+            padding: 2rem;
+            border-radius: 1rem;
+            background-color: $white;
+        }
+    }
+    &__title{
+        border-bottom: 0.1rem dashed $borderColor;
+        padding-bottom: 1rem;
+        margin-bottom: 3rem;
+    }
+}

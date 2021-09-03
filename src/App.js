@@ -17,6 +17,7 @@ import Checkout from "./pages/checkout/Checkout";
 import Cart from "./pages/shop/Cart/Cart";
 import WishList from "./pages/shop/wishlist/WishList";
 import "./responsive/responsive.scss";
+import Account from "./pages/myAccount/Account";
 
 function App() {
   return (
@@ -55,6 +56,9 @@ function App() {
           </Route>
           <Route path={ROUTE.WISHLIST} exact>
             <WishList />
+          </Route>
+          <Route path={ROUTE.MYACCOUNT} exact>
+            <Account />
           </Route>
         </Switch>
       </div>
