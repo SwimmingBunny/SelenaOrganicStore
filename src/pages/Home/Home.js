@@ -7,7 +7,7 @@ import Categories from "./Home.Categories";
 import BestSell from "./Home.BestSell";
 import Product from "./Home.Product";
 import BannerStatistics from "./Home.BannerStatistics";
-import BrandArea from "./Home.Brandarea";
+import BrandArea from "./Home.BrandArea";
 //
 const Home = () => {
   return (
