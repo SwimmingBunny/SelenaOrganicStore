@@ -25,7 +25,28 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &-layout {
+      margin: 1rem;
+      display: none;
+      &--btn {
+        padding: 0.5rem 0.8rem;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background: $white;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        &:hover {
+          background: $primaryColor;
+          color: $white;
+        }
+      }
+    }
     &-sort {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
       &--span {
         font-weight: 400;
         font-size: 1.6rem;

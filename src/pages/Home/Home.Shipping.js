@@ -60,7 +60,12 @@ const Shipping = () => {
         </Row>
       </Col>{" "}
       <Col className="shipping__detail" lg={{ span: 8 }} xs={{ span: 24 }}>
-        <Row>
+        <Row
+          style={{
+            margin: "0 1rem",
+            borderRight: isMoblie ? "none" : ".1rem solid #e5e5e5",
+          }}
+        >
           <Col className="shipping__detail-plant" xs={{ span: 6 }}>
             <FontAwesomeIcon
               className="shipping__detail-plant--icon"
