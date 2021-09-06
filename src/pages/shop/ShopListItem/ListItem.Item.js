@@ -74,7 +74,7 @@ const ShopItem = () => {
       </div>
 
       <div>
-        <Row gutter={16} className="product__list">
+        <Row gutter={isMoblie ? 0 : 16} className="product__list">
           <ProductItem
             img="Images/product/product-10.jpg"
             name="Carrot"
