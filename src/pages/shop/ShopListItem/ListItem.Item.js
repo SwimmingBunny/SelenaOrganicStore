@@ -1,8 +1,16 @@
-import React from "react";
+import * as React from "react";
+import {useDispatch} from "react-redux";
 import { Row, Select, Pagination } from "antd";
 import ProductItem from "../../../component/commont/ProductsItem";
+import { listProductApi } from '../../../redux/reducers/productSlice'
+
 const ShopItem = () => {
   const { Option } = Select;
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(listProductApi())
+  }, [])
 
   function handleChange(value) {
     console.log(`selected ${value}`);

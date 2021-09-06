@@ -7,7 +7,7 @@ export const listProductApi = createAsyncThunk('product/getApiData', async () =>
     const res = await axios
       .get(`http://localhost:5000/products/search`)
       .then((res) => {
-        console.log('.then ~ res', res);
+        console.log('.listProductApi ~ res', res);
         return res;
       })
       .catch((e) => {
@@ -33,8 +33,6 @@ const listProduct = createSlice({
         }
     }
 });
-
-
 
 const {reducer, actions} = listProduct;
 export const {getProduct} = actions;

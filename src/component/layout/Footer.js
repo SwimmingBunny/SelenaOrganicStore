@@ -44,7 +44,7 @@ const Footer = () => {
           <p>lndteams.dev@gmail.com</p>
         </Col>
         <Col
-          className="footer__contact--newarrivals"
+          className="footer__contact--newArrivals"
           lg={{ span: 7 }}
           xs={{ span: 24 }}
         >
@@ -84,7 +84,7 @@ const Footer = () => {
           />
         </Col>
         <Col
-          className="footer__top--newsletter"
+          className="footer__top--newsLetter"
           lg={{ span: 4 }}
           xs={{ span: 24 }}
         >
@@ -95,7 +95,7 @@ const Footer = () => {
             arrivals,special offers and other <br /> discount information.
           </p>
           <Input
-            className="footer__top--newsletter-input"
+            className="footer__top--newsLetter-input"
             placeholder="Your email address"
           />
           <Button className="footer__btn" type="primary">

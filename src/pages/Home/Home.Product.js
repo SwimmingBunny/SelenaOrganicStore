@@ -11,6 +11,7 @@ const Product = () => {
   function callback(key) {
     console.log(key);
   }
+
   return (
     <div className="container">
       <div className="product__heading">

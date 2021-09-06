@@ -22,10 +22,7 @@ import Account from "./pages/myAccount/Account";
 function App() {
   return (
     <>
-      <div>
         <Header />
-      </div>
-      <div>
         <Switch>
           <Route path={ROUTE.HOME} exact>
             <Home />
@@ -61,10 +58,7 @@ function App() {
             <Account />
           </Route>
         </Switch>
-      </div>
-      <div>
         <Footer />
-      </div>
     </>
   );
 }

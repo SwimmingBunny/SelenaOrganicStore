@@ -13,6 +13,7 @@ import "../../../style/form.scss";
 const Register = () => {
   const [form] = Form.useForm();
   const [formValue, setFormValue] = useState({
+    id: 10,
     fullname: "",
     email: "",
     password: "",

@@ -3,9 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const pool = require('./db_connection');
 const app = express();
+const cors = require('cors')
 
 // middleware
-
+app.use(cors())
 app.use(bodyParser.json());
 // app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
