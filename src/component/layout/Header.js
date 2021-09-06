@@ -45,7 +45,9 @@ const Header = () => {
   const accountMenu = (
     <Menu className="header__top-account-sub">
       <Menu.Item>
-        <a>My Account </a>
+      <NavLink to={ROUTE.MYACCOUNT} exact>
+        My Account
+        </NavLink>
       </Menu.Item>
       <Menu.Item>
         <NavLink to={ROUTE.LOGIN} exact>

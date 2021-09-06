@@ -74,3 +74,12 @@
 .ant-input-group-addon {
   border-radius: 30rem;
 }
+
+//////////////label////////
+.ant-form label {
+  min-width: 13rem;
+}
+/////////Acount Detail////////
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: $primaryColor;
+}

@@ -2,6 +2,16 @@ import { Button } from "antd";
 import React from "react";
 import TableRow from "../../../component/commont/TableRow.js";
 import CartForm from "./Cart.CartForm";
+
+import { ROUTE } from "../../../constant/router";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink,
+} from "react-router-dom";
+
 const CartTable = () => {
   return (
     <>
@@ -33,7 +43,7 @@ const CartTable = () => {
         <div className="cart__total-conten">
           <p> Shipping</p>
           <p> $30</p>
-        </div>{" "}
+        </div>
         <div className="cart__total-conten">
           <p> Discount</p>
           <p> -$230</p>
@@ -43,7 +53,7 @@ const CartTable = () => {
           <p className="cart__total-conten--total"> $230</p>
         </div>
         <Button className="cart__total-btn" type="primary">
-          <span> PROCEED CHECKOUT</span>{" "}
+         <NavLink to={ROUTE.CHECKOUT} exact > PROCEED CHECKOUT</NavLink> 
         </Button>
       </div>
     </>

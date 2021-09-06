@@ -18,6 +18,9 @@
                 }
             }
         }
+        &--backgroundColor{
+            background-color: $backgroundColor;
+        }
     }
     &__btn{
         background: $primaryColor;
@@ -25,6 +28,9 @@
         border: none;
         &:hover{
             background: $primaryHoverColor;
+        }
+        &--center{
+            text-align: center;
         }
     }
 
