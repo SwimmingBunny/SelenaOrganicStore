@@ -1,3 +1,4 @@
+@import "../style/variable.scss";
 @media only screen and (max-width: 480px) {
   .container {
     width: 100% !important;
@@ -6,6 +7,9 @@
     position: static;
 
     &__top {
+      &-search {
+        padding: 0 1rem;
+      }
       &-img {
         text-align: center;
       }
@@ -17,6 +21,7 @@
   }
   .slider {
     margin-bottom: 10rem;
+    padding: 0 1rem;
   }
   .categories-item-boder {
     max-height: none !important;
@@ -50,11 +55,83 @@
   .wishlist__responsive {
     overflow-x: auto;
   }
+  .wishlist__table {
+    margin: 0 1rem;
+  }
+  .sidebar {
+    padding: 1rem;
+  }
+  .shopitem {
+    &__sortitem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+    }
+  }
+  .submenu {
+    display: flex;
+    align-items: center;
+    &__cart {
+      color: $primaryColor;
+      font-size: 3rem;
+      padding-right: 1rem;
+      &:hover {
+        color: $primaryHoverColor;
+      }
+    }
+  }
+  .footer__top {
+    padding: 0 1rem;
+  }
+  .shopitem__sortitem-layout {
+    display: block !important;
+  }
+  .cart__table {
+    margin: 0 1rem;
+  }
+  .aboutus__provide-content {
+    margin: 0 1rem;
+  }
 }
+// split
+// split
+// split
 .fixed {
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   z-index: 1000;
+  background: white;
+  border-bottom: 0.2rem solid $borderColor;
+}
+.menufixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  background: white;
+  padding-bottom: 0.5rem;
+}
+.subfixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  margin-top: 9rem;
+  background: white;
+  z-index: 1000;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid $borderColor;
+  padding: 1rem;
+}
+.ant-input-search-button {
+  height: 4.4rem !important;
+}
+#header__top-search-input {
+  padding: 1rem;
 }

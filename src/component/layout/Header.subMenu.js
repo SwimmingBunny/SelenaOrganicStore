@@ -42,6 +42,9 @@ const SubMenu = () => {
   function goContact() {
     history.push("/contact");
   }
+  function goWishlist() {
+    history.push("/wish-list");
+  }
   return (
     <Menu
       mode="inline"
@@ -60,6 +63,9 @@ const SubMenu = () => {
           </Menu.Item>
           <Menu.Item key="8" onClick={goCart}>
             Cart
+          </Menu.Item>
+          <Menu.Item key="9" onClick={goWishlist}>
+            Wishlist
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="2" onClick={goAbout}>
