@@ -1,6 +1,12 @@
 import React from "react";
 import { Carousel, Row, Col, Button } from "antd";
+import { useHistory } from "react-router-dom";
+
 const Slider = () => {
+  const history = useHistory();
+  function goShopping() {
+    history.push("/shop-product");
+  }
   const contentStyle = {
     color: "#fff",
     lineHeight: "160px",
@@ -23,7 +29,9 @@ const Slider = () => {
               we supply highly quality, premium organic product
             </p>
             <br />
-            <Button id="slider__content1-text--btn">SHOP NOW</Button>
+            <Button id="slider__content1-text--btn" onClick={goShopping}>
+              SHOP NOW
+            </Button>
           </Col>
           <Col lg={{ span: 12 }} xs={{ span: 24 }}>
             <img
@@ -47,7 +55,9 @@ const Slider = () => {
               we supply highly quality, premium organic product
             </p>
             <br />
-            <Button id="slider__content1-text--btn">SHOP NOW</Button>
+            <Button id="slider__content1-text--btn" onClick={goShopping}>
+              SHOP NOW
+            </Button>
           </Col>
           <Col lg={{ span: 12 }} xs={{ span: 24 }}>
             <img
