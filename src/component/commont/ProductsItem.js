@@ -20,7 +20,7 @@ const ProductItem = (props) => {
   return (
     <>
       {!props.layout ? (
-        <Col lg={{ span: 8 }} xs={{ span: 24 }}>
+        <Col lg={{ span: 8 }} xs={{ span: 12 }}>
           <div style={{ padding: "2.4rem .8rem " }}>
             <div className="product__list-item">
               <div className="product__list-item--img">
@@ -79,7 +79,7 @@ const ProductItem = (props) => {
           </div>
         </Col>
       ) : (
-        <Col lg={{ span: 8 }} xs={{ span: 12 }}>
+        <Col lg={{ span: 8 }} xs={{ span: 24 }}>
           <div style={{ padding: "2.4rem .8rem " }}>
             <div className="product__list-item">
               <div className="product__list-item--img">
