@@ -10,42 +10,42 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faGlobeAsia, faFighterJet, faComment);
 const Choosen = () => {
   return (
-    <div className="aboutus__choosen">
+    <div className="aboutUs__choose">
       <div>
-        <h1 className="aboutus__choosen-h1">Why Choose Us</h1>
+        <h1 className="aboutUs__choose-h1">Why Choose Us</h1>
       </div>
-      <Row gutter={[24, 24]} className="aboutus__choosen-conten">
-        <Col className="aboutus__choosen-conten--pay" lg={{ span: 8 }}>
+      <Row gutter={[24, 24]} className="aboutUs__choose-content">
+        <Col className="aboutUs__choose-content--pay" lg={{ span: 8 }}>
           <FontAwesomeIcon
-            className="aboutus__choosen-conten--pay--icon"
+            className="aboutUs__choose-content--pay--icon"
             icon="globe-asia"
           />
-          <h3 className="aboutus__choosen-conten--pay--h3">FREE SHIPPING</h3>
-          <p className="aboutus__choosen-conten--pay--p">
+          <h3 className="aboutUs__choose-content--pay--h3">FREE SHIPPING</h3>
+          <p className="aboutUs__choose-content--pay--p">
             Amadea Shop is a very slick and clean e-commerce template with
             endless possibilities.
           </p>
         </Col>
-        <Col className="aboutus__choosen-conten--ship" lg={{ span: 8 }}>
+        <Col className="aboutUs__choose-content--ship" lg={{ span: 8 }}>
           <FontAwesomeIcon
-            className="aboutus__choosen-conten--pay--icon"
+            className="aboutUs__choose-content--pay--icon"
             icon="fighter-jet"
           />
-          <h3 className="aboutus__choosen-conten--pay--h3">FAST DELIVERY</h3>
-          <p className="aboutus__choosen-conten--pay--p">
+          <h3 className="aboutUs__choose-content--pay--h3">FAST DELIVERY</h3>
+          <p className="aboutUs__choose-content--pay--p">
             Amadea Shop is a very slick and clean e-commerce template with
             endless possibilities.
           </p>
         </Col>
-        <Col className="aboutus__choosen-conten--customer" lg={{ span: 8 }}>
+        <Col className="aboutUs__choose-content--customer" lg={{ span: 8 }}>
           <FontAwesomeIcon
-            className="aboutus__choosen-conten--pay--icon"
+            className="aboutUs__choose-content--pay--icon"
             icon="comment"
           />
-          <h3 className="aboutus__choosen-conten--pay--h3">
+          <h3 className="aboutUs__choose-content--pay--h3">
             CUSTOMERS SUPPORT
           </h3>
-          <p className="aboutus__choosen-conten--pay--p">
+          <p className="aboutUs__choose-content--pay--p">
             Amadea Shop is a very slick and clean e-commerce template with
             endless possibilities.
           </p>

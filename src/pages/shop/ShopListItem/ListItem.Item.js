@@ -1,8 +1,11 @@
-import React from "react";
+import * as React from "react";
+import {useDispatch} from "react-redux";
 import { Row, Select, Pagination } from "antd";
 import { useMediaQuery } from "react-responsive";
 
 import ProductItem from "../../../component/commont/ProductsItem";
+import { listProductApi } from '../../../redux/reducers/productSlice'
+
 import { Button } from "antd";
 import $ from "jquery";
 
@@ -23,6 +26,11 @@ const ShopItem = () => {
   });
 
   const { Option } = Select;
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(listProductApi())
+  }, [])
   const [changeUI, setChangeUI] = React.useState(true);
 
   function handleChange(value) {

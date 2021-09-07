@@ -5,7 +5,7 @@ const pool = require('./db_connection');
 const app = express();
 
 // middleware
-app.use(cors());
+app.use(cors())
 app.use(bodyParser.json());
 // app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));

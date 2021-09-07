@@ -4,11 +4,13 @@ import React, { useState } from "react";
 import { Row, Col } from "antd";
 import { Form, Input, Button, Checkbox } from "antd";
 
-import { useDispatch } from "react-redux";
-import { addUser } from "../../../redux/reducers/userRegisterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addCustomerApi } from "../../../redux/reducers/userRegisterSlice";
+import { saveCurrentLocation } from "../../../redux/reducers/userRegisterSlice";
 
 import validateMessages from "../ValidateMessage";
 import "../../../style/form.scss";
+import { useHistory } from "react-router";
 
 const Register = () => {
   const [form] = Form.useForm();
@@ -20,10 +22,16 @@ const Register = () => {
     registeruser: "",
   });
 
+  const history = useHistory();
   const dispatch = useDispatch();
+  const success = useSelector((state)=> state.register.success);
+  const customer = useSelector((state)=> state.register.customer);
+  const previousLocation = useSelector((state)=> state.register.previousLocation);
+
   const handleRegister = () => {
     console.log('form sbm', {formValue})
-    const action = addUser({formValue});
+    dispatch(saveCurrentLocation('/register'));
+    const action = addCustomerApi({formValue});
     dispatch(action);
     console.log('action',action)
   };
@@ -36,6 +44,13 @@ const Register = () => {
       setFormValue({ ...formValue, deadline: e });
     }
   };
+
+  // need dùng thì open ra
+  // React.useEffect(() => {
+  //   if(success && Object.keys(customer).length > 0 ){
+  //     history.push('/my-account');
+  //   }
+  // }, [success, customer, history, previousLocation])
 
   return (
     <div className='container'>
