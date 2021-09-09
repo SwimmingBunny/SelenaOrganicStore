@@ -20,7 +20,7 @@ const ShopItem = () => {
     query: "(max-width: 480px)",
   });
   $(window).bind("scroll", function () {
-    if ($(window).scrollTop() > 687 && isMoblie === true) {
+    if ($(window).scrollTop() > 800 && isMoblie === true) {
       $(".shopitem__sortitem").addClass("subfixed");
     } else {
       $(".shopitem__sortitem").removeClass("subfixed");

@@ -1,9 +1,8 @@
 const express = require('express');
-
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const pool = require('./db_connection');
 const app = express();
-const cors = require('cors')
 
 // middleware
 app.use(cors())
