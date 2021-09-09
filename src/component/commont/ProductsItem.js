@@ -24,7 +24,7 @@ const ProductItem = (props) => {
           <div style={{ padding: "2.4rem .8rem " }}>
             <div className="product__list-item">
               <div className="product__list-item--img">
-                <img width="100%" src={props.img} alt="" />
+                <img style={{width:'100%'}} src={props.img} alt="" />
               </div>
               <div className="product__list-item--rating">
                 <span>
@@ -50,7 +50,7 @@ const ProductItem = (props) => {
                 {props.name}
               </NavLink>
               <div className="product__list-item--price">
-                <p className="product__list-item--price--p">{props.price} </p>
+                <p className="product__list-item--price--p">${props.price} </p>
                 <p className="product__list-item--price--p discounted">
                   {props.sell}
                 </p>
@@ -73,7 +73,6 @@ const ProductItem = (props) => {
                   </div>
                 </Popover>
               </div>
-
               <QuickView />
             </div>
           </div>
