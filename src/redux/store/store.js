@@ -1,10 +1,10 @@
 import registerReducer from '../reducers/userRegisterSlice'
 import { configureStore } from "@reduxjs/toolkit";
-import listproductReducer  from '../reducers/productSlice';
+import listProductReducer  from '../reducers/productSlice';
 
 const rootReducer = {
     register: registerReducer,
-    listProduct : listproductReducer
+    listProduct : listProductReducer
 }
 
 const store = configureStore({

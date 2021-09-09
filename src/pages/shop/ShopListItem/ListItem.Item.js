@@ -1,10 +1,12 @@
+/** @format */
+
 import * as React from "react";
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Row, Select, Pagination } from "antd";
 import { useMediaQuery } from "react-responsive";
 
 import ProductItem from "../../../component/commont/ProductsItem";
-import { listProductApi } from '../../../redux/reducers/productSlice'
+import { getListProductApi } from "../../../redux/reducers/productSlice";
 
 import { Button } from "antd";
 import $ from "jquery";
@@ -26,12 +28,14 @@ const ShopItem = () => {
   });
 
   const { Option } = Select;
-  const dispatch = useDispatch()
-
-  React.useEffect(() => {
-    dispatch(listProductApi())
-  }, [])
+  const dispatch = useDispatch();
   const [changeUI, setChangeUI] = React.useState(true);
+  const listProductApi = useSelector(
+    (state) => state.listProduct.listProductApi
+  );
+  React.useEffect(() => {
+    dispatch(getListProductApi());
+  }, []);
 
   function handleChange(value) {
     console.log(`selected ${value}`);
@@ -39,42 +43,55 @@ const ShopItem = () => {
   const handleChangeUI = () => {
     setChangeUI(!changeUI);
   };
+  const renderListProduct = () => {
+    console.log("list", listProductApi);
+    return listProductApi.map((item, index) => {
+      return (
+        <ProductItem
+          key={index}
+          img={item.img}
+          name={item.name}
+          price={item.price}
+          sell={item.sell}
+          id = {index}
+        />
+      );
+    });
+  };
+
   return (
-    <div className="shopitem">
-      <div className="shopitem__sortitem">
+    <div className='shopitem'>
+      <div className='shopitem__sortitem'>
         <div style={{ margin: "1rem " }}>
-          <span className="shopitem__sortitem-sort--span">Sort By:</span>
+          <span className='shopitem__sortitem-sort--span'>Sort By:</span>
           <Select
-            defaultValue="Revelence"
+            defaultValue='Revelence'
             style={{ width: 120 }}
             onChange={handleChange}
-            className="shopitem__sort-select"
-          >
-            <Option value="Revelence">Revelence</Option>
-            <Option value="Name">Name (A-Z)</Option>
-            <Option value="Rating">Rating </Option>
-            <Option value="Rating">Best Seller </Option>
-            <Option value="Rating">Hot&New </Option>
+            className='shopitem__sort-select'>
+            <Option value='Revelence'>Revelence</Option>
+            <Option value='Name'>Name (A-Z)</Option>
+            <Option value='Rating'>Rating </Option>
+            <Option value='Rating'>Best Seller </Option>
+            <Option value='Rating'>Hot&New </Option>
           </Select>
         </div>
       </div>
-      <div className="shopitem__sortitem-sort">
-        <div className="shopitem__sortitem-layout">
+      <div className='shopitem__sortitem-sort'>
+        <div className='shopitem__sortitem-layout'>
           {changeUI ? (
             <button
-              type="primary"
+              type='primary'
               onClick={handleChangeUI}
-              className="shopitem__sortitem-layout--btn"
-            >
-              <FontAwesomeIcon icon="window-maximize" />
+              className='shopitem__sortitem-layout--btn'>
+              <FontAwesomeIcon icon='window-maximize' />
             </button>
           ) : (
             <button
-              type="primary"
+              type='primary'
               onClick={handleChangeUI}
-              className="shopitem__sortitem-layout--btn"
-            >
-              <FontAwesomeIcon icon="columns" />
+              className='shopitem__sortitem-layout--btn'>
+              <FontAwesomeIcon icon='columns' />
             </button>
           )}
         </div>
@@ -82,45 +99,11 @@ const ShopItem = () => {
       </div>
 
       <div>
-        <Row gutter={16} className="product__list">
-          <ProductItem
-            img="Images/product/product-10.jpg"
-            name="Carrot"
-            price="2$"
-            sell="5$"
-            layout={changeUI}
-          />{" "}
-          <ProductItem
-            img="Images/product/product-10.jpg"
-            name="Carrot"
-            price="2$"
-            sell="5$"
-            layout={changeUI}
-          />{" "}
-          <ProductItem
-            img="Images/product/product-10.jpg"
-            name="Carrot"
-            price="2$"
-            sell="5$"
-            layout={changeUI}
-          />{" "}
-          <ProductItem
-            img="Images/product/product-10.jpg"
-            name="Carrot"
-            price="2$"
-            sell="5$"
-            layout={changeUI}
-          />{" "}
-          <ProductItem
-            img="Images/product/product-10.jpg"
-            name="Carrot"
-            price="2$"
-            sell="5$"
-            layout={changeUI}
-          />
+        <Row gutter={16} className='product__list'>
+          {renderListProduct()}
         </Row>
       </div>
-      <div className="shopitem__pagi">
+      <div className='shopitem__pagi'>
         <Pagination defaultCurrent={1} total={50} />
       </div>
     </div>
