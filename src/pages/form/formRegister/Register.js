@@ -120,10 +120,7 @@ const Register = () => {
           </div>
         </Col>
         <Col xs={{ span: 24 }} lg={{ span: 12 }}>
-          <img
-            style={{ width: "100%", height: "100%" }}
-            src='Images/banner/best-sellers.png'
-          />
+
         </Col>
       </Row>
     </div>

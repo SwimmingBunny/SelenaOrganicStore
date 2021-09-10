@@ -6,7 +6,7 @@ exports.create = (req, res) => {
           message: "Content can not be empty!"
         });
     };
-    const product = new Product ({
+    const product = new Products ({
         id: req.body.id,
         name: req.body.name,
         price: req.body.price,
@@ -15,7 +15,7 @@ exports.create = (req, res) => {
         type: req.body.type,
     
       });
-      Product.create(product, (err, data) => {
+      Products.create(product, (err, data) => {
         if (err)
           res.status(500).send({
             message:
