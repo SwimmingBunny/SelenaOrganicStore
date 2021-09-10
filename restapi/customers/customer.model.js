@@ -1,7 +1,6 @@
 const sql = require('../db_connection');
 
 const Customer = function(customer) {
-    this.id = customer.id;
     this.name = customer.name;
     this.phone = customer.phone;
     this.mail = customer.mail;

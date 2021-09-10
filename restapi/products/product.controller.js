@@ -25,17 +25,6 @@ exports.create = (req, res) => {
       });
 };
 
-// Retrieve all Products from the database.
-// exports.getAllProduct = (err, res) => {
-//     Products.getAllProduct((err, data) => {
-//         if (err)
-//           res.status(500).send({
-//             message:
-//               err.message || "Some error occurred while retrieving Products."
-//           });
-//         else res.send(data);
-//       });
-// };
 
 exports.getProducts = (req, res) => {
     // const { productsName, productsType } = req.query;

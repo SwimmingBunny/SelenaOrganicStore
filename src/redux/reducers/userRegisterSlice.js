@@ -2,21 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import {createAsyncThunk } from "@reduxjs/toolkit";
 
-const addCustomerApi = createAsyncThunk(
+export const addCustomerApi = createAsyncThunk(
     "Customer/addCustomerApi",
     async (payload) => {
       await axios
         .post(`http://localhost:5000/customers`, {
-          id: payload.id,
           name: payload.fullname,
-          phone:'09999999',
           mail: payload.email,
-          gender: 'male',
           password: payload.password,
-          address: '42 abcd'
         })
         .then((res) => {
-          console.log(".addTaskApi ~ res", res);
+          console.log(".addCustomerApi ~ res", res);
           return res;
         })
         .catch((e) => {
@@ -24,21 +20,35 @@ const addCustomerApi = createAsyncThunk(
         });
     }
   );
+
+
+
 const userRegister = createSlice({
     name: 'register',
     initialState: {
-        listCustomer: []
+        customer: {},
+        previousLocation: '',
+        success: false,
+        loading: false,
     },
     reducers: {
-        addUser: (state,action) => {
-            state.listCustomer.push(action.payload)
+        addCustomer: (state,action) => {
+            state.customer = action.payload
+        },
+        saveCurrentLocation : (state, action) => {
+          state.previousLocation = action.payload //currentLocation
         }
+        
     },
-    extraReducer:{
-        [addCustomerApi.pending]: (state,action) =>{},
+    
+    extraReducers:{
+      
+        [addCustomerApi.pending]: (state,action) => {
+          state.loading = true;
+        },
         [addCustomerApi.rejected]: (state,action) =>{},
         [addCustomerApi.fulfilled]: (state, action) =>{
-            state.listCustomer = action.payload;
+            state.success = true;
         }
     }
 });
@@ -46,5 +56,5 @@ const userRegister = createSlice({
 
 
 const {reducer, actions} = userRegister;
-export const {addUser} = actions;
+export const {addCustomer, saveCurrentLocation} = actions;
 export default reducer;

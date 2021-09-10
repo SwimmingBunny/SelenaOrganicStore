@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import { Row, Col } from "antd";
 import { Form, Input, Button, Checkbox } from "antd";
 
-import { useDispatch } from "react-redux";
-import { addUser } from "../../../redux/reducers/userRegisterSlice";
-
+import { useDispatch, useSelector} from "react-redux";
+import { addCustomerApi} from "../../../redux/reducers/userRegisterSlice";
+import { saveCurrentLocation } from "../../../redux/reducers/userRegisterSlice";
 import validateMessages from "../ValidateMessage";
 import "../../../style/form.scss";
+import { useHistory } from "react-router";
 
 const Register = () => {
   const [form] = Form.useForm();
@@ -17,17 +18,18 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    registeruser: "",
   });
 
+  const history = useHistory();
   const dispatch = useDispatch();
+  const success = useSelector((state)=> state.register.success);
+  
+ 
   const handleRegister = () => {
     console.log('form sbm', {formValue})
-    const action = addUser({formValue});
-    dispatch(action);
-    console.log('action',action)
+    dispatch(addCustomerApi({...formValue}));
+    console.log('action',addCustomerApi)
   };
-
   const handelOnChange = (e) => {
     if (e.target) {
       setFormValue({ ...formValue, [e.target.name]: e.target.value });
@@ -36,6 +38,12 @@ const Register = () => {
       setFormValue({ ...formValue, deadline: e });
     }
   };
+
+  React.useEffect(() => {
+    if(success){
+      dispatch(saveCurrentLocation(history.goBack()));
+    }
+  }, [dispatch,success, history])
 
   return (
     <div className='container'>
