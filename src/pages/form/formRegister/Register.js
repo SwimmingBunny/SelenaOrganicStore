@@ -41,6 +41,7 @@ const Register = () => {
 
   React.useEffect(() => {
     if(success){
+      console.log("🚀 ~ file: Register.js ~ line 44 ~ React.useEffect ~ success", success)
       dispatch(saveCurrentLocation(history.goBack()));
     }
   }, [dispatch,success, history])
