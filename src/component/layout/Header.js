@@ -24,16 +24,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faShoppingCart, faTrash);
 
 const Header = () => {
-  $(window).bind("scroll", function () {
-    if ($(window).scrollTop() > 200) {
-      $(".header__submenu").addClass("fixed");
-    } else {
-      $(".header__submenu").removeClass("fixed");
-    }
-  });
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
+  $(window).bind("scroll", function () {
+    if ($(window).scrollTop() > 73 && isMoblie === true) {
+      $(".header__top-right").addClass("fixed");
+      $(".header__submenu").addClass("menufixed");
+    } else {
+      $(".header__top-right").removeClass("fixed");
+      $(".header__submenu").removeClass("menufixed");
+    }
+  });
+
   const history = useHistory();
   function goHome() {
     history.push("/");
@@ -42,7 +45,9 @@ const Header = () => {
   const accountMenu = (
     <Menu className="header__top-account-sub">
       <Menu.Item>
-        <a>My Account </a>
+      <NavLink to={ROUTE.MYACCOUNT} exact>
+        My Account
+        </NavLink>
       </Menu.Item>
       <Menu.Item>
         <NavLink to={ROUTE.LOGIN} exact>
@@ -166,12 +171,22 @@ const Header = () => {
                   xs={{ span: 12 }}
                 >
                   <Dropdown overlay={cartMenu}>
-                    <a>
-                      <FontAwesomeIcon
-                        className="header__top-cart-icon"
-                        icon="shopping-cart"
-                      />
-                    </a>
+                    {isMoblie ? (
+                      <div className="submenu">
+                        <FontAwesomeIcon
+                          className="submenu__cart"
+                          icon="shopping-cart"
+                        />
+                        <span>My cart</span>
+                      </div>
+                    ) : (
+                      <a>
+                        <FontAwesomeIcon
+                          className="header__top-cart-icon"
+                          icon="shopping-cart"
+                        />
+                      </a>
+                    )}
                   </Dropdown>
                 </Col>
               </Row>

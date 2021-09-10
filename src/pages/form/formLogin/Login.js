@@ -7,6 +7,9 @@ import "../../../style/form.scss";
 import "../../../style/base.scss";
 
 const Login = () => {
+  const [form] = Form.useForm();
+
+
   return (
     <div className="form container">
       <Row gutter={[16, 16]}>

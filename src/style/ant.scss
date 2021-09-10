@@ -23,7 +23,7 @@
 // Header
 // Header
 .ant-input-search-button {
-  height: 5.4rem !important;
+  height: 5.4rem;
   border-radius: 0 2rem 2rem 0 !important;
   &:hover {
     border: 0.1rem solid $primaryColor !important;
@@ -73,4 +73,13 @@
 }
 .ant-input-group-addon {
   border-radius: 30rem;
+}
+
+//////////////label////////
+.ant-form label {
+  min-width: 13rem;
+}
+/////////Acount Detail////////
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: $primaryColor;
 }

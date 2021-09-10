@@ -6,6 +6,8 @@ export const ROUTE = {
   REGISTER: "/register",
   LOGIN: "/login",
   CONTACT: "/contact",
+  CHECKOUT: "/checkout",
   CART: "/cart",
   WISHLIST: "/wish-list",
+  MYACCOUNT: "/my-account",
 };
