@@ -2,6 +2,7 @@ import React from "react";
 import SubMenu from "./Header.subMenu.js";
 import { useMediaQuery } from "react-responsive";
 import { Input, Menu, Dropdown, Button, Row, Col, Avatar, Image } from "antd";
+import { UserOutlined } from '@ant-design/icons';
 import { DownOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import { ROUTE } from "../../constant/router.js";
@@ -147,10 +148,7 @@ const Header = () => {
                 >
                   <Dropdown overlay={accountMenu}>
                     <a className="header__top-account-a">
-                      <Avatar
-                        size="small"
-                        src="Images/about/avata-3.jpg"
-                      ></Avatar>{" "}
+                    <Avatar style={{margin:"1rem"}} size="small" icon={<UserOutlined />} />
                       My Account <DownOutlined />
                     </a>
                   </Dropdown>
