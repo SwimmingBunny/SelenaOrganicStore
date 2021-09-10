@@ -5,7 +5,7 @@
 // Provide
 // Provide
 // Provid
-.aboutus {
+.aboutUs {
   font-family: "Raleway", sans-serif;
   box-sizing: border-box;
   margin-bottom: 4rem;
@@ -46,7 +46,7 @@
       }
     }
     &-image {
-      &--boder {
+      &--border {
         border: 0.5rem solid $primaryColor;
         margin-right: 3rem;
         &--img {
@@ -100,7 +100,7 @@
       }
     }
   }
-  &__choosen {
+  &__choose {
     border-bottom: 2px solid $borderColor;
     padding: 3rem 0;
     &-h1 {
@@ -123,7 +123,7 @@
     }
   }
 }
-.aboutus__choosen-conten {
+.aboutUs__choose-content {
   text-align: center;
   cursor: pointer;
 
@@ -138,12 +138,12 @@
     }
   }
 }
-.aboutus__choosen-conten--pay:hover .aboutus__choosen-conten--pay--icon {
+.aboutUs__choose-content--pay:hover .aboutUs__choose-content--pay--icon {
   color: $primaryColor;
 }
-.aboutus__choosen-conten--ship:hover .aboutus__choosen-conten--pay--icon {
+.aboutUs__choose-content--ship:hover .aboutUs__choose-content--pay--icon {
   color: $primaryColor;
 }
-.aboutus__choosen-conten--customer:hover .aboutus__choosen-conten--pay--icon {
+.aboutUs__choose-content--customer:hover .aboutUs__choose-content--pay--icon {
   color: $primaryColor;
 }

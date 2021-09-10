@@ -5,17 +5,10 @@ import { useMediaQuery } from "react-responsive";
 
 import { Carousel } from "antd";
 
-const Brandarea = () => {
+const BrandArea = () => {
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
-  const contentStyle = {
-    display: "flex",
-    flexDirection: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79",
-  };
   return (
     <>
       {isMoblie ? (
@@ -51,4 +44,4 @@ const Brandarea = () => {
   );
 };
 
-export default Brandarea;
+export default BrandArea;
