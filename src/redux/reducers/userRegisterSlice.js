@@ -56,5 +56,6 @@ const userRegister = createSlice({
 
 
 const {reducer, actions} = userRegister;
+export const { addUser} = actions;
 export const {addCustomer, saveCurrentLocation} = actions;
 export default reducer;

@@ -5,7 +5,7 @@ import {createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getListProductApi = createAsyncThunk('product/getApiData', async () => {
     const res = await axios
-      .get(`http://localhost:5000/products/search?KeySearch=`)
+      .get(`http://localhost:5000/products/search?KeySearch`)
       .then((res) => {
         console.log('.listProductApi ~ res', res);
         return res;

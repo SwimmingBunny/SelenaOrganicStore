@@ -52,7 +52,7 @@ const ShopItem = () => {
           name={item.name}
           price={item.price}
           sell={item.sell}
-          id = {index}
+          id={index}
         />
       );
     });
@@ -61,12 +61,19 @@ const ShopItem = () => {
     console.log(`selected ${value}`);
     console.log("long", listProductApi);
 
-    if(value === 'Name') {
-      const newList = listProductApi.sort();
-      setListProduct(...newList)
-    }
-    
-  }
+  const handelFilter = () => {
+    const booksSort = [...listProductApi].sort((a, b) => {
+      var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+      var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+    });
+  };
+
   return (
     <div className='shopitem'>
       <div className='shopitem__sortitem'>
@@ -78,11 +85,12 @@ const ShopItem = () => {
             onChange={handleChange}
             className='shopitem__sort-select'>
             <Option value='Revelence'>Revelence</Option>
-            <Option value='Name'>Name (A-Z)</Option>
+            <Option value='Name'>Name (A-Z) </Option>
             <Option value='Rating'>Rating </Option>
             <Option value='best'>Best Seller </Option>
             <Option value='hot'>Hot&New </Option>
           </Select>
+          <Button onClick={handelFilter}>Apply</Button>
         </div>
       </div>
       <div className='shopitem__sortitem-sort'>
@@ -116,5 +124,6 @@ const ShopItem = () => {
       </div>
     </div>
   );
+}
 };
 export default ShopItem;

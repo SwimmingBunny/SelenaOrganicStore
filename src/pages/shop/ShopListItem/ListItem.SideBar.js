@@ -62,10 +62,10 @@ const SideBar = () => {
       >
         <SubMenu key="sub5" title="Price" className="sidebar__menu-submenu">
           <Menu.Item className="sidebar__menu-submenu--item" key="1">
-            $0 - $100
+            $0 - $50
           </Menu.Item>
-          <Menu.Item key="2"> $100 - $200</Menu.Item>
-          <Menu.Item key="3">$200 - $300</Menu.Item>
+          <Menu.Item key="2"> $50 - $100</Menu.Item>
+          <Menu.Item key="3">$100 - more</Menu.Item>
         </SubMenu>
       </Menu>
       <div className="sidebar__img">
