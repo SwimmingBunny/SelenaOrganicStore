@@ -33,13 +33,12 @@ const ShopItem = () => {
   const listProductApi = useSelector(
     (state) => state.listProduct.listProductApi
   );
+  const [listProduct, setListProduct] = React.useState(listProductApi)
   React.useEffect(() => {
     dispatch(getListProductApi());
   }, []);
-
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
+ 
+ 
   const handleChangeUI = () => {
     setChangeUI(!changeUI);
   };
@@ -58,6 +57,9 @@ const ShopItem = () => {
       );
     });
   };
+  function handleChange(value) {
+    console.log(`selected ${value}`);
+    console.log("long", listProductApi);
 
   const handelFilter = () => {
     const booksSort = [...listProductApi].sort((a, b) => {
@@ -85,8 +87,8 @@ const ShopItem = () => {
             <Option value='Revelence'>Revelence</Option>
             <Option value='Name'>Name (A-Z) </Option>
             <Option value='Rating'>Rating </Option>
-            <Option value='Rating'>Best Seller </Option>
-            <Option value='Rating'>Hot&New </Option>
+            <Option value='best'>Best Seller </Option>
+            <Option value='hot'>Hot&New </Option>
           </Select>
           <Button onClick={handelFilter}>Apply</Button>
         </div>
@@ -122,5 +124,6 @@ const ShopItem = () => {
       </div>
     </div>
   );
+}
 };
 export default ShopItem;

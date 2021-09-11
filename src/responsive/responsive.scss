@@ -89,6 +89,9 @@
       }
     }
   }
+  .categories-item-col--h2 {
+    font-size: 2.5rem !important;
+  }
   .footer__top {
     padding: 0 1rem;
   }
@@ -101,7 +104,15 @@
   .aboutus__provide-content {
     margin: 0 1rem;
   }
- 
+  .product__list-item
+  {
+    &--img {
+      height: 20rem !important;
+    }
+    &--h3 {
+      font-size: 1.4rem !important;
+    }
+  }
 }
 // split
 // split
