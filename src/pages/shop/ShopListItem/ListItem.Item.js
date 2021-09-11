@@ -33,13 +33,12 @@ const ShopItem = () => {
   const listProductApi = useSelector(
     (state) => state.listProduct.listProductApi
   );
+  const [listProduct, setListProduct] = React.useState(listProductApi)
   React.useEffect(() => {
     dispatch(getListProductApi());
   }, []);
-
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
+ 
+ 
   const handleChangeUI = () => {
     setChangeUI(!changeUI);
   };
@@ -58,7 +57,16 @@ const ShopItem = () => {
       );
     });
   };
+  function handleChange(value) {
+    console.log(`selected ${value}`);
+    console.log("long", listProductApi);
 
+    if(value === 'Name') {
+      const newList = listProductApi.sort();
+      setListProduct(...newList)
+    }
+    
+  }
   return (
     <div className='shopitem'>
       <div className='shopitem__sortitem'>
@@ -72,8 +80,8 @@ const ShopItem = () => {
             <Option value='Revelence'>Revelence</Option>
             <Option value='Name'>Name (A-Z)</Option>
             <Option value='Rating'>Rating </Option>
-            <Option value='Rating'>Best Seller </Option>
-            <Option value='Rating'>Hot&New </Option>
+            <Option value='best'>Best Seller </Option>
+            <Option value='hot'>Hot&New </Option>
           </Select>
         </div>
       </div>
