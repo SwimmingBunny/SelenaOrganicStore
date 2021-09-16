@@ -64,6 +64,16 @@ const Header = () => {
   );
   const cartMenu = (
     <Menu className="header__top-cart-sub">
+        <Menu.Item>
+          <div className="header__top-cart-emty">
+          <img src='Images/about/no-cart.png'  />
+          <p>Your cart is emty</p>
+          </div>
+         
+        </Menu.Item>
+        {/* split here */}
+        {/* split here */}
+        {/* split here */}
       <div className="header__top-cart-container">
         <Menu.Item>
           <div className="header__top-container">
@@ -183,6 +193,9 @@ const Header = () => {
                           className="header__top-cart-icon"
                           icon="shopping-cart"
                         />
+                        <div className='header-noti'>
+                          <span>1</span>
+                        </div>
                       </a>
                     )}
                   </Dropdown>
