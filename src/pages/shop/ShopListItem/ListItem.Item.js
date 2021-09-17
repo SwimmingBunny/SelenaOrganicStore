@@ -15,6 +15,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faColumns, faWindowMaximize } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faColumns, faWindowMaximize);
+
+
+const listItemCart = 'LIST_ITEM_CART';
 const ShopItem = () => {
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
@@ -30,22 +33,49 @@ const ShopItem = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const [changeUI, setChangeUI] = React.useState(true);
+  const [listProductSort, setListProductSort] = React.useState([]);
   const listProductApi = useSelector(
     (state) => state.listProduct.listProductApi
   );
+
   React.useEffect(() => {
     dispatch(getListProductApi());
   }, []);
 
   function handleChange(value) {
     console.log(`selected ${value}`);
+    const listProductSort = [...listProductApi].sort((a, b) => {
+      if ((value = "Name")) {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+      }
+      if ((value = "Rating")) {
+        return a.rate - b.rate
+      }
+      if ((value = "All")) {
+        return(
+          setListProductSort([...listProductApi])
+        )
+      }
+    });
+    setListProductSort(listProductSort)
+    console.log(
+      "🚀 ~ file: ListItem.Item.js ~ line 53 ~ listProductSort ~ listProductSort",
+      listProductSort
+    );
   }
   const handleChangeUI = () => {
     setChangeUI(!changeUI);
   };
   const renderListProduct = () => {
     console.log("list", listProductApi);
-    return listProductApi.map((item, index) => {
+    return listProductSort.map((item, index) => {
       return (
         <ProductItem
           key={index}
@@ -53,42 +83,28 @@ const ShopItem = () => {
           name={item.name}
           price={item.price}
           sell={item.sell}
-          id={index}
+          handleAddCart = {handleAddCart(index)}
         />
       );
     });
   };
-
-  const handelFilter = () => {
-    const booksSort = [...listProductApi].sort((a, b) => {
-      var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-      var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-    });
-  };
-
+  const handleAddCart = (index) =>{
+      localStorage.setItem(listItemCart,JSON.stringify())
+  }
   return (
     <div className='shopitem'>
       <div className='shopitem__sortitem'>
         <div style={{ margin: "1rem " }}>
           <span className='shopitem__sortitem-sort--span'>Sort By:</span>
           <Select
-            defaultValue='Revelence'
+            defaultValue='All'
             style={{ width: 120 }}
             onChange={handleChange}
             className='shopitem__sort-select'>
-            <Option value='Revelence'>Revelence</Option>
+            <Option value='All'>All</Option>
             <Option value='Name'>Name (A-Z) </Option>
             <Option value='Rating'>Rating </Option>
-            <Option value='Rating'>Best Seller </Option>
-            <Option value='Rating'>Hot&New </Option>
           </Select>
-          <Button onClick={handelFilter}>Apply</Button>
         </div>
       </div>
       <div className='shopitem__sortitem-sort'>

@@ -23,9 +23,9 @@ const Account = (props) => {
   const [item, setItem] = React.useState("left");
   return (
     <>
-      <div className='aboutus__header'>
-        <h1 className='aboutus__header-h1'>Shop</h1>
-        <h3 className='aboutus__header-h3'>My Acount</h3>
+      <div className='aboutUs__header'>
+        <h1 className='aboutUs__header-h1'>Shop</h1>
+        <h3 className='aboutUs__header-h3'>My Acount</h3>
       </div>
       <div className='container'>
         <Row className='myaccount'>
