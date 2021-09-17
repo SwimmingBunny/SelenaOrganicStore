@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import AdminRow from "./admin.Table.js";
 import { Input, Avatar, Row, Col, Menu, Dropdown } from "antd";
 import {
   UserOutlined,
@@ -52,7 +53,7 @@ const Admin = () => {
     </Menu>
   );
   const submenu = (
-    <Menu className='admin-submenu'>
+    <Menu className='admin-submenu' style={{zIndex:'1000'}}>
       <Menu.Item>
         <ul className='admin-select'>
           <li>
@@ -109,7 +110,7 @@ const Admin = () => {
             )}
           </Col>
         </Row>
-        <Row>
+        <Row className='admin-body'>
           {isMoblie ? (
             <Col span={24}>
               <Dropdown
@@ -147,9 +148,34 @@ const Admin = () => {
             </Col>
           )}
 
-          <Col span={18}>
-              <div className='admin__content'>
-                 <h1>Hello!</h1>
+          <Col span={isMoblie ? 24: 18}>
+              <div className='admin__users'>
+                 <h2>Customer Managerment </h2>
+                 <table>
+                    <tr>
+                      <th className='id'>ID</th>
+                      <th className='name'>Name</th>
+                      <th className='email'>Email</th>
+                      <th className='password'>Password</th>
+                      <th className='edit'>Edit</th>
+                      <th className='delete'>Delete</th>
+                    </tr>
+                    <AdminRow/>
+                 </table>
+              </div>
+              <div className='admin__users'>
+                 <h2>Product Managerment </h2>
+                 <table>
+                    <tr>
+                      <th className='id'>ID</th>
+                      <th className='name'>Product</th>
+                      <th className='email'>Quantity</th>
+                      <th className='password'>Price</th>
+                      <th className='edit'>Edit</th>
+                      <th className='delete'>Delete</th>
+                    </tr>
+                    <AdminRow/>
+                 </table>
               </div>
           </Col>
         </Row>

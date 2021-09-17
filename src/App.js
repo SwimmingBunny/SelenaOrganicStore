@@ -23,7 +23,7 @@ import "./responsive/responsive.scss";
 function App() {
   return (
     <Switch>
-      <ROUTE path={ROUTE.USER}>
+      <Route path={ROUTE.USER}>
         <Header />
         <Switch>
           <Route path={ROUTE.HOME} exact>
@@ -61,7 +61,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </ROUTE>
+      </Route>
       <Route path={ROUTE.ADMIN} exact>
         <Admin />
       </Route>

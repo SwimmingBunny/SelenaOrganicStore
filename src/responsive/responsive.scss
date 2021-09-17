@@ -110,6 +110,19 @@
       font-size: 1.4rem !important;
     }
   }
+  .admin-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: $primaryColor;
+    color: $white;
+    font-weight: 500;
+  }
+  
+  .admin-body {
+    height: 0% !important;
+  }
 }
 // split
 // split
@@ -148,13 +161,4 @@
 }
 #header__top-search-input {
   padding: 0.3rem 0.5rem;
-}
-.admin-menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background: $primaryColor;
-  color: $white;
-  font-weight: 500;
 }

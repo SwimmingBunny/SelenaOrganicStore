@@ -153,10 +153,10 @@ const ProductDetail = () => {
           </TabPane>
         </Tabs>
       </Row>
-      <Row className='detail__bottom'>
+      <Row  className='detail__bottom'>
         <h1 className='detail__bottom--related'>Related Product</h1>
         <div className='detail__bottom--boder'></div>
-        <Row>
+        <Row gutter={16}>
           <ProductItem
             img='Images/product/product-10.jpg'
             name='Carrot'
