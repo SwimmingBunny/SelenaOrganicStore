@@ -22,11 +22,9 @@
   }
   .slider {
     padding: 0 1rem;
-    
   }
   .shipping {
     margin-top: 12rem;
-
   }
   .categories-item-boder {
     max-height: none !important;
@@ -104,8 +102,7 @@
   .aboutus__provide-content {
     margin: 0 1rem;
   }
-  .product__list-item
-  {
+  .product__list-item {
     &--img {
       height: 20rem !important;
     }
@@ -151,4 +148,13 @@
 }
 #header__top-search-input {
   padding: 0.3rem 0.5rem;
+}
+.admin-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: $primaryColor;
+  color: $white;
+  font-weight: 500;
 }
