@@ -4,13 +4,12 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Select, Pagination } from "antd";
 import { useMediaQuery } from "react-responsive";
-
+import ScrollToTop from '../../../component/commont/ScrollToTop'
+import { useEffect } from "react";
 import ProductItem from "../../../component/commont/ProductsItem";
 import { getListProductApi } from "../../../redux/reducers/productSlice";
-
 import { Button } from "antd";
 import $ from "jquery";
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faColumns, faWindowMaximize } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,6 +18,8 @@ library.add(faColumns, faWindowMaximize);
 
 const listItemCart = 'LIST_ITEM_CART';
 const ShopItem = () => {
+const [currenPage, setCurrenPage] = React.useState(1)
+const PAGE_SIZE = 12;
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
@@ -29,7 +30,6 @@ const ShopItem = () => {
       $(".shopitem__sortitem").removeClass("subfixed");
     }
   });
-
   const { Option } = Select;
   const dispatch = useDispatch();
   const [changeUI, setChangeUI] = React.useState(true);
@@ -73,9 +73,25 @@ const ShopItem = () => {
   const handleChangeUI = () => {
     setChangeUI(!changeUI);
   };
+  
+function ScrollToTop({ history }) {
+  useEffect(() => {
+    const unlisten = history.listen(() => {
+      window.scrollTo(0, 0);
+    });
+    return () => {
+      unlisten();
+    };
+  }, []);
+
+  return null;
+}
+  const totalResult = listProductApi.length;
+  
   const renderListProduct = () => {
     console.log("list", listProductApi);
-    return listProductSort.map((item, index) => {
+    return listProductApi
+    .map((item, index) => {
       return (
         <ProductItem
           key={index}
@@ -86,7 +102,10 @@ const ShopItem = () => {
           handleAddCart = {handleAddCart(index)}
         />
       );
-    });
+    })
+    .splice((currenPage - 1) * PAGE_SIZE)
+    .splice(0,PAGE_SIZE)
+  
   };
   const handleAddCart = (index) =>{
       localStorage.setItem(listItemCart,JSON.stringify())
@@ -125,7 +144,7 @@ const ShopItem = () => {
             </button>
           )}
         </div>
-        <div>Showing 1-12 of 32 results</div>
+        <div>Showing {PAGE_SIZE} of {totalResult} results</div>
       </div>
 
       <div>
@@ -134,7 +153,12 @@ const ShopItem = () => {
         </Row>
       </div>
       <div className='shopitem__pagi'>
-        <Pagination defaultCurrent={1} total={50} />
+        <Pagination 
+         pageSize={PAGE_SIZE}
+        current={currenPage} 
+        total={listProductApi.length} 
+         onChange={(page)=> {{setCurrenPage(page)}}} 
+         />
       </div>
     </div>
   );

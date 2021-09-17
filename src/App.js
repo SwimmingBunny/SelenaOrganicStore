@@ -16,12 +16,14 @@ import Contact from "./pages/contact/Contact";
 import Checkout from "./pages/checkout/Checkout";
 import Cart from "./pages/shop/Cart/Cart";
 import WishList from "./pages/shop/wishlist/WishList";
-import "./responsive/responsive.scss";
 import Account from "./pages/myAccount/Account";
+import Admin from "./pages/admin/admin";
+import "./responsive/responsive.scss";
 
 function App() {
   return (
-    <>
+    <Switch>
+      <ROUTE path={ROUTE.USER}>
         <Header />
         <Switch>
           <Route path={ROUTE.HOME} exact>
@@ -59,7 +61,11 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-    </>
+      </ROUTE>
+      <Route path={ROUTE.ADMIN} exact>
+        <Admin />
+      </Route>
+    </Switch>
   );
 }
 

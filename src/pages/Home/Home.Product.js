@@ -19,7 +19,7 @@ const Product = () => {
     dispatch(getListProductApi())
   }, []);
 
-  const callback = (key) => {
+  const callAPI = (key) => {
     if(key === '1'){
      const list = listProductApi.filter((item,index)=>{
         return(
@@ -52,8 +52,8 @@ const Product = () => {
        })
        setListProduct(list)
      }
+  
   }
-
   console.log('list', listProduct)
   const renderListProduct = () =>{
     return(
@@ -81,7 +81,7 @@ const Product = () => {
       <div className="product__item">
         <Tabs
           defaultActiveKey="1"
-          onChange={callback}
+          onChange={callAPI}
           className="product__item-list"
         >
           <TabPane tab ="Vegetable" key="1">
