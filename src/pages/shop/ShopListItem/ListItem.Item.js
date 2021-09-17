@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import ScrollToTop from '../../../component/commont/ScrollToTop'
 import { useEffect } from "react";
 import ProductItem from "../../../component/commont/ProductsItem";
-import { getListProductApi } from "../../../redux/reducers/productSlice";
+import { getListProductApi, setSortName } from "../../../redux/reducers/productSlice";
 import { Button } from "antd";
 import $ from "jquery";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -33,9 +33,8 @@ const PAGE_SIZE = 12;
   const { Option } = Select;
   const dispatch = useDispatch();
   const [changeUI, setChangeUI] = React.useState(true);
-  const [listProductSort, setListProductSort] = React.useState([]);
-  const listProductApi = useSelector(
-    (state) => state.listProduct.listProductApi
+  const {listProductApi} = useSelector(
+    (state) => state.listProduct
   );
 
   React.useEffect(() => {
@@ -44,31 +43,7 @@ const PAGE_SIZE = 12;
 
   function handleChange(value) {
     console.log(`selected ${value}`);
-    const listProductSort = [...listProductApi].sort((a, b) => {
-      if ((value = "Name")) {
-        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-      }
-      if ((value = "Rating")) {
-        return a.rate - b.rate
-      }
-      if ((value = "All")) {
-        return(
-          setListProductSort([...listProductApi])
-        )
-      }
-    });
-    setListProductSort(listProductSort)
-    console.log(
-      "🚀 ~ file: ListItem.Item.js ~ line 53 ~ listProductSort ~ listProductSort",
-      listProductSort
-    );
+    dispatch(setSortName(value))
   }
   const handleChangeUI = () => {
     setChangeUI(!changeUI);
@@ -87,6 +62,7 @@ function ScrollToTop({ history }) {
   return null;
 }
   const totalResult = listProductApi.length;
+  console.log("🚀 ~ file: ListItem.Item.js ~ line 65 ~ ShopItem ~ listProductApi.length", listProductApi.length)
   
   const renderListProduct = () => {
     console.log("list", listProductApi);
@@ -99,17 +75,13 @@ function ScrollToTop({ history }) {
           name={item.name}
           price={item.price}
           sell={item.sell}
-          handleAddCart = {handleAddCart(index)}
         />
       );
     })
-    .splice((currenPage - 1) * PAGE_SIZE)
-    .splice(0,PAGE_SIZE)
+    // .splice((currenPage - 1) * PAGE_SIZE)
+    // .splice(0,PAGE_SIZE)
   
   };
-  const handleAddCart = (index) =>{
-      localStorage.setItem(listItemCart,JSON.stringify())
-  }
   return (
     <div className='shopitem'>
       <div className='shopitem__sortitem'>

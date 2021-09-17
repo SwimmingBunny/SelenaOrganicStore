@@ -10,7 +10,8 @@ import {
   AppstoreOutlined,
   DownOutlined,
   MenuOutlined,
-  ShopOutlined
+  ShopOutlined,
+  ShoppingCartOutlined
 } from "@ant-design/icons";
 import { ROUTE } from "../../constant/router.js";
 import { useHistory } from "react-router-dom";
@@ -117,7 +118,7 @@ const Admin = () => {
                 className='admin-menu'
                 placement='bottomCenter'>
                 <p>
-                  Menu{" "}
+                  Menu
                   <DownOutlined
                     style={{ fontWeight: "500", fontSize: "1.4rem" }}
                   />
@@ -137,11 +138,15 @@ const Admin = () => {
                 </li>
                 <li>
                   <UserOutlined className='icon' />
-                  User
+                  Customers
+                </li>
+                <li>
+                  <ShoppingCartOutlined className='icon' />
+                  Oders
                 </li>
                 <li>
                   <ShopOutlined className='icon' />
-                  Product
+                  Products
                 </li>
               </ul>
             </Col>
