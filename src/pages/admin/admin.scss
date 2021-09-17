@@ -1,99 +1,128 @@
-@import "../../style/variable.scss";;
+@import "../../style/variable.scss";
 .admin {
-    &-header {
-        display: flex;
-        align-items: center;
-        padding: 4rem;
-        box-shadow: 0 10px 10px $borderColor;
-        background-color: $backgroundColor;
-        .col-icon {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 2rem;
-            .icon {
-                position: relative;
-                font-size: 2.4rem;
-                cursor: pointer;
-                &:hover {
-                    color: $primaryColor;
-                }
-                &::after {
-                    content: "";
-                    height: 10px;
-                    width: 10px;
-                    position: absolute;
-                    background-color: #e7441f;
-                    border-radius: 50%;
-                }
-            }
+  height: 100vh;
+  overflow: hidden;
+  &-header {
+    display: flex;
+    align-items: center;
+    padding: 4rem;
+    box-shadow: 0 10px 10px $borderColor;
+    background-color: $backgroundColor;
+    .col-icon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      .icon {
+        position: relative;
+        font-size: 2.4rem;
+        cursor: pointer;
+        &:hover {
+          color: $primaryColor;
         }
-        .col-img {
-            display: flex;
-            justify-content: center;
+        &::after {
+          content: "";
+          height: 10px;
+          width: 10px;
+          position: absolute;
+          background-color: #e7441f;
+          border-radius: 50%;
         }
-        .col-src {
-           padding: 0 40px;
-        }
+      }
     }
-    &-select {
-        background-color: $primaryColor;
-        height: 84vh;
-        list-style: none;
-        padding: 2rem;
-        box-shadow:  10px 0 10px $borderColor;
-        li {
-            border-bottom: .1rem solid $borderColor;
-            color: $white;
-            font-size: 1.6rem;
-            padding: 1rem;
-            cursor: pointer;
-            transition: .2s linear;
-            &:hover {
-                background: #51cf98;
-                padding-left: 2rem;
-            }
-            .icon {
-                min-width: 3rem;
-                text-align: left;
-            }
-        }
+    .col-img {
+      display: flex;
+      justify-content: center;
     }
-    &__content{
-        width: 98%;
-        margin: 2rem 0 0 2rem;
-        box-shadow: 10px 10px 10px $borderColor;
-        background-color: $backgroundColor;
-        border-radius: 1rem;
-        padding: 2rem;
+    .col-src {
+      padding: 0 40px;
     }
-}
-.sub-dropdown {
-    width: 150px;
-    margin-top: 1rem;
-    .cover {
-        display: flex;
-        align-items: center;
-        p {
-            margin: 0;
-            margin-left: 2rem;
-        }
-        .icon {
-            position: relative;
-            font-size: 1.6rem;
-            margin-left: .5rem;
+  }
+  &-body {
+    height: 100%;
+  }
+  &-select {
+    background-color: $primaryColor;
+    height: 100%;
+    list-style: none;
+    padding: 2rem;
+    box-shadow: 10px 0 10px $borderColor;
+    li {
+      border-bottom: 0.1rem solid $borderColor;
+      color: $white;
+      font-size: 1.6rem;
+      padding: 1rem;
+      cursor: pointer;
+      transition: 0.2s linear;
+      &:hover {
+        background: #51cf98;
+        padding-left: 2rem;
+      }
+      .icon {
+        min-width: 3rem;
+        text-align: left;
+      }
+    }
+  }
+  &__users {
+    width: 98%;
+    margin: 1rem;
+    box-shadow: 10px 10px 10px $borderColor;
+    background-color: $backgroundColor;
+    border-radius: 1rem;
+    padding: 2rem;
+    overflow-x: auto;
+
+    table {
+      min-width: 600px;
+      width: 100%;
+      th {
+          border: 1px solid $primaryColor;
+          padding: 1rem;
+      }
+      td {
+        border: 1px solid $primaryColor;
+        padding: 1rem; 
+       
+      }
+      tr {
+          text-align: center;
+          .icon{
             cursor: pointer;
             &:hover {
                 color: $primaryColor;
-            }
-            &::after {
-                content: "";
-                height: 5px;
-                width: 5px;
-                position: absolute;
-                background-color: #e7441f;
-                border-radius: 50%;
-            }
-        }
+            }   
+         }
+      }
     }
+  }
+}
+.sub-dropdown {
+  width: 150px;
+  margin-top: 1rem;
+  .cover {
+    display: flex;
+    align-items: center;
+    p {
+      margin: 0;
+      margin-left: 2rem;
+    }
+    .icon {
+      position: relative;
+      font-size: 1.6rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      &:hover {
+        color: $primaryColor;
+      }
+      &::after {
+        content: "";
+        height: 5px;
+        width: 5px;
+        position: absolute;
+        background-color: #e7441f;
+        border-radius: 50%;
+      }
+    }
+  }
 }
