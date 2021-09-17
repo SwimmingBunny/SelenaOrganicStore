@@ -128,7 +128,7 @@ const Admin = () => {
             <ul className="admin-select">
               <li>
                 <LayoutOutlined className="icon" />
-                Layouts
+                Dashboard
               </li>
               <li>
                 <AppstoreOutlined className="icon" />
@@ -140,7 +140,7 @@ const Admin = () => {
               </li>
               <li>
                 <FormOutlined className="icon" />
-                Forms
+                Table
               </li>
             </ul>
           </Col> }

@@ -24,49 +24,56 @@ import "./responsive/responsive.scss";
 function App() {
   return (
     <>
+   
+     <>
       
-        <Header />
-        <Switch>
-          <Route path={ROUTE.HOME} exact>
-            <Home />
-          </Route>
-          <Route path={ROUTE.LOGIN} exact>
-            <Login />
-          </Route>
-          <Route path={ROUTE.REGISTER} exact>
-            <Register />
-          </Route>
-          <Route path={ROUTE.SHOPITEM} exact>
-            <ListItem />
-          </Route>
-          <Route path={ROUTE.SHOPDETAIL} exact>
-            <ProductDetail />
-          </Route>
-          <Route path={ROUTE.ABOUTUS} exact>
-            <AboutUs />
-          </Route>
-          <Route path={ROUTE.CONTACT} exact>
-            <Contact />
-          </Route>
-          <Route path={ROUTE.CHECKOUT} exact>
-            <Checkout />
-          </Route>
-          <Route path={ROUTE.CART} exact>
-            <Cart />
-          </Route>
-          <Route path={ROUTE.WISHLIST} exact>
-            <WishList />
-          </Route>
-          <Route path={ROUTE.MYACCOUNT} exact>
-            <Account />
-          </Route>
-         
-        </Switch>
-        <Footer />
-        <Route path={ROUTE.ADMIN} exact>
-            <Admin />
+      <Header />
+      <Switch>
+        <Route path={ROUTE.HOME} exact>
+          <Home />
         </Route>
+        <Route path={ROUTE.LOGIN} exact>
+          <Login />
+        </Route>
+        <Route path={ROUTE.REGISTER} exact>
+          <Register />
+        </Route>
+        <Route path={ROUTE.SHOPITEM} exact>
+          <ListItem />
+        </Route>
+        <Route path={ROUTE.SHOPDETAIL} exact>
+          <ProductDetail />
+        </Route>
+        <Route path={ROUTE.ABOUTUS} exact>
+          <AboutUs />
+        </Route>
+        <Route path={ROUTE.CONTACT} exact>
+          <Contact />
+        </Route>
+        <Route path={ROUTE.CHECKOUT} exact>
+          <Checkout />
+        </Route>
+        <Route path={ROUTE.CART} exact>
+          <Cart />
+        </Route>
+        <Route path={ROUTE.WISHLIST} exact>
+          <WishList />
+        </Route>
+        <Route path={ROUTE.MYACCOUNT} exact>
+          <Account />
+        </Route>
+       
+      </Switch>
+      <Footer />
+     
+  </>
+  <>
+   <Route path={ROUTE.ADMIN} exact>
+          <Admin />
+      </Route>
+  </>
     </>
+   
   );
 }
 
