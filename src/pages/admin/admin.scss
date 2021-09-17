@@ -4,6 +4,8 @@
         display: flex;
         align-items: center;
         padding: 4rem;
+        box-shadow: 0 10px 10px $borderColor;
+        background-color: $backgroundColor;
         .col-icon {
             display: flex;
             align-items: center;
@@ -36,9 +38,10 @@
     }
     &-select {
         background-color: $primaryColor;
-
+        height: 84vh;
         list-style: none;
         padding: 2rem;
+        box-shadow:  10px 0 10px $borderColor;
         li {
             border-bottom: .1rem solid $borderColor;
             color: $white;
@@ -55,6 +58,14 @@
                 text-align: left;
             }
         }
+    }
+    &__content{
+        width: 98%;
+        margin: 2rem 0 0 2rem;
+        box-shadow: 10px 10px 10px $borderColor;
+        background-color: $backgroundColor;
+        border-radius: 1rem;
+        padding: 2rem;
     }
 }
 .sub-dropdown {

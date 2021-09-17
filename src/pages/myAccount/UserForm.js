@@ -9,12 +9,21 @@ import "../../style/form.scss";
 
 const AccountUser = () =>{
     const [form] = Form.useForm();
-    const [value, setValue] = React.useState(1);
-  
-   
-    const onChange = (e) => {
-      console.log("radio checked", e.target.value);
-      setValue(e.target.value);
+    const [formValue, setFormValue] = React.useState({
+      fullName: "",
+      email: "",
+      streetAddress: "",
+      town: "",
+      phone:"",
+      gender: ''
+    });
+    const handelOnChange = (e) => {
+      if (e.target) {
+        setFormValue({ ...formValue, [e.target.name]: e.target.value });
+        console.log(e.target.value);
+      } else {
+        setFormValue({ ...formValue});
+      }
     };
     return(
         <Form
@@ -24,7 +33,7 @@ const AccountUser = () =>{
         validateMessages={validateMessages}>
         <Form.Item
           label='Full name'
-          name='fullname'
+          name='fullName'
           rules={[
             {
               required: true,
@@ -32,12 +41,15 @@ const AccountUser = () =>{
             },
           ]}>
           <Input
+            onChange={(e)=>handelOnChange(e)}
+            value={formValue.fullName}
             className='form__group--input form__group--backgroundColor'
             placeholder='Full Name'
           />
         </Form.Item>
         <Form.Item
           label='Phone'
+          type = 'number'
           name='phone'
           rules={[
             {
@@ -46,6 +58,8 @@ const AccountUser = () =>{
             },
           ]}>
           <Input
+            onChange={(e)=>handelOnChange(e)}
+            value={formValue.phone}
             className='form__group--input form__group--backgroundColor'
             placeholder='PhoneNumber'
           />
@@ -55,20 +69,23 @@ const AccountUser = () =>{
           name={"email"}
           rules={[{ required: true, type: "email" }]}>
           <Input
+            onChange={(e)=>handelOnChange(e)}
+            value={formValue.email}
             className='form__group--input form__group--backgroundColor'
             placeholder='Enter your Email'
           />
         </Form.Item>
         <Form.Item
           label='Street Address'
-          name='streetaddress'
+          name='streetAddress'
           rules={[
             {
-              required: true,
-              type: "streetaddress",
+              required: true
             },
           ]}>
           <Input
+            onChange={(e)=>handelOnChange(e)}
+            value={formValue.streetAddress}
             className='form__group--input form__group--backgroundColor'
             placeholder=' Street Address'
           />
@@ -79,36 +96,40 @@ const AccountUser = () =>{
           rules={[
             {
               required: true,
-              message: "Please input your Full Name",
+              message: "Please input your Town / City",
             },
           ]}>
           <Input
+            onChange={(e)=>handelOnChange(e)}
+            value={formValue.town}
             className='form__group--input form__group--backgroundColor'
             placeholder='Town / City'
           />
         </Form.Item>
         <Form.Item
-          label='State / Divition'
-          name='state'
+          label='Country'
+          name='country'
           rules={[
             {
               required: true,
-              message: "Please input your Full Name",
+              message: "Please input your Country",
             },
           ]}>
           <Input
+            onChange={(e)=>handelOnChange(e)}
+            value={formValue.country}
             className='form__group--input form__group--backgroundColor'
-            placeholder='State / Divition'
+            placeholder='Country'
           />
         </Form.Item>
         <FormItem label='Gender'>
-          <Radio.Group onChange={onChange} value={value}>
+          <Radio.Group name="gender" onChange={(e)=>handelOnChange(e)} value={formValue.gender}>
             <Radio value={1}>Male</Radio>
             <Radio value={2}>Female</Radio>
           </Radio.Group>
         </FormItem>
         <Form.Item className="form__btn--center">
-            <Button type='primary' htmlType="submit" size='large' className='form__btn '>
+            <Button type='primary' htmlType="submit" size='large' className='form__btn'>
               SAVE CHANGE
             </Button>
         </Form.Item>

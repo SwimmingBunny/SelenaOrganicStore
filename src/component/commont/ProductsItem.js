@@ -1,6 +1,6 @@
 import React from "react";
 import QuickView from "./QuickView";
-import { Row, Col, Popover } from "antd";
+import { Row, Col, Popover, Alert } from "antd";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faShoppingBag,
@@ -16,6 +16,10 @@ const ProductItem = (props) => {
   const handelDetail = () => {
     return alert("hello my detail!");
   };
+  
+ const handleAddCart = ()=>{
+   Alert("oke!")
+ }
 
   return (
     <>
@@ -35,13 +39,13 @@ const ProductItem = (props) => {
                 </span>
                 <span>
                   <FontAwesomeIcon icon="star" />
-                </span>{" "}
+                </span>
                 <span>
                   <FontAwesomeIcon icon="star" />
-                </span>{" "}
+                </span>
                 <span>
                   <FontAwesomeIcon icon="star" />
-                </span>{" "}
+                </span>
                 <span>
                   <FontAwesomeIcon icon="star" />
                 </span>
@@ -93,13 +97,13 @@ const ProductItem = (props) => {
                 </span>
                 <span>
                   <FontAwesomeIcon icon="star" />
-                </span>{" "}
+                </span>
                 <span>
                   <FontAwesomeIcon icon="star" />
-                </span>{" "}
+                </span>
                 <span>
                   <FontAwesomeIcon icon="star" />
-                </span>{" "}
+                </span>
                 <span>
                   <FontAwesomeIcon icon="star" />
                 </span>
