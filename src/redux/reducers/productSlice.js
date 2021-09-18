@@ -26,29 +26,29 @@ const listProduct = createSlice({
       id: 1,
       name: 'carrot',
       img: 'https://picsum.photos/200/300',
-      price: '52',
+      price: 52,
       sell: '123'
     },{
       id: 2,
       name: 'barrot',
       img: 'https://picsum.photos/200/300',
-      price: '73',
+      price: 73,
       sell: '123'
     },{
       id: 3,
       name: 'darrot',
       img: 'https://picsum.photos/200/300',
-      price: '12',
+      price: 12,
       sell: '123'
     },{
       id: 4,
       name: 'kt',
       img: 'https://picsum.photos/200/300',
-      price: '17',
+      price: 17,
       sell: '123'
     }],
     sortName: "Name",
-    sortPrice: null
+    sortPrice: 1
   },
   reducers: {
     getProduct: async (state, action) => {},
@@ -69,14 +69,14 @@ const listProduct = createSlice({
     },
     setSortItem: (state,action)=>{
       state.sortPrice = action.payload;
-      state.listProductApi = [...state.listProductApi].filter((item,index)=>{
+      state.listProductApi = [...state.listProductApi].map((item,index)=>{
         if(action.payload === "1"){
-          return item.price < "50"
+          return item.price < 50
         }if(action.payload === "2"){
-          return item.price < "100" && item.price > "50"
+          return item.price < 100 && item.price > 50
           
         }if(action.payload === "3"){
-          return item.price < "100" 
+          return item.price < 100 
         }
       })
     }

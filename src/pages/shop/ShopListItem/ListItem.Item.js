@@ -16,7 +16,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faColumns, faWindowMaximize);
 
 
-const listItemCart = 'LIST_ITEM_CART';
 const ShopItem = () => {
 const [currenPage, setCurrenPage] = React.useState(1)
 const PAGE_SIZE = 12;
