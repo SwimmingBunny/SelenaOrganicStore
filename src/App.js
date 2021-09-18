@@ -23,7 +23,7 @@ import "./responsive/responsive.scss";
 function App() {
   return (
     <Switch>
-      <Route path={ROUTE.USER}>
+      <Route path={ROUTE.STORE} >
         <Header />
         <Switch>
           <Route path={ROUTE.HOME} exact>

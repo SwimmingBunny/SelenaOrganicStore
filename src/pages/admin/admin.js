@@ -11,7 +11,8 @@ import {
   AppstoreOutlined,
   DownOutlined,
   MenuOutlined,
-  ShopOutlined
+  ShopOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { ROUTE } from "../../constant/router.js";
 import { useHistory } from "react-router-dom";
@@ -24,9 +25,12 @@ import {
   Route,
   Link,
   NavLink,
+  useRouteMatch,useParams
 } from "react-router-dom";
 import "./admin.scss";
 const Admin = () => {
+  let { path, url } = useRouteMatch();
+  let { adminId } = useParams();
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
@@ -53,7 +57,7 @@ const Admin = () => {
     </Menu>
   );
   const submenu = (
-    <Menu className='admin-submenu' style={{zIndex:'1000'}}>
+    <Menu className='admin-submenu' style={{ zIndex: "1000" }}>
       <Menu.Item>
         <ul className='admin-select'>
           <li>
@@ -118,7 +122,7 @@ const Admin = () => {
                 className='admin-menu'
                 placement='bottomCenter'>
                 <p>
-                  Menu{" "}
+                  Menu
                   <DownOutlined
                     style={{ fontWeight: "500", fontSize: "1.4rem" }}
                   />
@@ -129,29 +133,45 @@ const Admin = () => {
             <Col span={6}>
               <ul className='admin-select'>
                 <li>
-                  <LayoutOutlined className='icon' />
-                  Dashboard
+                  <Link to={ROUTE.DASHBOARD}>
+                    <LayoutOutlined className='icon' />
+                    Dashboard{" "}
+                  </Link>
                 </li>
                 <li>
-                  <AppstoreOutlined className='icon' />
-                  User interface
+                  <Link to={ROUTE.UI}>
+                    <AppstoreOutlined className='icon' />
+                    User interface
+                  </Link>
                 </li>
                 <li>
-                  <UserOutlined className='icon' />
-                  User
+                  <Link to={`${url}${ROUTE.CUSTOMER}`}>
+                    <UserOutlined className='icon' />
+                    Customers
+                  </Link>
                 </li>
                 <li>
-                  <ShopOutlined className='icon' />
-                  Product
+                  <Link to={ROUTE.ORDERS}>
+                    <ShoppingCartOutlined className='icon' />
+                    Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`${url}${ROUTE.PRODUCTS}`}>
+                    <ShopOutlined className='icon' />
+                    Products
+                  </Link>
                 </li>
               </ul>
             </Col>
           )}
 
-          <Col span={isMoblie ? 24: 18}>
-              <div className='admin__users'>
-                 <h2>Customer Managerment </h2>
-                 <table>
+          <Col span={isMoblie ? 24 : 18}>
+            <Switch>
+              <Route path={`${path}${ROUTE.CUSTOMER}`} exact>
+                <div className='admin__users'>
+                  <h2>Customer Managerment </h2>
+                  <table>
                     <tr>
                       <th className='id'>ID</th>
                       <th className='name'>Name</th>
@@ -160,12 +180,14 @@ const Admin = () => {
                       <th className='edit'>Edit</th>
                       <th className='delete'>Delete</th>
                     </tr>
-                    <AdminRow/>
-                 </table>
-              </div>
-              <div className='admin__users'>
-                 <h2>Product Managerment </h2>
-                 <table>
+                    <AdminRow />
+                  </table>
+                </div>
+              </Route>
+              <Route path={path} exact>
+                <div className='admin__users'>
+                  <h2>Product Managerment </h2>
+                  <table>
                     <tr>
                       <th className='id'>ID</th>
                       <th className='name'>Product</th>
@@ -174,9 +196,11 @@ const Admin = () => {
                       <th className='edit'>Edit</th>
                       <th className='delete'>Delete</th>
                     </tr>
-                    <AdminRow/>
-                 </table>
-              </div>
+                    <AdminRow />
+                  </table>
+                </div>
+              </Route>
+            </Switch>
           </Col>
         </Row>
       </div>
