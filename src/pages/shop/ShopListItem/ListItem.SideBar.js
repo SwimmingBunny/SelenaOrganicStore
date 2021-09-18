@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getListProductApi, setSortItem } from "../../../redux/reducers/productSlice";
 import ProductItem from "../../../component/commont/ProductsItem";
 
+import { Slider } from "antd";
 const SideBar = () => {
   const { SubMenu } = Menu;
   const rootSubmenuKeys = ["sub1", "sub2", "sub3", "sub4", "sub5"];
@@ -14,6 +15,9 @@ const SideBar = () => {
     (state) => state.listProduct
   );
   const onOpenChange = (keys) => {
+    console.log(keys, "alo alo");
+    console.log(openKeys, "alo al 1 1 o");
+
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       setOpenKeys(keys);
@@ -24,6 +28,9 @@ const SideBar = () => {
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
+  function onChange(value) {
+    console.log("onChange: ", value);
+  }
 
   React.useEffect(() => {
     dispatch(getListProductApi())
@@ -44,6 +51,9 @@ const SideBar = () => {
       // dispatch(setSortItem(keys))
   }
   
+  function onAfterChange(value) {
+    console.log("onAfterChange: ", value);
+  }
   return (
     <div className="sidebar">
       <h1 className="sidebar__h1">Categories</h1>
@@ -80,7 +90,7 @@ const SideBar = () => {
       </Menu>{" "}
       {/* split */}
       <h1 className="sidebar__h1">Filter By Price</h1>
-      <Menu
+      {/* <Menu
         mode="inline"
         openKeys={openKeys}
         onOpenChange={onOpenChange}
@@ -93,7 +103,13 @@ const SideBar = () => {
           <Menu.Item key="2"> $50 - $100</Menu.Item>
           <Menu.Item key="3">$100 - more</Menu.Item>
         </SubMenu>
-      </Menu>
+      </Menu> */}
+      <Slider
+        defaultValue={1}
+        max={4}
+        onChange={onChange}
+        onAfterChange={onAfterChange}
+      />
       <div className="sidebar__img">
         {isMoblie ? (
           <img

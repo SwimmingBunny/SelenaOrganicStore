@@ -27,7 +27,7 @@ function App() {
         <Route path={ROUTE.HOME}>
           <Public />
         </Route>
-        <Route path={ROUTE.ADMIN} exact>
+        <Route path={ROUTE.ADMIN}>
           <Admin />
         </Route>
       </Switch>
@@ -52,7 +52,7 @@ function Public(params) {
         <Route path={ROUTE.SHOPITEM} exact>
           <ListItem />
         </Route>
-        <Route path={ROUTE.SHOPDETAIL+'/:id'} exact>
+        <Route path={ROUTE.SHOPDETAIL + "/:id"} exact>
           <ProductDetail />
         </Route>
         <Route path={ROUTE.ABOUTUS} exact>
