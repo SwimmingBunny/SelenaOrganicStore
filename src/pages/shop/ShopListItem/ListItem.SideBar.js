@@ -1,11 +1,18 @@
 import React from "react";
 import { Menu } from "antd";
 import { useMediaQuery } from "react-responsive";
+import { useDispatch, useSelector } from "react-redux";
+import { getListProductApi, setSortItem } from "../../../redux/reducers/productSlice";
+import ProductItem from "../../../component/commont/ProductsItem";
 
 const SideBar = () => {
   const { SubMenu } = Menu;
   const rootSubmenuKeys = ["sub1", "sub2", "sub3", "sub4", "sub5"];
   const [openKeys, setOpenKeys] = React.useState(["sub1"]);
+  const dispatch = useDispatch();
+  const {listProductApi} = useSelector(
+    (state) => state.listProduct
+  );
   const onOpenChange = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
@@ -18,6 +25,25 @@ const SideBar = () => {
     query: "(max-width: 480px)",
   });
 
+  React.useEffect(() => {
+    dispatch(getListProductApi())
+  }, [])
+
+  console.log("🚀 ~ file: ListItem.SideBar.js ~ line 14 ~ SideBar ~ listProductApi", listProductApi)
+
+
+  const handleOnChangePrice = (key)=>{
+    const latestOpenKey = key.find((key) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(key);
+      
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+    console.log("🚀 ~ file: ListItem.SideBar.js ~ line 34 ~ handleOnChangePrice ~ key", key)
+      // dispatch(setSortItem(keys))
+  }
+  
   return (
     <div className="sidebar">
       <h1 className="sidebar__h1">Categories</h1>
@@ -60,7 +86,7 @@ const SideBar = () => {
         onOpenChange={onOpenChange}
         className="sidebar__menu2"
       >
-        <SubMenu key="sub5" title="Price" className="sidebar__menu-submenu">
+        <SubMenu key="sub5" title="Price" className="sidebar__menu-submenu" onOpenChange={handleOnChangePrice}>
           <Menu.Item className="sidebar__menu-submenu--item" key="1">
             $0 - $50
           </Menu.Item>

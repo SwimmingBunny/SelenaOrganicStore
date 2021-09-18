@@ -30,7 +30,6 @@ import {
 import "./admin.scss";
 const Admin = () => {
   let { path, url } = useRouteMatch();
-  let { adminId } = useParams();
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
