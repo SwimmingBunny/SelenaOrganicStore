@@ -54,11 +54,17 @@ const SideBar = () => {
       {/* split */}
       <h1 className="sidebar__h1">Filter By Price</h1>
       <Slider
-        defaultValue={1}
-        max={4}
+        defaultValue={0}
+        max={3}
         onChange={onChange}
         onAfterChange={onAfterChange}
       />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span>0$</span>
+        <span>10$</span>
+        <span>50$</span>
+        <span>100$</span>
+      </div>
       <div className="sidebar__img">
         {isMoblie ? (
           <img
