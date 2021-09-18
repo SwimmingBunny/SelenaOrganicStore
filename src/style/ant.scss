@@ -86,3 +86,9 @@
 .ant-pagination-options {
   display: none;
 }
+.ant-slider-track {
+  background: $primaryColor;
+  &:hover {
+    background: $primaryColor;
+  }
+}
