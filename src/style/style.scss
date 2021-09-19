@@ -72,7 +72,16 @@
   display: flex !important;
   justify-content: center;
 }
-
+.header__top-cart-sub {
+  min-width: 35rem;
+  padding: 2rem;
+}
+.header__top-cart-container {
+  justify-content: space-between;
+  img {
+    margin-right: 2rem;
+  }
+}
 .header__top-cart-icon {
   position: relative;
   color: $primaryColor;
@@ -83,7 +92,7 @@
   }
 }
 .header-noti {
-  position:absolute ;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +110,7 @@
     max-height: 200px;
   }
   p {
-  font-family: "Raleway", sans-serif;
+    font-family: "Raleway", sans-serif;
     font-size: 1.6rem;
     margin-top: 1rem;
     font-weight: 500;
@@ -117,8 +126,10 @@
   display: flex;
   flex-direction: column;
   margin: 0 0.1rem;
+  flex: 1;
   &--prd {
     font-size: 1.6rem;
+    margin-bottom: 1rem;
     &:hover {
       color: $primaryColor;
     }

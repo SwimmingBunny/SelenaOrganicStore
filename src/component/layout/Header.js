@@ -1,8 +1,9 @@
 import React from "react";
 import SubMenu from "./Header.subMenu.js";
+import HeaderCart from "./Header.Cart.js";
 import { useMediaQuery } from "react-responsive";
 import { Input, Menu, Dropdown, Button, Row, Col, Avatar, Image } from "antd";
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from "@ant-design/icons";
 import { DownOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import { ROUTE } from "../../constant/router.js";
@@ -22,9 +23,24 @@ import ReactDOM from "react-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getListProductApi } from "../../redux/reducers/productSlice";
 library.add(faShoppingCart, faTrash);
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getListProductApi);
+  }, []);
+  const { cart } = useSelector((state) => state.listProduct);
+  const renderDataCart = () => {
+    return cart?.map((item, index) => {
+      return <HeaderCart key={index} {...item} />;
+    });
+  };
+  const totalProduct = cart.length;
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
@@ -46,8 +62,8 @@ const Header = () => {
   const accountMenu = (
     <Menu className="header__top-account-sub">
       <Menu.Item>
-      <NavLink to={ROUTE.MYACCOUNT} exact>
-        My Account
+        <NavLink to={ROUTE.MYACCOUNT} exact>
+          My Account
         </NavLink>
       </Menu.Item>
       <Menu.Item>
@@ -64,52 +80,38 @@ const Header = () => {
   );
   const cartMenu = (
     <Menu className="header__top-cart-sub">
+      {cart.length ? (
+        <>
+          {renderDataCart()}
+          <Menu.Item>
+            <span className="header__top-container-subtotal">SUBTOTAL:</span>
+          </Menu.Item>
+          <NavLink to={ROUTE.CART} exact>
+            <Menu.Item>
+              <Button id="header__top-container-btn" type="primary">
+                View Cart
+              </Button>
+            </Menu.Item>
+          </NavLink>
+
+          <Menu.Item>
+            <Button id="header__top-container-btn" type="primary">
+              Check Out
+            </Button>
+          </Menu.Item>
+        </>
+      ) : (
         <Menu.Item>
           <div className="header__top-cart-emty">
-          <img src='Images/about/no-cart.png'  />
-          <p>Your cart is emty</p>
-          </div>
-         
-        </Menu.Item>
-        {/* split here */}
-        {/* split here */}
-        {/* split here */}
-      <div className="header__top-cart-container">
-        <Menu.Item>
-          <div className="header__top-container">
-            <div>
-              <img
-                className="header__top-container-img"
-                src="https://template.hasthemes.com/selena/selena/assets/img/cart/cart-1.jpg"
-                alt=""
-              />
-            </div>
-            <div className="header__top-container-info">
-              <span className="header__top-container-info--prd">
-                SIMPLE PRODUCT
-              </span>
-              <span className="header__top-container-info--qty">Qty:</span>
-              <span className="header__top-container-info--prc">$60.00</span>
-            </div>
-            <div className="header__top-container-clear">x</div>
+            <img src="Images/about/no-cart.png" />
+            <p>Your cart is emty</p>
           </div>
         </Menu.Item>
-        <Menu.Item>
-          <span className="header__top-container-subtotal">SUBTOTAL:</span>
-        </Menu.Item>
-        <Menu.Item>
-          <NavLink to={ROUTE.CART} exact>
-            <Button id="header__top-container-btn" type="primary">
-              View Cart
-            </Button>
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item>
-          <Button id="header__top-container-btn" type="primary">
-            Check Out
-          </Button>
-        </Menu.Item>
-      </div>
+      )}
+
+      {/* split here */}
+      {/* split here */}
+      {/* split here */}
     </Menu>
   );
   const shoplist = (
@@ -158,7 +160,11 @@ const Header = () => {
                 >
                   <Dropdown overlay={accountMenu}>
                     <a className="header__top-account-a">
-                    <Avatar style={{margin:"1rem"}} size="small" icon={<UserOutlined />} />
+                      <Avatar
+                        style={{ margin: "1rem" }}
+                        size="small"
+                        icon={<UserOutlined />}
+                      />
                       My Account <DownOutlined />
                     </a>
                   </Dropdown>
@@ -186,6 +192,14 @@ const Header = () => {
                           icon="shopping-cart"
                         />
                         <span>My cart</span>
+                        <div
+                          className="header-noti"
+                          style={{
+                            display: `${totalProduct ? "flex" : "none"} `,
+                          }}
+                        >
+                          <span>{totalProduct}</span>
+                        </div>
                       </div>
                     ) : (
                       <a>
@@ -193,8 +207,13 @@ const Header = () => {
                           className="header__top-cart-icon"
                           icon="shopping-cart"
                         />
-                        <div className='header-noti'>
-                          <span>1</span>
+                        <div
+                          className="header-noti"
+                          style={{
+                            display: `${totalProduct ? "flex" : "none"} `,
+                          }}
+                        >
+                          <span>{totalProduct}</span>
                         </div>
                       </a>
                     )}

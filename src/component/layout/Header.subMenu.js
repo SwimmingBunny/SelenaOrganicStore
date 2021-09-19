@@ -48,7 +48,6 @@ const SubMenu = () => {
   return (
     <Menu
       mode="inline"
-      openKeys={openKeys}
       onOpenChange={onOpenChange}
       style={{ background: "#62d2a2", color: "white" }}
     >
