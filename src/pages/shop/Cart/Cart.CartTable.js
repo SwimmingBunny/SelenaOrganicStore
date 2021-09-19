@@ -35,7 +35,16 @@ const CartTable = () => {
     })
   }
 
+  const getTotal = ()=>{
+    let total = 0;
+    cart.forEach(element => {
+      return total += element.total;
 
+    });
+    return total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  }
+
+  
 
   return (
     <>
@@ -44,9 +53,9 @@ const CartTable = () => {
           <tr className="cart__table-tr">
             <th className="cart__table-tr--th tr--thum">THUMBNAIL</th>
             <th className="cart__table-tr--th tr--product">PRODUCT</th>
-            <th className="cart__table-tr--th tr--price">PRICE</th>
+            <th className="cart__table-tr--th tr--price">PRICE ($)</th>
             <th className="cart__table-tr--th tr--quantity">QUANTITY</th>
-            <th className="cart__table-tr--th tr--total">TOTAL</th>
+            <th className="cart__table-tr--th tr--total">TOTAL ($)</th>
             <th className="cart__table-tr--th tr--remove">REMOVE</th>
           </tr>
           {renderDataCart()}
@@ -58,20 +67,20 @@ const CartTable = () => {
       <div className="cart__total">
         <h2 className="cart__total-h2">Cart Total</h2>
         <div className="cart__total-conten">
-          <p> Sub Total</p>
-          <p> $230</p>
+          <p> Sub Total ($)</p>
+          <p> {getTotal()}</p>
         </div>
         <div className="cart__total-conten">
-          <p> Shipping</p>
-          <p> $30</p>
+          <p> Shipping ($)</p>
+          <p> 30</p>
         </div>
         <div className="cart__total-conten">
-          <p> Discount</p>
-          <p> -$230</p>
+          <p> Discount ($)</p>
+          <p> 0</p>
         </div>
         <div className="cart__total-conten">
-          <p className="cart__total-conten--total"> Total</p>
-          <p className="cart__total-conten--total"> $230</p>
+          <p className="cart__total-conten--total"> Total ($)</p>
+          <p className="cart__total-conten--total"> {+getTotal() + 30}</p>
         </div>
         <Button className="cart__total-btn" type="primary">
          <NavLink to={ROUTE.CHECKOUT} exact > PROCEED CHECKOUT</NavLink> 

@@ -35,12 +35,12 @@ const PAGE_SIZE = 12;
     (state) => state.listProduct
   );
 
+
   React.useEffect(() => {
     dispatch(getListProductApi());
   }, []);
 
   function handleChange(value) {
-    console.log(`selected ${value}`);
     dispatch(setSortName(value))
   }
   const handleChangeUI = () => {
@@ -51,7 +51,6 @@ const PAGE_SIZE = 12;
   const totalResult = listProductApi.length;
   
   const renderListProduct = () => {
-    console.log("list", listProductApi);
     return listProductApi
     .map((item, index) => {
       return (

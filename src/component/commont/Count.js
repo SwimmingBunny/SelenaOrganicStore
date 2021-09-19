@@ -21,7 +21,6 @@ const Count = () => {
     display: "flex",
     justifyContent: "space-between",
     maxHeight: "3.4rem",
-    // alignItems: "center",
   };
   const Plus = () => {
     if (count === 1) {
