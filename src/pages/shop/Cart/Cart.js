@@ -8,20 +8,18 @@ import { getListProductApi } from "../../../redux/reducers/productSlice";
 const Cart = () => {
   const dispatch = useDispatch();
 
- 
- useEffect(() => {
-    dispatch(getListProductApi)
-  }, [])
-  const {cart}= useSelector(state => state.listProduct)
- 
-  
+  useEffect(() => {
+    dispatch(getListProductApi);
+  }, []);
+  const { cart } = useSelector((state) => state.listProduct);
+
   return (
     <div>
       <div className="cart__header">
         <h1 className="cart__header-h1">Shop</h1>
         <h3 className="cart__header-h3">Cart </h3>
       </div>
-      <div className="container">{cart ? <CartTable/>: <Emty />}</div>
+      <div className="container">{cart.length ? <CartTable /> : <Emty />}</div>
     </div>
   );
 };

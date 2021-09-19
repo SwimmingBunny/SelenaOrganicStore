@@ -12,20 +12,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { ROUTE } from "../../constant/router";
 import { useDispatch } from "react-redux";
-import {getListProductApi, addToCart } from "../../redux/reducers/productSlice";
+import {
+  getListProductApi,
+  addToCart,
+} from "../../redux/reducers/productSlice";
 
 library.add(faShoppingBag, faHeart, faStar);
 
 const ProductItem = (props) => {
-  const {id,name,img,price} = props;
+  const { id, name, img, price } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
-   dispatch(getListProductApi()) 
-  }, [])
-  const handleAddCart = () =>{
-    dispatch(addToCart({id,img,name,price}))
-  }
+    dispatch(getListProductApi());
+  }, []);
+  const handleAddCart = () => {
+    dispatch(addToCart({ id, img, name, price }));
+    alert("Add to your card susccess");
+  };
 
   return (
     <>
@@ -69,7 +73,9 @@ const ProductItem = (props) => {
                 <Popover content="Add to cart">
                   <div className="product__list-item--icon-1">
                     <FontAwesomeIcon
-                      onClick={()=>{handleAddCart()}}
+                      onClick={() => {
+                        handleAddCart();
+                      }}
                       className="product__list-item--icon--1"
                       icon="shopping-bag"
                       onClick={handleAddCart}
@@ -125,9 +131,9 @@ const ProductItem = (props) => {
                   {props.sell}
                 </p>
               </div>
-              <div className="product__list-item--icon"  >
-                <Popover content="Add to cart" >
-                  <div className="product__list-item--icon-1" >
+              <div className="product__list-item--icon">
+                <Popover content="Add to cart">
+                  <div className="product__list-item--icon-1">
                     <FontAwesomeIcon
                       onClick={handleAddCart}
                       className="product__list-item--icon--1"
@@ -135,7 +141,7 @@ const ProductItem = (props) => {
                     />
                   </div>
                 </Popover>
-                
+
                 <Popover content=" Wishlist">
                   <div className="product__list-item--icon-2">
                     <FontAwesomeIcon

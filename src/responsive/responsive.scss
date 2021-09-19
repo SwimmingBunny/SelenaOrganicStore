@@ -119,9 +119,14 @@
     color: $white;
     font-weight: 500;
   }
-  
+
   .admin-body {
     height: 0% !important;
+  }
+  .header-noti {
+    width: 10px;
+    height: 10px;
+    transform: translate(17px, -8px);
   }
 }
 // split
