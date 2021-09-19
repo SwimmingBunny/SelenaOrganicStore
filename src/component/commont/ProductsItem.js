@@ -1,6 +1,7 @@
 import React from "react";
 import QuickView from "./QuickView";
-import { Row, Col, Popover, Alert } from "antd";
+import { Row, Col, Popover } from "antd";
+import { useEffect } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faShoppingBag,
@@ -10,16 +11,21 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { ROUTE } from "../../constant/router";
+import { useDispatch } from "react-redux";
+import {getListProductApi, addToCart } from "../../redux/reducers/productSlice";
+
 library.add(faShoppingBag, faHeart, faStar);
 
 const ProductItem = (props) => {
-  const handelDetail = () => {
-    return alert("hello my detail!");
-  };
-  
- const handleAddCart = ()=>{
-   Alert("oke!")
- }
+  const {id,name,img,price} = props;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+   dispatch(getListProductApi()) 
+  }, [])
+  const handleAddCart = () =>{
+    dispatch(addToCart({id,img,name,price}))
+  }
 
   return (
     <>
@@ -63,6 +69,7 @@ const ProductItem = (props) => {
                 <Popover content="Add to cart">
                   <div className="product__list-item--icon-1">
                     <FontAwesomeIcon
+                      onClick={()=>{handleAddCart()}}
                       className="product__list-item--icon--1"
                       icon="shopping-bag"
                     />
@@ -117,15 +124,17 @@ const ProductItem = (props) => {
                   {props.sell}
                 </p>
               </div>
-              <div className="product__list-item--icon">
-                <Popover content="Add to cart">
-                  <div className="product__list-item--icon-1">
+              <div className="product__list-item--icon"  >
+                <Popover content="Add to cart" >
+                  <div className="product__list-item--icon-1" >
                     <FontAwesomeIcon
+                      onClick={handleAddCart}
                       className="product__list-item--icon--1"
                       icon="shopping-bag"
                     />
                   </div>
                 </Popover>
+                
                 <Popover content=" Wishlist">
                   <div className="product__list-item--icon-2">
                     <FontAwesomeIcon
