@@ -9,9 +9,9 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getListProductApi);
+    dispatch(getListProductApi());
   }, []);
-  const { cart } = useSelector((state) => state.listProduct);
+  const { cart} = useSelector((state) => state.listProduct);
 
   return (
     <div>

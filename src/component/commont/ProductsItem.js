@@ -15,22 +15,26 @@ import { useDispatch } from "react-redux";
 import {
   getListProductApi,
   addToCart,
+  addToWishlist,
 } from "../../redux/reducers/productSlice";
 
 library.add(faShoppingBag, faHeart, faStar);
 
 const ProductItem = (props) => {
-  const { id, name, img, price } = props;
+  const { id, name, img, price, stock } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
   const handleAddCart = () => {
-    dispatch(addToCart({ id, img, name, price }));
-    alert("Add to your card susccess");
+    dispatch(addToCart({ id, img, name, price, stock, total: price, count : 1 }));
+    alert("Add to your card success");
   };
-
+  const handleAddWishlist = () => {
+    dispatch(addToWishlist({ id, img, name, price, stock}));
+    alert("Add to your Wishlist susccess");
+  };
   return (
     <>
       {!props.layout ? (
@@ -70,19 +74,16 @@ const ProductItem = (props) => {
                 </p>
               </div>
               <div className="product__list-item--icon">
-                <Popover content="Add to cart">
+                <Popover content="Add to cart" onClick={handleAddCart} >
                   <div className="product__list-item--icon-1">
                     <FontAwesomeIcon
-                      onClick={() => {
-                        handleAddCart();
-                      }}
                       className="product__list-item--icon--1"
                       icon="shopping-bag"
-                      onClick={handleAddCart}
+                      
                     />
                   </div>
                 </Popover>
-                <Popover content=" Wishlist">
+                <Popover content=" Wishlist"  onClick={handleAddWishlist}>
                   <div className="product__list-item--icon-2">
                     <FontAwesomeIcon
                       className="product__list-item--icon--1"

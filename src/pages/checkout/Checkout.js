@@ -3,26 +3,46 @@
 import React from "react";
 import { Row, Col, Form, Button, Radio, Input, Space } from "antd";
 import validateMessages from "../form/ValidateMessage";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import "../../style/checkout.scss";
 import "../../style/form.scss";
 import "../../style/aboutus.scss"
+import { getListProductApi } from "../../redux/reducers/productSlice";
 const Checkout = (props) => {
   const [form] = Form.useForm();
-  const [valueForm, setValueForm] = React.useState(1);
+  const [isShow, setIsShow] = React.useState(true);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getListProductApi())
+  }, [])
+
+  const {cart}= useSelector(state => state.listProduct)
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
-    setValueForm(e.target.value);
+    if(e.target.value === 1){
+      setIsShow(false)
+    }
+    if(e.target.value === 2){
+      setIsShow(true)
+    }
   };
 
   const handleSbm = () => {
     alert("success!")
   };
 
-  const totallproduct = () => {
-    return 1 + 2;
-  };
+  const getTotal = ()=>{
+    let total = 0;
+    cart.forEach(element => {
+      return total += element.total;
+
+    });
+    return total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  }
 
   return (
     <>
@@ -127,18 +147,8 @@ const Checkout = (props) => {
             <div className='checkout__order'>
               <table>
                 <tr>
-                  <th>Products</th>
-                  <th>Total</th>
-                </tr>
-                <tr>
-                  <td>
-                    {props.name} x {props.count}
-                  </td>
-                  <td>{totallproduct()}</td>
-                </tr>
-                <tr>
                   <td>Sub Total</td>
-                  <td>$0</td>
+                  <td>${getTotal()}</td>
                 </tr>
                 <tr>
                   <td>Shipping</td>
@@ -150,23 +160,19 @@ const Checkout = (props) => {
                 </tr>
                 <tr>
                   <th>Total Amount</th>
-                  <th>$30.00</th>
+                  <th>${+getTotal() + 30}</th>
                 </tr>
               </table>
               <div className='checkout__order--padding'>
                 <Radio.Group
                   onChange={onChange}
-                  value={valueForm}
                   className='checkout__order--radio'>
                   <Space direction='vertical'>
                     <Radio value={1}>Payment on delivery</Radio>
-                    <Radio value={2}>Direct Bank Transfer</Radio>
-                    <Radio value={3}>
-                      Paypal
-                      <li>
-                        <img src='Images/payment.png' />
-                      </li>
-                    </Radio>
+                    <Radio value={2}>Momo</Radio>
+                    <ul style = {{ display:`${!isShow ? "none" : "block"}`}}>
+                      <img style={{width:"40%"}}src='Images/payment/payment.jpg'/>
+                    </ul>
                   </Space>
                 </Radio.Group>{" "}
                 <br />

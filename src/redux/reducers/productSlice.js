@@ -10,7 +10,7 @@ export const getListProductApi = createAsyncThunk(
     const res = await axios
       .get(`http://localhost:5000/products/search?KeySearch`)
       .then((res) => {
-        console.log(".listProductApi ~ res", res);
+        // console.log(".listProductApi ~ res", res);
         return res;
       })
       .catch((e) => {
@@ -25,6 +25,7 @@ const listProduct = createSlice({
     listProductApi: [],
     listProductInit: [],
     cart: [],
+    wishlist: [],
     sortName: "Name",
     sortPrice: null,
     filterType: null,
@@ -83,14 +84,23 @@ const listProduct = createSlice({
     addToCart: (state, action) => {
       state.cart = [...state.cart, action.payload];
     },
+    addToWishlist: (state, action) => {
+      state.wishlist = [...state.wishlist, action.payload];
+    },
     deleteItemCart: (state, action) => {
       state.cart = state.cart.filter((item) => action.payload !== item.id);
     },
+    deleteItemWishlist: (state, action) => {
+      state.wishlist = state.wishlist.filter((item) => action.payload !== item.id);
+    },
+    
     editCartItem: (state, action) => {
+      
       state.cart = state.cart.map((item) => {
-        if (action.payload.id !== item.id) {
-          return action.payload;
+        if (action.payload.id === item.id) {
+          return {...action.payload,total: action.payload.price * action.payload.count};
         }
+
         return item;
       });
     },
@@ -141,5 +151,8 @@ export const {
   addToCart,
   setSortPrice,
   deleteItemCart,
+  editCartItem,
+  addToWishlist,
+  deleteItemWishlist
 } = actions;
 export default reducer;
