@@ -10,14 +10,12 @@ import { deleteItemCart, getListProductApi, } from "../../redux/reducers/product
 library.add(faTrash);
 const TableRow = (props) => {
 
-  const {key,name, price, img } = props;
+  const {id,name, price, img } = props;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getListProductApi())
   }, [])
-  const handleDelete = (key)=>{
-    dispatch(deleteItemCart(key))
-  }
+
   return (
     <tr className="cart__table-tr">
       <td className="cart__table-tr--td ">
@@ -36,7 +34,7 @@ const TableRow = (props) => {
       </td>
       <td className="cart__table-tr--td">{price} * Count</td>
       <td className="cart__table-tr--td">
-        <FontAwesomeIcon icon="trash" className="cart__table-tr--td--icon" onClick={(key) => {handleDelete(key)}} />
+        <FontAwesomeIcon icon="trash" className="cart__table-tr--td--icon" onClick={() => {dispatch(deleteItemCart(id))}}/>
       </td>
     </tr>
   );
