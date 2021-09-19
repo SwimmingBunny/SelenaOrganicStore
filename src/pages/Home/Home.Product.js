@@ -12,7 +12,7 @@ import { getListProductApi } from "../../redux/reducers/productSlice";
 const Product = () => {
   const { TabPane } = Tabs;
   const dispatch = useDispatch()
-  const listProductApi = useSelector(state => state.listProduct.listProductApi)
+  const {listProductApi} = useSelector(state => state.listProduct)
   const [listProduct, setListProduct] = React.useState(listProductApi)
 
   React.useEffect(() => {
@@ -54,10 +54,9 @@ const Product = () => {
      }
   
   }
-  console.log('list', listProduct)
   const renderListProduct = () =>{
     return(
-      listProduct.map((item,index)=>{
+      listProduct?.map((item,index)=>{
         return(
           <ProductItem
           key={index}
