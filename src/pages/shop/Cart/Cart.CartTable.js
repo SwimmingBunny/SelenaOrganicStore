@@ -2,6 +2,8 @@ import { Button } from "antd";
 import React from "react";
 import TableRow from "../../../component/commont/TableRow.js";
 import CartForm from "./Cart.CartForm";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { ROUTE } from "../../../constant/router";
 import {
@@ -11,8 +13,30 @@ import {
   Link,
   NavLink,
 } from "react-router-dom";
+import { getListProductApi } from "../../../redux/reducers/productSlice.js";
 
 const CartTable = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getListProductApi())
+  }, [])
+
+  const {cart}= useSelector(state => state.listProduct)
+
+  const renderDataCart = ()=>{
+    return cart?.map((item,index)=>{
+      return (
+        <TableRow
+          key = {index}
+          {...item}
+        />
+      )
+    })
+  }
+
+
+
   return (
     <>
       <div className="cart__responsive">
@@ -25,10 +49,7 @@ const CartTable = () => {
             <th className="cart__table-tr--th tr--total">TOTAL</th>
             <th className="cart__table-tr--th tr--remove">REMOVE</th>
           </tr>
-          <TableRow />
-          <TableRow />
-          <TableRow />
-          <TableRow />
+          {renderDataCart()}
           <tr></tr>
         </table>
       </div>

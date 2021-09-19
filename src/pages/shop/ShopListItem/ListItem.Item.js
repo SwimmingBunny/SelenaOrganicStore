@@ -8,7 +8,6 @@ import ScrollToTop from '../../../component/commont/ScrollToTop'
 import { useEffect } from "react";
 import ProductItem from "../../../component/commont/ProductsItem";
 import { getListProductApi, setSortName } from "../../../redux/reducers/productSlice";
-import { Button } from "antd";
 import $ from "jquery";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faColumns, faWindowMaximize } from "@fortawesome/free-solid-svg-icons";
@@ -48,20 +47,8 @@ const PAGE_SIZE = 12;
     setChangeUI(!changeUI);
   };
   
-function ScrollToTop({ history }) {
-  useEffect(() => {
-    const unlisten = history.listen(() => {
-      window.scrollTo(0, 0);
-    });
-    return () => {
-      unlisten();
-    };
-  }, []);
 
-  return null;
-}
   const totalResult = listProductApi.length;
-  // console.log("🚀 ~ file: ListItem.Item.js ~ line 65 ~ ShopItem ~ listProductApi.length", listProductApi.length)
   
   const renderListProduct = () => {
     console.log("list", listProductApi);

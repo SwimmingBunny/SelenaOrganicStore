@@ -26,7 +26,7 @@ const listProduct = createSlice({
     listProductInit: [],
     cart: [],
     sortName: "Name",
-    sortPrice: 1,
+    sortPrice: null,
     filterType: null,
   },
   reducers: {
@@ -50,24 +50,20 @@ const listProduct = createSlice({
       state.sortPrice = action.payload;
       state.listProductApi = [...state.listProductInit].filter(
         (item, index) => {
-          if (action.payload === 1) {
+          if (action.payload === 0) {
             return item.price < 10 && item.price > 1;
           }
-          if (action.payload === 2) {
+          if (action.payload === 1) {
             return item.price < 50 && item.price > 10;
           }
-          if (action.payload === 3) {
-            return item.price > 100;
+          if (action.payload === 2) {
+            return item.price > 50;
           }
         }
       );
     },
     filterType: (state, action) => {
       state.filterType = action.payload;
-      console.log(
-        "🚀 ~ file: productSlice.js ~ line 64 ~ action.payload",
-        action.payload
-      );
       state.listProductApi = [...state.listProductInit].filter(
         (item, index) => {
           const id = action.payload.key;
@@ -76,13 +72,10 @@ const listProduct = createSlice({
               return item.type === "vegetables";
             case "11":
               return item.type === "fruits";
-
             case "8":
               return item.type === "juice";
             case "5":
               return item.type === "meats";
-            default:
-              return true;
           }
         }
       );
@@ -90,7 +83,7 @@ const listProduct = createSlice({
     addToCart: (state, action) => {
       state.cart = [...state.cart, action.payload];
     },
-    delete: (state, action) => {
+    deleteItemCart: (state, action) => {
       state.cart = state.cart.filter((item) => action.payload !== item.id);
     },
     editCartItem: (state, action) => {
@@ -101,6 +94,33 @@ const listProduct = createSlice({
         return item;
       });
     },
+    setSortPrice: (state, action) => {
+      state.listProductApi = [...state.listProductApi].sort((a, b) => {
+        const id = action.payload.key;
+        switch (id) {
+          case "2":
+            return a.price - b.price;
+          case "6":
+            return a.price - b.price;
+
+          case "9":
+            return a.price - b.price;
+          case "12":
+            return a.price - b.price;
+          case "3":
+            return a.rating - b.rating;
+          case "7":
+            return a.rating - b.rating;
+
+          case "10":
+            return a.rating - b.rating;
+          case "13":
+            return a.rating - b.rating;
+          default:
+            return true;
+        }
+      });
+    },
   },
   extraReducers: {
     [getListProductApi.pending]: (state, action) => {},
@@ -108,15 +128,18 @@ const listProduct = createSlice({
     [getListProductApi.fulfilled]: (state, action) => {
       state.listProductApi = action.payload || [];
       state.listProductInit = action.payload || [];
-      console.log(
-        "🚀 ~ file: productSlice.js ~ line 55 ~ action.payload",
-        action.payload
-      );
     },
   },
 });
 
 const { reducer, actions } = listProduct;
-export const { getProduct, setSortName, setSortItem, filterType, addToCart } =
-  actions;
+export const {
+  getProduct,
+  setSortName,
+  setSortItem,
+  filterType,
+  addToCart,
+  setSortPrice,
+  deleteItemCart,
+} = actions;
 export default reducer;
