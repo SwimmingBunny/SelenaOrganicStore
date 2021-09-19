@@ -16,7 +16,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faColumns, faWindowMaximize);
 
 
-const listItemCart = 'LIST_ITEM_CART';
 const ShopItem = () => {
 const [currenPage, setCurrenPage] = React.useState(1)
 const PAGE_SIZE = 12;
@@ -62,7 +61,7 @@ function ScrollToTop({ history }) {
   return null;
 }
   const totalResult = listProductApi.length;
-  console.log("🚀 ~ file: ListItem.Item.js ~ line 65 ~ ShopItem ~ listProductApi.length", listProductApi.length)
+  // console.log("🚀 ~ file: ListItem.Item.js ~ line 65 ~ ShopItem ~ listProductApi.length", listProductApi.length)
   
   const renderListProduct = () => {
     console.log("list", listProductApi);
@@ -71,15 +70,12 @@ function ScrollToTop({ history }) {
       return (
         <ProductItem
           key={index}
-          img={item.img}
-          name={item.name}
-          price={item.price}
-          sell={item.sell}
+          {...item}
         />
       );
     })
-    // .splice((currenPage - 1) * PAGE_SIZE)
-    // .splice(0,PAGE_SIZE)
+    .splice((currenPage - 1) * PAGE_SIZE)
+    .splice(0,PAGE_SIZE)
   
   };
   return (
