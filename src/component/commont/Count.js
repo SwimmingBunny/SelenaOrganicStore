@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "antd";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 const Count = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(1);
   const [check, setCheck] = React.useState(true);
   const countStyle = {
     minWidth: "3.7rem",
@@ -24,16 +24,16 @@ const Count = () => {
     // alignItems: "center",
   };
   const Plus = () => {
-    if (count === 0) {
+    if (count === 1) {
       setCheck(true);
     }
     setCount(count + 1);
   };
   const Minus = () => {
-    if (count === 0) {
+    if (count === 1) {
       setCheck(!check);
     }
-    if (count > 0) {
+    if (count > 1) {
       setCheck(true);
       setCount(count - 1);
     }

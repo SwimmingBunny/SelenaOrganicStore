@@ -16,10 +16,10 @@ const ProductItem = (props) => {
   const handelDetail = () => {
     return alert("hello my detail!");
   };
-  
- const handleAddCart = ()=>{
-   Alert("oke!")
- }
+
+  const handleAddCart = () => {
+    console.log("long");
+  };
 
   return (
     <>
@@ -28,7 +28,7 @@ const ProductItem = (props) => {
           <div style={{ padding: "2.4rem .8rem " }}>
             <div className="product__list-item">
               <div className="product__list-item--img">
-                <img style={{width:'100%'}} src={props.img} alt="" />
+                <img style={{ width: "100%" }} src={props.img} alt="" />
               </div>
               <div className="product__list-item--rating">
                 <span>
@@ -65,6 +65,7 @@ const ProductItem = (props) => {
                     <FontAwesomeIcon
                       className="product__list-item--icon--1"
                       icon="shopping-bag"
+                      onClick={handleAddCart}
                     />
                   </div>
                 </Popover>

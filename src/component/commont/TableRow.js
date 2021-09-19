@@ -5,6 +5,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faTrash);
 const TableRow = () => {
+  const count =()=> {
+    return 
+  }
   return (
     <tr className="cart__table-tr">
       <td className="cart__table-tr--td ">
@@ -21,7 +24,7 @@ const TableRow = () => {
           <Count />
         </div>
       </td>
-      <td className="cart__table-tr--td">PRICE * Count</td>
+      <td className="cart__table-tr--td">{count}</td>
       <td className="cart__table-tr--td">
         <FontAwesomeIcon icon="trash" className="cart__table-tr--td--icon" />
       </td>
