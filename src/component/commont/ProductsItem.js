@@ -1,6 +1,6 @@
 import React from "react";
 import QuickView from "./QuickView";
-import { Row, Col, Popover } from "antd";
+import { Row, Col, Popover, Button } from "antd";
 import { useEffect } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -9,21 +9,22 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink,useHistory } from "react-router-dom";
 import { ROUTE } from "../../constant/router";
 import { useDispatch } from "react-redux";
 import {
   getListProductApi,
   addToCart,
   addToWishlist,
+  addToDetail,
 } from "../../redux/reducers/productSlice";
 
 library.add(faShoppingBag, faHeart, faStar);
 
 const ProductItem = (props) => {
-  const { id, name, img, price, stock } = props;
+  const { id, name, img, price, stock,description } = props;
   const dispatch = useDispatch();
-
+  const history = useHistory()
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
@@ -68,7 +69,7 @@ const ProductItem = (props) => {
                 {props.name}
               </NavLink>
               <div className="product__list-item--price">
-                <p className="product__list-item--price--p">${props.price} </p>
+                <p className="product__list-item--price--p">${props.price}.00 </p>
                 <p className="product__list-item--price--p discounted">
                   {props.sell}
                 </p>
@@ -92,7 +93,7 @@ const ProductItem = (props) => {
                   </div>
                 </Popover>
               </div>
-              <QuickView />
+              <Link className="quickview__eye" to={`${ROUTE.SHOPITEM}/${id}`} ><QuickView  /></Link>
             </div>
           </div>
         </Col>
@@ -153,7 +154,7 @@ const ProductItem = (props) => {
                 </Popover>
               </div>
 
-              <QuickView />
+              <QuickView  onClick={()=>history.push("/shop-product/" + id)} />
             </div>
           </div>
         </Col>

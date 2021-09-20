@@ -28,6 +28,7 @@ import {
   useRouteMatch,useParams
 } from "react-router-dom";
 import "./admin.scss";
+import Dashboard from "./admin.DashBoard.js";
 const Admin = () => {
   let { path, url } = useRouteMatch();
   const isMoblie = useMediaQuery({
@@ -132,13 +133,13 @@ const Admin = () => {
             <Col span={6}>
               <ul className='admin-select'>
                 <li>
-                  <Link to={ROUTE.DASHBOARD}>
+                  <Link to={`${url}${ROUTE.DASHBOARD}`}>
                     <LayoutOutlined className='icon' />
                     Dashboard{" "}
                   </Link>
                 </li>
                 <li>
-                  <Link to={ROUTE.UI}>
+                  <Link to={`${url}${ROUTE.UI}`}>
                     <AppstoreOutlined className='icon' />
                     User interface
                   </Link>
@@ -150,7 +151,7 @@ const Admin = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={ROUTE.ORDERS}>
+                  <Link to={`${url}${ROUTE.ORDERS}`}>
                     <ShoppingCartOutlined className='icon' />
                     Orders
                   </Link>
@@ -166,7 +167,11 @@ const Admin = () => {
           )}
 
           <Col span={isMoblie ? 24 : 18}>
+            <div className="admin__content">
             <Switch>
+            <Route path={`${path}${ROUTE.DASHBOARD}`} exact>
+                <Dashboard/>
+              </Route>
               <Route path={`${path}${ROUTE.CUSTOMER}`} exact>
                 <div className='admin__users'>
                   <h2>Customer Managerment </h2>
@@ -183,7 +188,7 @@ const Admin = () => {
                   </table>
                 </div>
               </Route>
-              <Route path={path} exact>
+              <Route path={`${path}${ROUTE.PRODUCTS}`} exact>
                 <div className='admin__users'>
                   <h2>Product Managerment </h2>
                   <table>
@@ -200,6 +205,8 @@ const Admin = () => {
                 </div>
               </Route>
             </Switch>
+            </div>
+           
           </Col>
         </Row>
       </div>

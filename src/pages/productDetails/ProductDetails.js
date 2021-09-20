@@ -20,21 +20,53 @@ import "../../style/ProductDetails.scss";
 import "../../style/form.scss";
 import "../../style/base.scss";
 import ProductItem from "../../component/commont/ProductsItem";
-import { NavLink } from "react-router-dom";
+import { NavLink,useParams } from "react-router-dom";
 import { ROUTE } from "../../constant/router";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, addToWishlist, getListProductApi } from "../../redux/reducers/productSlice";
+import test from '../../product-10.jpg'
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
+  const [itemDetail, setItemDetail] = React.useState()
+  const dispatch = useDispatch();
+  const {listProductApi} = useSelector(
+    (state) => state.listProduct
+  );
+  let {id} = useParams();
+
+  console.log("🚀 ~ file: ProductDetails.js ~ line 34 ~ ProductDetail ~ itemDetail", itemDetail)
+
+  React.useEffect(() => {
+    dispatch(getListProductApi());
+  }, []);
+  React.useEffect(() => {
+    const d = listProductApi[id];
+    setItemDetail(d)
+  }, [id]);
+  console.log("🚀 ~ file: ProductDetails.js ~ line 34 ~ ProductDetail ~ itemDetail", itemDetail?.img)
+
+  
   const [date, setDate] = React.useState(new Date().getDate());
   const [rate, setRate] = React.useState("");
   const { TabPane } = Tabs;
-
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
   const handleChange = (value) => {
     setRate(value);
   };
+
+
+const handleAddCart = () =>{
+  dispatch(addToCart({...itemDetail, total : itemDetail.price, count : 1}))
+  alert('Add cart success!')
+}
+
+const handleAddWishlist = () => {
+  dispatch(addToWishlist({...itemDetail}));
+  alert("Add to your Wishlist susccess");
+};
 
   return (
     <div className='container detail'>
@@ -42,31 +74,28 @@ const ProductDetail = () => {
         <Col lg={{ span: 8 }} className='detail__img'>
           <img
             className='detail__img--size'
-            src='Images/product/vegetables/Broccoli-each.jpg'></img>
+            src={`http://localhost:3000/${ itemDetail?.img}`}/>
+            
         </Col>
         <Col lg={{ span: 16 }} className='detail__info'>
           <div style={{ paddingLeft: "8rem" }}>
             <Rate />
-            <h2>Broccoli</h2>
+            <h2>{itemDetail?.name}</h2>
             <div></div>
-            <h2 className='detail__info--price'>$160.00</h2>
+            <h2 className='detail__info--price'>$ {itemDetail?.price}.00</h2>
             <p className='detail__info--descrip'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-              fringilla augue nec est tristique auctor. Donec non est at libero
-              vulputate rutrum. Morbi ornare lectus quis justo gravida semper.
-              Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id
-              nulla.
+              {itemDetail?.description}
             </p>
-            <NavLink to={ROUTE.CART} exact><Button className='form__btn detail__info--cart' size='large'>
+            <Button className='form__btn detail__info--cart' size='large' onClick={handleAddCart}>
               ADD TO CART
-            </Button></NavLink>
+            </Button>
             
-            <Button className='detail__info--heart' size='large'>
+            <Button className='detail__info--heart' size='large' onClick={handleAddWishlist}>
               <HeartOutlined />
             </Button>
             <Count />
 
-            <p style={{ marginTop: "1rem" }}>Availability: ? In Stock</p>
+            <p style={{ marginTop: "1rem" }}>Availability: {itemDetail?.stock} In Stock</p>
           </div>
         </Col>
       </Row>
@@ -75,15 +104,7 @@ const ProductDetail = () => {
         <Tabs tabPosition={isMoblie ? "top" : "left"}>
           <TabPane tab='Description' key='1' className='detail__middle--boder'>
             <p className='detail__info--descrip'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-              fringilla augue nec est tristique auctor. Donec non est at libero
-              vulputate rutrum. Morbi ornare lectus quis justo gravida semper.
-              Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id
-              nulla.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-              fringilla augue nec est tristique auctor. Donec non est at libero
-              vulputate rutrum. Morbi ornare lectus quis justo gravida semper.
-              Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id
-              nulla.
+            {itemDetail?.description}
             </p>
           </TabPane>
           <TabPane
@@ -158,22 +179,22 @@ const ProductDetail = () => {
         <div className='detail__bottom--boder'></div>
         <Row gutter={16}>
           <ProductItem
-            img='Images/product/product-10.jpg'
+            img='./Images/product/product-10.jpg'
             name='Carrot'
-            price='2$'
-            sell='5$'
+            price='2'
+            sell='$5'
           />
           <ProductItem
-            img='Images/product/product-10.jpg'
+            img='./Images/product/product-10.jpg'
             name='Carrot'
-            price='2$'
-            sell='5$'
+            price='2'
+            sell='$5'
           />
           <ProductItem
-            img='Images/product/product-10.jpg'
+            img={test}
             name='Carrot'
-            price='2$'
-            sell='5$'
+            price='2'
+            sell='$5'
           />
         </Row>
       </Row>
