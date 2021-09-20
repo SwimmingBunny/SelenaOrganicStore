@@ -32,7 +32,7 @@ const WishListRow = (props) => {
       <td className="wishlist__table-tr--td">{name}</td>
       <td className="wishlist__table-tr--td">{price}</td>
       <td className="wishlist__table-tr--td">
-        {stock ? (
+        {stock !== 0 ? (
           <p className="wishlist__table-tr--td--pblue" >
             In Stock
           </p>

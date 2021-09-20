@@ -17,18 +17,18 @@ import Checkout from "./pages/checkout/Checkout";
 import Cart from "./pages/shop/Cart/Cart";
 import WishList from "./pages/shop/wishlist/WishList";
 import Account from "./pages/myAccount/Account";
-import Admin from "./pages/admin/admin";
 import "./responsive/responsive.scss";
+import Admin from "./pages/admin/admin";
 
 function App() {
   return (
     <>
       <Switch>
+        <Route path={ROUTE.ADMIN} >
+          <Admin/>
+        </Route>
         <Route path={ROUTE.HOME}>
           <Public />
-        </Route>
-        <Route path={ROUTE.ADMIN}>
-          <Admin />
         </Route>
       </Switch>
     </>
@@ -52,7 +52,7 @@ function Public(params) {
         <Route path={ROUTE.SHOPITEM} exact>
           <ListItem />
         </Route>
-        <Route path={ROUTE.SHOPDETAIL + "/:id"} exact>
+        <Route path={ROUTE.SHOPITEM + "/:id"} exact>
           <ProductDetail />
         </Route>
         <Route path={ROUTE.ABOUTUS} exact>
@@ -78,5 +78,7 @@ function Public(params) {
     </>
   );
 }
+
+
 
 export default App;

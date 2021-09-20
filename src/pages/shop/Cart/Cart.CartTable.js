@@ -72,15 +72,15 @@ const CartTable = () => {
         </div>
         <div className="cart__total-conten">
           <p> Shipping ($)</p>
-          <p> 30</p>
+          <p> 10.00</p>
         </div>
         <div className="cart__total-conten">
           <p> Discount ($)</p>
-          <p> 0</p>
+          <p> 0.00</p>
         </div>
         <div className="cart__total-conten">
           <p className="cart__total-conten--total"> Total ($)</p>
-          <p className="cart__total-conten--total"> {+getTotal() + 30}</p>
+          <p className="cart__total-conten--total"> {+getTotal() + 10}.00</p>
         </div>
         <Button className="cart__total-btn" type="primary">
          <NavLink to={ROUTE.CHECKOUT} exact > PROCEED CHECKOUT</NavLink> 

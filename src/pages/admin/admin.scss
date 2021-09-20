@@ -30,6 +30,7 @@
         }
       }
     }
+    
     .col-img {
       display: flex;
       justify-content: center;
@@ -37,6 +38,15 @@
     .col-src {
       padding: 0 40px;
     }
+  }
+  &__content{
+    width: 98%;
+    margin: 1rem;
+    box-shadow: 10px 10px 10px $borderColor;
+    background-color: $backgroundColor;
+    border-radius: 1rem;
+    padding: 2rem;
+    overflow-x: auto;
   }
   &-body {
     height: 100%;
@@ -65,13 +75,7 @@
     }
   }
   &__users {
-    width: 98%;
-    margin: 1rem;
-    box-shadow: 10px 10px 10px $borderColor;
-    background-color: $backgroundColor;
-    border-radius: 1rem;
-    padding: 2rem;
-    overflow-x: auto;
+    
 
     table {
       min-width: 600px;

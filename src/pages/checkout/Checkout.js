@@ -23,10 +23,10 @@ const Checkout = (props) => {
   const {cart}= useSelector(state => state.listProduct)
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
-    if(e.target.value === 1){
+    if(e.target.value === 2){
       setIsShow(false)
     }
-    if(e.target.value === 2){
+    if(e.target.value === 1){
       setIsShow(true)
     }
   };
@@ -152,7 +152,7 @@ const Checkout = (props) => {
                 </tr>
                 <tr>
                   <td>Shipping</td>
-                  <td>$30.00</td>
+                  <td>$10.00</td>
                 </tr>
                 <tr>
                   <td>Counpon</td>
@@ -160,7 +160,7 @@ const Checkout = (props) => {
                 </tr>
                 <tr>
                   <th>Total Amount</th>
-                  <th>${+getTotal() + 30}</th>
+                  <th>${+getTotal() + 10}.00</th>
                 </tr>
               </table>
               <div className='checkout__order--padding'>
@@ -170,7 +170,7 @@ const Checkout = (props) => {
                   <Space direction='vertical'>
                     <Radio value={1}>Payment on delivery</Radio>
                     <Radio value={2}>Momo</Radio>
-                    <ul style = {{ display:`${!isShow ? "none" : "block"}`}}>
+                    <ul style = {{ display:`${isShow ? "none" : "block"}`}}>
                       <img style={{width:"40%"}}src='Images/payment/payment.jpg'/>
                     </ul>
                   </Space>

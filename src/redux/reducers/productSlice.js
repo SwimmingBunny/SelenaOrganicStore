@@ -26,9 +26,11 @@ const listProduct = createSlice({
     listProductInit: [],
     cart: [],
     wishlist: [],
+    relateProduct: [],
     sortName: "Name",
     sortPrice: null,
     filterType: null,
+
   },
   reducers: {
     getProduct: async (state, action) => {},
@@ -86,6 +88,9 @@ const listProduct = createSlice({
     },
     addToWishlist: (state, action) => {
       state.wishlist = [...state.wishlist, action.payload];
+    },
+    addToDetail: (state, action) => {
+      state.itemDetail = action.payload;
     },
     deleteItemCart: (state, action) => {
       state.cart = state.cart.filter((item) => action.payload !== item.id);
@@ -153,6 +158,7 @@ export const {
   deleteItemCart,
   editCartItem,
   addToWishlist,
-  deleteItemWishlist
+  deleteItemWishlist,
+  addToDetail
 } = actions;
 export default reducer;
