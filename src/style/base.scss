@@ -37,3 +37,11 @@ html {
     width: 8rem;
   }
 }
+@keyframes moving {
+  from {
+    transform: translatex(40rem);
+  }
+  to {
+    transform: translatex(1rem);
+  }
+}

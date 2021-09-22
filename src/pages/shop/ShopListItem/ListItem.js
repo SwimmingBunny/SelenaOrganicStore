@@ -21,7 +21,7 @@ const ListItem = () => {
         <h1 className="homeshop__header-h1">Shop</h1>
         <h3 className="homeshop__header-h3">Product </h3>
       </div>
-      <div className="container">
+      <div className="container" style={{ position: "relative" }}>
         <Row>
           <Col lg={{ span: 6 }} xs={{ span: 24 }}>
             <SideBar />
