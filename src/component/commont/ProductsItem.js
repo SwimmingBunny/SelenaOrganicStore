@@ -167,7 +167,11 @@ const ProductItem = (props) => {
                 </Popover>
               </div>
 
-              <QuickView onClick={() => history.push("/shop-product/" + id)} />
+              <QuickView
+                onClick={() => {
+                  history.push("/shop-product/" + id);
+                }}
+              />
             </div>
           </div>
         </Col>

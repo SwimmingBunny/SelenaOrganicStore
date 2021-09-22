@@ -34,15 +34,15 @@ const ShopItem = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const [changeUI, setChangeUI] = React.useState(true);
-  const {listProductApi,filterType, sortName} = useSelector(
+  const { listProductApi, filterType, sortName } = useSelector(
     (state) => state.listProduct
   );
 
-  console.log(" list item listProductApi", listProductApi)
+  console.log(" list item listProductApi", listProductApi);
 
   React.useEffect(() => {
     dispatch(getListProductApi());
-    console.log("IN EFFECT", )
+    console.log("IN EFFECT");
   }, []);
 
   function handleChange(value) {
@@ -53,20 +53,15 @@ const ShopItem = () => {
   };
 
   const totalResult = listProductApi.length;
-  
-  const renderListProduct = ()=>{
+
+  const renderListProduct = () => {
     return listProductApi
-    .map((item, index) => {
-      return (
-        <ProductItem
-          key={index}
-          {...item}
-        />
-      );
-    })
-    .splice((currenPage - 1) * PAGE_SIZE)
-    .splice(0,PAGE_SIZE)
-  }
+      .map((item, index) => {
+        return <ProductItem key={index} {...item} />;
+      })
+      .splice((currenPage - 1) * PAGE_SIZE)
+      .splice(0, PAGE_SIZE);
+  };
   return (
     <>
       <div className="shopitem">
@@ -123,6 +118,7 @@ const ShopItem = () => {
             onChange={(page) => {
               {
                 setCurrenPage(page);
+                window.scrollTo(0, 200);
               }
             }}
           />
