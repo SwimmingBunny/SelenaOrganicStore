@@ -31,13 +31,15 @@ const PAGE_SIZE = 12;
   const { Option } = Select;
   const dispatch = useDispatch();
   const [changeUI, setChangeUI] = React.useState(true);
-  const {listProductApi} = useSelector(
+  const {listProductApi,filterType, sortName} = useSelector(
     (state) => state.listProduct
   );
 
+  console.log(" list item listProductApi", listProductApi)
 
   React.useEffect(() => {
     dispatch(getListProductApi());
+    console.log("IN EFFECT", )
   }, []);
 
   function handleChange(value) {
@@ -50,7 +52,7 @@ const PAGE_SIZE = 12;
 
   const totalResult = listProductApi.length;
   
-  const renderListProduct = () => {
+  const renderListProduct = ()=>{
     return listProductApi
     .map((item, index) => {
       return (
@@ -62,8 +64,7 @@ const PAGE_SIZE = 12;
     })
     .splice((currenPage - 1) * PAGE_SIZE)
     .splice(0,PAGE_SIZE)
-  
-  };
+  }
   return (
     <div className='shopitem'>
       <div className='shopitem__sortitem'>

@@ -32,7 +32,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getListProductApi);
+    dispatch(getListProductApi());
   }, []);
   const { cart } = useSelector((state) => state.listProduct);
   const renderDataCart = () => {

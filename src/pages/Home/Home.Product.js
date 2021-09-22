@@ -11,13 +11,10 @@ import { getListProductApi } from "../../redux/reducers/productSlice";
 
 const Product = () => {
   const { TabPane } = Tabs;
-  const dispatch = useDispatch()
   const {listProductApi} = useSelector(state => state.listProduct)
   const [listProduct, setListProduct] = React.useState(listProductApi)
 
-  React.useEffect(() => {
-    dispatch(getListProductApi())
-  }, []);
+  
 
   const callAPI = (key) => {
     if(key === '1'){
