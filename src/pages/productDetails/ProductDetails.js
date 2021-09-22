@@ -15,7 +15,8 @@ import {
   Form,
 } from "antd";
 import { HeartOutlined} from "@ant-design/icons";
-import Count from "../../component/commont/Count";
+import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
+
 import "../../style/ProductDetails.scss";
 import "../../style/form.scss";
 import "../../style/base.scss";
@@ -23,7 +24,9 @@ import ProductItem from "../../component/commont/ProductsItem";
 import { NavLink,useParams } from "react-router-dom";
 import { ROUTE } from "../../constant/router";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addToWishlist, getListProductApi } from "../../redux/reducers/productSlice";
+import { addToCart, addToWishlist, getListProductApi,
+  deleteItemCart,
+  editCartItem, } from "../../redux/reducers/productSlice";
 import test from '../../product-10.jpg'
 
 const ProductDetail = (props) => {
@@ -31,30 +34,76 @@ const ProductDetail = (props) => {
     query: "(max-width: 480px)",
   });
   const [itemDetail, setItemDetail] = React.useState()
+  console.log("🚀 ~ file: ProductDetails.js ~ line 37 ~ ProductDetail ~ itemDetail", itemDetail)
   const dispatch = useDispatch();
   const {listProductApi} = useSelector(
     (state) => state.listProduct
   );
-  let {id} = useParams();
-
-  console.log("🚀 ~ file: ProductDetails.js ~ line 34 ~ ProductDetail ~ itemDetail", itemDetail)
-
-  React.useEffect(() => {
-    dispatch(getListProductApi());
-  }, []);
-  React.useEffect(() => {
-    const d = listProductApi[id];
-    setItemDetail(d)
-  }, [id]);
-  console.log("🚀 ~ file: ProductDetails.js ~ line 34 ~ ProductDetail ~ itemDetail", itemDetail?.img)
+  
 
   
   const [date, setDate] = React.useState(new Date().getDate());
   const [rate, setRate] = React.useState("");
   const { TabPane } = Tabs;
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
+  const [count, setCount] = React.useState(1);
+  const [check, setCheck] = React.useState(true);
+  const [checkStock, setCheckStock] = React.useState(true);
+  const countStyle = {
+    minWidth: "3.7rem",
+    textAlign: "center",
+    transform: "translateY(-.4rem)",
+    padding: "0 1rem",
+  };
+  const btnStyle = {
+    border: "none",
+  };
+  const borderStyle = {
+    border: "1px solid #e5e5e5",
+    margin: "0 1rem",
+    padding: ".5rem 0",
+    maxWidth: "10rem",
+    display: "flex",
+    justifyContent: "space-between",
+    maxHeight: "3.4rem",
+  };
+
+
+  let {id} = useParams();
+  React.useEffect(() => {
+    dispatch(getListProductApi());
+  }, []);
+  React.useEffect(() => {
+    const d = listProductApi.find(item=>item.id === +id); //find e in arr
+    setItemDetail(d)
+  }, [listProductApi,id]);
+
+  
   const handleChange = (value) => {
     setRate(value);
+  };
+  const Plus = () => {
+    if (count === 1) {
+      setCheck(true);
+    }
+    setCount(count + 1);
+    if (count >= itemDetail?.stock -1 ) {
+      setCheckStock(false);
+      alert("alo");
+    } else {
+      dispatch(editCartItem({ ...props, count: count + 1 }));
+    }
+  };
+  const Minus = () => {
+    if (count === 1) {
+      setCheck(!check);
+    }
+    if (count > 1) {
+      setCheck(true);
+      setCount(count - 1);
+      setCheckStock(true);
+      dispatch(editCartItem({ ...props, count: count - 1 }));
+    }
   };
 
 
@@ -93,7 +142,30 @@ const handleAddWishlist = () => {
             <Button className='detail__info--heart' size='large' onClick={handleAddWishlist}>
               <HeartOutlined />
             </Button>
-            <Count />
+            <div style={{ display: "flex"}}>
+          <div style={borderStyle}>
+            {check ? (
+              <Button onClick={Minus} size='small' style={btnStyle}>
+                <MinusOutlined />
+              </Button>
+            ) : (
+              <Button onClick={Minus} disabled size='small' style={btnStyle}>
+                <MinusOutlined />
+              </Button>
+            )}
+
+            <p style={countStyle}>{count}</p>
+            {checkStock ? (
+              <Button onClick={Plus} size='small' style={btnStyle}>
+                <PlusOutlined />
+              </Button>
+            ) : (
+              <Button onClick={Plus} size='small' disabled style={btnStyle}>
+                <PlusOutlined />
+             </Button>
+            )}
+          </div>
+        </div>
 
             <p style={{ marginTop: "1rem" }}>Availability: {itemDetail?.stock} In Stock</p>
           </div>

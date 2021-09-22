@@ -25,9 +25,7 @@ const ProductItem = (props) => {
   const { id, name, img, price, stock,description } = props;
   const dispatch = useDispatch();
   const history = useHistory()
-  useEffect(() => {
-    dispatch(getListProductApi());
-  }, []);
+  
   const handleAddCart = () => {
     dispatch(addToCart({ id, img, name, price, stock, total: price, count : 1 }));
     alert("Add to your card success");
