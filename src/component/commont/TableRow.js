@@ -1,7 +1,6 @@
 /** @format */
 
 import React from "react";
-import Count from "./Count";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Alert, Button } from "antd";
@@ -22,9 +21,7 @@ const TableRow = (props) => {
   const [count, setCount] = React.useState(1);
   const [check, setCheck] = React.useState(true);
   const [checkStock, setCheckStock] = React.useState(true);
-  useEffect(() => {
-    dispatch(getListProductApi());
-  }, []);
+  
   const countStyle = {
     minWidth: "3.7rem",
     textAlign: "center",

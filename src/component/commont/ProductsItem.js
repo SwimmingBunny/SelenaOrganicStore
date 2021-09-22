@@ -26,10 +26,8 @@ library.add(faShoppingBag, faHeart, faStar);
 const ProductItem = (props) => {
   const { id, name, img, price, stock, description } = props;
   const dispatch = useDispatch();
-  const history = useHistory();
-  useEffect(() => {
-    dispatch(getListProductApi());
-  }, []);
+  const history = useHistory()
+  
   const handleAddCart = () => {
     dispatch(
       addToCart({ id, img, name, price, stock, total: price, count: 1 })

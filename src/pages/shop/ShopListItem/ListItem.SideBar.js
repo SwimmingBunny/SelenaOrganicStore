@@ -15,7 +15,6 @@ import { Slider } from "antd";
 const SideBar = () => {
   const { SubMenu } = Menu;
   const dispatch = useDispatch();
-  const { listProductApi } = useSelector((state) => state.listProduct);
 
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",

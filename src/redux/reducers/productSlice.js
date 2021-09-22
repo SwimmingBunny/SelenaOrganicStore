@@ -30,7 +30,6 @@ const listProduct = createSlice({
     sortName: "Name",
     sortPrice: null,
     filterType: null,
-
   },
   reducers: {
     getProduct: async (state, action) => {},
@@ -66,7 +65,7 @@ const listProduct = createSlice({
       );
     },
     filterType: (state, action) => {
-      state.filterType = action.payload;
+      state.filterType = action.payload.key;
       state.listProductApi = [...state.listProductInit].filter(
         (item, index) => {
           const id = action.payload.key;
@@ -79,6 +78,8 @@ const listProduct = createSlice({
               return item.type === "juice";
             case "5":
               return item.type === "meats";
+            default:
+              return false;
           }
         }
       );
@@ -89,21 +90,22 @@ const listProduct = createSlice({
     addToWishlist: (state, action) => {
       state.wishlist = [...state.wishlist, action.payload];
     },
-    addToDetail: (state, action) => {
-      state.itemDetail = action.payload;
-    },
     deleteItemCart: (state, action) => {
       state.cart = state.cart.filter((item) => action.payload !== item.id);
     },
     deleteItemWishlist: (state, action) => {
-      state.wishlist = state.wishlist.filter((item) => action.payload !== item.id);
+      state.wishlist = state.wishlist.filter(
+        (item) => action.payload !== item.id
+      );
     },
-    
+
     editCartItem: (state, action) => {
-      
       state.cart = state.cart.map((item) => {
         if (action.payload.id === item.id) {
-          return {...action.payload,total: action.payload.price * action.payload.count};
+          return {
+            ...action.payload,
+            total: action.payload.price * action.payload.count,
+          };
         }
 
         return item;
@@ -159,6 +161,6 @@ export const {
   editCartItem,
   addToWishlist,
   deleteItemWishlist,
-  addToDetail
+  addToDetail,
 } = actions;
 export default reducer;

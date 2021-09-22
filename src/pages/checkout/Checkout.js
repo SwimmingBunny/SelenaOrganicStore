@@ -22,7 +22,6 @@ const Checkout = (props) => {
 
   const {cart}= useSelector(state => state.listProduct)
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
     if(e.target.value === 2){
       setIsShow(false)
     }

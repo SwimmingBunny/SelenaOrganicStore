@@ -23,26 +23,25 @@ import {
 
 library.add(faShoppingCart, faTrash);
 const HeaderCart = (props) => {
-  const { key, name, price, img } = props;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getListProductApi());
-  }, []);
+  const {id, name, price, img, count } = props;
+  const dispatch = useDispatch()
   return (
     <div className="header__top-cart-container">
       <Menu.Item>
         <div className="header__top-container">
           <div>
-            <img className="header__top-container-img" src={img} alt="" />
+            <img className="header__top-container-img" src={`http://localhost:3000/${img}`} alt="" />
           </div>
           <div className="header__top-container-info">
             <span className="header__top-container-info--prd">{name}</span>
-            <span className="header__top-container-info--prd">Qty:</span>
+            <span className="header__top-container-info--prd">Qty: {count}</span>
             <span className="header__top-container-info--prc">
-              Price: ${price}
+              Price: ${price}.00
             </span>
           </div>
-          <div className="header__top-container-clear">x</div>
+          <div className="header__top-container-clear" onClick={() => {
+            dispatch(deleteItemCart(id));
+          }}>x</div>
         </div>
       </Menu.Item>
     </div>
