@@ -1,5 +1,7 @@
 import React from "react";
 import QuickView from "./QuickView";
+import Modal from "../Modal/Modal";
+
 import { Row, Col, Popover, Button } from "antd";
 import { useEffect } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -9,7 +11,7 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, NavLink,useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { ROUTE } from "../../constant/router";
 import { useDispatch } from "react-redux";
 import {
@@ -22,18 +24,20 @@ import {
 library.add(faShoppingBag, faHeart, faStar);
 
 const ProductItem = (props) => {
-  const { id, name, img, price, stock,description } = props;
+  const { id, name, img, price, stock, description } = props;
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
   const handleAddCart = () => {
-    dispatch(addToCart({ id, img, name, price, stock, total: price, count : 1 }));
+    dispatch(
+      addToCart({ id, img, name, price, stock, total: price, count: 1 })
+    );
     alert("Add to your card success");
   };
   const handleAddWishlist = () => {
-    dispatch(addToWishlist({ id, img, name, price, stock}));
+    dispatch(addToWishlist({ id, img, name, price, stock }));
     alert("Add to your Wishlist susccess");
   };
   return (
@@ -69,22 +73,23 @@ const ProductItem = (props) => {
                 {props.name}
               </NavLink>
               <div className="product__list-item--price">
-                <p className="product__list-item--price--p">${props.price}.00 </p>
+                <p className="product__list-item--price--p">
+                  ${props.price}.00{" "}
+                </p>
                 <p className="product__list-item--price--p discounted">
                   {props.sell}
                 </p>
               </div>
               <div className="product__list-item--icon">
-                <Popover content="Add to cart" onClick={handleAddCart} >
+                <Popover content="Add to cart" onClick={handleAddCart}>
                   <div className="product__list-item--icon-1">
                     <FontAwesomeIcon
                       className="product__list-item--icon--1"
                       icon="shopping-bag"
-                      
                     />
                   </div>
                 </Popover>
-                <Popover content=" Wishlist"  onClick={handleAddWishlist}>
+                <Popover content=" Wishlist" onClick={handleAddWishlist}>
                   <div className="product__list-item--icon-2">
                     <FontAwesomeIcon
                       className="product__list-item--icon--1"
@@ -93,7 +98,9 @@ const ProductItem = (props) => {
                   </div>
                 </Popover>
               </div>
-              <Link className="quickview__eye" to={`${ROUTE.SHOPITEM}/${id}`} ><QuickView  /></Link>
+              <Link className="quickview__eye" to={`${ROUTE.SHOPITEM}/${id}`}>
+                <QuickView />
+              </Link>
             </div>
           </div>
         </Col>
@@ -154,11 +161,14 @@ const ProductItem = (props) => {
                 </Popover>
               </div>
 
-              <QuickView  onClick={()=>history.push("/shop-product/" + id)} />
+              <QuickView onClick={() => history.push("/shop-product/" + id)} />
             </div>
           </div>
         </Col>
       )}
+      <div className="modal">
+        <Modal />
+      </div>
     </>
   );
 };

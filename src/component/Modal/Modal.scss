@@ -1,0 +1,32 @@
+@import "../../style/variable.scss";
+@import "../../style/base.scss";
+.modal {
+  font-family: "Raleway", sans-serif !important;
+  display: none;
+  height: 50px;
+  width: 400px;
+  margin-top: 2rem;
+  background: $primaryColor;
+  color: $white;
+  text-align: right;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  animation: moving 0.2s linear;
+  .display {
+    display: flex;
+  }
+  .content {
+    margin-top: 1rem;
+    display: flex;
+    width: 97%;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    p {
+      margin: 0;
+    }
+  }
+  span {
+  }
+}
