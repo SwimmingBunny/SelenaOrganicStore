@@ -1,12 +1,9 @@
 import React from "react";
 import "./Modal.scss";
-const Modal = () => {
+const Modal = (props) => {
   return (
-    <div className="display">
-      <div className="content">
-        <p>Add to Cart susccess</p>
-      </div>
-      <span>X</span>
+    <div className="content">
+      <p>{props.name}</p>
     </div>
   );
 };

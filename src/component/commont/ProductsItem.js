@@ -24,19 +24,27 @@ import {
 library.add(faShoppingBag, faHeart, faStar);
 
 const ProductItem = (props) => {
+  const [isShowCart, setIsShowCart] = React.useState(true);
+  const [isShowWishlist, setisShowWishlist] = React.useState(true);
   const { id, name, img, price, stock, description } = props;
   const dispatch = useDispatch();
-  const history = useHistory()
-  
+  const history = useHistory();
+
   const handleAddCart = () => {
     dispatch(
       addToCart({ id, img, name, price, stock, total: price, count: 1 })
     );
-    alert("Add to your card success");
+    setIsShowCart(false);
+  };
+  const handleIsShow = () => {
+    setIsShowCart(true);
   };
   const handleAddWishlist = () => {
     dispatch(addToWishlist({ id, img, name, price, stock }));
-    alert("Add to your Wishlist susccess");
+    setisShowWishlist(false);
+  };
+  const handleIsShowWishlist = () => {
+    setisShowWishlist(true);
   };
   return (
     <>
@@ -164,8 +172,19 @@ const ProductItem = (props) => {
           </div>
         </Col>
       )}
-      <div className="modal">
-        <Modal />
+      <div
+        className="modal"
+        onClick={handleIsShow}
+        style={{ display: isShowCart ? "none" : "flex" }}
+      >
+        <Modal name="Add to cart suscces" />
+      </div>
+      <div
+        className="modal"
+        onClick={handleIsShowWishlist}
+        style={{ display: isShowWishlist ? "none" : "flex" }}
+      >
+        <Modal name="Add to wishlist suscces" />
       </div>
     </>
   );
