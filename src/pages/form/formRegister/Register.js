@@ -5,8 +5,8 @@ import { Row, Col, Alert } from "antd";
 import { Form, Input, Button, Checkbox } from "antd";
 
 import { useDispatch, useSelector} from "react-redux";
-import { addCustomerApi} from "../../../redux/reducers/userRegisterSlice";
-import { saveCurrentLocation } from "../../../redux/reducers/userRegisterSlice";
+import { addCustomerApi} from "../../../redux/reducers/customerSlice";
+import { saveCurrentLocation } from "../../../redux/reducers/customerSlice";
 import validateMessages from "../ValidateMessage";
 import "../../../style/form.scss";
 import { useHistory } from "react-router";
@@ -22,14 +22,12 @@ const Register = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const success = useSelector((state)=> state.register.success);
+  const {success} = useSelector((state)=> state.listCustomer);
   
  
   const handleRegister = () => {
     if(formValue.password === formValue.confirmPassword){
-      console.log('form sbm', {formValue})
       dispatch(addCustomerApi({...formValue}));
-      console.log('action',addCustomerApi)
     }else{
       Alert("password not similar confirm password")
     }
@@ -46,7 +44,6 @@ const Register = () => {
 
   React.useEffect(() => {
     if(success){
-      console.log("🚀 ~ file: Register.js ~ line 44 ~ React.useEffect ~ success", success)
       dispatch(saveCurrentLocation(history.goBack()));
     }
   }, [dispatch,success, history])

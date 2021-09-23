@@ -1,9 +1,9 @@
-import registerReducer from '../reducers/userRegisterSlice'
+import customerReducer from '../reducers/customerSlice'
 import { configureStore } from "@reduxjs/toolkit";
 import listProductReducer  from '../reducers/productSlice';
 
 const rootReducer = {
-    register: registerReducer,
+    listCustomer: customerReducer,
     listProduct : listProductReducer
 }
 
