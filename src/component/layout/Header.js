@@ -156,6 +156,7 @@ const Header = () => {
                 <Col
                   className="header__top-account"
                   lg={{ span: 6 }}
+                  md={{ span: 6 }}
                   xs={{ span: 12 }}
                 >
                   <Dropdown overlay={accountMenu}>
@@ -172,6 +173,7 @@ const Header = () => {
                 <Col
                   className="header__top-search"
                   lg={{ span: 14 }}
+                  md={{span: 12}}
                   xs={{ span: 24 }}
                 >
                   <Search
@@ -181,6 +183,8 @@ const Header = () => {
                 </Col>
                 <Col
                   lg={{ span: 4 }}
+                  md={{span: 6}}
+
                   className="header__top-cart"
                   xs={{ span: 12 }}
                 >

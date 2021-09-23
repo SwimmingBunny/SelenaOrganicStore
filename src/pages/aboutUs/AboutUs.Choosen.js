@@ -15,7 +15,11 @@ const Choosen = () => {
         <h1 className="aboutUs__choose-h1">Why Choose Us</h1>
       </div>
       <Row gutter={[24, 24]} className="aboutUs__choose-content">
-        <Col className="aboutUs__choose-content--pay" lg={{ span: 8 }}>
+        <Col
+          className="aboutUs__choose-content--pay"
+          lg={{ span: 8 }}
+          md={{ span: 24 }}
+        >
           <FontAwesomeIcon
             className="aboutUs__choose-content--pay--icon"
             icon="globe-asia"
@@ -26,7 +30,11 @@ const Choosen = () => {
             endless possibilities.
           </p>
         </Col>
-        <Col className="aboutUs__choose-content--ship" lg={{ span: 8 }}>
+        <Col
+          className="aboutUs__choose-content--ship"
+          lg={{ span: 8 }}
+          md={{ span: 24 }}
+        >
           <FontAwesomeIcon
             className="aboutUs__choose-content--pay--icon"
             icon="fighter-jet"
@@ -37,7 +45,11 @@ const Choosen = () => {
             endless possibilities.
           </p>
         </Col>
-        <Col className="aboutUs__choose-content--customer" lg={{ span: 8 }}>
+        <Col
+          className="aboutUs__choose-content--customer"
+          lg={{ span: 8 }}
+          md={{ span: 24 }}
+        >
           <FontAwesomeIcon
             className="aboutUs__choose-content--pay--icon"
             icon="comment"

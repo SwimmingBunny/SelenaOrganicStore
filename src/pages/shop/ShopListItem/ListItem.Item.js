@@ -55,7 +55,7 @@ const ShopItem = () => {
   const renderListProduct = () => {
     return listProductApi
       .map((item, index) => {
-        return <ProductItem key={index} {...item} />;
+        return <ProductItem key={index} layout={changeUI} {...item} />;
       })
       .splice((currenPage - 1) * PAGE_SIZE)
       .splice(0, PAGE_SIZE);

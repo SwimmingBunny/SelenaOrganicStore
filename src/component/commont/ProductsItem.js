@@ -46,6 +46,7 @@ const ProductItem = (props) => {
   const handleIsShowWishlist = () => {
     setisShowWishlist(true);
   };
+  console.log(props.layout);
   return (
     <>
       {!props.layout ? (
@@ -115,7 +116,7 @@ const ProductItem = (props) => {
           <div style={{ padding: "2.4rem .8rem " }}>
             <div className="product__list-item">
               <div className="product__list-item--img">
-                <img width="100%" src={props.img} alt="" />
+                <img style={{ width: "100%" }} src={props.img} alt="" />
               </div>
               <div className="product__list-item--rating">
                 <span>
@@ -141,23 +142,23 @@ const ProductItem = (props) => {
                 {props.name}
               </NavLink>
               <div className="product__list-item--price">
-                <p className="product__list-item--price--p">{props.price} </p>
+                <p className="product__list-item--price--p">
+                  ${props.price}.00{" "}
+                </p>
                 <p className="product__list-item--price--p discounted">
                   {props.sell}
                 </p>
               </div>
               <div className="product__list-item--icon">
-                <Popover content="Add to cart">
+                <Popover content="Add to cart" onClick={handleAddCart}>
                   <div className="product__list-item--icon-1">
                     <FontAwesomeIcon
-                      onClick={handleAddCart}
                       className="product__list-item--icon--1"
                       icon="shopping-bag"
                     />
                   </div>
                 </Popover>
-
-                <Popover content=" Wishlist">
+                <Popover content=" Wishlist" onClick={handleAddWishlist}>
                   <div className="product__list-item--icon-2">
                     <FontAwesomeIcon
                       className="product__list-item--icon--1"
@@ -166,12 +167,9 @@ const ProductItem = (props) => {
                   </div>
                 </Popover>
               </div>
-
-              <QuickView
-                onClick={() => {
-                  history.push("/shop-product/" + id);
-                }}
-              />
+              <Link className="quickview__eye" to={`${ROUTE.SHOPITEM}/${id}`}>
+                <QuickView />
+              </Link>
             </div>
           </div>
         </Col>
