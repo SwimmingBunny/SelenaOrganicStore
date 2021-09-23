@@ -84,6 +84,26 @@ const listProduct = createSlice({
         }
       );
     },
+    filterColor: (state, action) => {
+      state.filterColor = action.payload.key;
+      state.listProductApi = [...state.listProductInit].filter((item) => {
+        const id = action.payload.key;
+        switch (id) {
+          case "red":
+            return item.color === "red";
+          case "gold":
+            return item.color === "gold";
+          case "blue":
+            return item.color === "blue";
+          case "white":
+            return item.color === "white";
+          case "green":
+            return item.color === "green";
+          default:
+            return false;
+        }
+      });
+    },
     addToCart: (state, action) => {
       state.cart = [...state.cart, action.payload];
     },
@@ -162,5 +182,6 @@ export const {
   addToWishlist,
   deleteItemWishlist,
   addToDetail,
+  filterColor,
 } = actions;
 export default reducer;

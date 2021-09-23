@@ -20,7 +20,11 @@ const Contact = () => {
       </div>
       <div className="container">
         <Row className="form__contact">
-          <Col lg={{ span: 12 }} className="form__contact--user">
+          <Col
+            lg={{ span: 12 }}
+            md={{ span: 24 }}
+            className="form__contact--user"
+          >
             <h1>Tell Us Your Project</h1>
             <Form name="nest-messages">
               <div>
@@ -57,7 +61,9 @@ const Contact = () => {
               </Form.Item>
             </Form>
           </Col>
-          <Col lg={{ span: 12 }} className="form__contact--our">
+          <Col lg={{ span: 12 }} 
+            md={{ span: 24 }}
+            className="form__contact--our">
             <h1>Contact Us</h1>
             <p>
               Claritas est etiam processus dynamicus, qui sequitur mutationem

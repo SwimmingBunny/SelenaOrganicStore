@@ -9,6 +9,7 @@ import {
   getListProductApi,
   setSortItem,
   setSortPrice,
+  filterColor,
 } from "../../../redux/reducers/productSlice";
 
 import { Slider } from "antd";
@@ -33,6 +34,10 @@ const SideBar = () => {
     dispatch(setSortPrice(item));
   };
 
+  const handleColor = (i) => {
+    dispatch(filterColor(i));
+    console.log("mau gi ", i.key);
+  };
   return (
     <div className="sidebar">
       <h1 className="sidebar__h1">Categories</h1>
@@ -95,15 +100,32 @@ const SideBar = () => {
         <span>50$</span>
         <span>100$</span>
       </div>
+      <div className="sidebar__">
+        <h1 className="sidebar__h1">Color</h1>
+
+        <Menu onClick={handleColor} className="sidebar__menu1" mode="inline">
+          <Menu.ItemGroup key="sub5">
+            <Menu.Item key="red">Red</Menu.Item>
+            <Menu.Item key="blue">Blue</Menu.Item>
+            <Menu.Item key="white">White</Menu.Item>
+            <Menu.Item key="green">Green</Menu.Item>
+            <Menu.Item key="gold">Gold</Menu.Item>
+          </Menu.ItemGroup>
+        </Menu>
+      </div>
       <div className="sidebar__img">
         {isMoblie ? (
           <img
-            style={{ width: "100%" }}
+            style={{ maxWidth: "250px" }}
             src="Images/banner/slide_6.jpg"
             alt=""
           />
         ) : (
-          <img src="Images/banner/banner_left.jpg" alt="" />
+          <img
+            style={{ maxWidth: "250px" }}
+            src="Images/banner/banner_left.jpg"
+            alt=""
+          />
         )}
       </div>
     </div>
