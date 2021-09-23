@@ -34,15 +34,13 @@ const ShopItem = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const [changeUI, setChangeUI] = React.useState(true);
-  const { listProductApi, filterType, sortName } = useSelector(
+  const { listProductApi} = useSelector(
     (state) => state.listProduct
   );
 
-  console.log(" list item listProductApi", listProductApi);
 
   React.useEffect(() => {
     dispatch(getListProductApi());
-    console.log("IN EFFECT");
   }, []);
 
   function handleChange(value) {

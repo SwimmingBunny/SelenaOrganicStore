@@ -32,7 +32,6 @@ const listProduct = createSlice({
     filterType: null,
   },
   reducers: {
-    getProduct: async (state, action) => {},
     setSortName: (state, action) => {
       state.sortName = action.payload;
       state.listProductApi = [...state.listProductInit].sort((a, b) => {
@@ -118,7 +117,9 @@ const listProduct = createSlice({
         (item) => action.payload !== item.id
       );
     },
-
+    deleteItem: (state, action) => {
+      state.listProductInit = state.listProductInit.filter((item) => action.payload !== item.id);
+    },
     editCartItem: (state, action) => {
       state.cart = state.cart.map((item) => {
         if (action.payload.id === item.id) {
@@ -171,7 +172,6 @@ const listProduct = createSlice({
 
 const { reducer, actions } = listProduct;
 export const {
-  getProduct,
   setSortName,
   setSortItem,
   filterType,
@@ -182,6 +182,7 @@ export const {
   addToWishlist,
   deleteItemWishlist,
   addToDetail,
-  filterColor,
+  deleteItem,
+  filterColor
 } = actions;
 export default reducer;

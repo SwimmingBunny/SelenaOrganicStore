@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import AdminRow from "./admin.Table.js";
+import AdminRow from "./admin.Customer.js";
 import { Input, Avatar, Row, Col, Menu, Dropdown } from "antd";
 import {
   UserOutlined,
@@ -29,6 +29,11 @@ import {
 } from "react-router-dom";
 import "./admin.scss";
 import Dashboard from "./admin.DashBoard.js";
+import ProductItem from "../../component/commont/ProductsItem.js";
+import ProductRow from "./admin.Product.js";
+
+
+
 const Admin = () => {
   let { path, url } = useRouteMatch();
   const isMoblie = useMediaQuery({
@@ -176,14 +181,6 @@ const Admin = () => {
                 <div className='admin__users'>
                   <h2>Customer Managerment </h2>
                   <table>
-                    <tr>
-                      <th className='id'>ID</th>
-                      <th className='name'>Name</th>
-                      <th className='email'>Email</th>
-                      <th className='password'>Password</th>
-                      <th className='edit'>Edit</th>
-                      <th className='delete'>Delete</th>
-                    </tr>
                     <AdminRow />
                   </table>
                 </div>
@@ -192,15 +189,7 @@ const Admin = () => {
                 <div className='admin__users'>
                   <h2>Product Managerment </h2>
                   <table>
-                    <tr>
-                      <th className='id'>ID</th>
-                      <th className='name'>Product</th>
-                      <th className='email'>Quantity</th>
-                      <th className='password'>Price</th>
-                      <th className='edit'>Edit</th>
-                      <th className='delete'>Delete</th>
-                    </tr>
-                    <AdminRow />
+                    <ProductRow/>
                   </table>
                 </div>
               </Route>
