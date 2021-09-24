@@ -8,7 +8,7 @@ exports.create = (req, res) => {
         });
     };
     const customer = new Customer({
-        name: req.body.name,
+        username: req.body.username,
         phone: req.body.phone,
         mail: req.body.mail,
         gender: req.body.gender,

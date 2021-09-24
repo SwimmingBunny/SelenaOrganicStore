@@ -25,12 +25,12 @@ import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getListProductApi } from "../../redux/reducers/productSlice";
+import { getListProductApi, searchItem, setSortItem } from "../../redux/reducers/productSlice";
 library.add(faShoppingCart, faTrash);
 
 const Header = () => {
   const dispatch = useDispatch();
-
+  const [value, setValue] = React.useState()
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
@@ -57,6 +57,11 @@ const Header = () => {
   const history = useHistory();
   function goHome() {
     history.push("/");
+  }
+  const handleSearch = () =>{
+    history.push("/shop-product");
+    return dispatch(searchItem(value))
+    
   }
   const { Search } = Input;
   const accountMenu = (
@@ -179,7 +184,11 @@ const Header = () => {
                   <Search
                     id="header__top-search-input"
                     placeholder="search here"
+                    onChange = {(e)=>setValue(e.target.value)}
+                    value={value}
+                    onSearch = {()=>{handleSearch()}}
                   />
+                  {/* <Button type="primary" } >Search</Button> */}
                 </Col>
                 <Col
                   lg={{ span: 4 }}

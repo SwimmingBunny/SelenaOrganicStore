@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import ProductItem from "../../../component/commont/ProductsItem";
 import {
   getListProductApi,
-  setSortName,
+  setSort,
 } from "../../../redux/reducers/productSlice";
 import $ from "jquery";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -42,7 +42,7 @@ const ShopItem = () => {
   }, []);
 
   function handleChange(value) {
-    dispatch(setSortName(value));
+    dispatch(setSort(value));
   }
   const handleChangeUI = () => {
     setChangeUI(!changeUI);
@@ -111,7 +111,7 @@ const ShopItem = () => {
 
         <div>
           <Row className="product__list">
-            {changeUI ? <> {renderProduct()}</> : <> {renderListProduct()} </>}
+            {changeUI ? <>{renderListProduct()} </> : <> {renderProduct()} </>}
           </Row>
         </div>
         <div className="shopitem__pagi">

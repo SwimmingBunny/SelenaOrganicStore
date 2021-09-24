@@ -2,6 +2,10 @@
 .admin {
   height: 100vh;
   overflow: hidden;
+  &-text{
+    color: white;
+    font-weight: 700;
+  }
   &-header {
     display: flex;
     align-items: center;

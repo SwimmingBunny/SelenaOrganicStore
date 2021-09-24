@@ -2,7 +2,7 @@ import { Button } from "antd";
 import React from "react";
 import TableRow from "../../../component/commont/TableRow.js";
 import CartForm from "./Cart.CartForm";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ROUTE } from "../../../constant/router";
@@ -17,7 +17,9 @@ import { getListProductApi } from "../../../redux/reducers/productSlice.js";
 
 const CartTable = () => {
   const dispatch = useDispatch();
+  const {discountPrice} = useSelector(state => state.coupon)
 
+  const [coupon, setCoupon] = useState(0);
   useEffect(() => {
     dispatch(getListProductApi())
   }, [])
@@ -35,6 +37,7 @@ const CartTable = () => {
     })
   }
 
+
   const getTotal = ()=>{
     let total = 0;
     cart.forEach(element => {
@@ -43,8 +46,6 @@ const CartTable = () => {
     });
     return total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
   }
-
-  
 
   return (
     <>
@@ -62,7 +63,6 @@ const CartTable = () => {
           <tr></tr>
         </table>
       </div>
-
       <CartForm />
       <div className="cart__total">
         <h2 className="cart__total-h2">Cart Total</h2>
@@ -76,11 +76,11 @@ const CartTable = () => {
         </div>
         <div className="cart__total-conten">
           <p> Discount ($)</p>
-          <p> 0.00</p>
+          <p> {coupon}</p>
         </div>
         <div className="cart__total-conten">
           <p className="cart__total-conten--total"> Total ($)</p>
-          <p className="cart__total-conten--total"> {+getTotal() + 10}.00</p>
+          <p className="cart__total-conten--total"> {+getTotal() + 10 - coupon}.00 </p>
         </div>
         <Button className="cart__total-btn" type="primary">
          <NavLink to={ROUTE.CHECKOUT} exact > PROCEED CHECKOUT</NavLink> 
