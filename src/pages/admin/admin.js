@@ -94,7 +94,7 @@ const Admin = () => {
           <Col span={isMoblie ? 24 : 6}>
             <NavLink to={ROUTE.HOME} className='col-img' exact>
               <ScrollToTop />
-              <img src='Images/logo/logo.png' alt='Logo image' />
+              <img src={`http://localhost:3000/Images/logo/logo.png`} alt='Logo image' />
             </NavLink>
           </Col>
           <Col span={isMoblie ? 20 : 14} className='col-img'>
@@ -138,31 +138,31 @@ const Admin = () => {
             <Col span={6}>
               <ul className='admin-select'>
                 <li>
-                  <Link to={`${url}${ROUTE.DASHBOARD}`}>
+                  <NavLink className='admin-text' to={`${url}${ROUTE.DASHBOARD}`}>
                     <LayoutOutlined className='icon' />
-                    Dashboard{" "}
-                  </Link>
+                    Dashboard
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to={`${url}${ROUTE.UI}`}>
+                  <Link className='admin-text' to={`${url}${ROUTE.UI}`}>
                     <AppstoreOutlined className='icon' />
                     User interface
                   </Link>
                 </li>
                 <li>
-                  <Link to={`${url}${ROUTE.CUSTOMER}`}>
+                  <Link className='admin-text' to={`${url}${ROUTE.CUSTOMER}`}>
                     <UserOutlined className='icon' />
                     Customers
                   </Link>
                 </li>
                 <li>
-                  <Link to={`${url}${ROUTE.ORDERS}`}>
+                  <Link className='admin-text' to={`${url}${ROUTE.ORDERS}`}>
                     <ShoppingCartOutlined className='icon' />
                     Orders
                   </Link>
                 </li>
                 <li>
-                  <Link to={`${url}${ROUTE.PRODUCTS}`}>
+                  <Link className='admin-text' to={`${url}${ROUTE.PRODUCTS}`}>
                     <ShopOutlined className='icon' />
                     Products
                   </Link>

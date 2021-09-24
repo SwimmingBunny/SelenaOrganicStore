@@ -106,10 +106,10 @@ const SideBar = () => {
         <Menu onClick={handleColor} className="sidebar__menu1" mode="inline">
           <Menu.ItemGroup key="sub5">
             <Menu.Item key="red">Red</Menu.Item>
-            <Menu.Item key="blue">Blue</Menu.Item>
-            <Menu.Item key="white">White</Menu.Item>
+            <Menu.Item key="orange">Organe</Menu.Item>
+            <Menu.Item key="purple">Purple</Menu.Item>
             <Menu.Item key="green">Green</Menu.Item>
-            <Menu.Item key="gold">Gold</Menu.Item>
+            <Menu.Item key="yellow">Yellow</Menu.Item>
           </Menu.ItemGroup>
         </Menu>
       </div>

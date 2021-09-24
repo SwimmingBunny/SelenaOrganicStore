@@ -7,7 +7,7 @@ export const addCustomerApi = createAsyncThunk(
     async (payload) => {
       await axios
         .post(`http://localhost:5000/customers`, {
-          name: payload.fullname,
+          username: payload.fullname,
           mail: payload.email,
           password: payload.password,
         })
@@ -36,7 +36,7 @@ export const addCustomerApi = createAsyncThunk(
     }
   );
   export const deleteListCustomerApi = createAsyncThunk(
-    "Customer/DeleteCustomerApi",
+    "Customer/deleteCustomerApi",
     async (id) => {
       const res = await axios
         .delete(`http://localhost:5000/customers/${id}`)
@@ -67,10 +67,6 @@ const userRegister = createSlice({
         saveCurrentLocation : (state, action) => {
           state.previousLocation = action.payload //currentLocation
         },
-        deleteUser: (state, action) => {
-          state.listCustomerApi = state.listCustomerApi.filter((item) => action.payload !== item.id);
-        },
-        
     },
     
     extraReducers:{
@@ -92,10 +88,7 @@ const userRegister = createSlice({
         [deleteListCustomerApi.pending]:(state,action) => {
           state.loading = true;
         },
-        [deleteListCustomerApi.rejected]: (state,action) =>{},
-        [deleteListCustomerApi.fulfilled]: (state, action) =>{
-            state.listCustomerApi = action.payload || []
-        },
+        
     }
 });
 

@@ -12,6 +12,7 @@ const Cart = () => {
     dispatch(getListProductApi());
   }, []);
   const { cart} = useSelector((state) => state.listProduct);
+  console.log(" line 15 ~ Cart ~ cart", cart)
 
   return (
     <div>

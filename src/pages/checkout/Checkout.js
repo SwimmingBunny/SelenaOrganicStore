@@ -21,6 +21,7 @@ const Checkout = (props) => {
   }, [])
 
   const {cart}= useSelector(state => state.listProduct)
+
   const onChange = (e) => {
     if(e.target.value === 2){
       setIsShow(false)
@@ -32,6 +33,25 @@ const Checkout = (props) => {
 
   const handleSbm = () => {
     alert("success!")
+    let total = 10; //10 ship
+    const discount = 50;
+
+    const cartApi = cart.map((vl)=>{
+      total = total + vl.total;
+
+      return {
+        product: {
+          id: vl.id,
+          name: vl.name,
+          price: vl.price
+        },
+        quantity: vl.count
+      }
+    });
+    const request = {
+      cart : cartApi,total,discount
+    }
+    console.log("request", request)
   };
 
   const getTotal = ()=>{

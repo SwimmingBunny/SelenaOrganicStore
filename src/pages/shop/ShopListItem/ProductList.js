@@ -18,7 +18,7 @@ import { useDispatch } from "react-redux";
 const ProductList = (props) => {
   const [isShowCart, setIsShowCart] = React.useState(true);
   const [isShowWishlist, setisShowWishlist] = React.useState(true);
-  const { id, name, img, price, stock, description } = props;
+  const { id, name, img, price, stock, description,rating } = props;
   const dispatch = useDispatch();
   const handleAddCart = () => {
     dispatch(
@@ -44,7 +44,7 @@ const ProductList = (props) => {
         </Col>
         <Col lg={{ span: 18 }} xs={{ span: 24 }}>
           <div className="content">
-            <Rate />
+           <Rate value={rating} />
             <h2>{props.name}</h2>
             <h3>$ {price}.00</h3>
             <p>{description}</p>

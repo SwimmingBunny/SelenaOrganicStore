@@ -9,7 +9,13 @@ import {
   Link,
   NavLink,
 } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addCoupon } from "../../../redux/reducers/couponSlice";
 const CartForm = () => {
+  const [value, setValue] = React.useState(null);
+  const dispatch = useDispatch()
+
+  
   return (
     <Row className="cart__form">
       <Col className="cart__form-col1" lg={{ span: 14 }} xs={{ span: 24 }}>
@@ -17,8 +23,10 @@ const CartForm = () => {
           placeholder="Enter your counpon here"
           required
           className="cart__form-col1--ipu"
+          onChange={(e)=>{setValue(e.target.value)}}
+          value={value}
         />
-        <Button className="cart__form-col1--btn">
+        <Button className="cart__form-col1--btn" onClick={()=>{dispatch(addCoupon(value))}}>
           <span>APPLY COUPON</span>
         </Button>
       </Col>

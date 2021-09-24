@@ -3,7 +3,10 @@
 import React from "react";
 import { EditFilled, DeleteOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getListCustomerApi,deleteUser, deleteListCustomerApi } from "../../redux/reducers/customerSlice";
+import {
+  getListCustomerApi,
+  deleteListCustomerApi,
+} from "../../redux/reducers/customerSlice";
 
 const AdminRow = () => {
   const dispatch = useDispatch();
@@ -24,7 +27,12 @@ const AdminRow = () => {
             <EditFilled />
           </td>
           <td className='icon'>
-            <DeleteOutlined onClick={()=>{dispatch(deleteUser(item.id))}}/>
+            <DeleteOutlined
+              onClick={async () => {
+                await dispatch(deleteListCustomerApi(item.id));
+                dispatch(getListCustomerApi());
+              }}
+            />
           </td>
         </tr>
       );
@@ -38,7 +46,7 @@ const AdminRow = () => {
         <th className='email'>Email</th>
         <th className='password'>Password</th>
         <th className='edit'>Edit</th>
-        <th className='delete' >Delete</th>
+        <th className='delete'>Delete</th>
       </tr>
       {renderListCustomer()}
     </>
