@@ -2,7 +2,7 @@ const sql = require('../db_connection');
 
 const Customer = function(customer) {
 
-    this.name = customer.name;
+    this.username = customer.username;
     this.phone = customer.phone;
     this.mail = customer.mail;
     this.gender = customer.gender;

@@ -3,6 +3,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { switchCase } from "@babel/types";
 
 export const getListProductApi = createAsyncThunk(
   "product/getApiData",
@@ -19,21 +20,49 @@ export const getListProductApi = createAsyncThunk(
     return res.data;
   }
 );
+export const deleteListProductApi = createAsyncThunk(
+  "product/deleteApiData",
+  async (id) => {
+    const res = await axios
+      .delete(`http://localhost:5000/products/search?KeySearch${id}`)
+      .then((res) => {
+        // console.log(".listProductApi ~ res", res);
+        return res;
+      })
+      .catch((e) => {
+        console.log("e", e);
+      });
+    return res.data;
+  }
+);
 const listProduct = createSlice({
   name: "listProduct",
   initialState: {
     listProductApi: [],
     listProductInit: [],
-    cart: [],
+    cart: [
+    ],
+    order: {
+      // cart: [
+      //   {
+      //     product: {},
+      //     quantity: 0,
+      //   },
+      // ],
+      // total: 0,
+      // discount: 0,
+      // customer: {},
+    },
     wishlist: [],
     relateProduct: [],
-    sortName: "Name",
+    sortType: "All",
     sortPrice: null,
     filterType: null,
+    searchValue: null,
   },
   reducers: {
-    setSortName: (state, action) => {
-      state.sortName = action.payload;
+    setSort: (state, action) => {
+      state.sortType = action.payload;
       state.listProductApi = [...state.listProductInit].sort((a, b) => {
         if (action.payload === "Name") {
           var nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -44,6 +73,12 @@ const listProduct = createSlice({
           if (nameA > nameB) {
             return 1;
           }
+        }
+        if(action.payload === "All"){
+          return true
+        }
+        if(action.payload === "Rating"){
+          return b.rating - a.rating
         }
       });
     },
@@ -90,12 +125,12 @@ const listProduct = createSlice({
         switch (id) {
           case "red":
             return item.color === "red";
-          case "gold":
-            return item.color === "gold";
-          case "blue":
-            return item.color === "blue";
-          case "white":
-            return item.color === "white";
+          case "yellow":
+            return item.color === "yellow";
+          case "orange":
+            return item.color === "orange";
+          case "purple":
+            return item.color === "purple";
           case "green":
             return item.color === "green";
           default:
@@ -104,7 +139,7 @@ const listProduct = createSlice({
       });
     },
     addToCart: (state, action) => {
-      state.cart = [...state.cart, action.payload];
+        state.cart = [...state.cart, action.payload];
     },
     addToWishlist: (state, action) => {
       state.wishlist = [...state.wishlist, action.payload];
@@ -118,7 +153,9 @@ const listProduct = createSlice({
       );
     },
     deleteItem: (state, action) => {
-      state.listProductInit = state.listProductInit.filter((item) => action.payload !== item.id);
+      state.listProductInit = state.listProductInit.filter(
+        (item) => action.payload !== item.id
+      );
     },
     editCartItem: (state, action) => {
       state.cart = state.cart.map((item) => {
@@ -159,6 +196,26 @@ const listProduct = createSlice({
         }
       });
     },
+    searchItem: (state, action) => {
+      state.searchValue = action.payload;
+      const value = action.payload;
+      state.listProductApi = [...state.listProductInit].map(
+        (item, index) => {
+          let condition = false;
+          if(item.name.includes(value)){
+            condition = true;
+          }
+          if(item.type.includes(value)){
+            condition = true;
+          }
+          if(item.color.includes(value)){
+            condition = true;
+          }
+          return {...item,condition}
+        }
+      ).filter((vl)=>vl.condition)
+
+    },
   },
   extraReducers: {
     [getListProductApi.pending]: (state, action) => {},
@@ -166,13 +223,14 @@ const listProduct = createSlice({
     [getListProductApi.fulfilled]: (state, action) => {
       state.listProductApi = action.payload || [];
       state.listProductInit = action.payload || [];
+    },[deleteListProductApi.pending]: (state, action) => {
     },
   },
 });
 
 const { reducer, actions } = listProduct;
 export const {
-  setSortName,
+  setSort,
   setSortItem,
   filterType,
   addToCart,
@@ -183,6 +241,7 @@ export const {
   deleteItemWishlist,
   addToDetail,
   deleteItem,
-  filterColor
+  filterColor,
+  searchItem,
 } = actions;
 export default reducer;
