@@ -1,6 +1,7 @@
 /** @format */
 
 import * as React from "react";
+import ProductList from "./ProductList";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Select, Pagination } from "antd";
 import { useMediaQuery } from "react-responsive";
@@ -34,10 +35,7 @@ const ShopItem = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const [changeUI, setChangeUI] = React.useState(true);
-  const { listProductApi} = useSelector(
-    (state) => state.listProduct
-  );
-
+  const { listProductApi } = useSelector((state) => state.listProduct);
 
   React.useEffect(() => {
     dispatch(getListProductApi());
@@ -56,6 +54,14 @@ const ShopItem = () => {
     return listProductApi
       .map((item, index) => {
         return <ProductItem key={index} layout={changeUI} {...item} />;
+      })
+      .splice((currenPage - 1) * PAGE_SIZE)
+      .splice(0, PAGE_SIZE);
+  };
+  const renderProduct = () => {
+    return listProductApi
+      .map((item, index) => {
+        return <ProductList key={index} layout={changeUI} {...item} />;
       })
       .splice((currenPage - 1) * PAGE_SIZE)
       .splice(0, PAGE_SIZE);
@@ -104,8 +110,8 @@ const ShopItem = () => {
         </div>
 
         <div>
-          <Row gutter={16} className="product__list">
-            {renderListProduct()}
+          <Row className="product__list">
+            {changeUI ? <> {renderProduct()}</> : <> {renderListProduct()} </>}
           </Row>
         </div>
         <div className="shopitem__pagi">
