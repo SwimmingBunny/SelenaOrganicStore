@@ -1,0 +1,68 @@
+@import "../../../style/variable.scss";
+.product-list {
+  border: 0.1rem $borderColor solid;
+  padding: 2rem;
+  margin: 0 0 2rem 1rem;
+  width: 100%;
+  overflow: hidden;
+  .img {
+    display: flex;
+    justify-content: center;
+    border: 0.1rem solid $borderColor;
+    img {
+      width: 100%;
+    }
+  }
+  .content {
+    margin-left: 4rem;
+    h2 {
+      font-weight: 500;
+    }
+    h3 {
+      color: $primaryColor;
+      font-size: 2rem;
+    }
+    .add {
+      border-radius: 35px;
+      color: $white;
+      background: $primaryColor;
+      font-weight: 700;
+      border: none;
+      outline: none;
+      &:hover {
+        background: $primaryHoverColor;
+      }
+    }
+    .icon {
+      border-radius: 50%;
+      color: $primaryColor;
+      margin-left: 2rem;
+      border: $primaryColor 0.1rem solid;
+      &:hover {
+        background: $primaryColor;
+        color: $white;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .product-list {
+    .img {
+      img {
+        width: 50%;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 480px) {
+  .product-list {
+    .img {
+      img {
+        width: 50%;
+      }
+    }
+    .content {
+      margin-left: 0rem;
+    }
+  }
+}
