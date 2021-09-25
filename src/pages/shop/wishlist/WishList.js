@@ -1,9 +1,11 @@
 import React from "react";
 import WishListTable from "./WishList.Table";
+import EmtyWishlist from "./Wishlist.Emty";
 import "../../../style/wishlist.scss";
-import { Button } from "antd";
+import { useSelector } from "react-redux";
 
 const WishList = () => {
+  const { wishlist } = useSelector((state) => state.listProduct);
   return (
     <div>
       <div className="wishlist__header">
@@ -11,7 +13,7 @@ const WishList = () => {
         <h3 className="wishlist__header-h3">WishList </h3>
       </div>
       <div className="container">
-        <WishListTable />
+        {wishlist.length ? <WishListTable /> : <EmtyWishlist />}
       </div>
     </div>
   );

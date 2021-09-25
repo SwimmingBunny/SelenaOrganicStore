@@ -10,4 +10,11 @@ export const ROUTE = {
   CART: "/cart",
   WISHLIST: "/wish-list",
   MYACCOUNT: "/my-account",
+  ADMIN : "/admin",
+  STORE: "/store",
+  UI:"/ui",
+  DASHBOARD: "/dashboard",
+  CUSTOMER: "/customer",
+  ORDERS: "/orders",
+  PRODUCTS:"/products"
 };

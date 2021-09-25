@@ -1,12 +1,12 @@
 /** @format */
 
 import React, { useState } from "react";
-import { Row, Col } from "antd";
+import { Row, Col, Alert } from "antd";
 import { Form, Input, Button, Checkbox } from "antd";
 
 import { useDispatch, useSelector} from "react-redux";
-import { addCustomerApi} from "../../../redux/reducers/userRegisterSlice";
-import { saveCurrentLocation } from "../../../redux/reducers/userRegisterSlice";
+import { addCustomerApi} from "../../../redux/reducers/customerSlice";
+import { saveCurrentLocation } from "../../../redux/reducers/customerSlice";
 import validateMessages from "../ValidateMessage";
 import "../../../style/form.scss";
 import { useHistory } from "react-router";
@@ -14,7 +14,7 @@ import { useHistory } from "react-router";
 const Register = () => {
   const [form] = Form.useForm();
   const [formValue, setFormValue] = useState({
-    fullname: "",
+    fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -22,13 +22,16 @@ const Register = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const success = useSelector((state)=> state.register.success);
+  const {success} = useSelector((state)=> state.listCustomer);
   
  
   const handleRegister = () => {
-    console.log('form sbm', {formValue})
-    dispatch(addCustomerApi({...formValue}));
-    console.log('action',addCustomerApi)
+    if(formValue.password === formValue.confirmPassword){
+      dispatch(addCustomerApi({...formValue}));
+    }else{
+      Alert("password not similar confirm password")
+    }
+    
   };
   const handelOnChange = (e) => {
     if (e.target) {
@@ -41,7 +44,6 @@ const Register = () => {
 
   React.useEffect(() => {
     if(success){
-      console.log("🚀 ~ file: Register.js ~ line 44 ~ React.useEffect ~ success", success)
       dispatch(saveCurrentLocation(history.goBack()));
     }
   }, [dispatch,success, history])
@@ -67,12 +69,13 @@ const Register = () => {
                 <Input
                   className='form__group--input'
                   placeholder='Full Name'
-                  name='fullname'
+                  name='fullName'
                   onChange={(e) => handelOnChange(e)}
-                  value={formValue.fullname}
+                  value={formValue.fullName}
                 />
               </Form.Item>
-              <Form.Item>
+              <Form.Item
+                  rules={[{ required: true, type: "email" }]}>
                 <Input
                   className='form__group--input'
                   placeholder='Enter your Email'
@@ -105,15 +108,13 @@ const Register = () => {
                   value={formValue.confirmPassword}
                 />
               </Form.Item>
-              <Form.Item name='registeruser' valuePropName='checked'>
-                <Checkbox>Subscribe Our Newsletter</Checkbox>
-              </Form.Item>
               <Form.Item>
                 <Button
                   type='primary'
                   htmlType='submit'
                   className='form__btn'
-                  onClick={handleRegister}>
+                  onClick={handleRegister}
+                  >
                   REGISTER
                 </Button>
               </Form.Item>
@@ -122,9 +123,15 @@ const Register = () => {
         </Col>
         <Col xs={{ span: 24 }} lg={{ span: 12 }}>
         <img
+<<<<<<< HEAD
             style={{ width: "100%", height: "100%" }}
             src='Images/banner/best-sellers.png'
           />
+=======
+            style={{ width: "100%",height:"91%"}}
+            src="Images/banner/best-sellers.png"
+          />                  
+>>>>>>> aff55ae3e3a914ef49e973f694ffd3335d5d2c5e
         </Col>
       </Row>
     </div>

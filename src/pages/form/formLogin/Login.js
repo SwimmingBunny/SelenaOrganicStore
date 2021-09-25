@@ -5,6 +5,8 @@ import { Row, Col } from "antd";
 import { Form, Input, Button, Checkbox } from "antd";
 import "../../../style/form.scss";
 import "../../../style/base.scss";
+import { NavLink } from "react-router-dom";
+import { ROUTE } from "../../../constant/router";
 
 const Login = () => {
   const [form] = Form.useForm();
@@ -45,7 +47,7 @@ const Login = () => {
               </Form.Item>
               <div className="form__group--subform">
                 <Form.Item name="remember" valuePropName="checked">
-                  <Checkbox>Remember me</Checkbox>
+                  <NavLink to={ROUTE.REGISTER}>Register</NavLink>
                 </Form.Item>
                 <Form.Item>
                   <a>Forgot password?</a>
@@ -61,7 +63,7 @@ const Login = () => {
         </Col>
         <Col xs={{ span: 24 }} lg={{ span: 12 }}>
           <img
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "76%" }}
             src="Images/banner/best-sellers.png"
           />
         </Col>

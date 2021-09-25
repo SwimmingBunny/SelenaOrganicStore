@@ -11,15 +11,12 @@ import { getListProductApi } from "../../redux/reducers/productSlice";
 
 const Product = () => {
   const { TabPane } = Tabs;
-  const dispatch = useDispatch()
-  const listProductApi = useSelector(state => state.listProduct.listProductApi)
+  const {listProductApi} = useSelector(state => state.listProduct)
   const [listProduct, setListProduct] = React.useState(listProductApi)
 
-  React.useEffect(() => {
-    dispatch(getListProductApi())
-  }, []);
+  
 
-  const callback = (key) => {
+  const callAPI = (key) => {
     if(key === '1'){
      const list = listProductApi.filter((item,index)=>{
         return(
@@ -52,12 +49,11 @@ const Product = () => {
        })
        setListProduct(list)
      }
+  
   }
-
-  console.log('list', listProduct)
   const renderListProduct = () =>{
     return(
-      listProduct.map((item,index)=>{
+      listProduct?.map((item,index)=>{
         return(
           <ProductItem
           key={index}
@@ -81,7 +77,7 @@ const Product = () => {
       <div className="product__item">
         <Tabs
           defaultActiveKey="1"
-          onChange={callback}
+          onChange={callAPI}
           className="product__item-list"
         >
           <TabPane tab ="Vegetable" key="1">

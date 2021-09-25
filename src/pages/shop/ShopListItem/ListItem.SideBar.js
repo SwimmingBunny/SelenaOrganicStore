@@ -1,82 +1,131 @@
+/** @format */
+
 import React from "react";
 import { Menu } from "antd";
 import { useMediaQuery } from "react-responsive";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  filterType,
+  getListProductApi,
+  setSortItem,
+  setSortPrice,
+  filterColor,
+} from "../../../redux/reducers/productSlice";
 
+import { Slider } from "antd";
 const SideBar = () => {
   const { SubMenu } = Menu;
-  const rootSubmenuKeys = ["sub1", "sub2", "sub3", "sub4", "sub5"];
-  const [openKeys, setOpenKeys] = React.useState(["sub1"]);
-  const onOpenChange = (keys) => {
-    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      setOpenKeys(keys);
-    } else {
-      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
-    }
-  };
+  const dispatch = useDispatch();
+
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
+  function onChange(value) {
+    console.log("onChange: ", value);
+    dispatch(setSortItem(value));
+  }
 
+  React.useEffect(() => {
+    dispatch(getListProductApi());
+  }, []);
+
+  const handleClick = (item) => {
+    console.log("click o day ", item);
+    dispatch(setSortPrice(item));
+  };
+
+  const handleColor = (i) => {
+    dispatch(filterColor(i));
+    console.log("mau gi ", i.key);
+  };
   return (
     <div className="sidebar">
       <h1 className="sidebar__h1">Categories</h1>
-      <Menu
-        mode="inline"
-        openKeys={openKeys}
-        onOpenChange={onOpenChange}
-        className="sidebar__menu1"
-      >
-        <SubMenu key="sub1" title="Vegetable" className="sidebar__menu-submenu">
-          <Menu.Item key="1">Sell</Menu.Item>
-          <Menu.Item key="2">Hot&New</Menu.Item>
-          <Menu.Item key="3">Bestseller</Menu.Item>
-          <Menu.Item key="4">All item</Menu.Item>
+      <Menu onClick={handleClick} className="sidebar__menu1" mode="inline">
+        <SubMenu
+          key="sub1"
+          title="Vegetables"
+          className="sidebar__menu-submenu"
+          onTitleClick={() => {
+            dispatch(filterType({ key: "1" }));
+          }}
+        >
+          <Menu.ItemGroup key="sub1">
+            <Menu.Item key="2">Price</Menu.Item>
+            <Menu.Item key="3">Rating</Menu.Item>
+          </Menu.ItemGroup>
         </SubMenu>
-        <SubMenu key="sub2" title="Fruits">
-          <Menu.Item key="1">Sell</Menu.Item>
-          <Menu.Item key="2">Hot&New</Menu.Item>
-          <Menu.Item key="3">Bestseller</Menu.Item>
-          <Menu.Item key="4">All item</Menu.Item>
+        <SubMenu
+          key="sub2"
+          title="Meat"
+          onTitleClick={() => {
+            dispatch(filterType({ key: "5" }));
+          }}
+        >
+          <Menu.Item key="6">Price</Menu.Item>
+          <Menu.Item key="7">Rating</Menu.Item>
         </SubMenu>
-        <SubMenu key="sub3" title="Juice">
-          <Menu.Item key="1">Sell</Menu.Item>
-          <Menu.Item key="2">Hot&New</Menu.Item>
-          <Menu.Item key="3">Bestseller</Menu.Item>
-          <Menu.Item key="4">All item</Menu.Item>
+        <SubMenu
+          key="sub4"
+          title="Juice"
+          onTitleClick={() => {
+            dispatch(filterType({ key: "8" }));
+          }}
+        >
+          <Menu.Item key="9">Price</Menu.Item>
+          <Menu.Item key="10">Rating</Menu.Item>
         </SubMenu>
-        <SubMenu key="sub4" title="Meat">
-          <Menu.Item key="1">Sell</Menu.Item>
-          <Menu.Item key="2">Hot&New</Menu.Item>
-          <Menu.Item key="3">Bestseller</Menu.Item>
-          <Menu.Item key="4">All item</Menu.Item>
-        </SubMenu>
-      </Menu>{" "}
-      {/* split */}
-      <h1 className="sidebar__h1">Filter By Price</h1>
-      <Menu
-        mode="inline"
-        openKeys={openKeys}
-        onOpenChange={onOpenChange}
-        className="sidebar__menu2"
-      >
-        <SubMenu key="sub5" title="Price" className="sidebar__menu-submenu">
-          <Menu.Item className="sidebar__menu-submenu--item" key="1">
-            $0 - $50
-          </Menu.Item>
-          <Menu.Item key="2"> $50 - $100</Menu.Item>
-          <Menu.Item key="3">$100 - more</Menu.Item>
+        <SubMenu
+          key="sub5"
+          title="Fruits"
+          onTitleClick={() => {
+            dispatch(filterType({ key: "11" }));
+          }}
+        >
+          <Menu.Item key="12">Price</Menu.Item>
+          <Menu.Item key="13">Rating</Menu.Item>
         </SubMenu>
       </Menu>
+      {/* split */}
+      <h1 className="sidebar__h1">Filter By Price</h1>
+      <Slider
+        defaultValue={0}
+        max={3}
+        onChange={onChange}
+        // onAfterChange={onAfterChange}
+      />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span>1$</span>
+        <span>10$</span>
+        <span>50$</span>
+        <span>100$</span>
+      </div>
+      <div className="sidebar__">
+        <h1 className="sidebar__h1">Color</h1>
+
+        <Menu onClick={handleColor} className="sidebar__menu1" mode="inline">
+          <Menu.ItemGroup key="sub5">
+            <Menu.Item key="red">Red</Menu.Item>
+            <Menu.Item key="orange">Organe</Menu.Item>
+            <Menu.Item key="purple">Purple</Menu.Item>
+            <Menu.Item key="green">Green</Menu.Item>
+            <Menu.Item key="yellow">Yellow</Menu.Item>
+          </Menu.ItemGroup>
+        </Menu>
+      </div>
       <div className="sidebar__img">
         {isMoblie ? (
           <img
-            style={{ width: "100%" }}
+            style={{ maxWidth: "250px" }}
             src="Images/banner/slide_6.jpg"
             alt=""
           />
         ) : (
-          <img src="Images/banner/banner_left.jpg" alt="" />
+          <img
+            style={{ maxWidth: "250px" }}
+            src="Images/banner/banner_left.jpg"
+            alt=""
+          />
         )}
       </div>
     </div>

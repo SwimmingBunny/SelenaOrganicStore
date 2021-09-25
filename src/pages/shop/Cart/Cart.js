@@ -2,21 +2,25 @@ import React from "react";
 import Emty from "./Cart.Emty";
 import CartTable from "./Cart.CartTable";
 import "../../../style/cart.scss";
-import { Button } from "antd";
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getListProductApi } from "../../../redux/reducers/productSlice";
 const Cart = () => {
-  const [toggle, setToggle] = React.useState(true);
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getListProductApi());
+  }, []);
+  const { cart} = useSelector((state) => state.listProduct);
+  console.log(" line 15 ~ Cart ~ cart", cart)
+
   return (
     <div>
       <div className="cart__header">
         <h1 className="cart__header-h1">Shop</h1>
         <h3 className="cart__header-h3">Cart </h3>
       </div>
-      <div className="container">{toggle ? <Emty /> : <CartTable />}</div>
-      <Button onClick={handleToggle}>change</Button>
+      <div className="container">{cart.length ? <CartTable /> : <Emty />}</div>
     </div>
   );
 };

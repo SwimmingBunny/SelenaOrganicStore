@@ -16,51 +16,69 @@ import Contact from "./pages/contact/Contact";
 import Checkout from "./pages/checkout/Checkout";
 import Cart from "./pages/shop/Cart/Cart";
 import WishList from "./pages/shop/wishlist/WishList";
-import "./responsive/responsive.scss";
 import Account from "./pages/myAccount/Account";
+import "./responsive/responsive.scss";
+import Admin from "./pages/admin/admin";
 
 function App() {
   return (
     <>
-        <Header />
-        <Switch>
-          <Route path={ROUTE.HOME} exact>
-            <Home />
-          </Route>
-          <Route path={ROUTE.LOGIN} exact>
-            <Login />
-          </Route>
-          <Route path={ROUTE.REGISTER} exact>
-            <Register />
-          </Route>
-          <Route path={ROUTE.SHOPITEM} exact>
-            <ListItem />
-          </Route>
-          <Route path={ROUTE.SHOPDETAIL} exact>
-            <ProductDetail />
-          </Route>
-          <Route path={ROUTE.ABOUTUS} exact>
-            <AboutUs />
-          </Route>
-          <Route path={ROUTE.CONTACT} exact>
-            <Contact />
-          </Route>
-          <Route path={ROUTE.CHECKOUT} exact>
-            <Checkout />
-          </Route>
-          <Route path={ROUTE.CART} exact>
-            <Cart />
-          </Route>
-          <Route path={ROUTE.WISHLIST} exact>
-            <WishList />
-          </Route>
-          <Route path={ROUTE.MYACCOUNT} exact>
-            <Account />
-          </Route>
-        </Switch>
-        <Footer />
+      <Switch>
+        <Route path={ROUTE.ADMIN} >
+          <Admin/>
+        </Route>
+        <Route path={ROUTE.HOME}>
+          <Public />
+        </Route>
+      </Switch>
     </>
   );
 }
+
+function Public(params) {
+  return (
+    <>
+      <Header />
+      <Switch>
+        <Route path={ROUTE.HOME} exact>
+          <Home />
+        </Route>
+        <Route path={ROUTE.LOGIN} exact>
+          <Login />
+        </Route>
+        <Route path={ROUTE.REGISTER} exact>
+          <Register />
+        </Route>
+        <Route path={ROUTE.SHOPITEM} exact>
+          <ListItem />
+        </Route>
+        <Route path={ROUTE.SHOPITEM + "/:id"} exact>
+          <ProductDetail />
+        </Route>
+        <Route path={ROUTE.ABOUTUS} exact>
+          <AboutUs />
+        </Route>
+        <Route path={ROUTE.CONTACT} exact>
+          <Contact />
+        </Route>
+        <Route path={ROUTE.CHECKOUT} exact>
+          <Checkout />
+        </Route>
+        <Route path={ROUTE.CART} exact>
+          <Cart />
+        </Route>
+        <Route path={ROUTE.WISHLIST} exact>
+          <WishList />
+        </Route>
+        <Route path={ROUTE.MYACCOUNT} exact>
+          <Account />
+        </Route>
+      </Switch>
+      <Footer />
+    </>
+  );
+}
+
+
 
 export default App;

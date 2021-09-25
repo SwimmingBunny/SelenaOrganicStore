@@ -105,7 +105,7 @@
 .categories-item-col {
   cursor: pointer;
   border-radius: 2rem;
-  min-height: 35rem;
+  min-height: 40rem;
   border: 0.1rem $white solid;
 
   &--h2 {
@@ -337,7 +337,7 @@
       &:hover > .product__list-item--icon-1 {
         display: block;
       }
-      &--img{
+      &--img {
         padding: 2rem;
         height: 40rem;
         overflow: hidden;
@@ -354,6 +354,7 @@
         font-size: 2rem;
         margin: 1.5rem 0 1rem;
         position: relative;
+        min-height: 6.2rem;
         &:hover {
           color: $primaryColor;
         }
@@ -390,7 +391,7 @@
           transform: translate(54%, 50%);
           background: $white;
           color: $primaryColor;
-          transition: linear 0.8s;
+          transition: linear 0.3s;
           &:hover {
             background: $primaryColor;
             color: $white;
@@ -409,7 +410,7 @@
           transform: translate(-45%, 50%);
           background: $white;
           color: $primaryColor;
-          transition: linear 0.8s;
+          transition: linear 0.3s;
           &:hover {
             background: $primaryColor;
             color: $white;
