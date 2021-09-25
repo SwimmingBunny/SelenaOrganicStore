@@ -123,9 +123,15 @@ const Register = () => {
         </Col>
         <Col xs={{ span: 24 }} lg={{ span: 12 }}>
         <img
+<<<<<<< HEAD
+            style={{ width: "100%", height: "100%" }}
+            src='Images/banner/best-sellers.png'
+          />
+=======
             style={{ width: "100%",height:"91%"}}
             src="Images/banner/best-sellers.png"
           />                  
+>>>>>>> aff55ae3e3a914ef49e973f694ffd3335d5d2c5e
         </Col>
       </Row>
     </div>
