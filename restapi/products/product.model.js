@@ -1,7 +1,6 @@
 const sql = require('../db_connection');
 
 const Products = (products)  => {
-    this.id = products.id;
     this.name = products.name;
     this.price = products.price;
     this.description = products.description;

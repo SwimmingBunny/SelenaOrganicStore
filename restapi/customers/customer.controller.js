@@ -1,101 +1,83 @@
-const Customer = require("./customer.model.js");
+﻿const express = require('express');
+const router = express.Router();
+const Joi = require('joi');
+const validateRequest = require('./middleware/validate-request');
+const authorize = require('./middleware/authorize')
+const userService = require('./user.service');
 
-// Create and Save a new Customer
-exports.create = (req, res) => {
-    if (!req.body) {
-        res.status(400).send({
-          message: "Content can not be empty!"
-        });
-    };
-    const customer = new Customer({
-        name: req.body.name,
-        phone: req.body.phone,
-        mail: req.body.mail,
-        gender: req.body.gender,
-        password: req.body.password,
-    
-      });
-      Customer.create(customer, (err, data) => {
-        if (err)
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the Customer."
-          });
-        else res.send(data);
-      });
-};
+// routes
+router.post('/authenticate', authenticateSchema, authenticate);
+router.post('/register', registerSchema, register);
+router.get('/', authorize(), getAll);
+router.get('/current', authorize(), getCurrent);
+router.get('/:id', authorize(), getById);
+router.put('/:id', authorize(), updateSchema, update);
+router.delete('/:id', authorize(), _delete);
 
-// Retrieve all Customers from the database.
-exports.findAll = (req, res) => {
-    Customer.getAll((err, data) => {
-        if (err)
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving customers."
-          });
-        else res.send(data);
-      });
-};
+module.exports = router;
 
-// Find a single Customer with a customerId
-exports.findOne = (req, res) => {
-    Customer.findById(req.params.customerId, (err, data) => {
-        if (err) {
-          if (err.kind === "not_found") {
-            res.status(404).send({
-              message: `Not found Customer with id ${req.params.customerId}.`
-            });
-          } else {
-            res.status(500).send({
-              message: "Error retrieving Customer with id " + req.params.customerId
-            });
-          }
-        } else res.send(data);
-      });
-};
+function authenticateSchema(req, res, next) {
+    const schema = Joi.object({
+        username: Joi.string().required(),
+        password: Joi.string().required()
+    });
+    validateRequest(req, next, schema);
+}
 
-// Update a Customer identified by the customerId in the request
-exports.update = (req, res) => {
-    // Validate Request
-    if (!req.body) {
-        res.status(400).send({
-          message: "Content can not be empty!"
-        });
-      }
-    
-      Customer.updateById(
-        req.params.customerId,
-        new Customer(req.body),
-        (err, data) => {
-          if (err) {
-            if (err.kind === "not_found") {
-              res.status(404).send({
-                message: `Not found Customer with id ${req.params.customerId}.`
-              });
-            } else {
-              res.status(500).send({
-                message: "Error updating Customer with id " + req.params.customerId
-              });
-            }
-          } else res.send(data);
-        }
-      );
-};
+function authenticate(req, res, next) {
+    userService.authenticate(req.body)
+        .then(user => res.json(user))
+        .catch(next);
+}
 
-// Delete a Customer with the specified customerId in the request
-exports.delete = (req, res) => {
-    Customer.remove(req.params.customerId, (err, data) => {
-        if (err) {
-          if (err.kind === "not_found") {
-            res.status(404).send({
-              message: `Not found Customer with id ${req.params.customerId}.`
-            });
-          } else {
-            res.status(500).send({
-              message: "Could not delete Customer with id " + req.params.customerId
-            });
-          }
-        } else res.send({ message: `Customer was deleted successfully!` });
-      });
-};
+function registerSchema(req, res, next) {
+    const schema = Joi.object({
+        mail: Joi.string().required(),
+        username: Joi.string().required(),
+        password: Joi.string().min(6).required()
+    });
+    validateRequest(req, next, schema);
+}
 
+function register(req, res, next) {
+    userService.create(req.body)
+        .then(() => res.json({ message: 'Registration successful' }))
+        .catch(next);
+}
+
+function getAll(req, res, next) {
+    userService.getAll()
+        .then(users => res.json(users))
+        .catch(next);
+}
+
+function getCurrent(req, res, next) {
+    res.json(req.user);
+}
+
+function getById(req, res, next) {
+    userService.getById(req.params.id)
+        .then(user => res.json(user))
+        .catch(next);
+}
+
+function updateSchema(req, res, next) {
+    const schema = Joi.object({
+        mail: Joi.string().empty(''),
+        username: Joi.string().empty(''),
+        password: Joi.string().min(6).empty('')
+    });
+    validateRequest(req, next, schema);
+}
+
+function update(req, res, next) {
+    userService.update(req.params.id, req.body)
+        .then(user => res.json(user))
+        .catch(next);
+}
+
+function _delete(req, res, next) {
+    userService.delete(req.params.id)
+        .then(() => res.json({ message: 'User deleted successfully' }))
+        .catch(next);
+}

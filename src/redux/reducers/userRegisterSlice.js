@@ -6,7 +6,7 @@ export const addCustomerApi = createAsyncThunk(
     "Customer/addCustomerApi",
     async (payload) => {
       await axios
-        .post(`http://localhost:5000/customers`, {
+        .post(`http://localhost:5000/customer`, {
           name: payload.fullname,
           mail: payload.email,
           password: payload.password,
@@ -20,7 +20,38 @@ export const addCustomerApi = createAsyncThunk(
         });
     }
   );
-
+  export const loginUser = createAsyncThunk(
+    'users/login',
+    async ({ email, password }, thunkAPI) => {
+      try {
+        const response = await fetch(
+          'http://localhost:5000/customer/authenticate',
+          {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+          }
+        );
+        let data = await response.json();
+        console.log('response', data);
+        if (response.status === 200) {
+          localStorage.setItem('token', data.token);
+          return data;
+        } else {
+          return thunkAPI.rejectWithValue(data);
+        }
+      } catch (e) {
+        console.log('Error', e.response.data);
+        thunkAPI.rejectWithValue(e.response.data);
+      }
+    }
+  );
 
 
 const userRegister = createSlice({
