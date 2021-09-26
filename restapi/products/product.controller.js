@@ -7,7 +7,6 @@ exports.create = (req, res) => {
         });
     };
     const product = new Products ({
-        id: req.body.id,
         name: req.body.name,
         price: req.body.price,
         description: req.body.description,

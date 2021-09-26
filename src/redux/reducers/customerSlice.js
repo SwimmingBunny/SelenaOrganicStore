@@ -3,11 +3,11 @@ import axios from "axios";
 import {createAsyncThunk } from "@reduxjs/toolkit";
 
 export const addCustomerApi = createAsyncThunk(
-    "Customer/addCustomerApi",
+    "customer/addCustomerApi",
     async (payload) => {
       await axios
-        .post(`http://localhost:5000/customers`, {
-          username: payload.fullname,
+        .post(`http://localhost:5000/customer/register`, {
+          username: payload.username,
           mail: payload.email,
           password: payload.password,
         })
@@ -21,10 +21,10 @@ export const addCustomerApi = createAsyncThunk(
     }
   );
   export const getListCustomerApi = createAsyncThunk(
-    "Customer/getCustomerApi",
+    "customer/getCustomerApi",
     async (id) => {
       const res = await axios
-        .get(`http://localhost:5000/customers`)
+        .get(`http://localhost:5000/customer`)
         .then((res) => {
           // console.log(".listProductApi ~ res", res);
           return res;
@@ -36,10 +36,10 @@ export const addCustomerApi = createAsyncThunk(
     }
   );
   export const deleteListCustomerApi = createAsyncThunk(
-    "Customer/deleteCustomerApi",
+    "customer/deleteCustomerApi",
     async (id) => {
       const res = await axios
-        .delete(`http://localhost:5000/customers/${id}`)
+        .delete(`http://localhost:5000/customer/${id}`)
         .then((res) => {
           // console.log(".listProductApi ~ res", res);
           return res;
@@ -50,7 +50,26 @@ export const addCustomerApi = createAsyncThunk(
       return res.data;
     }
   );
-
+  export const updateCustomerApi = createAsyncThunk(
+    "customer/updateCustomerApi",
+    async (payload) => {
+      const res = await axios
+        .put(`http://localhost:5000/customer/${payload.id}`, {
+          username: payload.username,
+          mail: payload.mail,
+          password: payload.password,
+        })
+        .then((res) => {
+          console.log(".addCustomerApi ~ res", res);
+          return res;
+        })
+        .catch((e) => {
+          // console.log("e", e);
+        });
+        console.log(" line 71 ~ res.data", res.data)
+        return res.data;
+    }
+  );
 const userRegister = createSlice({
     name: 'listCustomer',
     initialState: {
@@ -67,6 +86,7 @@ const userRegister = createSlice({
         saveCurrentLocation : (state, action) => {
           state.previousLocation = action.payload //currentLocation
         },
+
     },
     
     extraReducers:{

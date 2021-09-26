@@ -52,7 +52,6 @@ const Checkout = (props) => {
       total,
       discount,
     };
-    console.log("request", request);
   };
 
   const getTotal = () => {

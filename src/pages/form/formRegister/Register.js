@@ -14,7 +14,7 @@ import { useHistory } from "react-router";
 const Register = () => {
   const [form] = Form.useForm();
   const [formValue, setFormValue] = useState({
-    fullName: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -38,7 +38,7 @@ const Register = () => {
       setFormValue({ ...formValue, [e.target.name]: e.target.value });
       console.log(e.target.value);
     } else {
-      setFormValue({ ...formValue, deadline: e });
+      setFormValue({ ...formValue});
     }
   };
 
@@ -63,15 +63,15 @@ const Register = () => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your Full Name",
+                    message: "Please input your Username",
                   },
                 ]}>
                 <Input
                   className='form__group--input'
-                  placeholder='Full Name'
-                  name='fullName'
+                  placeholder='Enter Username'
+                  name='username'
                   onChange={(e) => handelOnChange(e)}
-                  value={formValue.fullName}
+                  value={formValue.username}
                 />
               </Form.Item>
               <Form.Item

@@ -20,6 +20,26 @@ export const getListProductApi = createAsyncThunk(
     return res.data;
   }
 );
+export const updateProductApi = createAsyncThunk(
+  "product/updateProductApi",
+  async (payload) => {
+    const res = await axios
+      .put(`http://localhost:5000/products/search?KeySearch${payload.id}`, {
+        name: payload.name,
+        type: payload.type,
+        price: payload.price,
+        stock: payload.stock
+      })
+      .then((res) => {
+          // console.log(".listProductApi ~ res", res);
+        return res;
+      })
+      .catch((e) => {
+        // console.log("e", e);
+      });
+      return res.data;
+  }
+);
 export const deleteListProductApi = createAsyncThunk(
   "product/deleteApiData",
   async (id) => {

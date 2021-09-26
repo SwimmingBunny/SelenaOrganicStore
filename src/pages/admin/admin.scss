@@ -1,8 +1,7 @@
 @import "../../style/variable.scss";
 .admin {
   height: 100vh;
-  overflow: hidden;
-  &-text{
+  &-text {
     color: white;
     font-weight: 700;
   }
@@ -34,7 +33,7 @@
         }
       }
     }
-    
+
     .col-img {
       display: flex;
       justify-content: center;
@@ -43,7 +42,7 @@
       padding: 0 40px;
     }
   }
-  &__content{
+  &__content {
     width: 98%;
     margin: 1rem;
     box-shadow: 10px 10px 10px $borderColor;
@@ -79,28 +78,25 @@
     }
   }
   &__users {
-    
-
     table {
       min-width: 600px;
       width: 100%;
       th {
-          border: 1px solid $primaryColor;
-          padding: 1rem;
+        border: 1px solid $primaryColor;
+        padding: 1rem;
       }
       td {
         border: 1px solid $primaryColor;
-        padding: 1rem; 
-       
+        padding: 1rem;
       }
       tr {
-          text-align: center;
-          .icon{
-            cursor: pointer;
-            &:hover {
-                color: $primaryColor;
-            }   
-         }
+        text-align: center;
+        .icon {
+          cursor: pointer;
+          &:hover {
+            color: $primaryColor;
+          }
+        }
       }
     }
   }
