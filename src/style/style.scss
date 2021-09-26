@@ -55,8 +55,26 @@
 .header__top-search {
   border: $borderColor;
   outline: none;
+  position: relative;
   &:hover {
     color: $borderColor;
+  }
+  &:hover .result {
+    display: flex;
+  }
+  .result {
+    display: none;
+    flex-direction: column;
+    background-color: $borderColor;
+    color: $textColor;
+    max-height: 180px;
+    overflow: hidden;
+    z-index: 10;
+    width: 100%;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-top: 0.2rem;
+    position: absolute;
   }
 }
 #header__top-search-input {
