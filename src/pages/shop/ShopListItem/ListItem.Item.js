@@ -104,9 +104,7 @@ const ShopItem = () => {
               </button>
             )}
           </div>
-          <div>
-            Showing {PAGE_SIZE} of {totalResult} results
-          </div>
+          <div>Showing {totalResult} results</div>
         </div>
 
         <div>

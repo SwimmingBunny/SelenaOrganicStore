@@ -25,12 +25,16 @@ import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getListProductApi, searchItem, setSortItem } from "../../redux/reducers/productSlice";
+import {
+  getListProductApi,
+  searchItem,
+  setSortItem,
+} from "../../redux/reducers/productSlice";
 library.add(faShoppingCart, faTrash);
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState()
+  const [valueSearch, setValueSearch] = React.useState();
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
@@ -58,11 +62,10 @@ const Header = () => {
   function goHome() {
     history.push("/");
   }
-  const handleSearch = () =>{
+  const handleSearch = () => {
     history.push("/shop-product");
-    return dispatch(searchItem(value))
-    
-  }
+    return dispatch(searchItem(valueSearch));
+  };
   const { Search } = Input;
   const accountMenu = (
     <Menu className="header__top-account-sub">
@@ -139,6 +142,19 @@ const Header = () => {
       </NavLink>
     </Menu>
   );
+  const { listProductApi } = useSelector((state) => state.listProduct);
+  const renderResult = () => {
+    return listProductApi
+      .filter((val) => {
+        if (val.name.includes(valueSearch)) {
+          return val;
+        }
+      })
+      .map((item) => {
+        return <p>{item.name}</p>;
+      });
+  };
+
   return (
     <div style={{ paddingTop: isMoblie ? "0" : "12rem" }}>
       <div className="header">
@@ -178,22 +194,23 @@ const Header = () => {
                 <Col
                   className="header__top-search"
                   lg={{ span: 14 }}
-                  md={{span: 12}}
+                  md={{ span: 12 }}
                   xs={{ span: 24 }}
                 >
                   <Search
                     id="header__top-search-input"
                     placeholder="search here"
-                    onChange = {(e)=>setValue(e.target.value)}
-                    value={value}
-                    onSearch = {()=>{handleSearch()}}
+                    onChange={(e) => setValueSearch(e.target.value)}
+                    value={valueSearch}
+                    onSearch={() => {
+                      handleSearch();
+                    }}
                   />
-                  {/* <Button type="primary" } >Search</Button> */}
+                  <div className="result">{renderResult()}</div>
                 </Col>
                 <Col
                   lg={{ span: 4 }}
-                  md={{span: 6}}
-
+                  md={{ span: 6 }}
                   className="header__top-cart"
                   xs={{ span: 12 }}
                 >

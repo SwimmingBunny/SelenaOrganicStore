@@ -2,23 +2,24 @@
 
 import React from "react";
 import Modal from "../../../component/Modal/Modal";
+import ViewProduct from "./ViewProduct";
 import { useMediaQuery } from "react-responsive";
 import { Row, Col, Rate, Button } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
-
+import { Link, NavLink, useHistory } from "react-router-dom";
+import { ROUTE } from "../../../constant/router";
 import {
   addToCart,
   addToWishlist,
   addToDetail,
 } from "../../../redux/reducers/productSlice";
-
 import "./productList.scss";
 import { useDispatch } from "react-redux";
 
 const ProductList = (props) => {
   const [isShowCart, setIsShowCart] = React.useState(true);
   const [isShowWishlist, setisShowWishlist] = React.useState(true);
-  const { id, name, img, price, stock, description,rating } = props;
+  const { id, name, img, price, stock, description, rating } = props;
   const dispatch = useDispatch();
   const handleAddCart = () => {
     dispatch(
@@ -41,10 +42,13 @@ const ProductList = (props) => {
       <Row>
         <Col lg={{ span: 6 }} xs={{ span: 24 }} className="img">
           <img src={img} />
+          <Link className="viewproduct__eye" to={`${ROUTE.SHOPITEM}/${id}`}>
+            <ViewProduct />
+          </Link>
         </Col>
         <Col lg={{ span: 18 }} xs={{ span: 24 }}>
           <div className="content">
-           <Rate value={rating} />
+            <Rate value={rating} />
             <h2>{props.name}</h2>
             <h3>$ {price}.00</h3>
             <p>{description}</p>
