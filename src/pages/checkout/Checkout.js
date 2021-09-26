@@ -51,7 +51,6 @@ const Checkout = (props) => {
     const request = {
       cart : cartApi,total,discount
     }
-    console.log("request", request)
   };
 
   const getTotal = ()=>{

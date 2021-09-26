@@ -21,7 +21,6 @@ const SideBar = () => {
     query: "(max-width: 480px)",
   });
   function onChange(value) {
-    console.log("onChange: ", value);
     dispatch(setSortItem(value));
   }
 
@@ -30,13 +29,11 @@ const SideBar = () => {
   }, []);
 
   const handleClick = (item) => {
-    console.log("click o day ", item);
     dispatch(setSortPrice(item));
   };
 
   const handleColor = (i) => {
     dispatch(filterColor(i));
-    console.log("mau gi ", i.key);
   };
   return (
     <div className="sidebar">

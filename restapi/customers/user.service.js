@@ -48,8 +48,20 @@ const findUser = async (username) => {
 };
 
 async function getAll() {
-    return await db.customers.findAll();
-}
+    return await getUserAll();
+};
+
+const getUserAll= async () => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * FROM customers`, (error, results) => {
+            if (error) {
+                return reject(error);
+            }
+            return resolve(results);
+        });
+    });
+};
+
 
 async function getById(id) {
     return await getUser(id);
@@ -83,15 +95,11 @@ async function create(params) {
 
 
 async function update(id, params) {
+console.log("🚀 ~ file: user.service.js ~ line 98 ~ update ~ params", params)
     const user = await getUser(id);
-
     // validate
     const usernameChanged = params.username && user.username !== params.username;
-    if (usernameChanged && await db.customers.findOne({
-        where: {
-            username: params.username
-        }
-    })) {
+    if (usernameChanged && await findUser(params.username)) {
         throw 'Username "' + params.username + '" is already taken';
     }
 
@@ -101,10 +109,19 @@ async function update(id, params) {
     }
 
     // copy params to user and save
-    Object.assign(user, params);
-    await user.save();
+    // Object.assign(user, params);
+    await db.query(`UPDATE customers SET mail='${params.mail}', username='${params.username}', 
+    password='${params.hash}' WHERE id =${id}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            // result(err, null);
+            return;
+        }
 
-    return omitHash(user.get());
+        console.log("updated customer: ", params);
+        //   result(null, params);
+    });
+    return {...omitHash(user)};
 }
 
 async function _delete(id) {
@@ -117,24 +134,34 @@ async function _delete(id) {
 async function getUser(id) {
     const user = await findByPk(id);
 
-    const findByPk = (id, result) => {
-        db.query(`SELECT * FROM customers WHERE id = ${id}`, (err, res) => {
-            if (err) {
-                console.log("error: ", err);
-                result(err, null);
-                return;
-            }
+    // const findByPk = (id, result) => {
+    //     db.query(`SELECT * FROM customers WHERE id = ${id}`, (err, res) => {
+    //         if (err) {
+    //             console.log("error: ", err);
+    //             result(err, null);
+    //             return;
+    //         }
 
-            if (res.length) {
-                console.log("found customer: ", res[0]);
-                result(null, res[0]);
-                return;
-            }
-        })
-    }
+    //         if (res.length) {
+    //             console.log("found customer: ", res[0]);
+    //             result(null, res[0]);
+    //             return;
+    //         }
+    //     })
+    // }
     if (!user) throw 'User not found';
     return user;
 }
+const findByPk = async (id) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * FROM customers WHERE id = ${id}`, (error, results) => {
+            if (error) {
+                return reject(error);
+            }
+            return resolve(results);
+        });
+    });
+};
 
 function omitHash(user) {
     const {
