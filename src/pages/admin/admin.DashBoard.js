@@ -2,10 +2,19 @@
 
 import React from "react";
 import "./admin.DashBoard.scss";
+import { useDispatch,useSelector } from "react-redux";
 import { Input, Avatar, Row, Col, Menu, Dropdown } from "antd";
 import { UserOutlined,ShoppingCartOutlined, DollarCircleOutlined } from "@ant-design/icons";
 import chart from '../../demo_15270_none.png'
+import { getListCustomerApi } from "../../redux/reducers/customerSlice";
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const {listCustomerApi} = useSelector(state => state.listCustomer);
+  React.useEffect(() => {
+    dispatch(getListCustomerApi());
+  }, []);
+  
+  const lengthCustomer = listCustomerApi.length;
   return (
     <div className='dashBoard'>
       <Row >
@@ -15,7 +24,7 @@ const Dashboard = () => {
           </div>
           <div>
             <h2>Total Customer</h2>
-            <h1>520 users</h1>
+            <h1>{lengthCustomer} Users</h1>
           </div>
         </Col>
         <Col lg={{ span: 8 }} className='dashBoard__group'>

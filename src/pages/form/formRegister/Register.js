@@ -14,7 +14,7 @@ import { useHistory } from "react-router";
 const Register = () => {
   const [form] = Form.useForm();
   const [formValue, setFormValue] = useState({
-    fullName: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -38,7 +38,7 @@ const Register = () => {
       setFormValue({ ...formValue, [e.target.name]: e.target.value });
       console.log(e.target.value);
     } else {
-      setFormValue({ ...formValue, deadline: e });
+      setFormValue({ ...formValue});
     }
   };
 
@@ -63,15 +63,15 @@ const Register = () => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your Full Name",
+                    message: "Please input your Username",
                   },
                 ]}>
                 <Input
                   className='form__group--input'
-                  placeholder='Full Name'
-                  name='fullName'
+                  placeholder='Enter Username'
+                  name='username'
                   onChange={(e) => handelOnChange(e)}
-                  value={formValue.fullName}
+                  value={formValue.username}
                 />
               </Form.Item>
               <Form.Item
@@ -123,15 +123,9 @@ const Register = () => {
         </Col>
         <Col xs={{ span: 24 }} lg={{ span: 12 }}>
         <img
-<<<<<<< HEAD
-            style={{ width: "100%", height: "100%" }}
-            src='Images/banner/best-sellers.png'
-          />
-=======
             style={{ width: "100%",height:"91%"}}
             src="Images/banner/best-sellers.png"
           />                  
->>>>>>> aff55ae3e3a914ef49e973f694ffd3335d5d2c5e
         </Col>
       </Row>
     </div>

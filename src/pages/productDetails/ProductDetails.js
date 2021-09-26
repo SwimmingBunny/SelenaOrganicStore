@@ -38,10 +38,7 @@ const ProductDetail = (props) => {
     query: "(max-width: 480px)",
   });
   const [itemDetail, setItemDetail] = React.useState();
-  console.log(
-    "🚀 ~ file: ProductDetails.js ~ line 37 ~ ProductDetail ~ itemDetail",
-    itemDetail
-  );
+  
   const dispatch = useDispatch();
   const { listProductApi } = useSelector((state) => state.listProduct);
 
