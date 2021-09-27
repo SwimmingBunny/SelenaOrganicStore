@@ -29,8 +29,7 @@ import {
 } from "react-router-dom";
 import "./admin.scss";
 import Dashboard from "./admin.DashBoard.js";
-import ProductItem from "../../component/commont/ProductsItem.js";
-import ProductRow from "./admin.Product.js";
+import ProductRow from "./ProductRow.js";
 
 
 
@@ -98,7 +97,6 @@ const Admin = () => {
             </NavLink>
           </Col>
           <Col span={isMoblie ? 20 : 14} className='col-img'>
-            <Input placeholder='Basic usage' />
           </Col>
           <Col span={isMoblie ? 4 : 4} className='col-icon'>
             {isMoblie ? (
@@ -178,20 +176,10 @@ const Admin = () => {
                 <Dashboard/>
               </Route>
               <Route path={`${path}${ROUTE.CUSTOMER}`} exact>
-                <div className='admin__users'>
-                  <h2>Customer Managerment </h2>
-                  <table>
                     <AdminRow />
-                  </table>
-                </div>
               </Route>
               <Route path={`${path}${ROUTE.PRODUCTS}`} exact>
-                <div className='admin__users'>
-                  <h2>Product Managerment </h2>
-                  <table>
-                    <ProductRow/>
-                  </table>
-                </div>
+                  <ProductRow/>
               </Route>
             </Switch>
             </div>

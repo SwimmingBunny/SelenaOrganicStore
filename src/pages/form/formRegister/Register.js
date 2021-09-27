@@ -3,9 +3,8 @@
 import React, { useState } from "react";
 import { Row, Col, Alert } from "antd";
 import { Form, Input, Button, Checkbox } from "antd";
-
-import { useDispatch, useSelector} from "react-redux";
-import { addCustomerApi} from "../../../redux/reducers/customerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addCustomerApi } from "../../../redux/reducers/customerSlice";
 import { saveCurrentLocation } from "../../../redux/reducers/customerSlice";
 import validateMessages from "../ValidateMessage";
 import "../../../style/form.scss";
@@ -14,39 +13,39 @@ import { useHistory } from "react-router";
 const Register = () => {
   const [form] = Form.useForm();
   const [formValue, setFormValue] = useState({
+    gender:"",
+    fullName:"",
     username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   });
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const {success} = useSelector((state)=> state.listCustomer);
-  
- 
+  const { success } = useSelector((state) => state.listCustomer);
+
   const handleRegister = () => {
-    if(formValue.password === formValue.confirmPassword){
-      dispatch(addCustomerApi({...formValue}));
-    }else{
-      Alert("password not similar confirm password")
+    if (formValue.password === formValue.confirmPassword) {
+      return dispatch(addCustomerApi({ ...formValue }));
     }
-    
+    if(formValue.password !== formValue.confirmPassword){
+      return Alert("password not similar confirm password");
+    }
   };
   const handelOnChange = (e) => {
     if (e.target) {
       setFormValue({ ...formValue, [e.target.name]: e.target.value });
-      console.log(e.target.value);
     } else {
-      setFormValue({ ...formValue});
+      setFormValue({ ...formValue });
     }
   };
 
   React.useEffect(() => {
-    if(success){
+    if (success) {
       dispatch(saveCurrentLocation(history.goBack()));
     }
-  }, [dispatch,success, history])
+  }, [dispatch, success, history]);
 
   return (
     <div className='container'>
@@ -59,7 +58,24 @@ const Register = () => {
               name='basic'
               initialValues={{ remember: true }}
               validateMessages={validateMessages}>
+                <Form.Item
+                name='fullName'
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Full Name",
+                  },
+                ]}>
+                <Input
+                  className='form__group--input'
+                  placeholder='Enter Full Name'
+                  name='fullName'
+                  onChange={(e) => handelOnChange(e)}
+                  value={formValue.fullName}
+                />
+              </Form.Item>
               <Form.Item
+                name='username'
                 rules={[
                   {
                     required: true,
@@ -75,7 +91,8 @@ const Register = () => {
                 />
               </Form.Item>
               <Form.Item
-                  rules={[{ required: true, type: "email" }]}>
+                name='email'
+                rules={[{ required: true, type: "email" }]}>
                 <Input
                   className='form__group--input'
                   placeholder='Enter your Email'
@@ -85,6 +102,7 @@ const Register = () => {
                 />
               </Form.Item>
               <Form.Item
+                name='password'
                 rules={[
                   { required: true, message: "Please input your password!" },
                 ]}>
@@ -97,6 +115,7 @@ const Register = () => {
                 />
               </Form.Item>
               <Form.Item
+                name='confirmPassword'
                 rules={[
                   { required: true, message: "Please Repeat your password!" },
                 ]}>
@@ -113,8 +132,7 @@ const Register = () => {
                   type='primary'
                   htmlType='submit'
                   className='form__btn'
-                  onClick={handleRegister}
-                  >
+                  onClick={handleRegister}>
                   REGISTER
                 </Button>
               </Form.Item>
@@ -122,10 +140,10 @@ const Register = () => {
           </div>
         </Col>
         <Col xs={{ span: 24 }} lg={{ span: 12 }}>
-        <img
-            style={{ width: "100%",height:"91%"}}
-            src="Images/banner/best-sellers.png"
-          />                  
+          <img
+            style={{ width: "100%", height: "91%" }}
+            src='Images/banner/best-sellers.png'
+          />
         </Col>
       </Row>
     </div>

@@ -25,7 +25,7 @@ const Contact = () => {
             md={{ span: 24 }}
             className="form__contact--user"
           >
-            <h1>Tell Us Your Project</h1>
+            <h1>Tell Us Your Comment</h1>
             <Form name="nest-messages">
               <div>
                 <Form.Item name="name" rules={[{ required: true }]}>

@@ -7,9 +7,11 @@ export const addCustomerApi = createAsyncThunk(
     async (payload) => {
       await axios
         .post(`http://localhost:5000/customer/register`, {
+          fullName: payload.fullName,
           username: payload.username,
           mail: payload.email,
           password: payload.password,
+          role: "2"
         })
         .then((res) => {
           console.log(".addCustomerApi ~ res", res);
@@ -73,19 +75,58 @@ export const addCustomerApi = createAsyncThunk(
 const userRegister = createSlice({
     name: 'listCustomer',
     initialState: {
+        listCustomerInit: [],
         listCustomerApi: [],
         customer: {},
+        infoUser: {},
         previousLocation: '',
         success: false,
         loading: false,
+        setSortUser: null,
+        searchUser: null,
     },
     reducers: {
         addCustomer: (state,action) => {
             state.customer = action.payload
         },
+        setInfoCustomer: (state,action) => {
+          
+          console.log("🚀 ~ file: customerSlice.js ~ line 94 ~ state.infoUser", action.payload)
+          state.infoUser = action.payload;
+        },
         saveCurrentLocation : (state, action) => {
           state.previousLocation = action.payload //currentLocation
         },
+        setSortUser: (state,action)=>{
+          state.setSortUser = action.payload;
+          state.listCustomerApi = [...state.listCustomerInit].sort((a,b)=>{
+            if(action.payload === "Name"){
+              var aName = a.username.toUpperCase();
+              var bName = b.username.toUpperCase();
+              if(aName > bName){
+                return 1
+              }
+              if(aName < bName){
+                return -1;
+              }
+            }
+           if(action.payload){
+             return true;
+           }
+          })
+        },
+        searchUser: (state,action)=>{
+          state.searchUser =  action.payload;
+          const value = action.payload;
+          // console.log("🚀 ~ file: customerSlice.js ~ line 113 ~ value", value)
+          state.listCustomerApi = [...state.listCustomerInit].map((item)=>{
+            let condition = false;
+            if(item.username.toUpperCase().includes(value)){
+              condition = true;
+            }
+            return {...item,condition}
+          }).filter((vl)=>vl.condition)
+        }
 
     },
     
@@ -104,6 +145,7 @@ const userRegister = createSlice({
         [getListCustomerApi.rejected]: (state,action) =>{},
         [getListCustomerApi.fulfilled]: (state, action) =>{
             state.listCustomerApi = action.payload || []
+            state.listCustomerInit = action.payload || []
         },
         [deleteListCustomerApi.pending]:(state,action) => {
           state.loading = true;
@@ -116,5 +158,5 @@ const userRegister = createSlice({
 
 const {reducer, actions} = userRegister;
 export const { addUser} = actions;
-export const {addCustomer, saveCurrentLocation,deleteUser} = actions;
+export const {addCustomer, saveCurrentLocation,deleteUser,setSortUser,searchUser,setInfoCustomer} = actions;
 export default reducer;
