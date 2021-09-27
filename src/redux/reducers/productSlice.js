@@ -100,6 +100,12 @@ const listProduct = createSlice({
         if(action.payload === "Rating"){
           return b.rating - a.rating
         }
+        if(action.payload === "Stock"){
+          return a.stock - b.stock
+        }
+        if(action.payload === "Price"){
+          return a.price - b.price
+        }
       });
     },
     setSortItem: (state, action) => {

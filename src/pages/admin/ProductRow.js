@@ -9,59 +9,56 @@ import {
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getListCustomerApi,
-  deleteListCustomerApi,
-  updateCustomerApi,
-  setSortUser,
-  searchUser
-} from "../../redux/reducers/customerSlice";
+  deleteListProductApi,
+  getListProductApi,
+  setSort,
+  updateProductApi,
+  searchItem,
+} from "../../redux/reducers/productSlice";
+import { Button, Input,Select } from "antd";
 import { useState } from "react";
-import { Input,Select,Button } from "antd";
 
-const AdminRow = () => {
+const ProductRow = () => {
   const dispatch = useDispatch();
-  const { listCustomerApi } = useSelector((state) => state.listCustomer);
+  const { listProductApi } = useSelector((state) => state.listProduct);
   const [edit, setEdit] = useState();
   const { Option } = Select;
   React.useEffect(() => {
-    dispatch(getListCustomerApi());
+    dispatch(getListProductApi());
   }, []);
 
   const [formNewVl, setFormNewVl] = useState({
-    fullName: '',
-    username: '',
-    mail: '',
-    phone:'',
-    address:'',
-    password: '',
-    search: ''
+    name: "",
+    stock: "",
+    price: "",
+    type: "",
+    search: "",
   });
   const handelOnChange = (e) => {
     if (e.target) {
       setFormNewVl({ ...formNewVl, [e.target.name]: e.target.value });
+      console.log(e.target.value);
     } else {
-      setFormNewVl({ ...formNewVl});
+      setFormNewVl({ ...formNewVl });
     }
   };
-
   const handleEdit = (id) => {
     setEdit(id);
   };
 
-  const handleSave = async(id) => {
-    await dispatch(updateCustomerApi({ ...formNewVl, id }));
+  const handleSave = (id) => {
+    dispatch(updateProductApi({ ...formNewVl, id }));
     setEdit();
-    dispatch(getListCustomerApi());
   };
-  function handleChange(value) {
-    dispatch(setSortUser(value))
-  }
-  const handleSearch= ()=>{
-    dispatch(searchUser(formNewVl.search.toUpperCase()))
-  }
 
-  const renderListCustomer = () => {
-    return listCustomerApi.map((item, index) => {
+  function handleChange(value) {
+    dispatch(setSort(value))
+  }
+  const handleSearch=()=>{
+    dispatch(searchItem(formNewVl.search))
+  }
+  const renderListProduct = () => {
+    return listProductApi.map((item, index) => {
       return (
         <>
           {edit === item.id ? (
@@ -69,42 +66,34 @@ const AdminRow = () => {
               <td>{item.id}</td>
               <td>
                 <Input
-                  name='fullName'
+                  name='name'
                   onChange={(e) => handelOnChange(e)}
-                  placeholder={item.fullName}
-                  value={formNewVl.fullName}
+                  placeholder={item.name}
+                  value={formNewVl.name}
                 />
               </td>
               <td>
                 <Input
-                  name='username'
+                  name='stock'
                   onChange={(e) => handelOnChange(e)}
-                  placeholder={item.username}
-                  value={formNewVl.username}
+                  placeholder={item.stock}
+                  value={formNewVl.stock}
                 />
               </td>
               <td>
                 <Input
-                  name='mail'
+                  name='price'
                   onChange={(e) => handelOnChange(e)}
-                  placeholder={item.mail}
-                  value={formNewVl.mail}
+                  placeholder={item.price}
+                  value={formNewVl.price}
                 />
               </td>
               <td>
                 <Input
-                  name='phone'
+                  name='type'
                   onChange={(e) => handelOnChange(e)}
-                  placeholder={item.phone}
-                  value={formNewVl.phone}
-                />
-              </td>
-              <td>
-                <Input
-                  name='address'
-                  onChange={(e) => handelOnChange(e)}
-                  placeholder={item.address}
-                  value={formNewVl.address}
+                  placeholder={item.type}
+                  value={formNewVl.type}
                 />
               </td>
               <td className='icon'>
@@ -126,14 +115,13 @@ const AdminRow = () => {
           ) : (
             <tr>
               <td>{item.id}</td>
-              <td>{item.fullName}</td>
-              <td>{item.username}</td>
-              <td>{item.mail}</td>
-              <td>{item.phone}</td>
-              <td>{item.address}</td>
+              <td>{item.name}</td>
+              <td>{item.type}</td>
+              <td>{item.stock}</td>
+              <td>{item.price}</td>
               <td className='icon'>
                 <EditFilled
-                  onClick={async() => {
+                  onClick={() => {
                     handleEdit(item.id);
                   }}
                 />
@@ -141,8 +129,8 @@ const AdminRow = () => {
               <td className='icon'>
                 <DeleteOutlined
                   onClick={async () => {
-                    await dispatch(deleteListCustomerApi(item.id));
-                    dispatch(getListCustomerApi());
+                    await dispatch(deleteListProductApi(item.id));
+                    dispatch(getListProductApi());
                   }}
                 />
               </td>
@@ -154,7 +142,7 @@ const AdminRow = () => {
   };
   return (
     <div className='admin__users'>
-      <h2>Customer Managerment </h2>
+      <h2>Product Managerment </h2>
       <div className='top top--flex'>
         <div>
           <Select
@@ -163,7 +151,10 @@ const AdminRow = () => {
             onChange={handleChange}>
             <Option value='All'>All</Option>
             <Option value='Name'>Name (A-Z)</Option>
-            <Option value='Stock'>Date Create</Option>
+            <Option value='Price'>
+             Price (S-L)
+            </Option>
+            <Option value='Stock'>Stock (S-L)</Option>
           </Select>
         </div>
         <div className='top--width top--flex'>
@@ -174,17 +165,16 @@ const AdminRow = () => {
       <table>
         <tr>
           <th className='id'>ID</th>
-          <th className='fullName'>Full Name</th>
-          <th className='name'>Name</th>
-          <th className='email'>Email</th>
-          <th className='phone'>Phone</th>
-          <th className='address'>Address</th>
+          <th className='name'>Product</th>
+          <th className='type'>Type</th>
+          <th className='stock'>Stock</th>
+          <th className='price'>Price ($)</th>
           <th className='edit'>Edit</th>
           <th className='delete'>Delete</th>
         </tr>
-        {renderListCustomer()}
+        {renderListProduct()}
       </table>
     </div>
   );
 };
-export default AdminRow;
+export default ProductRow;

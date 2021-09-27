@@ -3,7 +3,7 @@
 import "./style/style.scss";
 import Header from "./component/layout/Header";
 import Home from "./pages/Home/Home";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route,Redirect } from "react-router-dom";
 import { ROUTE } from "./constant/router.js";
 
 import Footer from "./component/layout/Footer";
@@ -22,16 +22,19 @@ import Admin from "./pages/admin/admin";
 
 function App() {
   return (
-    <>
       <Switch>
-        <Route path={ROUTE.ADMIN} >
+        <PrivateRoute path={ROUTE.ADMIN} >
           <Admin/>
+        </PrivateRoute>
+        <Route path={ROUTE.LOGIN} exact>
+          <Header />
+          <Login />
+          <Footer />
         </Route>
-        <Route path={ROUTE.HOME}>
+        <PrivateRoute path={ROUTE.HOME}>
           <Public />
-        </Route>
+        </PrivateRoute>
       </Switch>
-    </>
   );
 }
 
@@ -42,9 +45,6 @@ function Public(params) {
       <Switch>
         <Route path={ROUTE.HOME} exact>
           <Home />
-        </Route>
-        <Route path={ROUTE.LOGIN} exact>
-          <Login />
         </Route>
         <Route path={ROUTE.REGISTER} exact>
           <Register />
@@ -79,6 +79,25 @@ function Public(params) {
   );
 }
 
-
-
+function PrivateRoute({ children, ...rest }) {
+  let token = localStorage.getItem("accessToken");
+  console.log("auth",token);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        token ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
 export default App;

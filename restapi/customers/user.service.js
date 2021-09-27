@@ -125,8 +125,21 @@ console.log("🚀 ~ file: user.service.js ~ line 98 ~ update ~ params", params)
 }
 
 async function _delete(id) {
-    const user = await getUser(id);
-    await user.destroy();
+    // const user = await getUser(id);
+    await  db.query("DELETE FROM customers WHERE id = ?", id, (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          return(err) ;
+        }
+    
+        if (res.affectedRows === 0) {
+          // not found Customer with the id
+          return (null);
+        }
+    
+        console.log("deleted customer with id: ", id);
+       return (res)
+      });
 }
 
 // helper functions
