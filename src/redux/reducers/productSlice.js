@@ -28,16 +28,16 @@ export const updateProductApi = createAsyncThunk(
         name: payload.name,
         type: payload.type,
         price: payload.price,
-        stock: payload.stock
+        stock: payload.stock,
       })
       .then((res) => {
-          // console.log(".listProductApi ~ res", res);
+        // console.log(".listProductApi ~ res", res);
         return res;
       })
       .catch((e) => {
         // console.log("e", e);
       });
-      return res.data;
+    return res.data;
   }
 );
 export const deleteListProductApi = createAsyncThunk(
@@ -60,8 +60,7 @@ const listProduct = createSlice({
   initialState: {
     listProductApi: [],
     listProductInit: [],
-    cart: [
-    ],
+    cart: [],
     order: {
       // cart: [
       //   {
@@ -84,7 +83,7 @@ const listProduct = createSlice({
     setSort: (state, action) => {
       state.sortType = action.payload;
       state.listProductApi = [...state.listProductInit].sort((a, b) => {
-        if (action.payload === "Name") {
+        if (action.payload === "NameA") {
           var nameA = a.name.toUpperCase(); // ignore upper and lowercase
           var nameB = b.name.toUpperCase(); // ignore upper and lowercase
           if (nameA < nameB) {
@@ -94,11 +93,30 @@ const listProduct = createSlice({
             return 1;
           }
         }
-        if(action.payload === "All"){
-          return true
+        if (action.payload === "NameZ") {
+          var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+          var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return 1;
+          }
+          if (nameA > nameB) {
+            return -1;
+          }
         }
-        if(action.payload === "Rating"){
-          return b.rating - a.rating
+        if (action.payload === "All") {
+          return true;
+        }
+        if (action.payload === "RatingZ") {
+          return b.rating - a.rating;
+        }
+        if (action.payload === "RatingA") {
+          return a.rating - b.rating;
+        }
+        if (action.payload === "PriceA") {
+          return a.price - b.price;
+        }
+        if (action.payload === "PriceZ") {
+          return b.price - a.price;
         }
       });
     },
@@ -159,10 +177,31 @@ const listProduct = createSlice({
       });
     },
     addToCart: (state, action) => {
+      const id = action.payload.id;
+      const isExist = state.cart.find((item) => item.id === id);
+
+      if (isExist) {
+        state.cart = state.cart.map((item) => {
+          if (item.id === id) {
+            return {
+              ...action.payload,
+              count: item.count + 1,
+            };
+          }
+          return item;
+        });
+      } else {
         state.cart = [...state.cart, action.payload];
+      }
     },
     addToWishlist: (state, action) => {
-      state.wishlist = [...state.wishlist, action.payload];
+      const id = action.payload.id;
+      const isExist = state.wishlist.find((item) => item.id === id);
+      if (isExist) {
+        return;
+      } else {
+        state.wishlist = [...state.wishlist, action.payload];
+      }
     },
     deleteItemCart: (state, action) => {
       state.cart = state.cart.filter((item) => action.payload !== item.id);
@@ -219,22 +258,24 @@ const listProduct = createSlice({
     searchItem: (state, action) => {
       state.searchValue = action.payload;
       const value = action.payload;
-      state.listProductApi = [...state.listProductInit].map(
-        (item, index) => {
+      state.listProductApi = [...state.listProductInit]
+        .map((item, index) => {
           let condition = false;
-          if(item.name.includes(value)){
+          if (item.name.toUpperCase().includes(value)) {
             condition = true;
           }
-          if(item.type.includes(value)){
+          if (item.name.toLowerCase().includes(value)) {
             condition = true;
           }
-          if(item.color.includes(value)){
+          if (item.type.includes(value)) {
             condition = true;
           }
-          return {...item,condition}
-        }
-      ).filter((vl)=>vl.condition)
-
+          if (item.color.includes(value)) {
+            condition = true;
+          }
+          return { ...item, condition };
+        })
+        .filter((vl) => vl.condition);
     },
   },
   extraReducers: {
@@ -243,8 +284,8 @@ const listProduct = createSlice({
     [getListProductApi.fulfilled]: (state, action) => {
       state.listProductApi = action.payload || [];
       state.listProductInit = action.payload || [];
-    },[deleteListProductApi.pending]: (state, action) => {
     },
+    [deleteListProductApi.pending]: (state, action) => {},
   },
 });
 

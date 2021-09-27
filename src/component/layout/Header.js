@@ -40,10 +40,11 @@ const Header = () => {
   }, []);
   const { cart } = useSelector((state) => state.listProduct);
   const renderDataCart = () => {
-    return cart?.map((item, index) => {
+    return cart.slice(0, 5).map((item, index) => {
       return <HeaderCart key={index} {...item} />;
     });
   };
+
   const totalProduct = cart.length;
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
@@ -91,9 +92,11 @@ const Header = () => {
       {cart.length ? (
         <>
           {renderDataCart()}
-          <Menu.Item>
-            <span className="header__top-container-subtotal">SUBTOTAL:</span>
-          </Menu.Item>
+          {/* <Menu.Item>
+            <span className="header__top-container-subtotal">
+              SUBTOTAL:{subTotal}
+            </span>
+          </Menu.Item> */}
           <NavLink to={ROUTE.CART} exact>
             <Menu.Item>
               <Button id="header__top-container-btn" type="primary">
@@ -101,12 +104,13 @@ const Header = () => {
               </Button>
             </Menu.Item>
           </NavLink>
-
-          <Menu.Item>
-            <Button id="header__top-container-btn" type="primary">
-              Check Out
-            </Button>
-          </Menu.Item>
+          <NavLink to={ROUTE.CHECKOUT} exact>
+            <Menu.Item>
+              <Button id="header__top-container-btn" type="primary">
+                Check Out
+              </Button>
+            </Menu.Item>
+          </NavLink>
         </>
       ) : (
         <Menu.Item>
@@ -145,9 +149,12 @@ const Header = () => {
   const { listProductApi } = useSelector((state) => state.listProduct);
   const renderResult = () => {
     return listProductApi
-      .filter((val) => {
-        if (val.name.includes(valueSearch)) {
-          return val;
+      .filter((item) => {
+        if (item.name.toLowerCase().includes(valueSearch)) {
+          return item;
+        }
+        if (item.name.toUpperCase().includes(valueSearch)) {
+          return item;
         }
       })
       .map((item) => {

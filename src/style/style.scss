@@ -120,6 +120,9 @@
   background-color: #e7441f;
   border-radius: 50%;
   color: $white;
+  span {
+    transform: translateY(-2px);
+  }
 }
 .header__top-cart-emty {
   text-align: center;

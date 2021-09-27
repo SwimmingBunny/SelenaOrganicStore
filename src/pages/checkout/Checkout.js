@@ -5,12 +5,15 @@ import { Row, Col, Form, Button, Radio, Input, Space } from "antd";
 import validateMessages from "../form/ValidateMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import Modal from "../../component/Modal/Modal.js";
 
 import "../../style/checkout.scss";
 import "../../style/form.scss";
 import "../../style/aboutus.scss";
 import { getListProductApi } from "../../redux/reducers/productSlice";
 const Checkout = (props) => {
+  const [isShowCart, setIsShowCart] = React.useState(true);
+
   const [form] = Form.useForm();
   const [isShow, setIsShow] = React.useState(true);
 
@@ -30,8 +33,13 @@ const Checkout = (props) => {
       setIsShow(true);
     }
   };
+  const handleIsShow = () => {
+    setIsShowCart(true);
+  };
 
   const handleSbm = () => {
+    setIsShowCart(false);
+
     let total = 10; //10 ship
     const discount = 50;
 
@@ -182,10 +190,7 @@ const Checkout = (props) => {
                   <td>Shipping</td>
                   <td>$10.00</td>
                 </tr>
-                <tr>
-                  <td>Counpon</td>
-                  <td>None</td>
-                </tr>
+
                 <tr>
                   <th>Total Amount</th>
                   <th>${+getTotal() + 10}.00</th>
@@ -225,6 +230,13 @@ const Checkout = (props) => {
             </div>
           </Col>
         </Row>
+      </div>
+      <div
+        className="modal"
+        onClick={handleIsShow}
+        style={{ display: isShowCart ? "none" : "flex" }}
+      >
+        <Modal name="Payment success! Thanks for your support" />
       </div>
     </>
   );

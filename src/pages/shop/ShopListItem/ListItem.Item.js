@@ -3,7 +3,7 @@
 import * as React from "react";
 import ProductList from "./ProductList";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Select, Pagination } from "antd";
+import { Row, Select, Pagination, Menu } from "antd";
 import { useMediaQuery } from "react-responsive";
 import ScrollToTop from "../../../component/commont/ScrollToTop";
 import { useEffect } from "react";
@@ -11,6 +11,8 @@ import ProductItem from "../../../component/commont/ProductsItem";
 import {
   getListProductApi,
   setSort,
+  filterType,
+  setSortPrice,
 } from "../../../redux/reducers/productSlice";
 import $ from "jquery";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -19,6 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faColumns, faWindowMaximize);
 
 const ShopItem = () => {
+  const { SubMenu } = Menu;
   const [currenPage, setCurrenPage] = React.useState(1);
   const PAGE_SIZE = 12;
   const isMoblie = useMediaQuery({
@@ -42,6 +45,7 @@ const ShopItem = () => {
   }, []);
 
   function handleChange(value) {
+    setCurrenPage(1);
     dispatch(setSort(value));
   }
   const handleChangeUI = () => {
@@ -66,6 +70,7 @@ const ShopItem = () => {
       .splice((currenPage - 1) * PAGE_SIZE)
       .splice(0, PAGE_SIZE);
   };
+
   return (
     <>
       <div className="shopitem">
@@ -79,8 +84,12 @@ const ShopItem = () => {
               className="shopitem__sort-select"
             >
               <Option value="All">All</Option>
-              <Option value="Name">Name (A-Z) </Option>
-              <Option value="Rating">Rating </Option>
+              <Option value="NameA">Name (A-Z) </Option>
+              <Option value="NameZ">Name (Z-A) </Option>
+              <Option value="PriceA">Price (Low - Hight) </Option>
+              <Option value="PriceZ">Price (Hight - Low) </Option>
+              <Option value="RatingA">Rating (Low - Hight) </Option>
+              <Option value="RatingZ">Rating (Hight - Low) </Option>
             </Select>
           </div>
         </div>
