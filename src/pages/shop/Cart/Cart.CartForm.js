@@ -10,7 +10,6 @@ import {
   NavLink,
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addCoupon } from "../../../redux/reducers/couponSlice";
 const CartForm = () => {
   const [value, setValue] = React.useState(null);
   const dispatch = useDispatch();

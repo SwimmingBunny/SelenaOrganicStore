@@ -118,6 +118,12 @@ const listProduct = createSlice({
         if (action.payload === "PriceZ") {
           return b.price - a.price;
         }
+        if(action.payload === "Stock"){
+          return a.stock - b.stock
+        }
+        if(action.payload === "Price"){
+          return a.price - b.price
+        }
       });
     },
     setSortItem: (state, action) => {

@@ -17,9 +17,7 @@ import { getListProductApi } from "../../../redux/reducers/productSlice.js";
 
 const CartTable = () => {
   const dispatch = useDispatch();
-  const { discountPrice } = useSelector((state) => state.coupon);
 
-  const [coupon, setCoupon] = useState(0);
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
@@ -70,12 +68,10 @@ const CartTable = () => {
           <p> Shipping ($)</p>
           <p> 10.00</p>
         </div>
+      
         <div className="cart__total-conten">
           <p className="cart__total-conten--total"> Total ($)</p>
-          <p className="cart__total-conten--total">
-            {" "}
-            {+getTotal() + 10 - coupon}.00{" "}
-          </p>
+          <p className="cart__total-conten--total"> {+getTotal() + 10}.00 </p>
         </div>
         <Button className="cart__total-btn" type="primary">
           <NavLink to={ROUTE.CHECKOUT} exact>

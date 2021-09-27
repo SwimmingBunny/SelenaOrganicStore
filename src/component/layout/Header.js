@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import SubMenu from "./Header.subMenu.js";
 import HeaderCart from "./Header.Cart.js";
@@ -33,12 +35,17 @@ import {
 library.add(faShoppingCart, faTrash);
 
 const Header = () => {
+  const token = localStorage.getItem("accessToken");
+  const [isLogin, setIsLogin] = React.useState(token);
   const dispatch = useDispatch();
+
   const [valueSearch, setValueSearch] = React.useState();
   useEffect(() => {
-    dispatch(getListProductApi());
+    dispatch(getListProductApi())
   }, []);
   const { cart } = useSelector((state) => state.listProduct);
+  const { infoUser } = useSelector((state) => state.listCustomer);
+  console.log("🚀 ~ file: Header.js ~ line 48 ~ Header ~ infoUser", infoUser)
   const renderDataCart = () => {
     return cart.slice(0, 5).map((item, index) => {
       return <HeaderCart key={index} {...item} />;
@@ -68,54 +75,66 @@ const Header = () => {
     return dispatch(searchItem(valueSearch));
   };
   const { Search } = Input;
+  const handleLogout = () => {
+    return localStorage.removeItem("accessToken");
+  };
   const accountMenu = (
-    <Menu className="header__top-account-sub">
-      <Menu.Item>
-        <NavLink to={ROUTE.MYACCOUNT} exact>
-          My Account
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink to={ROUTE.LOGIN} exact>
-          Login
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink to={ROUTE.REGISTER} exact>
-          Register
-        </NavLink>
-      </Menu.Item>
+    <Menu className='header__top-account-sub'>
+      {isLogin ? (
+        <>
+          <Menu.Item>
+            <NavLink to={ROUTE.MYACCOUNT} exact>
+              My Account
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <li onClick={handleLogout}>
+              Log out
+            </li>
+          </Menu.Item>
+        </>
+      ) : (
+        <>
+          <Menu.Item>
+            <NavLink to={ROUTE.LOGIN} exact>
+              Login
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink to={ROUTE.REGISTER} exact>
+              Register
+            </NavLink>
+          </Menu.Item>
+        </>
+      )}
     </Menu>
   );
   const cartMenu = (
-    <Menu className="header__top-cart-sub">
+    <Menu className='header__top-cart-sub'>
       {cart.length ? (
         <>
           {renderDataCart()}
-          {/* <Menu.Item>
-            <span className="header__top-container-subtotal">
-              SUBTOTAL:{subTotal}
-            </span>
-          </Menu.Item> */}
+          <Menu.Item>
+            <span className='header__top-container-subtotal'>SUBTOTAL:</span>
+          </Menu.Item>
           <NavLink to={ROUTE.CART} exact>
             <Menu.Item>
-              <Button id="header__top-container-btn" type="primary">
+              <Button id='header__top-container-btn' type='primary'>
                 View Cart
               </Button>
             </Menu.Item>
           </NavLink>
-          <NavLink to={ROUTE.CHECKOUT} exact>
-            <Menu.Item>
-              <Button id="header__top-container-btn" type="primary">
-                Check Out
-              </Button>
-            </Menu.Item>
-          </NavLink>
+
+          <Menu.Item>
+            <Button id='header__top-container-btn' type='primary'>
+              Check Out
+            </Button>
+          </Menu.Item>
         </>
       ) : (
         <Menu.Item>
-          <div className="header__top-cart-emty">
-            <img src="Images/about/no-cart.png" />
+          <div className='header__top-cart-emty'>
+            <img src='Images/about/no-cart.png' />
             <p>Your cart is emty</p>
           </div>
         </Menu.Item>
@@ -127,21 +146,21 @@ const Header = () => {
     </Menu>
   );
   const shoplist = (
-    <Menu className="header__top-submenu">
+    <Menu className='header__top-submenu'>
       <NavLink to={ROUTE.SHOPITEM} exact>
         <Menu.Item>
-          <a className="header__top-submenu--a">Shop Product</a>
+          <a className='header__top-submenu--a'>Shop Product</a>
         </Menu.Item>
       </NavLink>
       <NavLink to={ROUTE.WISHLIST} exact>
         <Menu.Item>
-          <a className="header__top-submenu--a">Wishlist</a>
+          <a className='header__top-submenu--a'>Wishlist</a>
         </Menu.Item>
       </NavLink>
 
       <NavLink to={ROUTE.CART} exact>
         <Menu.Item>
-          <a className="header__top-submenu--a">Cart</a>
+          <a className='header__top-submenu--a'>Cart</a>
         </Menu.Item>
       </NavLink>
     </Menu>
@@ -164,34 +183,32 @@ const Header = () => {
 
   return (
     <div style={{ paddingTop: isMoblie ? "0" : "12rem" }}>
-      <div className="header">
-        <div className="container">
-          <Row className="header__top">
+      <div className='header'>
+        <div className='container'>
+          <Row className='header__top'>
             <Col
               lg={{ span: 10 }}
               xs={{ span: 24 }}
-              className="header__top-img"
-            >
+              className='header__top-img'>
               <img
-                src="Images/logo/logo.png"
-                alt="Logo image"
+                src='Images/logo/logo.png'
+                alt='Logo image'
                 onClick={goHome}
               />
             </Col>
 
             <Col lg={{ span: 14 }} xs={{ span: 24 }}>
-              <Row className="header__top-right">
+              <Row className='header__top-right'>
                 <Col
-                  className="header__top-account"
+                  className='header__top-account'
                   lg={{ span: 6 }}
                   md={{ span: 6 }}
-                  xs={{ span: 12 }}
-                >
+                  xs={{ span: 12 }}>
                   <Dropdown overlay={accountMenu}>
-                    <a className="header__top-account-a">
+                    <a className='header__top-account-a'>
                       <Avatar
                         style={{ margin: "1rem" }}
-                        size="small"
+                        size='small'
                         icon={<UserOutlined />}
                       />
                       My Account <DownOutlined />
@@ -199,57 +216,53 @@ const Header = () => {
                   </Dropdown>
                 </Col>
                 <Col
-                  className="header__top-search"
+                  className='header__top-search'
                   lg={{ span: 14 }}
                   md={{ span: 12 }}
-                  xs={{ span: 24 }}
-                >
+                  xs={{ span: 24 }}>
                   <Search
-                    id="header__top-search-input"
-                    placeholder="search here"
+                    id='header__top-search-input'
+                    placeholder='search here'
                     onChange={(e) => setValueSearch(e.target.value)}
                     value={valueSearch}
                     onSearch={() => {
                       handleSearch();
                     }}
                   />
-                  <div className="result">{renderResult()}</div>
+                  <div className='result'>{renderResult()}</div>
                 </Col>
                 <Col
                   lg={{ span: 4 }}
                   md={{ span: 6 }}
-                  className="header__top-cart"
-                  xs={{ span: 12 }}
-                >
+                  className='header__top-cart'
+                  xs={{ span: 12 }}>
                   <Dropdown overlay={cartMenu}>
                     {isMoblie ? (
-                      <div className="submenu">
+                      <div className='submenu'>
                         <FontAwesomeIcon
-                          className="submenu__cart"
-                          icon="shopping-cart"
+                          className='submenu__cart'
+                          icon='shopping-cart'
                         />
                         <span>My cart</span>
                         <div
-                          className="header-noti"
+                          className='header-noti'
                           style={{
                             display: `${totalProduct ? "flex" : "none"} `,
-                          }}
-                        >
+                          }}>
                           <span>{totalProduct}</span>
                         </div>
                       </div>
                     ) : (
                       <a>
                         <FontAwesomeIcon
-                          className="header__top-cart-icon"
-                          icon="shopping-cart"
+                          className='header__top-cart-icon'
+                          icon='shopping-cart'
                         />
                         <div
-                          className="header-noti"
+                          className='header-noti'
                           style={{
                             display: `${totalProduct ? "flex" : "none"} `,
-                          }}
-                        >
+                          }}>
                           <span>{totalProduct}</span>
                         </div>
                       </a>
@@ -263,44 +276,43 @@ const Header = () => {
       </div>
       {/* Header Menu */}
 
-      <div className="container">
+      <div className='container'>
         {isMoblie ? (
-          <Row className="header__submenu">
+          <Row className='header__submenu'>
             <Col xs={{ span: 24 }}>
               <SubMenu />
             </Col>
           </Row>
         ) : (
-          <div className="header__top-menu">
+          <div className='header__top-menu'>
             <nav>
-              <ul className="header__top-menu-ul">
-                <li className="header__top-menu-li">
-                  <a className="header__top-menu-a" href="" onClick={goHome}>
+              <ul className='header__top-menu-ul'>
+                <li className='header__top-menu-li'>
+                  <a className='header__top-menu-a' href='' onClick={goHome}>
                     HOME
                   </a>
                 </li>
-                <li className="header__top-menu-li">
+                <li className='header__top-menu-li'>
                   <div>
                     <Dropdown overlay={shoplist}>
-                      <a className="header__top-menu-a  boder-none">
+                      <a className='header__top-menu-a  boder-none'>
                         SHOP <DownOutlined />
                       </a>
                     </Dropdown>
                   </div>
                 </li>
-                <li className="header__top-menu-li">
+                <li className='header__top-menu-li'>
                   <NavLink to={ROUTE.ABOUTUS} exact>
-                    <a className="header__top-menu-a" href="">
+                    <a className='header__top-menu-a' href=''>
                       ABOUT US
                     </a>
                   </NavLink>
                 </li>
-                <li className="header__top-menu-li">
+                <li className='header__top-menu-li'>
                   <NavLink
-                    className="header__top-menu-a"
+                    className='header__top-menu-a'
                     to={ROUTE.CONTACT}
-                    exact
-                  >
+                    exact>
                     CONTACT
                   </NavLink>
                 </li>

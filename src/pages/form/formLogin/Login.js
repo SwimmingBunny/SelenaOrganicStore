@@ -7,8 +7,11 @@ import "../../../style/form.scss";
 import "../../../style/base.scss";
 import { NavLink } from "react-router-dom";
 import { ROUTE } from "../../../constant/router";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { setInfoCustomer } from "../../../redux/reducers/customerSlice";
 const Login = () => {
+   const dispatch = useDispatch()
   const [form] = Form.useForm();
   const [formValue, setFormValue] = useState({
     username: "",
@@ -46,10 +49,16 @@ const Login = () => {
         throw Error(response.status)
       }) 
       .then((result) => {
-        console.log(result);
         let results = JSON.parse(result);
+        dispatch(setInfoCustomer(results));
         localStorage.setItem("accessToken", results.token);
-        alert("Login access!")
+        alert("Login access!");
+        if(results.role === '2'){
+          window.location.pathname = '/';
+        }
+        if (results.role === '1') {
+          window.location.pathname = '/admin';
+        }
         
       })
       .catch((error) => {

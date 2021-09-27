@@ -9,6 +9,7 @@ const validateMessages = {
   },
   number: {
     range: '${label} must be between ${min} and ${max}',
+    min: 6
   },
   };
 
