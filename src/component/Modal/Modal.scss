@@ -2,16 +2,14 @@
 @import "../../style/base.scss";
 .modal {
   font-family: "Raleway", sans-serif !important;
-  // display: none;
+  display: none;
   background: transparent;
   color: $white;
   position: fixed;
   display: flex;
   justify-content: flex-end;
   top: 0;
-  left: 0;
   right: 0;
-  bottom: 0;
   z-index: 1000;
   .content {
     animation: moving 0.2s linear;

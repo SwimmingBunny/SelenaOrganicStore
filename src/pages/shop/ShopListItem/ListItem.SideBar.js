@@ -47,10 +47,7 @@ const SideBar = () => {
             dispatch(filterType({ key: "1" }));
           }}
         >
-          <Menu.ItemGroup key="sub1">
-            <Menu.Item key="2">Price</Menu.Item>
-            <Menu.Item key="3">Rating</Menu.Item>
-          </Menu.ItemGroup>
+          <Menu.ItemGroup key="sub1"></Menu.ItemGroup>
         </SubMenu>
         <SubMenu
           key="sub2"
@@ -58,30 +55,21 @@ const SideBar = () => {
           onTitleClick={() => {
             dispatch(filterType({ key: "5" }));
           }}
-        >
-          <Menu.Item key="6">Price</Menu.Item>
-          <Menu.Item key="7">Rating</Menu.Item>
-        </SubMenu>
+        ></SubMenu>
         <SubMenu
           key="sub4"
           title="Juice"
           onTitleClick={() => {
             dispatch(filterType({ key: "8" }));
           }}
-        >
-          <Menu.Item key="9">Price</Menu.Item>
-          <Menu.Item key="10">Rating</Menu.Item>
-        </SubMenu>
+        ></SubMenu>
         <SubMenu
           key="sub5"
           title="Fruits"
           onTitleClick={() => {
             dispatch(filterType({ key: "11" }));
           }}
-        >
-          <Menu.Item key="12">Price</Menu.Item>
-          <Menu.Item key="13">Rating</Menu.Item>
-        </SubMenu>
+        ></SubMenu>
       </Menu>
       {/* split */}
       <h1 className="sidebar__h1">Filter By Price</h1>

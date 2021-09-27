@@ -8,65 +8,42 @@ import { ROUTE } from "../../constant/router.js";
 import ScrollToTop from "../../component/commont/ScrollToTop";
 import { getListProductApi } from "../../redux/reducers/productSlice";
 
-
 const Product = () => {
   const { TabPane } = Tabs;
-  const {listProductApi} = useSelector(state => state.listProduct)
-  const [listProduct, setListProduct] = React.useState(listProductApi)
-
-  
+  const { listProductApi } = useSelector((state) => state.listProduct);
+  const [listProduct, setListProduct] = React.useState(listProductApi);
 
   const callAPI = (key) => {
-    if(key === '1'){
-     const list = listProductApi.filter((item,index)=>{
-        return(
-          item.type === "vegetables"
-        )
-      })
-      setListProduct(list)
+    if (key === "1") {
+      const list = listProductApi.filter((item, index) => {
+        return item.type === "vegetables";
+      });
+      setListProduct(list);
     }
-    if(key === '2'){
-      const list = listProductApi.filter((item,index)=>{
-         return(
-           item.type === "fruits"
-         )
-       })
-       setListProduct(list)
-     }
-     if(key === '3'){
-      const list = listProductApi.filter((item,index)=>{
-         return(
-           item.type === "juice"
-         )
-       })
-       setListProduct(list)
-     }
-     if(key === '4'){
-      const list = listProductApi.filter((item,index)=>{
-         return(
-           item.type === "meats"
-         )
-       })
-       setListProduct(list)
-     }
-  
-  }
-  const renderListProduct = () =>{
-    return(
-      listProduct?.map((item,index)=>{
-        return(
-          <ProductItem
-          key={index}
-          img={item.img}
-          name={item.name}
-          price={item.price}
-          sell={item.sell}
-          id = {index}
-        />
-        )
-      })
-    )
-  }
+    if (key === "2") {
+      const list = listProductApi.filter((item, index) => {
+        return item.type === "fruits";
+      });
+      setListProduct(list);
+    }
+    if (key === "3") {
+      const list = listProductApi.filter((item, index) => {
+        return item.type === "juice";
+      });
+      setListProduct(list);
+    }
+    if (key === "4") {
+      const list = listProductApi.filter((item, index) => {
+        return item.type === "meats";
+      });
+      setListProduct(list);
+    }
+  };
+  const renderListProduct = () => {
+    return listProduct?.map((item, index) => {
+      return <ProductItem key={index} {...item} />;
+    });
+  };
 
   return (
     <div className="container">
@@ -80,24 +57,24 @@ const Product = () => {
           onChange={callAPI}
           className="product__item-list"
         >
-          <TabPane tab ="Vegetable" key="1">
+          <TabPane tab="Vegetable" key="1">
             <Row gutter={16} className="product__list">
-              {renderListProduct ()}
+              {renderListProduct()}
             </Row>
           </TabPane>
           <TabPane tab="Fruits" key="2">
             <Row gutter={16} className="product__list">
-              {renderListProduct ()}
+              {renderListProduct()}
             </Row>
           </TabPane>
           <TabPane tab="Juice" key="3">
             <Row gutter={16} className="product__list">
-              {renderListProduct ()}
+              {renderListProduct()}
             </Row>
           </TabPane>
           <TabPane tab="Meats" key="4">
             <Row gutter={16} className="product__list">
-              {renderListProduct ()}
+              {renderListProduct()}
             </Row>
           </TabPane>
         </Tabs>

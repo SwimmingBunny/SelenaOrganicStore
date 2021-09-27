@@ -47,10 +47,11 @@ const Header = () => {
   const { infoUser } = useSelector((state) => state.listCustomer);
   console.log("🚀 ~ file: Header.js ~ line 48 ~ Header ~ infoUser", infoUser)
   const renderDataCart = () => {
-    return cart?.map((item, index) => {
+    return cart.slice(0, 5).map((item, index) => {
       return <HeaderCart key={index} {...item} />;
     });
   };
+
   const totalProduct = cart.length;
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
@@ -167,9 +168,12 @@ const Header = () => {
   const { listProductApi } = useSelector((state) => state.listProduct);
   const renderResult = () => {
     return listProductApi
-      .filter((val) => {
-        if (val.name.includes(valueSearch)) {
-          return val;
+      .filter((item) => {
+        if (item.name.toLowerCase().includes(valueSearch)) {
+          return item;
+        }
+        if (item.name.toUpperCase().includes(valueSearch)) {
+          return item;
         }
       })
       .map((item) => {

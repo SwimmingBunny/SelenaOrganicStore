@@ -16,12 +16,12 @@ import {
 
 library.add(faTrash);
 const TableRow = (props) => {
-  const { id, name, price, img, stock } = props;
+  const { id, name, price, img, stock, count } = props;
   const dispatch = useDispatch();
-  const [count, setCount] = React.useState(1);
+  const [count1, setCount] = React.useState(count);
   const [check, setCheck] = React.useState(true);
   const [checkStock, setCheckStock] = React.useState(true);
-  
+
   const countStyle = {
     minWidth: "3.7rem",
     textAlign: "center",
@@ -42,15 +42,15 @@ const TableRow = (props) => {
   };
 
   const Plus = () => {
-    if (count === 1) {
+    if (count1 === 1) {
       setCheck(true);
     }
-    setCount(count + 1);
-    if (count >= stock -1 ) {
+    setCount(count1 + 1);
+    if (count1 >= stock - 1) {
       setCheckStock(false);
       alert("alo");
     } else {
-      dispatch(editCartItem({ ...props, count: count + 1 }));
+      dispatch(editCartItem({ ...props, count: count1 + 1 }));
     }
   };
   const Minus = () => {
@@ -61,48 +61,48 @@ const TableRow = (props) => {
       setCheck(true);
       setCount(count - 1);
       setCheckStock(true);
-      dispatch(editCartItem({ ...props, count: count - 1 }));
+      dispatch(editCartItem({ ...props, count: count1 - 1 }));
     }
   };
 
   return (
-    <tr className='cart__table-tr'>
-      <td className='cart__table-tr--td '>
-        <img className='cart__table-tr--td--img' src={img} alt='img' />
+    <tr className="cart__table-tr">
+      <td className="cart__table-tr--td ">
+        <img className="cart__table-tr--td--img" src={img} alt="img" />
       </td>
-      <td className='cart__table-tr--td'>{name}</td>
-      <td className='cart__table-tr--td'>{price}</td>
-      <td className='cart__table-tr--td'>
+      <td className="cart__table-tr--td">{name}</td>
+      <td className="cart__table-tr--td">{price}</td>
+      <td className="cart__table-tr--td">
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div style={borderStyle}>
             {check ? (
-              <Button onClick={Minus} size='small' style={btnStyle}>
+              <Button onClick={Minus} size="small" style={btnStyle}>
                 <MinusOutlined />
               </Button>
             ) : (
-              <Button onClick={Minus} disabled size='small' style={btnStyle}>
+              <Button onClick={Minus} disabled size="small" style={btnStyle}>
                 <MinusOutlined />
               </Button>
             )}
 
-            <p style={countStyle}>{count}</p>
+            <p style={countStyle}>{count1}</p>
             {checkStock ? (
-              <Button onClick={Plus} size='small' style={btnStyle}>
+              <Button onClick={Plus} size="small" style={btnStyle}>
                 <PlusOutlined />
               </Button>
             ) : (
-              <Button onClick={Plus} size='small' disabled style={btnStyle}>
+              <Button onClick={Plus} size="small" disabled style={btnStyle}>
                 <PlusOutlined />
-             </Button>
+              </Button>
             )}
           </div>
         </div>
       </td>
-      <td className='cart__table-tr--td'>{price * count}</td>
-      <td className='cart__table-tr--td'>
+      <td className="cart__table-tr--td">{price * count}</td>
+      <td className="cart__table-tr--td">
         <FontAwesomeIcon
-          icon='trash'
-          className='cart__table-tr--td--icon'
+          icon="trash"
+          className="cart__table-tr--td--icon"
           onClick={() => {
             dispatch(deleteItemCart(id));
           }}

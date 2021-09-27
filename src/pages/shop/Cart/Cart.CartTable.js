@@ -2,7 +2,7 @@ import { Button } from "antd";
 import React from "react";
 import TableRow from "../../../component/commont/TableRow.js";
 import CartForm from "./Cart.CartForm";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ROUTE } from "../../../constant/router";
@@ -19,31 +19,27 @@ const CartTable = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getListProductApi())
-  }, [])
+    dispatch(getListProductApi());
+  }, []);
 
-  const {cart}= useSelector(state => state.listProduct)
-
-  const renderDataCart = ()=>{
-    return cart?.map((item,index)=>{
-      return (
-        <TableRow
-          key = {index}
-          {...item}
-        />
-      )
-    })
-  }
-
-
-  const getTotal = ()=>{
-    let total = 0;
-    cart.forEach(element => {
-      return total += element.total;
-
+  const { cart } = useSelector((state) => state.listProduct);
+  console.log(cart, "a;pa ;pád");
+  const renderDataCart = () => {
+    return cart?.map((item, index) => {
+      return <TableRow key={index} {...item} />;
     });
-    return total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  }
+  };
+
+  const getTotal = () => {
+    let total = 0;
+    cart.forEach((element) => {
+      return (total += element.total);
+    });
+    return total.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
 
   return (
     <>
@@ -78,7 +74,10 @@ const CartTable = () => {
           <p className="cart__total-conten--total"> {+getTotal() + 10}.00 </p>
         </div>
         <Button className="cart__total-btn" type="primary">
-         <NavLink to={ROUTE.CHECKOUT} exact > PROCEED CHECKOUT</NavLink> 
+          <NavLink to={ROUTE.CHECKOUT} exact>
+            {" "}
+            PROCEED CHECKOUT
+          </NavLink>
         </Button>
       </div>
     </>

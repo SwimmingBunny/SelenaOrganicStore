@@ -12,9 +12,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 const CartForm = () => {
   const [value, setValue] = React.useState(null);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  
   return (
     <Row className="cart__form">
       <Col lg={{ span: 24 }} xs={{ span: 24 }} className="cart__form-col2">
