@@ -24,9 +24,9 @@ const AccountUser = () => {
   React.useEffect(() => {
     dispatch(getListCustomerApi());
   }, []);
-  React.useEffect(() => {
-    setFormValue(list);
-  }, []);
+  // React.useEffect(() => {
+  //   setFormValue(list);
+  // }, [list]);
   
   const handelOnChange = (e) => {
     if (e.target) {

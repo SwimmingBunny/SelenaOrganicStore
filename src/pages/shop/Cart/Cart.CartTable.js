@@ -8,9 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { ROUTE } from "../../../constant/router";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
   NavLink,
 } from "react-router-dom";
 import { getListProductApi } from "../../../redux/reducers/productSlice.js";

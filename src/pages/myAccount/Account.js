@@ -18,11 +18,15 @@ import WishListTable from "../shop/wishlist/WishList.Table";
 import CartTable from "../shop/Cart/Cart.CartTable";
 import ChangePassword from "./ChangePassword";
 import { useMediaQuery } from "react-responsive";
+import { useSelector,useDispatch } from "react-redux";
 
 const Account = (props) => {
+  const list = JSON.parse(localStorage.getItem('inforUser'));
+
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
+  
   const { TabPane } = Tabs;
   return (
     <>
@@ -39,7 +43,7 @@ const Account = (props) => {
               </div>
               <div>
                 <h4>Account</h4>
-                <h3>SELLENA</h3>
+                <h3>{list.fullName}</h3>
               </div>
             </div>
             <div className="myaccount__nav__bot">
