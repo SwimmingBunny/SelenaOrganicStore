@@ -65,11 +65,21 @@ const SideBar = () => {
 
         <Menu onClick={handleColor} className="sidebar__menu1" mode="inline">
           <Menu.ItemGroup key="sub5">
-            <Menu.Item key="red">Red</Menu.Item>
-            <Menu.Item key="orange">Organe</Menu.Item>
-            <Menu.Item key="purple">Purple</Menu.Item>
-            <Menu.Item key="green">Green</Menu.Item>
-            <Menu.Item key="yellow">Yellow</Menu.Item>
+            <Menu.Item key="red">
+              <p style={{ color: "red" }}> Red</p>
+            </Menu.Item>
+            <Menu.Item key="orange">
+              <p style={{ color: "orange" }}> Orange</p>
+            </Menu.Item>
+            <Menu.Item key="purple">
+              <p style={{ color: "purple" }}> Purple</p>
+            </Menu.Item>
+            <Menu.Item key="green">
+              <p style={{ color: "green" }}> Green</p>
+            </Menu.Item>
+            <Menu.Item key="yellow">
+              <p style={{ color: "yellow" }}> Yellow</p>
+            </Menu.Item>
           </Menu.ItemGroup>
         </Menu>
       </div>

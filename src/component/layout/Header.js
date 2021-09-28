@@ -45,11 +45,6 @@ const Header = () => {
   }, []);
   const { cart } = useSelector((state) => state.listProduct);
   const { infoUser } = useSelector((state) => state.listCustomer);
-  console.log(
-    "🚀 ~ file: Header.js ~ line 48 ~ Header ~ infoUser",
-    infoUser.length
-  );
-
   const renderDataCart = () => {
     return cart.slice(0, 5).map((item, index) => {
       return <HeaderCart key={index} {...item} />;
@@ -187,11 +182,7 @@ const Header = () => {
       <div className="header">
         <div className="container">
           <Row className="header__top">
-            <Col
-              lg={{ span: 10 }}
-              xs={{ span: 24 }}
-              className="header__top-img"
-            >
+            <Col lg={{ span: 8 }} xs={{ span: 24 }} className="header__top-img">
               <img
                 src="Images/logo/logo.png"
                 alt="Logo image"
@@ -199,12 +190,12 @@ const Header = () => {
               />
             </Col>
 
-            <Col lg={{ span: 14 }} xs={{ span: 24 }}>
+            <Col lg={{ span: 16 }} xs={{ span: 24 }}>
               <Row className="header__top-right">
                 <Col
                   className="header__top-account"
-                  lg={{ span: 6 }}
-                  md={{ span: 6 }}
+                  lg={{ span: 8 }}
+                  md={{ span: 8 }}
                   xs={{ span: 12 }}
                 >
                   <Dropdown overlay={accountMenu}>
@@ -228,7 +219,7 @@ const Header = () => {
                 </Col>
                 <Col
                   className="header__top-search"
-                  lg={{ span: 14 }}
+                  lg={{ span: 12 }}
                   md={{ span: 12 }}
                   xs={{ span: 24 }}
                 >

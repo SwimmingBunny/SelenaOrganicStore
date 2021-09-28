@@ -118,7 +118,9 @@ const ProductDetail = (props) => {
     dispatch(addToWishlist({ ...itemDetail }));
     setisShowWishlist(false);
   };
-  window.scrollTo(0, 20);
+  React.useEffect(() => {
+    window.scrollTo(0, 50);
+  }, []);
   const handleIsShow = () => {
     setIsShowCart(true);
   };
