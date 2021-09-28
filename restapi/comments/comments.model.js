@@ -3,7 +3,7 @@ const sql = require('../db_connection');
 const Comment = function(comments) {
     this.rating = comments.rating;
     this.content = comments.content;
-    this.date = comments.date;
+    this.date = new Date();
     this.product_id = comments.product_id;
     this.customer_id = comments.customer_id;
   };

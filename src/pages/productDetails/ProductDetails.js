@@ -13,6 +13,7 @@ import {
   Space,
   Input,
   Form,
+  Comment, Tooltip, List 
 } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
@@ -28,25 +29,24 @@ import {
   addToCart,
   addToWishlist,
   getListProductApi,
-  deleteItemCart,
   editCartItem,
 } from "../../redux/reducers/productSlice";
-// import test from "../../product-10.jpg";
-// import img2 from "../../../public/Images/product/fruits/0219.jpg";
+import moment from 'moment';
+import { addComment, addCommentApi, getListCommentApi } from "../../redux/reducers/commentSlice.js";
 const ProductDetail = (props) => {
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
+  const list = JSON.parse(localStorage.getItem('inforUser'));
   const [isShowCart, setIsShowCart] = React.useState(true);
   const [isShowWishlist, setisShowWishlist] = React.useState(true);
   const [itemDetail, setItemDetail] = React.useState();
   const [countPD, setCountPD] = React.useState(1);
-  console.log(itemDetail, "itemDetail o day");
-
   const dispatch = useDispatch();
   const { listProductApi } = useSelector((state) => state.listProduct);
-  const [date, setDate] = React.useState(new Date().getDate());
   const [rate, setRate] = React.useState("");
+  const [contentVl, setContentVl] = React.useState("")
+
   const { TabPane } = Tabs;
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
   const [check, setCheck] = React.useState(true);
@@ -93,7 +93,7 @@ const ProductDetail = (props) => {
   };
   let { id } = useParams();
   React.useEffect(() => {
-    dispatch(getListProductApi());
+    dispatch(getListProductApi()) && dispatch(getListCommentApi())
   }, []);
   React.useEffect(() => {
     const d = listProductApi.find((item) => item.id === +id); //find e in arr
@@ -125,67 +125,87 @@ const ProductDetail = (props) => {
   const handleIsShowWishlist = () => {
     setisShowWishlist(true);
   };
+
+  const handelComment = (product_id) =>{
+    dispatch(addCommentApi({contentVl,rate,product_id,customer_id:list.id }))
+  }
+  const data = [
+    {
+      actions: [<span key="comment-list-reply-to-0">Reply to</span>],
+      author: 'Han Solo',
+      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+      content: (
+        <p>
+          We supply a series of design principles, practical patterns and high quality design
+          resources (Sketch and Axure), to help people create their product prototypes beautifully and
+          efficiently.
+        </p>
+      ),
+      datetime: (
+        <Tooltip title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}>
+          <span>{moment().subtract(1, 'days').fromNow()}</span>
+        </Tooltip>
+      ),
+    },
+  ];
+
   return (
     <>
-      <div className="container detail">
-        <Row className="detail__top">
-          <Col lg={{ span: 8 }} className="detail__img">
+      <div className='container detail'>
+        <Row className='detail__top'>
+          <Col lg={{ span: 8 }} className='detail__img'>
             <img
-              className="detail__img--size"
+              className='detail__img--size'
               src={`http://localhost:3000/${itemDetail?.img}`}
             />
           </Col>
-          <Col lg={{ span: 16 }} className="detail__info">
+          <Col lg={{ span: 16 }} className='detail__info'>
             <div style={{ paddingLeft: isMoblie ? "2rem" : "8rem" }}>
               <Rate value={itemDetail?.rating} />
               <h2>{itemDetail?.name}</h2>
               <div></div>
-              <h2 className="detail__info--price">$ {itemDetail?.price}.00</h2>
-              <p className="detail__info--descrip">{itemDetail?.description}</p>
+              <h2 className='detail__info--price'>$ {itemDetail?.price}.00</h2>
+              <p className='detail__info--descrip'>{itemDetail?.description}</p>
               <Button
-                className="form__btn detail__info--cart"
-                size="large"
-                onClick={handleAddCart}
-              >
+                className='form__btn detail__info--cart'
+                size='large'
+                onClick={handleAddCart}>
                 ADD TO CART
               </Button>
 
               <Button
-                className="detail__info--heart"
-                size="large"
-                onClick={handleAddWishlist}
-              >
+                className='detail__info--heart'
+                size='large'
+                onClick={handleAddWishlist}>
                 <HeartOutlined />
               </Button>
               <div style={{ display: "flex" }}>
                 <div style={borderStyle}>
                   {check ? (
-                    <Button onClick={Minus} size="small" style={btnStyle}>
+                    <Button onClick={Minus} size='small' style={btnStyle}>
                       <MinusOutlined />
                     </Button>
                   ) : (
                     <Button
                       onClick={Minus}
                       disabled
-                      size="small"
-                      style={btnStyle}
-                    >
+                      size='small'
+                      style={btnStyle}>
                       <MinusOutlined />
                     </Button>
                   )}
 
                   <p style={countStyle}>{countPD}</p>
                   {checkStock ? (
-                    <Button onClick={Plus} size="small" style={btnStyle}>
+                    <Button onClick={Plus} size='small' style={btnStyle}>
                       <PlusOutlined />
                     </Button>
                   ) : (
                     <Button
                       onClick={Plus}
-                      size="small"
+                      size='small'
                       disabled
-                      style={btnStyle}
-                    >
+                      style={btnStyle}>
                       <PlusOutlined />
                     </Button>
                   )}
@@ -198,64 +218,46 @@ const ProductDetail = (props) => {
             </div>
           </Col>
         </Row>
-        <Row className="detail__middle">
+        <Row className='detail__middle'>
           <Space style={{ marginBottom: 24 }}></Space>
           <Tabs tabPosition={isMoblie ? "top" : "left"}>
             <TabPane
-              tab="Description"
-              key="1"
-              className="detail__middle--boder"
-            >
-              <p className="detail__info--descrip">{itemDetail?.description}</p>
+              tab='Description'
+              key='1'
+              className='detail__middle--boder'>
+              <p className='detail__info--descrip'>{itemDetail?.description}</p>
             </TabPane>
             <TabPane
-              tab="Reviews"
-              key="2"
-              className="detail__middle--boder detail__middle__review"
-            >
-              <h2> 1 Review For Admin</h2>
-              <div>
-                <div className="detail--flex">
-                  <img
-                    className="detail__middle__review--avt"
-                    src="Images/product/product-1.jpg"
-                    alt="avatar"
-                  />
-                  <div className="detail__middle__review--info">
-                    <h3>Admin</h3>
-                    <Rate />
-                    <p>{date}</p>
-                    <p className="detail__info--descrip">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Nam fringilla augue nec est tristique auctor. Donec non
-                      est at libero vulputate rutrum.
-                    </p>
-                  </div>
-                </div>
-                <div className="detail--flex">
-                  <img
-                    className="detail__middle__review--avt"
-                    src="Images/product/product-1.jpg"
-                    alt="avatar"
-                  />
-                  <div className="detail__middle__review--info">
-                    <h3>Admin</h3>
-                    <Rate />
-                    <p>{date}</p>
-                    <p className="detail__info--descrip">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Nam fringilla augue nec est tristique auctor. Donec non
-                      est at libero vulputate rutrum.
-                    </p>
-                  </div>
-                </div>
-                <div className="detail__middle__review--sb">
+              tab='Reviews'
+              key='2'
+              className='detail__middle--boder detail__middle__review'>
+                  <div className='detail__middle__review--info'>
+                    <List
+                      className='comment-list'
+                      header={`${data.length} Comment`}
+                      itemLayout='horizontal'
+                      dataSource={data}
+                      renderItem={(item) => (
+                        <li>
+                          <Comment
+                            actions={item.actions}
+                            author={item.author}
+                            avatar={item.avatar}
+                            content={item.content}
+                            datetime={item.datetime}
+                          />
+                        </li>
+                      )}
+                    />
+                <div className='detail__middle__review--sb'>
                   <h3>Comment:</h3>
                   <Input
-                    className="form__group--input"
-                    placeholder="Enter review product..."
+                    className='form__group--input'
+                    placeholder='Enter review product...'
+                    onChange = {(e)=>{setContentVl(e.target.value)}}
+                    value={contentVl}
                   />
-                  <div className="detail__middle__review--sb--rate">
+                  <div className='detail__middle__review--sb--rate'>
                     <h3>Rate:</h3>
                     <Rate
                       tooltips={desc}
@@ -263,14 +265,14 @@ const ProductDetail = (props) => {
                       value={rate}
                     />
                     {rate ? (
-                      <span className="ant-rate-text"> : {desc[rate - 1]}</span>
+                      <span className='ant-rate-text'> : {desc[rate - 1]}</span>
                     ) : (
                       ""
                     )}
                   </div>
 
                   <br />
-                  <Button className="form__btn detail__info--cart" size="large">
+                  <Button className='form__btn detail__info--cart' htmlType="submit" size='large' onClick={()=>{handelComment(itemDetail?.id)}}>
                     Comment
                   </Button>
                 </div>
@@ -278,9 +280,9 @@ const ProductDetail = (props) => {
             </TabPane>
           </Tabs>
         </Row>
-        <Row className="detail__bottom">
-          <h1 className="detail__bottom--related">Related Product</h1>
-          <div className="detail__bottom--boder"></div>
+        <Row className='detail__bottom'>
+          <h1 className='detail__bottom--related'>Related Product</h1>
+          <div className='detail__bottom--boder'></div>
           <Row gutter={16}>
             <ProductItem
               img={`http://localhost:3000/${itemDetail?.img}`}
@@ -304,18 +306,16 @@ const ProductDetail = (props) => {
         </Row>
       </div>
       <div
-        className="modal"
+        className='modal'
         onClick={handleIsShow}
-        style={{ display: isShowCart ? "none" : "flex" }}
-      >
-        <Modal name="Add to cart suscces" />
+        style={{ display: isShowCart ? "none" : "flex" }}>
+        <Modal name='Add to cart suscces' />
       </div>
       <div
-        className="modal"
+        className='modal'
         onClick={handleIsShowWishlist}
-        style={{ display: isShowWishlist ? "none" : "flex" }}
-      >
-        <Modal name="Add to wishlist suscces" />
+        style={{ display: isShowWishlist ? "none" : "flex" }}>
+        <Modal name='Add to wishlist suscces' />
       </div>
     </>
   );

@@ -10,6 +10,8 @@ import BannerStatistics from "./Home.BannerStatistics";
 import BrandArea from "./Home.BrandArea";
 //
 const Home = () => {
+
+  
   return (
     <>
       <Slider />

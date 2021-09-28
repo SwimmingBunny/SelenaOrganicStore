@@ -142,12 +142,6 @@ const Admin = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <Link className='admin-text' to={`${url}${ROUTE.UI}`}>
-                    <AppstoreOutlined className='icon' />
-                    User interface
-                  </Link>
-                </li>
-                <li>
                   <Link className='admin-text' to={`${url}${ROUTE.CUSTOMER}`}>
                     <UserOutlined className='icon' />
                     Customers
