@@ -90,8 +90,6 @@ const userRegister = createSlice({
             state.customer = action.payload
         },
         setInfoCustomer: (state,action) => {
-          
-          console.log("🚀 ~ file: customerSlice.js ~ line 94 ~ state.infoUser", action.payload)
           state.infoUser = action.payload;
         },
         saveCurrentLocation : (state, action) => {

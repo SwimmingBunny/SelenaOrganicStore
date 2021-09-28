@@ -29,7 +29,7 @@ const SideBar = () => {
   }, []);
 
   const handleClick = (item) => {
-    dispatch(setSortPrice(item));
+    dispatch(filterType(item));
   };
 
   const handleColor = (i) => {
@@ -39,37 +39,12 @@ const SideBar = () => {
     <div className="sidebar">
       <h1 className="sidebar__h1">Categories</h1>
       <Menu onClick={handleClick} className="sidebar__menu1" mode="inline">
-        <SubMenu
-          key="sub1"
-          title="Vegetables"
-          className="sidebar__menu-submenu"
-          onTitleClick={() => {
-            dispatch(filterType({ key: "1" }));
-          }}
-        >
-          <Menu.ItemGroup key="sub1"></Menu.ItemGroup>
-        </SubMenu>
-        <SubMenu
-          key="sub2"
-          title="Meat"
-          onTitleClick={() => {
-            dispatch(filterType({ key: "5" }));
-          }}
-        ></SubMenu>
-        <SubMenu
-          key="sub4"
-          title="Juice"
-          onTitleClick={() => {
-            dispatch(filterType({ key: "8" }));
-          }}
-        ></SubMenu>
-        <SubMenu
-          key="sub5"
-          title="Fruits"
-          onTitleClick={() => {
-            dispatch(filterType({ key: "11" }));
-          }}
-        ></SubMenu>
+        <Menu.ItemGroup key="sub1">
+          <Menu.Item key="1">Vegetables</Menu.Item>
+          <Menu.Item key="11">Fruits</Menu.Item>
+          <Menu.Item key="8">Juice</Menu.Item>
+          <Menu.Item key="5">Meat</Menu.Item>
+        </Menu.ItemGroup>
       </Menu>
       {/* split */}
       <h1 className="sidebar__h1">Filter By Price</h1>
