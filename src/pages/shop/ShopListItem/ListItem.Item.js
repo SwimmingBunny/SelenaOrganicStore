@@ -11,6 +11,7 @@ import ProductItem from "../../../component/commont/ProductsItem";
 import {
   getListProductApi,
   setSort,
+  setCurrentPage,
   filterType,
   setSortPrice,
 } from "../../../redux/reducers/productSlice";
@@ -21,8 +22,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faColumns, faWindowMaximize);
 
 const ShopItem = () => {
-  const { SubMenu } = Menu;
-  const [currenPage, setCurrenPage] = React.useState(1);
+  const { currentPage } = useSelector((state) => state.listProduct);
+  console.log(currentPage, "alo alo");
   const PAGE_SIZE = 12;
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
@@ -45,7 +46,6 @@ const ShopItem = () => {
   }, []);
 
   function handleChange(value) {
-    setCurrenPage(1);
     dispatch(setSort(value));
   }
   const handleChangeUI = () => {
@@ -59,7 +59,7 @@ const ShopItem = () => {
       .map((item, index) => {
         return <ProductItem key={index} layout={changeUI} {...item} />;
       })
-      .splice((currenPage - 1) * PAGE_SIZE)
+      .splice((currentPage - 1) * PAGE_SIZE)
       .splice(0, PAGE_SIZE);
   };
   const renderProduct = () => {
@@ -67,7 +67,7 @@ const ShopItem = () => {
       .map((item, index) => {
         return <ProductList key={index} layout={changeUI} {...item} />;
       })
-      .splice((currenPage - 1) * PAGE_SIZE)
+      .splice((currentPage - 1) * PAGE_SIZE)
       .splice(0, PAGE_SIZE);
   };
 
@@ -124,13 +124,11 @@ const ShopItem = () => {
         <div className="shopitem__pagi">
           <Pagination
             pageSize={PAGE_SIZE}
-            current={currenPage}
+            current={currentPage}
             total={listProductApi.length}
             onChange={(page) => {
-              {
-                setCurrenPage(page);
-                window.scrollTo(0, 200);
-              }
+              dispatch(setCurrentPage(page));
+              window.scrollTo(0, 200);
             }}
           />
         </div>

@@ -78,10 +78,15 @@ const listProduct = createSlice({
     sortPrice: null,
     filterType: null,
     searchValue: null,
+    currentPage: 1,
   },
   reducers: {
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
     setSort: (state, action) => {
       state.sortType = action.payload;
+      state.currentPage = 1;
       state.listProductApi = [...state.listProductInit].sort((a, b) => {
         if (action.payload === "NameA") {
           var nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -145,6 +150,7 @@ const listProduct = createSlice({
     },
     filterType: (state, action) => {
       state.filterType = action.payload.key;
+      state.currentPage = 1;
       state.listProductApi = [...state.listProductInit].filter(
         (item, index) => {
           const id = action.payload.key;
@@ -165,6 +171,7 @@ const listProduct = createSlice({
     },
     filterColor: (state, action) => {
       state.filterColor = action.payload.key;
+      state.currentPage = 1;
       state.listProductApi = [...state.listProductInit].filter((item) => {
         const id = action.payload.key;
         switch (id) {
@@ -311,5 +318,6 @@ export const {
   deleteItem,
   filterColor,
   searchItem,
+  setCurrentPage,
 } = actions;
 export default reducer;

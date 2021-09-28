@@ -11,8 +11,7 @@ const Cart = () => {
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
-  const { cart} = useSelector((state) => state.listProduct);
-
+  const { cart } = useSelector((state) => state.listProduct);
   return (
     <div>
       <div className="cart__header">
