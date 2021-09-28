@@ -136,7 +136,7 @@ const ProductDetail = (props) => {
             />
           </Col>
           <Col lg={{ span: 16 }} className="detail__info">
-            <div style={{ paddingLeft: "8rem" }}>
+            <div style={{ paddingLeft: isMoblie ? "2rem" : "8rem" }}>
               <Rate value={itemDetail?.rating} />
               <h2>{itemDetail?.name}</h2>
               <div></div>
@@ -283,13 +283,23 @@ const ProductDetail = (props) => {
           <div className="detail__bottom--boder"></div>
           <Row gutter={16}>
             <ProductItem
-              img="http://localhost:3000/Images/product/product-10.jpg"
-              name="Carrot"
-              price="2"
-              sell="$5"
+              img={`http://localhost:3000/${itemDetail?.img}`}
+              name={itemDetail?.name}
+              price={itemDetail?.price}
+              rating={itemDetail?.rating}
             />
-            {/* <ProductItem img={img2} name="Carrot" price="2" sell="$5" />
-          <ProductItem img={test} name="Carrot" price="2" sell="$5" /> */}
+            <ProductItem
+              img={`http://localhost:3000/${itemDetail?.img}`}
+              name={itemDetail?.name}
+              price={itemDetail?.price}
+              rating={itemDetail?.rating}
+            />
+            <ProductItem
+              img={`http://localhost:3000/${itemDetail?.img}`}
+              name={itemDetail?.name}
+              price={itemDetail?.price}
+              rating={itemDetail?.rating}
+            />
           </Row>
         </Row>
       </div>

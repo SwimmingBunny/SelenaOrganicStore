@@ -104,6 +104,7 @@ const listProduct = createSlice({
           }
         }
         if (action.payload === "All") {
+          console.log(action.payload, "alo alo");
           return true;
         }
         if (action.payload === "RatingZ") {
@@ -118,11 +119,11 @@ const listProduct = createSlice({
         if (action.payload === "PriceZ") {
           return b.price - a.price;
         }
-        if(action.payload === "Stock"){
-          return a.stock - b.stock
+        if (action.payload === "Stock") {
+          return a.stock - b.stock;
         }
-        if(action.payload === "Price"){
-          return a.price - b.price
+        if (action.payload === "Price") {
+          return a.price - b.price;
         }
       });
     },

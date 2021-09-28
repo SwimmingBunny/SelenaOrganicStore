@@ -35,7 +35,7 @@ const ProductItem = (props) => {
     dispatch(addToCart({ id, img, name, price, stock, total: price, count }));
     setIsShowCart(false);
   };
- 
+
   const handleAddWishlist = () => {
     dispatch(addToWishlist({ id, img, name, price, stock }));
     setisShowWishlist(false);
@@ -49,99 +49,51 @@ const ProductItem = (props) => {
 
   return (
     <>
-      {!props.layout ? (
-        <Col lg={{ span: 8 }} xs={{ span: 12 }}>
-          <div style={{ padding: "2.4rem .8rem " }}>
-            <div className="product__list-item">
-              <div className="product__list-item--img">
-                <img style={{ width: "100%" }} src={props.img} alt="" />
-              </div>
-              <div className="product__list-item--rating">
-                <span>
-                  <Rate allowHalf count={rating} />
-                </span>
-              </div>
-              <NavLink className="product__list-item--h3" to={ROUTE.SHOPDETAIL}>
-                {props.name}
-              </NavLink>
-              <div className="product__list-item--price">
-                <p className="product__list-item--price--p">
-                  ${props.price}.00{" "}
-                </p>
-                <p className="product__list-item--price--p discounted">
-                  {props.sell}
-                </p>
-              </div>
-              <div className="product__list-item--icon">
-                <Popover content="Add to cart" onClick={handleAddCart}>
-                  <div className="product__list-item--icon-1">
-                    <FontAwesomeIcon
-                      className="product__list-item--icon--1"
-                      icon="shopping-bag"
-                    />
-                  </div>
-                </Popover>
-                <Popover content=" Wishlist" onClick={handleAddWishlist}>
-                  <div className="product__list-item--icon-2">
-                    <FontAwesomeIcon
-                      className="product__list-item--icon--1"
-                      icon="heart"
-                    />
-                  </div>
-                </Popover>
-              </div>
-              <Link className="quickview__eye" to={`${ROUTE.SHOPITEM}/${id}`}>
-                <QuickView />
-              </Link>
+      <Col lg={{ span: 8 }} xs={{ span: 12 }}>
+        <div style={{ padding: "2.4rem .8rem " }}>
+          <div className="product__list-item">
+            <div className="product__list-item--img">
+              <img style={{ width: "100%" }} src={props.img} alt="" />
             </div>
-          </div>
-        </Col>
-      ) : (
-        <Col lg={{ span: 8 }} xs={{ span: 24 }}>
-          <div style={{ padding: "2.4rem .8rem " }}>
-            <div className="product__list-item">
-              <div className="product__list-item--img">
-                <img style={{ width: "100%" }} src={props.img} alt="" />
-              </div>
-              <div className="product__list-item--rating">
-                <Rate value={rating} />
-              </div>
-              <NavLink className="product__list-item--h3" to={ROUTE.SHOPDETAIL}>
-                {props.name}
-              </NavLink>
-              <div className="product__list-item--price">
-                <p className="product__list-item--price--p">
-                  ${props.price}.00{" "}
-                </p>
-                <p className="product__list-item--price--p discounted">
-                  {props.sell}
-                </p>
-              </div>
-              <div className="product__list-item--icon">
-                <Popover content="Add to cart" onClick={handleAddCart}>
-                  <div className="product__list-item--icon-1">
-                    <FontAwesomeIcon
-                      className="product__list-item--icon--1"
-                      icon="shopping-bag"
-                    />
-                  </div>
-                </Popover>
-                <Popover content=" Wishlist" onClick={handleAddWishlist}>
-                  <div className="product__list-item--icon-2">
-                    <FontAwesomeIcon
-                      className="product__list-item--icon--1"
-                      icon="heart"
-                    />
-                  </div>
-                </Popover>
-              </div>
-              <Link className="quickview__eye" to={`${ROUTE.SHOPITEM}/${id}`}>
-                <QuickView />
-              </Link>
+            <div className="product__list-item--rating">
+              <span>
+                <Rate allowHalf value={rating} />
+              </span>
             </div>
+            <NavLink className="product__list-item--h3" to={ROUTE.SHOPDETAIL}>
+              {props.name}
+            </NavLink>
+            <div className="product__list-item--price">
+              <p className="product__list-item--price--p">${props.price}.00 </p>
+              <p className="product__list-item--price--p discounted">
+                {props.sell}
+              </p>
+            </div>
+            <div className="product__list-item--icon">
+              <Popover content="Add to cart" onClick={handleAddCart}>
+                <div className="product__list-item--icon-1">
+                  <FontAwesomeIcon
+                    className="product__list-item--icon--1"
+                    icon="shopping-bag"
+                  />
+                </div>
+              </Popover>
+              <Popover content=" Wishlist" onClick={handleAddWishlist}>
+                <div className="product__list-item--icon-2">
+                  <FontAwesomeIcon
+                    className="product__list-item--icon--1"
+                    icon="heart"
+                  />
+                </div>
+              </Popover>
+            </div>
+            <Link className="quickview__eye" to={`${ROUTE.SHOPITEM}/${id}`}>
+              <QuickView />
+            </Link>
           </div>
-        </Col>
-      )}
+        </div>
+      </Col>
+
       <div
         className="modal"
         onClick={handleIsShow}
