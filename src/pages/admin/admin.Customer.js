@@ -141,8 +141,11 @@ const AdminRow = () => {
               <td className='icon'>
                 <DeleteOutlined
                   onClick={async () => {
-                    await dispatch(deleteListCustomerApi(item.id));
-                    dispatch(getListCustomerApi());
+                    const isDele = window.confirm("Are you sure delete this user?")
+                    if(isDele === true) {
+                      await dispatch(deleteListCustomerApi(item.id));
+                      dispatch(getListCustomerApi());
+                    }
                   }}
                 />
               </td>
@@ -175,7 +178,7 @@ const AdminRow = () => {
         <tr>
           <th className='id'>ID</th>
           <th className='fullName'>Full Name</th>
-          <th className='name'>Name</th>
+          <th className='name'>Username</th>
           <th className='email'>Email</th>
           <th className='phone'>Phone</th>
           <th className='address'>Address</th>

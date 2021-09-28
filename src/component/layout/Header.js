@@ -21,7 +21,6 @@ import "antd/dist/antd.css";
 import "../../style/style.scss";
 import "../../style/base.scss";
 import "../../responsive/responsive.scss";
-import ReactDOM from "react-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -44,7 +43,9 @@ const Header = () => {
     dispatch(getListProductApi());
   }, []);
   const { cart } = useSelector((state) => state.listProduct);
-  const { infoUser } = useSelector((state) => state.listCustomer);
+  const list = JSON.parse(localStorage.getItem('inforUser'));
+
+
   const renderDataCart = () => {
     return cart.slice(0, 5).map((item, index) => {
       return <HeaderCart key={index} {...item} />;
@@ -205,9 +206,9 @@ const Header = () => {
                         size="small"
                         icon={<UserOutlined />}
                       />
-                      {infoUser.fullName ? (
+                      {list.fullName ? (
                         <>
-                          {infoUser.fullName} <DownOutlined />
+                          {list.fullName} <DownOutlined />
                         </>
                       ) : (
                         <>

@@ -81,7 +81,6 @@ function Public(params) {
 
 function PrivateRoute({ children, ...rest }) {
   let token = localStorage.getItem("accessToken");
-  console.log("auth", token);
   return (
     <Route
       {...rest}

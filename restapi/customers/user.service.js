@@ -98,10 +98,10 @@ async function update(id, params) {
 console.log("🚀 ~ file: user.service.js ~ line 98 ~ update ~ params", params)
     const user = await getUser(id);
     // validate
-    const usernameChanged = params.username && user.username !== params.username;
-    if (usernameChanged && await findUser(params.username)) {
-        throw 'Username "' + params.username + '" is already taken';
-    }
+    // const usernameChanged = params.username && user.username !== params.username;
+    // // if (usernameChanged && await findUser(params.username)) {
+    // //     throw 'Username "' + params.username + '" is already taken';
+    // // }
 
     // hash password if it was entered
     if (params.password) {
@@ -110,7 +110,8 @@ console.log("🚀 ~ file: user.service.js ~ line 98 ~ update ~ params", params)
 
     // copy params to user and save
     // Object.assign(user, params);
-    await db.query(`UPDATE customers SET mail='${params.mail}', username='${params.username}', 
+    await db.query(`UPDATE customers SET fullName='${params.fullName}', address='${params.address}',
+     mail='${params.mail}', username='${params.username}', phone='${params.phone}', gender='${params.gender}',
     password='${params.hash}' WHERE id =${id}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -121,7 +122,7 @@ console.log("🚀 ~ file: user.service.js ~ line 98 ~ update ~ params", params)
         console.log("updated customer: ", params);
         //   result(null, params);
     });
-    return {...omitHash(user)};
+    return {user};
 }
 
 async function _delete(id) {

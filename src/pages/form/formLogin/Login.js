@@ -51,6 +51,7 @@ const Login = () => {
         throw Error(response.status);
       })
       .then((result) => {
+        localStorage.setItem("inforUser", result);
         let results = JSON.parse(result);
         dispatch(setInfoCustomer(results));
         localStorage.setItem("accessToken", results.token);
@@ -59,11 +60,12 @@ const Login = () => {
           history.push("/");
         }
         if (results.role === "1") {
-          history.push("/admin");
+          history.push("/admin/dashboard");
         }
       })
       .catch((error) => {
         console.log("error", error);
+        alert("Login fail!");
       });
   };
   return (

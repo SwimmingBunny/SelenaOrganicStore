@@ -37,6 +37,7 @@ export const addCustomerApi = createAsyncThunk(
       return res.data;
     }
   );
+  
   export const deleteListCustomerApi = createAsyncThunk(
     "customer/deleteCustomerApi",
     async (id) => {
@@ -55,11 +56,16 @@ export const addCustomerApi = createAsyncThunk(
   export const updateCustomerApi = createAsyncThunk(
     "customer/updateCustomerApi",
     async (payload) => {
+      console.log("🚀 ~ file: customerSlice.js ~ line 59 ~ payload", payload)
       const res = await axios
         .put(`http://localhost:5000/customer/${payload.id}`, {
           username: payload.username,
           mail: payload.mail,
           password: payload.password,
+          fullName: payload.fullName,
+          phone: payload.phone,
+          address: payload.address,
+          gender: payload.gender,
         })
         .then((res) => {
           console.log(".addCustomerApi ~ res", res);
@@ -148,6 +154,7 @@ const userRegister = createSlice({
         [deleteListCustomerApi.pending]:(state,action) => {
           state.loading = true;
         },
+        
         
     }
 });
