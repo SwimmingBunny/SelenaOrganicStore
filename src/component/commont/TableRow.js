@@ -16,12 +16,13 @@ import {
 
 library.add(faTrash);
 const TableRow = (props) => {
+  // Tên biến
   const { id, name, price, img, stock, count } = props;
-  const dispatch = useDispatch();
   const [count1, setCount] = React.useState(count);
   const [check, setCheck] = React.useState(true);
   const [checkStock, setCheckStock] = React.useState(true);
-
+  const dispatch = useDispatch();
+// Style cho Button Count
   const countStyle = {
     minWidth: "3.7rem",
     textAlign: "center",
@@ -40,7 +41,7 @@ const TableRow = (props) => {
     justifyContent: "space-between",
     maxHeight: "3.4rem",
   };
-
+  // Function cho Button Count
   const Plus = () => {
     if (count1 === 1) {
       setCheck(true);

@@ -80,7 +80,7 @@ function Public(params) {
 }
 
 function PrivateRoute({ children, ...rest }) {
-  let token = localStorage.getItem("accessToken");
+  const token = localStorage.getItem("accessToken");
   return (
     <Route
       {...rest}

@@ -3,7 +3,6 @@
 import React from "react";
 import QuickView from "./QuickView";
 import Modal from "../Modal/Modal";
-
 import { Row, Col, Popover, Button } from "antd";
 import { Rate } from "antd";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -22,20 +21,25 @@ import {
   addToWishlist,
   addToDetail,
 } from "../../redux/reducers/productSlice";
-
 library.add(faShoppingBag, faHeart, faStar);
 
 const ProductItem = (props) => {
+  // Tên Biến
+  const token = localStorage.getItem("accessToken");
+  const history = useHistory();
   const [isShowCart, setIsShowCart] = React.useState(true);
   const [isShowWishlist, setisShowWishlist] = React.useState(true);
   const { id, name, img, price, stock, description, rating, count } = props;
   const dispatch = useDispatch();
-
+  // Các Function đơn giản
   const handleAddCart = () => {
-    dispatch(addToCart({ id, img, name, price, stock, total: price, count }));
-    setIsShowCart(false);
+    if (token) {
+      dispatch(addToCart({ id, img, name, price, stock, total: price, count }));
+      setIsShowCart(false);
+    } else {
+      history.push("/login");
+    }
   };
-
   const handleAddWishlist = () => {
     dispatch(addToWishlist({ id, img, name, price, stock }));
     setisShowWishlist(false);

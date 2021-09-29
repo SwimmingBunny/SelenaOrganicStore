@@ -140,6 +140,11 @@
 .header__top-container {
   display: flex;
 }
+.header__top-container-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .header__top-container-img {
   width: 10rem;
 }

@@ -22,9 +22,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faColumns, faWindowMaximize);
 
 const ShopItem = () => {
+  // Tên Biến
+  const dispatch = useDispatch();
+  const { listProductApi } = useSelector((state) => state.listProduct);
+  const [changeUI, setChangeUI] = React.useState(true);
   const { currentPage } = useSelector((state) => state.listProduct);
-  console.log(currentPage, "alo alo");
   const PAGE_SIZE = 12;
+  const { Option } = Select;
+  const totalResult = listProductApi.length;
+  React.useEffect(() => {
+    dispatch(getListProductApi());
+  }, []);
+  // use MediaQuery
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
@@ -36,24 +45,15 @@ const ShopItem = () => {
     }
   });
 
-  const { Option } = Select;
-  const dispatch = useDispatch();
-  const [changeUI, setChangeUI] = React.useState(true);
-  const { listProductApi } = useSelector((state) => state.listProduct);
-
-  React.useEffect(() => {
-    dispatch(getListProductApi());
-  }, []);
-
+  // Function đơn giản
   function handleChange(value) {
     dispatch(setSort(value));
   }
   const handleChangeUI = () => {
     setChangeUI(!changeUI);
   };
-
-  const totalResult = listProductApi.length;
-
+  // Render listProduct ra 2 kiểu
+  // kiểu 1
   const renderListProduct = () => {
     return listProductApi
       .map((item, index) => {
@@ -62,6 +62,7 @@ const ShopItem = () => {
       .splice((currentPage - 1) * PAGE_SIZE)
       .splice(0, PAGE_SIZE);
   };
+  // kiểu 2
   const renderProduct = () => {
     return listProductApi
       .map((item, index) => {

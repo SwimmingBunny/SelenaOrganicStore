@@ -13,11 +13,8 @@ import {
 } from "react-router-dom";
 const SubMenu = () => {
   const { SubMenu } = Menu;
-
-  // submenu keys of first level
   const rootSubmenuKeys = ["sub1", "sub2", "sub4"];
   const [openKeys, setOpenKeys] = React.useState(["sub1"]);
-
   const onOpenChange = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {

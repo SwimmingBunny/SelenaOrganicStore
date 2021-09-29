@@ -34,25 +34,19 @@ import {
 library.add(faShoppingCart, faTrash);
 
 const Header = () => {
+  // Tên Biến
   const token = localStorage.getItem("accessToken");
   const [isLogin, setIsLogin] = React.useState(token);
-  const dispatch = useDispatch();
-
   const [valueSearch, setValueSearch] = React.useState();
+  const list = JSON.parse(localStorage.getItem("inforUser"));
+  const history = useHistory();
+  const { Search } = Input;
+  const dispatch = useDispatch();
+  // Get listProductApi
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
-  const { cart } = useSelector((state) => state.listProduct);
-  const list = JSON.parse(localStorage.getItem('inforUser'));
-
-
-  const renderDataCart = () => {
-    return cart.slice(0, 5).map((item, index) => {
-      return <HeaderCart key={index} {...item} />;
-    });
-  };
-
-  const totalProduct = cart.length;
+  // user Media Query
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
@@ -65,8 +59,7 @@ const Header = () => {
       $(".header__submenu").removeClass("menufixed");
     }
   });
-
-  const history = useHistory();
+  //  Function đơn giản
   function goHome() {
     history.push("/");
   }
@@ -74,12 +67,39 @@ const Header = () => {
     history.push("/shop-product");
     return dispatch(searchItem(valueSearch));
   };
-  const { Search } = Input;
   const handleLogout = () => {
     history.push("/login");
-
-    return localStorage.removeItem("accessToken");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("inforUser");
   };
+
+  // Render cart ra component
+  const { cart } = useSelector((state) => state.listProduct);
+  const totalProduct = cart.length;
+  const renderDataCart = () => {
+    return cart.slice(0, 5).map((item, index) => {
+      return <HeaderCart key={index} {...item} />;
+    });
+  };
+
+  // Render ListProduct vào Thanh Sợt
+  const { listProductApi } = useSelector((state) => state.listProduct);
+  const renderResult = () => {
+    return listProductApi
+      .filter((item) => {
+        if (item.name.toLowerCase().includes(valueSearch)) {
+          return item;
+        }
+        if (item.name.toUpperCase().includes(valueSearch)) {
+          return item;
+        }
+      })
+      .map((item) => {
+        return <p>{item.name}</p>;
+      });
+  };
+
+  // SubMenu
   const accountMenu = (
     <Menu className="header__top-account-sub">
       {isLogin ? (
@@ -111,9 +131,17 @@ const Header = () => {
   );
   const cartMenu = (
     <Menu className="header__top-cart-sub">
-      {cart.length ? (
+      {totalProduct ? (
         <>
           {renderDataCart()}
+
+          <Menu.Item>
+            {totalProduct > 5 ? (
+              <span className="header__top-container-icon">
+                <DownOutlined />
+              </span>
+            ) : null}
+          </Menu.Item>
           <NavLink to={ROUTE.CART} exact>
             <Menu.Item>
               <Button id="header__top-container-btn" type="primary">
@@ -136,10 +164,6 @@ const Header = () => {
           </div>
         </Menu.Item>
       )}
-
-      {/* split here */}
-      {/* split here */}
-      {/* split here */}
     </Menu>
   );
   const shoplist = (
@@ -162,22 +186,10 @@ const Header = () => {
       </NavLink>
     </Menu>
   );
-  const { listProductApi } = useSelector((state) => state.listProduct);
-  const renderResult = () => {
-    return listProductApi
-      .filter((item) => {
-        if (item.name.toLowerCase().includes(valueSearch)) {
-          return item;
-        }
-        if (item.name.toUpperCase().includes(valueSearch)) {
-          return item;
-        }
-      })
-      .map((item) => {
-        return <p>{item.name}</p>;
-      });
-  };
 
+  // Chỗ returm
+  // Chỗ returm
+  // Chỗ return
   return (
     <div style={{ paddingTop: isMoblie ? "0" : "12rem" }}>
       <div className="header">
@@ -206,9 +218,9 @@ const Header = () => {
                         size="small"
                         icon={<UserOutlined />}
                       />
-                      {list.fullName ? (
+                      {list?.fullName ? (
                         <>
-                          {list.fullName} <DownOutlined />
+                          {list?.fullName} <DownOutlined />
                         </>
                       ) : (
                         <>

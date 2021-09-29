@@ -14,24 +14,22 @@ import {
 
 import { Slider } from "antd";
 const SideBar = () => {
-  const { SubMenu } = Menu;
+  // Tên biến
   const dispatch = useDispatch();
-
-  const isMoblie = useMediaQuery({
-    query: "(max-width: 480px)",
-  });
-  function onChange(value) {
-    dispatch(setSortItem(value));
-  }
-
   React.useEffect(() => {
     dispatch(getListProductApi());
   }, []);
-
+  // Use MediaQuery
+  const isMoblie = useMediaQuery({
+    query: "(max-width: 480px)",
+  });
+  // function Đơn Giản
+  function onChange(value) {
+    dispatch(setSortItem(value));
+  }
   const handleClick = (item) => {
     dispatch(filterType(item));
   };
-
   const handleColor = (i) => {
     dispatch(filterColor(i));
   };
@@ -78,7 +76,7 @@ const SideBar = () => {
               <p style={{ color: "green" }}> Green</p>
             </Menu.Item>
             <Menu.Item key="yellow">
-              <p style={{ color: "yellow" }}> Yellow</p>
+              <p style={{ color: "#c7a012" }}> Yellow</p>
             </Menu.Item>
           </Menu.ItemGroup>
         </Menu>

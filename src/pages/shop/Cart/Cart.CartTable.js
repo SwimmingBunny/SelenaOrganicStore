@@ -6,27 +6,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ROUTE } from "../../../constant/router";
-import {
-  BrowserRouter as Router,
-  NavLink,
-} from "react-router-dom";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
 import { getListProductApi } from "../../../redux/reducers/productSlice.js";
 
 const CartTable = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
-
+  // render cart đển component
   const { cart } = useSelector((state) => state.listProduct);
-  console.log(cart, "a;pa ;pád");
   const renderDataCart = () => {
     return cart?.map((item, index) => {
       return <TableRow key={index} {...item} />;
     });
   };
-
+  // Function đơn giản
   const getTotal = () => {
     let total = 0;
     cart.forEach((element) => {
@@ -65,7 +60,7 @@ const CartTable = () => {
           <p> Shipping ($)</p>
           <p> 10.00</p>
         </div>
-      
+
         <div className="cart__total-conten">
           <p className="cart__total-conten--total"> Total ($)</p>
           <p className="cart__total-conten--total"> {+getTotal() + 10}.00 </p>
