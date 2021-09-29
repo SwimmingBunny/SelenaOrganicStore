@@ -80,7 +80,11 @@ const listProduct = createSlice({
       state.currentPage = 1;
       state.listProductApi = [...state.listProductInit]
         .filter((item) => {
-          return !state.filterType || state.filterType === item.type;
+          if (state.filterType === "all") {
+            return (state.listProductApi = [...state.listProductInit]);
+          } else {
+            return !state.filterType || state.filterType === item.type;
+          }
         })
         .sort((a, b) => {
           if (action.payload === "NameA") {
@@ -163,6 +167,9 @@ const listProduct = createSlice({
             case "5":
               state.filterType = "meats";
               return item.type === "meats";
+            case "2":
+              state.filterType = "all";
+              return true;
             default:
               return false;
           }

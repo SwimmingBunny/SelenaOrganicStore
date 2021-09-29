@@ -42,6 +42,7 @@ const SideBar = () => {
           <Menu.Item key="11">Fruits</Menu.Item>
           <Menu.Item key="8">Juice</Menu.Item>
           <Menu.Item key="5">Meat</Menu.Item>
+          <Menu.Item key="2">All Product</Menu.Item>
         </Menu.ItemGroup>
       </Menu>
       {/* split */}
