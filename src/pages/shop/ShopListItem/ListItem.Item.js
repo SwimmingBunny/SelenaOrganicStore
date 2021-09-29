@@ -79,7 +79,7 @@ const ShopItem = () => {
           <div style={{ margin: "1rem " }}>
             <span className="shopitem__sortitem-sort--span">Sort By:</span>
             <Select
-              defaultValue="All"
+              defaultValue="All Product"
               style={{ width: 120 }}
               onChange={handleChange}
               className="shopitem__sort-select"
@@ -119,7 +119,19 @@ const ShopItem = () => {
 
         <div>
           <Row className="product__list">
-            {changeUI ? <>{renderListProduct()} </> : <> {renderProduct()} </>}
+            {totalResult ? (
+              <>
+                {changeUI ? (
+                  <>{renderListProduct()} </>
+                ) : (
+                  <> {renderProduct()} </>
+                )}
+              </>
+            ) : (
+              <div className="align-center">
+                <img src="Images/about/nodata-found.png" />
+              </div>
+            )}
           </Row>
         </div>
         <div className="shopitem__pagi">

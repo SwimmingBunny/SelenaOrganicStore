@@ -61,17 +61,7 @@ const listProduct = createSlice({
     listProductApi: [],
     listProductInit: [],
     cart: [],
-    order: {
-      // cart: [
-      //   {
-      //     product: {},
-      //     quantity: 0,
-      //   },
-      // ],
-      // total: 0,
-      // discount: 0,
-      // customer: {},
-    },
+    order: {},
     wishlist: [],
     relateProduct: [],
     sortType: "All",
@@ -84,53 +74,59 @@ const listProduct = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
+
     setSort: (state, action) => {
       state.sortType = action.payload;
       state.currentPage = 1;
-      state.listProductApi = [...state.listProductInit].sort((a, b) => {
-        if (action.payload === "NameA") {
-          var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-          var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1;
+      state.listProductApi = [...state.listProductInit]
+        .filter((item) => {
+          return !state.filterType || state.filterType === item.type;
+        })
+        .sort((a, b) => {
+          if (action.payload === "NameA") {
+            var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
           }
-          if (nameA > nameB) {
-            return 1;
+          if (action.payload === "NameZ") {
+            var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return 1;
+            }
+            if (nameA > nameB) {
+              return -1;
+            }
           }
-        }
-        if (action.payload === "NameZ") {
-          var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-          var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-          if (nameA < nameB) {
-            return 1;
+          if (action.payload === "All") {
+            return (state.listProductApi = state.listProductInit);
           }
-          if (nameA > nameB) {
-            return -1;
+          if (action.payload === "RatingZ") {
+            return b.rating - a.rating;
           }
-        }
-        if (action.payload === "All") {
-          console.log(action.payload, "alo alo");
-          return true;
-        }
-        if (action.payload === "RatingZ") {
-          return b.rating - a.rating;
-        }
-        if (action.payload === "RatingA") {
-          return a.rating - b.rating;
-        }
-        if (action.payload === "PriceA") {
-          return a.price - b.price;
-        }
-        if (action.payload === "PriceZ") {
-          return b.price - a.price;
-        }
-        if (action.payload === "Stock") {
-          return a.stock - b.stock;
-        }
-        if (action.payload === "Price") {
-          return a.price - b.price;
-        }
-      });
+          if (action.payload === "RatingA") {
+            return a.rating - b.rating;
+          }
+          if (action.payload === "PriceA") {
+            return a.price - b.price;
+          }
+          if (action.payload === "PriceZ") {
+            return b.price - a.price;
+          }
+          if (action.payload === "Stock") {
+            return a.stock - b.stock;
+          }
+          if (action.payload === "Price") {
+            return a.price - b.price;
+          } else {
+            return false;
+          }
+        });
     },
     setSortItem: (state, action) => {
       state.sortPrice = action.payload;
@@ -156,12 +152,16 @@ const listProduct = createSlice({
           const id = action.payload.key;
           switch (id) {
             case "1":
+              state.filterType = "vegetables";
               return item.type === "vegetables";
             case "11":
+              state.filterType = "fruits";
               return item.type === "fruits";
             case "8":
+              state.filterType = "juice";
               return item.type === "juice";
             case "5":
+              state.filterType = "meats";
               return item.type === "meats";
             default:
               return false;
@@ -172,23 +172,27 @@ const listProduct = createSlice({
     filterColor: (state, action) => {
       state.filterColor = action.payload.key;
       state.currentPage = 1;
-      state.listProductApi = [...state.listProductInit].filter((item) => {
-        const id = action.payload.key;
-        switch (id) {
-          case "red":
-            return item.color === "red";
-          case "yellow":
-            return item.color === "yellow";
-          case "orange":
-            return item.color === "orange";
-          case "purple":
-            return item.color === "purple";
-          case "green":
-            return item.color === "green";
-          default:
-            return false;
-        }
-      });
+      state.listProductApi = [...state.listProductInit]
+        .filter((item) => {
+          return !state.filterType || state.filterType === item.type;
+        })
+        .filter((item) => {
+          const id = action.payload.key;
+          switch (id) {
+            case "red":
+              return item.color === "red";
+            case "yellow":
+              return item.color === "yellow";
+            case "orange":
+              return item.color === "orange";
+            case "purple":
+              return item.color === "purple";
+            case "green":
+              return item.color === "green";
+            default:
+              return false;
+          }
+        });
     },
     addToCart: (state, action) => {
       const id = action.payload.id;

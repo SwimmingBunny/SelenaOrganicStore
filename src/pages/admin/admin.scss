@@ -1,6 +1,7 @@
 @import "../../style/variable.scss";
 .admin {
   height: 100vh;
+  overflow: hidden;
   &-text {
     color: white;
     font-weight: 700;
@@ -131,13 +132,13 @@
   }
 }
 
-.top{
+.top {
   margin-bottom: 2rem;
-  justify-content:space-between;
-  &--flex{
+  justify-content: space-between;
+  &--flex {
     display: flex;
   }
-  &--width{
+  &--width {
     width: 50rem;
   }
 }
