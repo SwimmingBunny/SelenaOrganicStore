@@ -15,27 +15,35 @@ const Product = () => {
 
   const callAPI = (key) => {
     if (key === "1") {
-      const list = listProductApi.filter((item, index) => {
-        return item.type === "vegetables";
-      });
+      const list = listProductApi
+        .filter((item, index) => {
+          return item.type === "vegetables";
+        })
+        .slice(0, 6);
       setListProduct(list);
     }
     if (key === "2") {
-      const list = listProductApi.filter((item, index) => {
-        return item.type === "fruits";
-      });
+      const list = listProductApi
+        .filter((item, index) => {
+          return item.type === "fruits";
+        })
+        .slice(0, 6);
       setListProduct(list);
     }
     if (key === "3") {
-      const list = listProductApi.filter((item, index) => {
-        return item.type === "juice";
-      });
+      const list = listProductApi
+        .filter((item, index) => {
+          return item.type === "juice";
+        })
+        .slice(0, 6);
       setListProduct(list);
     }
     if (key === "4") {
-      const list = listProductApi.filter((item, index) => {
-        return item.type === "meats";
-      });
+      const list = listProductApi
+        .filter((item, index) => {
+          return item.type === "meats";
+        })
+        .slice(0, 6);
       setListProduct(list);
     }
   };

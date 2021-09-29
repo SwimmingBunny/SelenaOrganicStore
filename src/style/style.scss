@@ -96,9 +96,14 @@
 }
 .header__top-cart-container {
   justify-content: space-between;
+
   img {
     margin-right: 2rem;
   }
+}
+.header__top-cart-cover {
+  max-height: 300px;
+  overflow-y: scroll;
 }
 .header__top-cart-icon {
   position: relative;
