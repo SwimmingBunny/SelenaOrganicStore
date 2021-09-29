@@ -1,5 +1,4 @@
 /** @format */
-
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import Modal from "../../component/Modal/Modal.js";
@@ -34,18 +33,20 @@ import {
 import moment from 'moment';
 import { addComment, addCommentApi, getListCommentApi } from "../../redux/reducers/commentSlice.js";
 const ProductDetail = (props) => {
-  const isMoblie = useMediaQuery({
-    query: "(max-width: 480px)",
-  });
-  const list = JSON.parse(localStorage.getItem('inforUser'));
+  // Tên Biến
   const [isShowCart, setIsShowCart] = React.useState(true);
   const [isShowWishlist, setisShowWishlist] = React.useState(true);
   const [itemDetail, setItemDetail] = React.useState();
+  const [contentVl, setContentVl] = React.useState("")
+  const [rate, setRate] = React.useState("");
   const [countPD, setCountPD] = React.useState(1);
+  const list = JSON.parse(localStorage.getItem('inforUser'));
+
+  const isMoblie = useMediaQuery({
+    query: "(max-width: 480px)",
+  });
   const dispatch = useDispatch();
   const { listProductApi } = useSelector((state) => state.listProduct);
-  const [rate, setRate] = React.useState("");
-  const [contentVl, setContentVl] = React.useState("")
 
   const { TabPane } = Tabs;
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
