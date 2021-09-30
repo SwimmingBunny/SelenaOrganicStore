@@ -28,6 +28,11 @@ const Account = (props) => {
   });
   
   const { TabPane } = Tabs;
+
+  const handelLogout = () =>{
+    localStorage.removeItem('accessToken', 'inforUser');
+    alert('ok')
+  }
   return (
     <>
       <div className="aboutUs__header">
@@ -64,8 +69,8 @@ const Account = (props) => {
                   <h2 className="myaccount__title">CHANGE PASSWORD</h2>
                   <ChangePassword />
                 </TabPane>
-                <TabPane tab="LOGOUT" key="5">
-                  UPDATE SAU!
+                <TabPane tab="LOGOUT" key="5" onTabClick={handelLogout}>
+
                 </TabPane>
               </Tabs>
             </div>

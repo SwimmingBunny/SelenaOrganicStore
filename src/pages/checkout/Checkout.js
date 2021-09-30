@@ -11,10 +11,21 @@ import "../../style/checkout.scss";
 import "../../style/form.scss";
 import "../../style/aboutus.scss";
 import { getListProductApi } from "../../redux/reducers/productSlice";
+import { addOrderApi } from "../../redux/reducers/orderSlice";
 const Checkout = (props) => {
+  const list = JSON.parse(localStorage.getItem("inforUser"));
   const [isShowCart, setIsShowCart] = React.useState(true);
 
   const [form] = Form.useForm();
+  const [formVl, setFormVl] = React.useState(
+    {
+      fullName: '',
+      mail: '',
+      phone: '',
+      address: '',
+      note:''
+    }
+  );
   const [isShow, setIsShow] = React.useState(true);
 
   const dispatch = useDispatch();
@@ -22,7 +33,9 @@ const Checkout = (props) => {
   useEffect(() => {
     dispatch(getListProductApi());
   }, []);
-
+  useEffect(() => {
+    setFormVl(list);
+  }, [list]);
   const { cart } = useSelector((state) => state.listProduct);
 
   const onChange = (e) => {
@@ -37,29 +50,26 @@ const Checkout = (props) => {
     setIsShowCart(true);
   };
 
-  const handleSbm = () => {
+  const handleSbm = (listId) => {
     setIsShowCart(false);
 
     let total = 10; //10 ship
-    const discount = 50;
+    
 
     const cartApi = cart.map((vl) => {
       total = total + vl.total;
 
       return {
-        product: {
-          id: vl.id,
-          name: vl.name,
-          price: vl.price,
-        },
+        product_id: vl.id,
         quantity: vl.count,
       };
     });
     const request = {
       cart: cartApi,
       total,
-      discount,
+      listId
     };
+    dispatch(addOrderApi(request))
   };
 
   const getTotal = () => {
@@ -87,11 +97,11 @@ const Checkout = (props) => {
               <Form
                 Form={form}
                 name='basic'
-                initialValues={{ remember: true }}
+                initialValues={{ remember: true , fullName: list.fullName, phone: list.phone, email: list.mail, address: list.address }}
                 validateMessages={validateMessages}>
                 <Form.Item
                   label='Full name'
-                  name='fullname'
+                  name='fullName'
                   rules={[
                     {
                       required: true,
@@ -115,48 +125,27 @@ const Checkout = (props) => {
                   />
                 </Form.Item>
                 <Form.Item
-                  label='Street Address'
-                  name='streetaddress'
-                  rules={[
-                    {
-                      required: true,
-                      type: "streetaddress",
-                    },
-                  ]}>
+                  label='Phone'
+                  name="phone"
+                  rules={[{ required: true, type: "phone" }]}>
                   <Input
-                    name='streetaddress'
+                    name="phone"
                     className='form__group--input form__group--backgroundColor'
-                    placeholder=' Street Address'
+                    placeholder='Enter your phone'
                   />
                 </Form.Item>
                 <Form.Item
-                  label='Town / City'
-                  name='town'
+                  label='Address'
+                  name='address'
                   rules={[
                     {
                       required: true,
-                      message: "Please input your Full Name",
                     },
                   ]}>
                   <Input
-                    name='town'
+                    name='address'
                     className='form__group--input form__group--backgroundColor'
-                    placeholder='Town / City'
-                  />
-                </Form.Item>
-                <Form.Item
-                  label='State / Divition'
-                  name='state'
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Full Name",
-                    },
-                  ]}>
-                  <Input
-                    name='state'
-                    className='form__group--input form__group--backgroundColor'
-                    placeholder='State / Divition'
+                    placeholder='Address'
                   />
                 </Form.Item>
                 <Form.Item
@@ -220,7 +209,7 @@ const Checkout = (props) => {
                       size='large'
                       htmlType="submit"
                       className='form__btn'
-                      onClick={handleSbm}>
+                      onClick={()=>handleSbm(list.id)}>
                       PLACE ORDER
                     </Button>
                   </Form.Item>

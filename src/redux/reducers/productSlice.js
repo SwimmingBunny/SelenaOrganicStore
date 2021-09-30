@@ -6,7 +6,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { switchCase } from "@babel/types";
 
 export const getListProductApi = createAsyncThunk(
-  "product/getApiData",
+  "product/getProductApi",
   async () => {
     const res = await axios
       .get(`http://localhost:5000/products/search?KeySearch`)
@@ -18,6 +18,30 @@ export const getListProductApi = createAsyncThunk(
         console.log("e", e);
       });
     return res.data;
+  }
+);
+
+
+export const postListProductApi = createAsyncThunk(
+  "product/postProductApi",
+  async (payload) => {
+    console.log("🚀 ~ file: productSlice.js ~ line 28 ~ payload", payload)
+    await axios
+      .post(`http://localhost:5000/products`,{
+        name: payload.name,
+        type: payload.type,
+        price: payload.price,
+        stock: payload.color,
+        color: payload.stock,
+        description: payload.description,
+      })
+      .then((res) => {
+        // console.log(".listProductApi ~ res", res);
+        return res;
+      })
+      .catch((e) => {
+        console.log("e", e);
+      });
   }
 );
 export const updateProductApi = createAsyncThunk(
@@ -61,17 +85,7 @@ const listProduct = createSlice({
     listProductApi: [],
     listProductInit: [],
     cart: [],
-    order: {
-      // cart: [
-      //   {
-      //     product: {},
-      //     quantity: 0,
-      //   },
-      // ],
-      // total: 0,
-      // discount: 0,
-      // customer: {},
-    },
+    order: { },
     wishlist: [],
     relateProduct: [],
     sortType: "All",
@@ -79,6 +93,7 @@ const listProduct = createSlice({
     filterType: null,
     searchValue: null,
     currentPage: 1,
+    loading: false
   },
   reducers: {
     setCurrentPage: (state, action) => {
@@ -298,6 +313,9 @@ const listProduct = createSlice({
     [getListProductApi.fulfilled]: (state, action) => {
       state.listProductApi = action.payload || [];
       state.listProductInit = action.payload || [];
+    },
+    [postListProductApi.pending]: (state, action) => {
+      state.loading = true;
     },
     [deleteListProductApi.pending]: (state, action) => {},
   },

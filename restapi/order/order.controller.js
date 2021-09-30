@@ -9,19 +9,14 @@ exports.create = (req, res) => {
     };
 
     const order = new Order  ({
-        discount: req.body.discount,
+        status: req.body.status,
         total: req.body.total,
         customer_id: req.body.customer_id,
         cart: req.body.cart
     });
 
-    Order.create(order, (err, data) => {
-        if (err)
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the order."
-          });
-        else res.send(data);
+    Order.create(order, ( data) => {
+         res.send(data);
       });
 };
 

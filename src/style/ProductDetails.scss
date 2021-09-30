@@ -61,7 +61,6 @@
         border: 0.1rem solid $borderColor;
       }
       &--info {
-        border: 0.1rem solid $borderColor;
         padding: 1rem;
         margin: 0 0 5rem 1rem;
       }
@@ -82,4 +81,11 @@
       text-align: center;
     }
   }
+}
+
+
+////comment public////
+
+.sizeCmt{
+  font-size: 1rem;
 }

@@ -82,7 +82,7 @@ const Header = () => {
     });
   };
 
-  // Render ListProduct vào Thanh Sợt
+  // Render ListProduct vào Thanh Search
   const { listProductApi } = useSelector((state) => state.listProduct);
   const renderResult = () => {
     return listProductApi

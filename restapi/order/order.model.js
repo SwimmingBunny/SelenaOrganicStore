@@ -2,7 +2,7 @@ const sql = require('../db_connection');
 
 const Order = function(order) {
     this.date = new Date();
-    this.discount = order.discount;
+    this.status = order.status;
     this.total = order.total;
     this.customer_id = order.customer_id;
     this.cart = order.cart;
@@ -35,10 +35,12 @@ const Order = function(order) {
                     console.log('save order detail error')   ;                 
                     return reject(error);
                 }
-                // return resolve({success: true});
-                return resolve(results);
+                return resolve({success: true});
+                // return resolve(results);
+                
+              });
             });
-        });
+        
     };
     const getOrderDetailByOrderId = (orderId) => {
         return new Promise((resolve, reject) => {
@@ -53,7 +55,6 @@ const Order = function(order) {
     };
   Order.create = async (order, result) => {
     const newOrder = await saveOrder(order);
-    console.log("🚀 ~ file: order.model.js ~ line 29 ~ Order.create= ~ newOrder", newOrder)
     
     const listOrderDetail = order.cart ;    
     let newOrderDetail = [] ;
@@ -68,13 +69,13 @@ const Order = function(order) {
 
     };
     const orderDetailStatus = await saveOrderDetail (newOrderDetail);
-    // let  orderDetail = [];
-    // if (orderDetailStatus.success) {
-    //     orderDetail = await getOrderDetailByOrderId (newOrder.id);
-    //     // orderDetail = await Order.findById (newOrder.id);
-    // }
-    result(orderDetailStatus) ;
-       
+    
+    let  orderDetail = [];
+    if (orderDetailStatus.success) {
+        orderDetail = await getOrderDetailByOrderId(newOrder.id);
+    };
+    result({id: newOrder.id, orderDetail}) ;
+    
   };
 
   Order.findById = (order_id, result) => {
@@ -83,13 +84,13 @@ const Order = function(order) {
         console.log("error: ", err);
         result(err, null);
         return;
-      }
+      };
   
       if (res.length) {
-        console.log("found comment: ", res);
+        console.log("found order: ", res);
         result(null, res);
         return;
-      }
+      };
       // not found comment with the id
       result({ kind: "not_found" }, null);
     });

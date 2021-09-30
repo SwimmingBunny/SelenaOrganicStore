@@ -13,6 +13,7 @@ import {
   MenuOutlined,
   ShopOutlined,
   ShoppingCartOutlined,
+  AppstoreAddOutlined
 } from "@ant-design/icons";
 import { ROUTE } from "../../constant/router.js";
 import { useHistory } from "react-router-dom";
@@ -30,7 +31,8 @@ import {
 import "./admin.scss";
 import Dashboard from "./admin.DashBoard.js";
 import ProductRow from "./ProductRow.js";
-
+import Order from "./admin.Order.js"
+import AddProduct from "./admin.AddProduct.js";
 
 
 const Admin = () => {
@@ -79,6 +81,10 @@ const Admin = () => {
           <li>
             <ShopOutlined className='icon' />
             Product
+          </li>
+          <li>
+            <ShopOutlined className='icon' />
+              Add Product
           </li>
         </ul>
       </Menu.Item>
@@ -144,7 +150,7 @@ const Admin = () => {
                 <li>
                   <Link className='admin-text' to={`${url}${ROUTE.CUSTOMER}`}>
                     <UserOutlined className='icon' />
-                    Customers
+                      User
                   </Link>
                 </li>
                 <li>
@@ -157,6 +163,12 @@ const Admin = () => {
                   <Link className='admin-text' to={`${url}${ROUTE.PRODUCTS}`}>
                     <ShopOutlined className='icon' />
                     Products
+                  </Link>
+                </li>
+                <li>
+                  <Link className='admin-text' to={`${url}${ROUTE.ADDPRODUCT}`}>
+                    <AppstoreAddOutlined className='icon' />
+                  Add Products
                   </Link>
                 </li>
               </ul>
@@ -172,12 +184,17 @@ const Admin = () => {
               <Route path={`${path}${ROUTE.CUSTOMER}`} exact>
                     <AdminRow />
               </Route>
+              <Route path={`${path}${ROUTE.ORDERS}`} exact>
+                    <Order/>
+              </Route>
               <Route path={`${path}${ROUTE.PRODUCTS}`} exact>
                   <ProductRow/>
               </Route>
+              <Route path={`${path}${ROUTE.ADDPRODUCT}`} exact>
+                  <AddProduct/>
+              </Route>
             </Switch>
             </div>
-           
           </Col>
         </Row>
       </div>

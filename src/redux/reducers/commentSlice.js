@@ -58,7 +58,13 @@ const userRegister = createSlice({
         [addCommentApi.fulfilled]: (state, action) =>{
             state.success = true;
         },
-       
+        [getListCommentApi.pending]: (state,action) => {
+          state.loading = true;
+        },
+        [getListCommentApi.rejected]: (state,action) =>{},
+        [getListCommentApi.fulfilled]: (state, action) =>{
+          state.listCommentInit = action.payload || []
+        },
         
     }
 });

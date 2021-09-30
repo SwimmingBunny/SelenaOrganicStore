@@ -12,10 +12,10 @@ import {
   Space,
   Input,
   Form,
-  Comment, Tooltip, List 
+  Comment,
+  Tooltip,Avatar
 } from "antd";
-import { HeartOutlined } from "@ant-design/icons";
-import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
+import { PlusOutlined, MinusOutlined,HeartOutlined} from "@ant-design/icons";
 
 import "../../style/ProductDetails.scss";
 import "../../style/form.scss";
@@ -27,26 +27,31 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   addToWishlist,
-  getListProductApi,
   editCartItem,
 } from "../../redux/reducers/productSlice";
-import moment from 'moment';
-import { addComment, addCommentApi, getListCommentApi } from "../../redux/reducers/commentSlice.js";
-const ProductDetail = (props) => {
+import moment from "moment";
+import {
+  addCommentApi,
+  getListCommentApi,
+} from "../../redux/reducers/commentSlice.js";
+import { getListCustomerApi } from "../../redux/reducers/customerSlice.js";
+const ProductDetail = () => {
   // Tên Biến
   const [isShowCart, setIsShowCart] = React.useState(true);
   const [isShowWishlist, setisShowWishlist] = React.useState(true);
   const [itemDetail, setItemDetail] = React.useState();
-  const [contentVl, setContentVl] = React.useState("")
+  const [contentVl, setContentVl] = React.useState("");
   const [rate, setRate] = React.useState("");
   const [countPD, setCountPD] = React.useState(1);
-  const list = JSON.parse(localStorage.getItem('inforUser'));
+  const list = JSON.parse(localStorage.getItem("inforUser"));
 
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
   });
   const dispatch = useDispatch();
   const { listProductApi } = useSelector((state) => state.listProduct);
+  const { listCommentInit } = useSelector((state) => state.listComment);
+  const { listCustomerApi } = useSelector((state) => state.listCustomer);
 
   const { TabPane } = Tabs;
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
@@ -94,8 +99,11 @@ const ProductDetail = (props) => {
   };
   let { id } = useParams();
   React.useEffect(() => {
-    dispatch(getListProductApi()) && dispatch(getListCommentApi())
+    dispatch(getListCustomerApi())
   }, []);
+  React.useEffect(() => {
+    dispatch(getListCommentApi());
+  }, [listCommentInit]);
   React.useEffect(() => {
     const d = listProductApi.find((item) => item.id === +id); //find e in arr
     setItemDetail(d);
@@ -129,29 +137,52 @@ const ProductDetail = (props) => {
     setisShowWishlist(true);
   };
 
-  const handelComment = (product_id) =>{
-    dispatch(addCommentApi({contentVl,rate,product_id,customer_id:list.id }))
-  }
-  const data = [
-    {
-      actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-      author: 'Han Solo',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      content: (
-        <p>
-          We supply a series of design principles, practical patterns and high quality design
-          resources (Sketch and Axure), to help people create their product prototypes beautifully and
-          efficiently.
-        </p>
-      ),
-      datetime: (
-        <Tooltip title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}>
-          <span>{moment().subtract(1, 'days').fromNow()}</span>
-        </Tooltip>
-      ),
-    },
-  ];
+  const handelComment = (product_id) => {
+    dispatch(
+      addCommentApi({ contentVl, rate, product_id, customer_id: list.id })
+    );
+  };
+  
+ 
 
+  const renderComments = () => { 
+    return listCommentInit?.map((item) => {
+      if(item.product_id === itemDetail?.id){
+        let userID = item.customer_id;
+        const listCustomer =  listCustomerApi.filter((item)=>{
+          return item.id === userID;
+        })
+        const customer = listCustomer.map((item)=>{
+          return item.fullName
+        })
+        return (
+          <Comment
+            author={<a>{customer[0]}</a>}
+            avatar={
+              <Avatar
+                src='https://picsum.photos/200'
+                alt='avt'
+              />
+            }
+            content={
+              <div>
+                <p className="sizeCmt">{item.content}</p>
+                <span>
+                {item.rating ? <Rate value={item.rating}/> : null}
+              </span>
+              </div>
+            }
+            datetime={
+              <Tooltip>
+                <span>{moment(item.date).format("DD-MM-YYYY HH:mm:ss")}</span>
+              </Tooltip>
+            }
+          />
+        );
+      }
+      
+    });
+  };
   return (
     <>
       <div className='container detail'>
@@ -234,30 +265,16 @@ const ProductDetail = (props) => {
               tab='Reviews'
               key='2'
               className='detail__middle--boder detail__middle__review'>
-                  <div className='detail__middle__review--info'>
-                    <List
-                      className='comment-list'
-                      header={`${data.length} Comment`}
-                      itemLayout='horizontal'
-                      dataSource={data}
-                      renderItem={(item) => (
-                        <li>
-                          <Comment
-                            actions={item.actions}
-                            author={item.author}
-                            avatar={item.avatar}
-                            content={item.content}
-                            datetime={item.datetime}
-                          />
-                        </li>
-                      )}
-                    />
+              <div className='detail__middle__review--info'>
+                {renderComments()}
                 <div className='detail__middle__review--sb'>
                   <h3>Comment:</h3>
                   <Input
                     className='form__group--input'
                     placeholder='Enter review product...'
-                    onChange = {(e)=>{setContentVl(e.target.value)}}
+                    onChange={(e) => {
+                      setContentVl(e.target.value);
+                    }}
                     value={contentVl}
                   />
                   <div className='detail__middle__review--sb--rate'>
@@ -275,7 +292,13 @@ const ProductDetail = (props) => {
                   </div>
 
                   <br />
-                  <Button className='form__btn detail__info--cart' htmlType="submit" size='large' onClick={()=>{handelComment(itemDetail?.id)}}>
+                  <Button
+                    className='form__btn detail__info--cart'
+                    htmlType='submit'
+                    size='large'
+                    onClick={() => {
+                      handelComment(itemDetail?.id);
+                    }}>
                     Comment
                   </Button>
                 </div>
