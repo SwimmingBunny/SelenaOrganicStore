@@ -139,6 +139,10 @@
     left: 1rem !important;
     top: 21.7rem;
   }
+  .header-noti span {
+    transform: translateY(-1px);
+    font-size: 10px;
+  }
 }
 // 768px
 @media only screen and (max-width: 768px) {

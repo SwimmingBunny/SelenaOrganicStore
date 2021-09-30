@@ -2,8 +2,7 @@
 
 import React from "react";
 import QuickView from "./QuickView";
-import Modal from "../Modal/Modal";
-import { Row, Col, Popover, Button } from "antd";
+import { Row, Col, Popover, Modal, Space } from "antd";
 import { Rate } from "antd";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -26,30 +25,54 @@ library.add(faShoppingBag, faHeart, faStar);
 const ProductItem = (props) => {
   // Tên Biến
   const token = localStorage.getItem("accessToken");
-  const history = useHistory();
-  const [isShowCart, setIsShowCart] = React.useState(true);
-  const [isShowWishlist, setisShowWishlist] = React.useState(true);
   const { id, name, img, price, stock, description, rating, count } = props;
+  const history = useHistory();
   const dispatch = useDispatch();
   // Các Function đơn giản
   const handleAddCart = () => {
-    if (token) {
-      dispatch(addToCart({ id, img, name, price, stock, total: price, count }));
-      setIsShowCart(false);
+    if (stock === 0) {
+      warning();
     } else {
-      history.push("/login");
+      if (token) {
+        dispatch(
+          addToCart({ id, img, name, price, stock, total: price, count })
+        );
+        cartModal();
+      } else {
+        history.push("/login");
+      }
     }
   };
   const handleAddWishlist = () => {
     dispatch(addToWishlist({ id, img, name, price, stock }));
-    setisShowWishlist(false);
+    wlModal();
   };
-  const handleIsShow = () => {
-    setIsShowCart(true);
-  };
-  const handleIsShowWishlist = () => {
-    setisShowWishlist(true);
-  };
+  //  Modal
+  function cartModal() {
+    let secondsToGo = 1;
+    const modal = Modal.success({
+      title: "Add to cart susccess",
+    });
+    setTimeout(() => {
+      modal.destroy();
+    }, secondsToGo * 1000);
+  }
+  function wlModal() {
+    let secondsToGo = 1;
+    const modal = Modal.success({
+      title: "Add to wishlist susccess",
+    });
+    setTimeout(() => {
+      modal.destroy();
+    }, secondsToGo * 1000);
+  }
+  // Modal warning
+  function warning() {
+    Modal.error({
+      title: "Sorry! Stock Out",
+      content: "We will refill soon",
+    });
+  }
 
   return (
     <>
@@ -65,7 +88,16 @@ const ProductItem = (props) => {
               </span>
             </div>
             <NavLink className="product__list-item--h3" to={ROUTE.SHOPDETAIL}>
-              {props.name}
+              <div>
+                {stock === 0 ? (
+                  <>
+                    {props.name}
+                    <p className="stockout "> Stock Out</p>
+                  </>
+                ) : (
+                  <>{props.name}</>
+                )}
+              </div>
             </NavLink>
             <div className="product__list-item--price">
               <p className="product__list-item--price--p">${props.price}.00 </p>
@@ -73,6 +105,7 @@ const ProductItem = (props) => {
                 {props.sell}
               </p>
             </div>
+
             <div className="product__list-item--icon">
               <Popover content="Add to cart" onClick={handleAddCart}>
                 <div className="product__list-item--icon-1">
@@ -97,21 +130,6 @@ const ProductItem = (props) => {
           </div>
         </div>
       </Col>
-
-      <div
-        className="modal"
-        onClick={handleIsShow}
-        style={{ display: isShowCart ? "none" : "flex" }}
-      >
-        <Modal name="Add to cart suscces" />
-      </div>
-      <div
-        className="modal"
-        onClick={handleIsShowWishlist}
-        style={{ display: isShowWishlist ? "none" : "flex" }}
-      >
-        <Modal name="Add to wishlist suscces" />
-      </div>
     </>
   );
 };
