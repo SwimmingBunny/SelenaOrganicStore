@@ -1,9 +1,10 @@
 import React from "react";
-import Modal from "../../../component/Modal/Modal.js";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
+import { Modal } from "antd";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -14,8 +15,6 @@ import {
 library.add(faTrash, faPlus);
 
 const WishListRow = (props) => {
-  const [isShowCart, setIsShowCart] = React.useState(true);
-
   const dispatch = useDispatch();
 
   const { id, name, img, stock, price } = props;
@@ -24,15 +23,22 @@ const WishListRow = (props) => {
   }, []);
 
   const handleAddCart = () => {
+    cartModal();
     dispatch(
       addToCart({ id, img, name, price, stock, total: price, count: 1 })
     );
-    setIsShowCart(false);
-  };
-  const handleIsShow = () => {
-    setIsShowCart(true);
   };
 
+  //  Modal
+  function cartModal() {
+    let secondsToGo = 1;
+    const modal = Modal.success({
+      title: "Add to cart susccess",
+    });
+    setTimeout(() => {
+      modal.destroy();
+    }, secondsToGo * 1000);
+  }
   return (
     <>
       <tr className="wishlist__table-tr">
@@ -49,14 +55,16 @@ const WishListRow = (props) => {
           )}
         </td>
         <td className="wishlist__table-tr--td">
-          <p
-            className="wishlist__table-tr--td--ad"
-            onClick={() => {
-              handleAddCart();
-            }}
-          >
-            Add
-          </p>
+          {stock === 0 ? null : (
+            <p
+              className="wishlist__table-tr--td--ad"
+              onClick={() => {
+                handleAddCart();
+              }}
+            >
+              Add
+            </p>
+          )}
         </td>
         <td className="wishlist__table-tr--td">
           <FontAwesomeIcon
@@ -68,14 +76,6 @@ const WishListRow = (props) => {
           />
         </td>
       </tr>
-
-      <div
-        className="modal"
-        onClick={handleIsShow}
-        style={{ display: isShowCart ? "none" : "flex" }}
-      >
-        <Modal name="Add to cart suscces" />
-      </div>
     </>
   );
 };

@@ -17,9 +17,15 @@
     }
   }
   .content {
+    .stockout {
+      font-size: 1.2rem;
+      margin-bottom: 0;
+      color: #dc4557;
+    }
     margin-left: 4rem;
     h2 {
       font-weight: 500;
+      margin: 0;
     }
     h3 {
       color: $primaryColor;

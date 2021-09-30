@@ -33,6 +33,11 @@ const SideBar = () => {
   const handleColor = (i) => {
     dispatch(filterColor(i));
   };
+  function onChange(value) {
+    console.log(value, "123123");
+    dispatch(setSortItem(value));
+  }
+
   return (
     <div className="sidebar">
       <h1 className="sidebar__h1">Categories</h1>
@@ -46,17 +51,11 @@ const SideBar = () => {
         </Menu.ItemGroup>
       </Menu>
       {/* split */}
-      <h1 className="sidebar__h1">Filter By Price</h1>
-      <Slider
-        defaultValue={0}
-        max={3}
-        onChange={onChange}
-        // onAfterChange={onAfterChange}
-      />
+      <Slider range step={10} defaultValue={[20, 50]} onChange={onChange} />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <span>1$</span>
-        <span>10$</span>
-        <span>50$</span>
+        <span>30$</span>
+        <span>60$</span>
         <span>100$</span>
       </div>
       <div className="sidebar__">
