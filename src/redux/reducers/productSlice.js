@@ -21,12 +21,11 @@ export const getListProductApi = createAsyncThunk(
   }
 );
 
-
 export const postListProductApi = createAsyncThunk(
   "product/postProductApi",
   async (payload) => {
     await axios
-      .post(`http://localhost:5000/products`,{
+      .post(`http://localhost:5000/products`, {
         name: payload.name,
         type: payload.type,
         price: payload.price,
@@ -92,7 +91,7 @@ const listProduct = createSlice({
     filterType: null,
     searchValue: null,
     currentPage: 1,
-    loading: false
+    loading: false,
   },
   reducers: {
     setCurrentPage: (state, action) => {
@@ -434,6 +433,9 @@ const listProduct = createSlice({
     deleteItemCart: (state, action) => {
       state.cart = state.cart.filter((item) => action.payload !== item.id);
     },
+    clearItemCart: (state, action) => {
+      state.cart = state.cart.filter((item) => action.payload === item.id);
+    },
     deleteItemWishlist: (state, action) => {
       state.wishlist = state.wishlist.filter(
         (item) => action.payload !== item.id
@@ -504,6 +506,7 @@ const listProduct = createSlice({
           return { ...item, condition };
         })
         .filter((vl) => vl.condition);
+      state.currentPage = 1;
     },
   },
   extraReducers: {
@@ -536,5 +539,6 @@ export const {
   filterColor,
   searchItem,
   setCurrentPage,
+  clearItemCart,
 } = actions;
 export default reducer;

@@ -10,9 +10,11 @@ import {
   Space,
   Input,
   Comment,
-  Tooltip,Avatar,Modal
+  Tooltip,
+  Avatar,
+  Modal,
 } from "antd";
-import { PlusOutlined, MinusOutlined,HeartOutlined} from "@ant-design/icons";
+import { PlusOutlined, MinusOutlined, HeartOutlined } from "@ant-design/icons";
 
 import "../../style/ProductDetails.scss";
 import "../../style/form.scss";
@@ -60,14 +62,13 @@ const ProductDetail = () => {
   // Get đc listProductApi
   React.useEffect(() => {
     dispatch(getListCommentApi());
-    dispatch(getListCustomerApi())
-
+    dispatch(getListCustomerApi());
   }, []);
   React.useEffect(() => {
     const d = listProductApi.find((item) => item.id === +id); //find e in arr
     setItemDetail(d);
   }, [listProductApi, id]);
- 
+
   React.useEffect(() => {
     dispatch(getListCommentApi());
   }, [listCommentInit]);
@@ -107,7 +108,12 @@ const ProductDetail = () => {
     if (countPD >= itemDetail.stock - 1) {
       setCheckStock(false);
     } else {
-      dispatch(editCartItem({ ...itemDetail, count: countPD + 1 }));
+      dispatch(
+        editCartItem({
+          ...itemDetail,
+          count: countPD + 1,
+        })
+      );
     }
   };
   const Minus = () => {
@@ -118,12 +124,14 @@ const ProductDetail = () => {
       setCheck(true);
       setCountPD(countPD - 1);
       setCheckStock(true);
-      dispatch(editCartItem({ ...itemDetail, count: countPD - 1 }));
+      dispatch(
+        editCartItem({
+          ...itemDetail,
+          count: countPD - 1,
+        })
+      );
     }
   };
-  
- 
- 
 
   const handleAddCart = () => {
     if (itemDetail?.stock === 0) {
@@ -149,33 +157,25 @@ const ProductDetail = () => {
       addCommentApi({ contentVl, rate, product_id, customer_id: list.id })
     );
   };
- 
 
-  const renderComments = () => { 
+  const renderComments = () => {
     return listCommentInit?.map((item) => {
-      if(item.product_id === itemDetail?.id){
+      if (item.product_id === itemDetail?.id) {
         let userID = item.customer_id;
-        const listCustomer =  listCustomerApi.filter((item)=>{
+        const listCustomer = listCustomerApi.filter((item) => {
           return item.id === userID;
-        })
-        const customer = listCustomer.map((item)=>{
-          return item.fullName
-        })
+        });
+        const customer = listCustomer.map((item) => {
+          return item.fullName;
+        });
         return (
           <Comment
             author={<a>{customer[0]}</a>}
-            avatar={
-              <Avatar
-                src='https://picsum.photos/200'
-                alt='avt'
-              />
-            }
+            avatar={<Avatar src="https://picsum.photos/200" alt="avt" />}
             content={
               <div>
                 <p className="sizeCmt">{item.content}</p>
-                <span>
-                {item.rating ? <Rate value={item.rating}/> : null}
-              </span>
+                <span>{item.rating ? <Rate value={item.rating} /> : null}</span>
               </div>
             }
             datetime={
@@ -186,7 +186,6 @@ const ProductDetail = () => {
           />
         );
       }
-      
     });
   };
   //  Modal
@@ -298,16 +297,17 @@ const ProductDetail = () => {
               <p className="detail__info--descrip">{itemDetail?.description}</p>
             </TabPane>
             <TabPane
-              tab='Reviews'
-              key='2'
-              className='detail__middle--boder detail__middle__review'>
-              <div className='detail__middle__review--info'>
+              tab="Reviews"
+              key="2"
+              className="detail__middle--boder detail__middle__review"
+            >
+              <div className="detail__middle__review--info">
                 {renderComments()}
-                <div className='detail__middle__review--sb'>
+                <div className="detail__middle__review--sb">
                   <h3>Comment:</h3>
                   <Input
-                    className='form__group--input'
-                    placeholder='Enter review product...'
+                    className="form__group--input"
+                    placeholder="Enter review product..."
                     onChange={(e) => {
                       setContentVl(e.target.value);
                     }}
@@ -329,12 +329,13 @@ const ProductDetail = () => {
 
                   <br />
                   <Button
-                    className='form__btn detail__info--cart'
-                    htmlType='submit'
-                    size='large'
+                    className="form__btn detail__info--cart"
+                    htmlType="submit"
+                    size="large"
                     onClick={() => {
                       handelComment(itemDetail?.id);
-                    }}>
+                    }}
+                  >
                     Comment
                   </Button>
                 </div>

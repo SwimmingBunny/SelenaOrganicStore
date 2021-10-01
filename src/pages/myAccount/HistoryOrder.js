@@ -35,7 +35,6 @@ const HistoryOrder = () => {
   const { Option } = Select;
   React.useEffect(() => {
     dispatch(getListProductApi());
-    dispatch(getOrderFindOneApi(idBill));
     dispatch(getOrderApi());
     dispatch(getListCustomerApi());
     dispatch(getOrderUserApi());
@@ -43,6 +42,9 @@ const HistoryOrder = () => {
   React.useEffect(() => {
     dispatch(getOrderUserApi(list.id));
   }, [list.id]);
+  React.useEffect(() => {
+    dispatch(getOrderFindOneApi(idBill));
+  }, [idBill]);
   const [formNewVl, setFormNewVl] = useState({
     name: "",
     fullName: "",
@@ -65,6 +67,7 @@ const HistoryOrder = () => {
   };
   // console.log("--",listOrderFindOneApi);
   const renderBill = () => {
+    console.log(listOrderFindOneApi);
     return listOrderFindOneApi?.map((item) => {
       const product_id = item.product_id;
 
@@ -170,7 +173,7 @@ const HistoryOrder = () => {
       </table>
       {visible ? (
         <div className="modal" onClick={setIsShow}>
-          <div className="content">
+          <div className="content1">
             <table>
               <tr>
                 <th className="id">STT</th>

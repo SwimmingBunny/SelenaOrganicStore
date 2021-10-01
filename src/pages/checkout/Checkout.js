@@ -19,7 +19,10 @@ import { useEffect } from "react";
 import "../../style/checkout.scss";
 import "../../style/form.scss";
 import "../../style/aboutus.scss";
-import { getListProductApi } from "../../redux/reducers/productSlice";
+import {
+  getListProductApi,
+  clearItemCart,
+} from "../../redux/reducers/productSlice";
 import { addOrderApi } from "../../redux/reducers/orderSlice";
 const Checkout = (props) => {
   const list = JSON.parse(localStorage.getItem("inforUser"));
@@ -38,6 +41,7 @@ const Checkout = (props) => {
 
   useEffect(() => {
     dispatch(getListProductApi());
+    window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
     setFormVl(list);
@@ -69,6 +73,7 @@ const Checkout = (props) => {
       listId,
     };
     dispatch(addOrderApi(request));
+    dispatch(clearItemCart(-1));
   };
 
   const getTotal = (ship) => {
@@ -218,7 +223,6 @@ const Checkout = (props) => {
                       htmlType="submit"
                       className="form__btn"
                       onClick={() => {
-                      
                         handleSbm(list.id);
                       }}
                     >
