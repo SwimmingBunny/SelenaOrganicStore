@@ -4,7 +4,8 @@ const pool = mysql.createConnection({
   user: 'selena',
   password: 'DNL123$321',
   database: 'selena',
-  port: '23306'
+  port: '23306',
+  multipleStatements: true
 });
 
 module.exports = pool;

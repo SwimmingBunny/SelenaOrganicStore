@@ -69,21 +69,38 @@ export const addOrderApi = createAsyncThunk(
       return res.data;
     }
   );
-  // export const deleteOrderApi = createAsyncThunk(
-  //   "order/deleteOrderApi",
-  //   async (id) => {
-  //     const res = await axios
-  //       .delete(`http://localhost:5000/order/${id}`)
-  //       .then((res) => {
-  //         // console.log(".listProductApi ~ res", res);
-  //         return res;
-  //       })
-  //       .catch((e) => {
-  //         console.log("e", e);
-  //       });
-  //     return res.data;
-  //   }
-  // );
+  export const deleteOrderApi = createAsyncThunk(
+    "order/deleteOrderApi",
+    async (id) => {
+      const res = await axios
+        .delete(`http://localhost:5000/order/delete/${id}`)
+        .then((res) => {
+          // console.log(".listProductApi ~ res", res);
+          return res;
+        })
+        .catch((e) => {
+          console.log("e", e);
+        });
+      return res.data;
+    }
+  );
+  export const updateOrderApi = createAsyncThunk(
+    "order/updateOrderApi",
+    async (payload) => {
+      const res = await axios
+        .put(`http://localhost:5000/order/${payload.id}`, {
+          status: payload.status,
+        })
+        .then((res) => {
+          // console.log(".listProductApi ~ res", res);
+          return res;
+        })
+        .catch((e) => {
+          // console.log("e", e);
+        });
+      return res.data;
+    }
+  );
 const orderList = createSlice({
     name: 'orderList',
     initialState: {

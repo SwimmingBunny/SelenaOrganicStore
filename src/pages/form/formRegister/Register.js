@@ -27,7 +27,7 @@ const Register = () => {
 
   const handleRegister = () => {
     if (formValue.password === formValue.confirmPassword) {
-      message.success('Login Success', 3);
+      message.success('Register Success', 3);
       return dispatch(addCustomerApi({ ...formValue }));
     }
     

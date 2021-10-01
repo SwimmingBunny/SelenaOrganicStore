@@ -8,13 +8,16 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getListProductApi,
-  setSort,
-} from "../../redux/reducers/productSlice";
-import { Button, Input, Select } from "antd";
+import { getListProductApi, setSort } from "../../redux/reducers/productSlice";
+import { Button, Input, Select,message } from "antd";
 import { useState } from "react";
-import { getOrderApi, searchItem } from "../../redux/reducers/orderSlice";
+import {
+  deleteOrderApi,
+  getOrderApi,
+  getOrderUserApi,
+  searchItem,
+  updateOrderApi,
+} from "../../redux/reducers/orderSlice";
 import { getListCustomerApi } from "../../redux/reducers/customerSlice";
 import moment from "moment";
 
@@ -23,6 +26,7 @@ const Order = () => {
   const { listOrderApi } = useSelector((state) => state.listOrder);
   const { listCustomerApi } = useSelector((state) => state.listCustomer);
   const [edit, setEdit] = useState();
+  const [status, setStatus] = useState("Pending");
   const { Option } = Select;
   React.useEffect(() => {
     dispatch(getListProductApi());
@@ -48,8 +52,21 @@ const Order = () => {
   function handleChange(value) {
     dispatch(setSort(value));
   }
+  function handleStatusChange(value) {
+    console.log(`selected ${value}`);
+    setStatus(value)
+  }
   const handleSearch = () => {
     dispatch(searchItem(formNewVl.search));
+  };
+  const handleEdit = (id) => {
+    setEdit(id);
+  };
+  const handleSave = (id) => {
+    dispatch(updateOrderApi({status,id}));
+    message.success('Update Success', 4);
+    dispatch(getOrderApi());
+    setEdit();
   };
   const renderListOrder = () => {
     return listOrderApi.map((item) => {
@@ -67,19 +84,64 @@ const Order = () => {
         );
       });
       return (
-        <tr>
-          <td>{item.id}</td>
-          {user}
-          <td>{item.status}</td>
-          <td>{moment(item.date).format("DD-MM-YYYY")}</td>
-          <td>{item.total}</td>
-          <td className='icon'>
-            <EditFilled />
-          </td>
-          <td className='icon'>
-            <DeleteOutlined />
-          </td>
-        </tr>
+        <>
+          {edit === item.id ? (
+            <tr>
+              <td>{item.id}</td>
+              {user}
+              <td>
+                <Select
+                  defaultValue='Pending'
+                  style={{ width: 120 }}
+                  onChange={handleStatusChange}>
+                  <Option value='Pending'>Pending</Option>
+                  <Option value='Delivery'>Delivery</Option>
+                  <Option value='Done'>Done</Option>
+                </Select>
+              </td>
+              <td>{moment(item.date).format("DD-MM-YYYY")}</td>
+              <td>{item.total}</td>
+              <td className="icon">
+                  <SaveOutlined
+                    htmlType="submit"
+                    onClick={() => {
+                      handleSave(item.id);
+                    }}
+                  />
+                </td>
+                <td className="icon">
+                  <CloseOutlined
+                    onClick={() => {
+                      setEdit();
+                    }}
+                  />
+                </td>
+            </tr>
+          ) : (
+            <tr>
+              <td>{item.id}</td>
+              {user}
+              <td>{item.status}</td>
+              <td>{moment(item.date).format("DD-MM-YYYY")}</td>
+              <td>{item.total}</td>
+              <td className='icon'>
+                <EditFilled
+                  onClick={() => {
+                    handleEdit(item.id);
+                  }}
+                />
+              </td>
+              <td className='icon'>
+                <DeleteOutlined
+                  onClick={async () => {
+                    await dispatch(deleteOrderApi(item.id));
+                    dispatch(getOrderApi());
+                  }}
+                />
+              </td>
+            </tr>
+          )}
+        </>
       );
     });
   };

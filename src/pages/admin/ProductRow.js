@@ -16,7 +16,7 @@ import {
   setCurrentPage,
   searchItem,
 } from "../../redux/reducers/productSlice";
-import { Button, Input, Select, Pagination } from "antd";
+import { Button, Input, Select, Pagination,message } from "antd";
 import { useState } from "react";
 
 const ProductRow = () => {
@@ -40,7 +40,6 @@ const ProductRow = () => {
   const handelOnChange = (e) => {
     if (e.target) {
       setFormNewVl({ ...formNewVl, [e.target.name]: e.target.value });
-      console.log(e.target.value);
     } else {
       setFormNewVl({ ...formNewVl });
     }
@@ -51,6 +50,8 @@ const ProductRow = () => {
 
   const handleSave = (id) => {
     dispatch(updateProductApi({ ...formNewVl, id }));
+    message.success('Update Success', 4);
+    dispatch(getListProductApi());
     setEdit();
   };
 

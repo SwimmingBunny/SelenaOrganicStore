@@ -27,10 +27,6 @@ const AdminRow = () => {
 
   const [edit, setEdit] = useState();
   const { Option } = Select;
-  React.useEffect(() => {
-    dispatch(getListCustomerApi());
-  }, []);
-
   const [formNewVl, setFormNewVl] = useState({
     fullName: "",
     username: "",
@@ -40,6 +36,9 @@ const AdminRow = () => {
     password: "",
     search: "",
   });
+  React.useEffect(() => {
+    dispatch(getListCustomerApi());
+  }, []);
   const handelOnChange = (e) => {
     if (e.target) {
       setFormNewVl({ ...formNewVl, [e.target.name]: e.target.value });
@@ -54,9 +53,9 @@ const AdminRow = () => {
 
   const handleSave = async (id) => {
     await dispatch(updateCustomerApi({ ...formNewVl, id }));
+    message.success("You have successfully saved!", 4);
     setEdit();
     dispatch(getListCustomerApi());
-    message.success("You have successfully saved!", 4);
   };
   function handleChange(value) {
     dispatch(setSortUser(value));
@@ -117,6 +116,7 @@ const AdminRow = () => {
                   <SaveOutlined
                     htmlType='submit'
                     onClick={() => {
+                      setFormNewVl({...item});
                       handleSave(item.id);
                     }}
                   />

@@ -126,46 +126,48 @@ const Order = function(order) {
     });
   };
   
-//   Comment.updateById = (id, comment, result) => {
-//     sql.query(
-//       "UPDATE comments SET rating = ?, content = ?, date = ? WHERE id = ?",
-//       [comment.rating, comment.content, comment.date, id],
-//       (err, res) => {
-//         if (err) {
-//           console.log("error: ", err);
-//           result(null, err);
-//           return;
-//         }
+  Order.updateStatusByIdOrder = (id, order, result) => {
+    sql.query(
+      "UPDATE orders SET status = ?, date = ? WHERE id = ?",
+      [order.status, order.date, id],
+      (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+          return;
+        }
   
-//         if (res.affectedRows === 0) {
-//           // not found Customer with the id
-//           result({ kind: "not_found" }, null);
-//           return;
-//         }
+        if (res.affectedRows === 0) {
+          // not found Customer with the id
+          result({ kind: "not_found" }, null);
+          return;
+        }
   
-//         console.log("updated comment: ", { id: id, ...comment });
-//         result(null, { id: id, ...comment });
-//       }
-//     );
-//   };
+        console.log("updated order: ", { id: id, ...order });
+        result(null, { id: id, ...order });
+      }
+    );
+  };
   
-//   Comment.remove = (id, result) => {
-//     sql.query("DELETE FROM comments WHERE id = ?", id, (err, res) => {
-//       if (err) {
-//         console.log("error: ", err);
-//         result(null, err);
-//         return;
-//       }
+  Order.remove = (order_id, result) => {
+  console.log("🚀 ~ file: order.model.js ~ line 153 ~ order_id", order_id)
+    
+    sql.query(`DELETE FROM order_detail WHERE order_id = ${order_id} ; DELETE FROM orders WHERE id = ${order_id}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      
+      if (res.affectedRows === 0) {
+        // not found Customer with the order_id
+        result({ kind: "not_found" }, null);
+        return;
+      }
   
-//       if (res.affectedRows === 0) {
-//         // not found Customer with the id
-//         result({ kind: "not_found" }, null);
-//         return;
-//       }
-  
-//       console.log("deleted comment with id: ", id);
-//       result(null, res);
-//     });
-//   };
+      console.log("deleted order with id: ", order_id);
+      result(null, res);
+    });
+  };
   
   module.exports = Order;
