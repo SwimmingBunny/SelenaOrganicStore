@@ -56,7 +56,6 @@ export const addCustomerApi = createAsyncThunk(
   export const updateCustomerApi = createAsyncThunk(
     "customer/updateCustomerApi",
     async (payload) => {
-      console.log("🚀 ~ file: customerSlice.js ~ line 59 ~ payload", payload)
       const res = await axios
         .put(`http://localhost:5000/customer/${payload.id}`, {
           username: payload.username,

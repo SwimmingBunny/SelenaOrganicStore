@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Row, Col, Alert } from "antd";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox,message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomerApi } from "../../../redux/reducers/customerSlice";
 import { saveCurrentLocation } from "../../../redux/reducers/customerSlice";
@@ -27,11 +27,10 @@ const Register = () => {
 
   const handleRegister = () => {
     if (formValue.password === formValue.confirmPassword) {
+      message.success('Login Success', 3);
       return dispatch(addCustomerApi({ ...formValue }));
     }
-    if(formValue.password !== formValue.confirmPassword){
-      return Alert("password not similar confirm password");
-    }
+    
   };
   const handelOnChange = (e) => {
     if (e.target) {

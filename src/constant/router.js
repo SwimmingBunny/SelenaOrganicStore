@@ -12,7 +12,7 @@ export const ROUTE = {
   MYACCOUNT: "/my-account",
   ADMIN : "/admin",
   STORE: "/store",
-  UI:"/ui",
+  ADDPRODUCT:"/add-product",
   DASHBOARD: "/dashboard",
   CUSTOMER: "/customer",
   ORDERS: "/orders",

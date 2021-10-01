@@ -12,6 +12,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "antd": "^4.16.12",
+    "antd-img-crop": "^3.16.0",
     "axios": "^0.21.3",
     "daemon": "^1.1.0",
     "formik": "^2.2.9",

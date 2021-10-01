@@ -112,7 +112,7 @@ console.log("🚀 ~ file: user.service.js ~ line 98 ~ update ~ params", params)
     // Object.assign(user, params);
     await db.query(`UPDATE customers SET fullName='${params.fullName}', address='${params.address}',
      mail='${params.mail}', username='${params.username}', phone='${params.phone}', gender='${params.gender}',
-    password='${params.hash}' WHERE id =${id}`, (err, res) => {
+    password='${params.password}' WHERE id =${id}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             // result(err, null);

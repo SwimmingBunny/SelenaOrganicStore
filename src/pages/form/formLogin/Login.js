@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Row, Col } from "antd";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, message } from "antd";
 import "../../../style/form.scss";
 import "../../../style/base.scss";
 import { NavLink } from "react-router-dom";
@@ -55,7 +55,7 @@ const Login = () => {
         let results = JSON.parse(result);
         dispatch(setInfoCustomer(results));
         localStorage.setItem("accessToken", results.token);
-        alert("Login access!");
+        message.success('Login Success', 3);
         if (results.role === "2") {
           history.push("/");
         }
@@ -65,7 +65,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log("error", error);
-        alert("Login fail!");
+        message.error('Login Fail!', 3);
       });
   };
   return (

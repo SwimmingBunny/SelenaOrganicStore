@@ -17,7 +17,7 @@ import {
 } from "../../redux/reducers/customerSlice";
 import { setCurrentPage } from "../../redux/reducers/productSlice";
 import { useState } from "react";
-import { Input, Select, Button, Pagination } from "antd";
+import { Input, Select, Button, Pagination, message } from "antd";
 
 const AdminRow = () => {
   const dispatch = useDispatch();
@@ -56,6 +56,7 @@ const AdminRow = () => {
     await dispatch(updateCustomerApi({ ...formNewVl, id }));
     setEdit();
     dispatch(getListCustomerApi());
+    message.success("You have successfully saved!", 4);
   };
   function handleChange(value) {
     dispatch(setSortUser(value));
@@ -74,7 +75,7 @@ const AdminRow = () => {
                 <td>{item.id}</td>
                 <td>
                   <Input
-                    name="fullName"
+                    name='fullName'
                     onChange={(e) => handelOnChange(e)}
                     placeholder={item.fullName}
                     value={formNewVl.fullName}
@@ -82,7 +83,7 @@ const AdminRow = () => {
                 </td>
                 <td>
                   <Input
-                    name="username"
+                    name='username'
                     onChange={(e) => handelOnChange(e)}
                     placeholder={item.username}
                     value={formNewVl.username}
@@ -90,7 +91,7 @@ const AdminRow = () => {
                 </td>
                 <td>
                   <Input
-                    name="mail"
+                    name='mail'
                     onChange={(e) => handelOnChange(e)}
                     placeholder={item.mail}
                     value={formNewVl.mail}
@@ -98,7 +99,7 @@ const AdminRow = () => {
                 </td>
                 <td>
                   <Input
-                    name="phone"
+                    name='phone'
                     onChange={(e) => handelOnChange(e)}
                     placeholder={item.phone}
                     value={formNewVl.phone}
@@ -106,21 +107,21 @@ const AdminRow = () => {
                 </td>
                 <td>
                   <Input
-                    name="address"
+                    name='address'
                     onChange={(e) => handelOnChange(e)}
                     placeholder={item.address}
                     value={formNewVl.address}
                   />
                 </td>
-                <td className="icon">
+                <td className='icon'>
                   <SaveOutlined
-                    htmlType="submit"
+                    htmlType='submit'
                     onClick={() => {
                       handleSave(item.id);
                     }}
                   />
                 </td>
-                <td className="icon">
+                <td className='icon'>
                   <CloseOutlined
                     onClick={() => {
                       setEdit();
@@ -136,14 +137,14 @@ const AdminRow = () => {
                 <td>{item.mail}</td>
                 <td>{item.phone}</td>
                 <td>{item.address}</td>
-                <td className="icon">
+                <td className='icon'>
                   <EditFilled
                     onClick={async () => {
                       handleEdit(item.id);
                     }}
                   />
                 </td>
-                <td className="icon">
+                <td className='icon'>
                   <DeleteOutlined
                     onClick={async () => {
                       const isDele = window.confirm(
@@ -151,6 +152,7 @@ const AdminRow = () => {
                       );
                       if (isDele === true) {
                         await dispatch(deleteListCustomerApi(item.id));
+                        message.success("You have successfully deleted!", 4);
                         dispatch(getListCustomerApi());
                       }
                     }}
@@ -166,49 +168,47 @@ const AdminRow = () => {
   };
   return (
     <>
-      <div className="admin__users">
+      <div className='admin__users'>
         <h2>Customer Managerment </h2>
-        <div className="top top--flex">
+        <div className='top top--flex'>
           <div>
             <Select
-              defaultValue="All"
+              defaultValue='All'
               style={{ width: 120 }}
-              onChange={handleChange}
-            >
-              <Option value="All">All</Option>
-              <Option value="Name">Name (A-Z)</Option>
-              <Option value="Stock">Date Create</Option>
+              onChange={handleChange}>
+              <Option value='All'>All</Option>
+              <Option value='Name'>Name (A-Z)</Option>
             </Select>
           </div>
-          <div className="top--width top--flex">
+          <div className='top--width top--flex'>
             <Input
-              placeholder="Search..."
-              name="search"
+              placeholder='Search...'
+              name='search'
               onChange={(e) => {
                 handelOnChange(e);
               }}
               value={formNewVl.search}
             />
-            <Button htmlType="html" onClick={handleSearch}>
+            <Button htmlType='html' onClick={handleSearch}>
               Search
             </Button>
           </div>
         </div>
         <table>
           <tr>
-            <th className="id">ID</th>
-            <th className="fullName">Full Name</th>
-            <th className="name">Username</th>
-            <th className="email">Email</th>
-            <th className="phone">Phone</th>
-            <th className="address">Address</th>
-            <th className="edit">Edit</th>
-            <th className="delete">Delete</th>
+            <th className='id'>ID</th>
+            <th className='fullName'>Full Name</th>
+            <th className='name'>Username</th>
+            <th className='email'>Email</th>
+            <th className='phone'>Phone</th>
+            <th className='address'>Address</th>
+            <th className='edit'>Edit</th>
+            <th className='delete'>Delete</th>
           </tr>
           {renderListCustomer()}
         </table>
       </div>
-      <div className="shopitem__pagi">
+      <div className='shopitem__pagi'>
         <Pagination
           pageSize={PAGE_SIZE}
           current={currentPage}

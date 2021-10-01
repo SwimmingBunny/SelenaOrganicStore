@@ -19,6 +19,7 @@ import CartTable from "../shop/Cart/Cart.CartTable";
 import ChangePassword from "./ChangePassword";
 import { useMediaQuery } from "react-responsive";
 import { useSelector,useDispatch } from "react-redux";
+import HistoryOrder from "./HistoryOrder";
 
 const Account = (props) => {
   const list = JSON.parse(localStorage.getItem('inforUser'));
@@ -54,7 +55,7 @@ const Account = (props) => {
                 </TabPane>
                 <TabPane tab="ORDERS" key="2">
                   <h2 className="myaccount__title">ORDERS</h2>
-                  <CartTable />
+                  <HistoryOrder/>
                 </TabPane>
                 <TabPane tab="WISHLIST" key="3">
                   <h2 className="myaccount__title">WISHLIST</h2>
@@ -63,9 +64,6 @@ const Account = (props) => {
                 <TabPane tab="CHANGE PASSWORD" key="4">
                   <h2 className="myaccount__title">CHANGE PASSWORD</h2>
                   <ChangePassword />
-                </TabPane>
-                <TabPane tab="LOGOUT" key="5">
-                  UPDATE SAU!
                 </TabPane>
               </Tabs>
             </div>

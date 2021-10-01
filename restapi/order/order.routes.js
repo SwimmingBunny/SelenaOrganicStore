@@ -9,7 +9,7 @@ app.get("/order", order.findAll);
 
 // Retrieve a single order with orderID
 app.get("/order/:order_id", order.findOne);
-
+app.get("/order/customer/:customer_id", order.findByCustomer);
 // // Update a Customer with customerId
 // app.put("/comments/:commentId", comments.update);
 
