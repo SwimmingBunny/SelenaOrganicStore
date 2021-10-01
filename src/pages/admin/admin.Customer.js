@@ -39,6 +39,7 @@ const AdminRow = () => {
   React.useEffect(() => {
     dispatch(getListCustomerApi());
   }, []);
+  
   const handelOnChange = (e) => {
     if (e.target) {
       setFormNewVl({ ...formNewVl, [e.target.name]: e.target.value });
@@ -66,6 +67,7 @@ const AdminRow = () => {
   const renderListCustomer = () => {
     return listCustomerApi
       .map((item, index) => {
+        
         return (
           <>
             {edit === item.id ? (
@@ -140,6 +142,7 @@ const AdminRow = () => {
                   <EditFilled
                     onClick={async () => {
                       handleEdit(item.id);
+                      setFormNewVl({...item})
                     }}
                   />
                 </td>
@@ -168,7 +171,7 @@ const AdminRow = () => {
   return (
     <>
       <div className='admin__users'>
-        <h2>Customer Managerment </h2>
+        <h2>Customer Management </h2>
         <div className='top top--flex'>
           <div>
             <Select

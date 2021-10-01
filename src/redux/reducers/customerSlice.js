@@ -7,10 +7,13 @@ export const addCustomerApi = createAsyncThunk(
     async (payload) => {
       await axios
         .post(`http://localhost:5000/customer/register`, {
-          fullName: payload.fullName,
           username: payload.username,
           mail: payload.email,
           password: payload.password,
+          fullName: payload.fullName,
+          phone: payload.phone,
+          address: payload.address,
+          gender: payload.gender,
           role: "2"
         })
         .then((res) => {
@@ -84,8 +87,6 @@ const userRegister = createSlice({
         listCustomerApi: [],
         customer: {},
         infoUser: {},
-        previousLocation: '',
-        success: false,
         loading: false,
         setSortUser: null,
         searchUser: null,
@@ -96,9 +97,6 @@ const userRegister = createSlice({
         },
         setInfoCustomer: (state,action) => {
           state.infoUser = action.payload;
-        },
-        saveCurrentLocation : (state, action) => {
-          state.previousLocation = action.payload //currentLocation
         },
         setSortUser: (state,action)=>{
           state.setSortUser = action.payload;
@@ -121,11 +119,28 @@ const userRegister = createSlice({
         searchUser: (state,action)=>{
           state.searchUser =  action.payload;
           const value = action.payload;
-          // console.log("🚀 ~ file: customerSlice.js ~ line 113 ~ value", value)
           state.listCustomerApi = [...state.listCustomerInit].map((item)=>{
             let condition = false;
             if(item.username.toUpperCase().includes(value)){
               condition = true;
+            }
+            if(item.username.toLowerCase().includes(value)){
+              condition = true;
+            }
+            if(item.fullName.toUpperCase().includes(value)){
+              condition = true;
+            }
+            if(item.fullName.toLowerCase().includes(value)){
+              condition = true;
+            }
+            if(item.address.toUpperCase().includes(value)){
+              condition = true;
+            }
+            if(item.address.toLowerCase().includes(value)){
+              condition = true;
+            }
+            if(item.phone.includes(value)){
+               condition = true;
             }
             return {...item,condition}
           }).filter((vl)=>vl.condition)
@@ -140,7 +155,6 @@ const userRegister = createSlice({
         },
         [addCustomerApi.rejected]: (state,action) =>{},
         [addCustomerApi.fulfilled]: (state, action) =>{
-            state.success = true;
         },
         [getListCustomerApi.pending]:(state,action) => {
           state.loading = true;

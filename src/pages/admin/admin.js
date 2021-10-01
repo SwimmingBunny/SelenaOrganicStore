@@ -34,8 +34,11 @@ import Dashboard from "./admin.DashBoard.js";
 import ProductRow from "./ProductRow.js";
 import Order from "./admin.Order.js";
 import AddProduct from "./admin.AddProduct.js";
+import { useDispatch } from "react-redux";
+
 
 const Admin = () => {
+  const dispatch = useDispatch()
   let { path, url } = useRouteMatch();
   const isMoblie = useMediaQuery({
     query: "(max-width: 480px)",
@@ -153,6 +156,7 @@ const Admin = () => {
                 <NavLink className='admin-text' to={`${url}${ROUTE.CUSTOMER}`}>
                   <li>
                     <UserOutlined className='icon' />
+                  
                     User
                   </li>
                 </NavLink>
@@ -185,7 +189,7 @@ const Admin = () => {
           <Col span={isMoblie ? 24 : 18}>
             <div className='admin__content'>
               <Switch>
-                <Route path={`${path}${ROUTE.DASHBOARD}`} exact>
+                <Route path={`${path}${ROUTE.DASHBOARD}`}>
                   <Dashboard />
                 </Route>
                 <Route path={`${path}${ROUTE.CUSTOMER}`} exact>

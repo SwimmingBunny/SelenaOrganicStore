@@ -49,9 +49,7 @@
 
   &__middle {
     margin-top: 5rem;
-    &--boder {
-      border: 0.1rem solid $primaryColor;
-    }
+    
     &__review {
       width: 100%;
       padding: 2rem;
@@ -85,7 +83,9 @@
 
 
 ////comment public////
-
+.comment__inp{
+  width: 105rem;
+}
 .sizeCmt{
   font-size: 1rem;
 }

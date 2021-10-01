@@ -11,7 +11,9 @@ import "../../style/form.scss";
 import "../../style/aboutus.scss";
 import { getListProductApi } from "../../redux/reducers/productSlice";
 import { addOrderApi } from "../../redux/reducers/orderSlice";
+import { useHistory } from "react-router";
 const Checkout = () => {
+  const history = useHistory()
   const list = JSON.parse(localStorage.getItem("inforUser"));
 
   const [form] = Form.useForm();
@@ -59,6 +61,7 @@ const Checkout = () => {
       listId,
     };
     dispatch(addOrderApi(request));
+    history.push('/my-account')
   };
 
   const getTotal = (ship) => {
