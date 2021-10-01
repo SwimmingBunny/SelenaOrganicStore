@@ -9,16 +9,9 @@
         &--flex{
             display: flex;
         }
-        &--avt{
-            margin-right: 2rem;
-            width: 5%;
-            height: 15%;
-            border: 0.1rem solid;
-            border-radius: 50%;
-            & img{
-                width: 100%;
-                border-radius: 50%;
-            }
+        &--name{
+            margin-left: 2rem;
+            
         }
         &__bot{
             margin-top: 3rem;

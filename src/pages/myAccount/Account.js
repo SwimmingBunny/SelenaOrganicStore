@@ -1,14 +1,11 @@
 /** @format */
 
 import React from "react";
-import { Row, Col, Menu, Tabs } from "antd";
+import { Row, Col, Tabs, Avatar } from "antd";
 import {
-  HeartOutlined,
   UserOutlined,
-  ShoppingCartOutlined,
-  LogoutOutlined,
-  KeyOutlined,
-  CarTwoTone,
+  
+ 
 } from "@ant-design/icons";
 
 import "../../style/aboutus.scss";
@@ -39,16 +36,16 @@ const Account = (props) => {
         <Row className="myaccount">
           <Col lg={{ span: 24 }} className="myaccount__nav">
             <div className="myaccount__nav__top myaccount__nav--flex">
-              <div className="myaccount__nav--avt">
-                <img src="Images/avt.png" />
+              <div >
+              <Avatar size={50} icon={<UserOutlined />} />
               </div>
-              <div>
+              <div className="myaccount__nav--name">
                 <h4>Account</h4>
                 <h3>{list.fullName}</h3>
               </div>
             </div>
             <div className="myaccount__nav__bot">
-              <Tabs tabPosition={isMoblie ? "top" : "left"}>
+              <Tabs defaultActiveKey='2' tabPosition={isMoblie ? "top" : "left"}>
                 <TabPane tab="ACCOUNT DETAILS" key="1">
                   <h2 className="myaccount__title">ACCOUNT DETAILS</h2>
                   <AccountUser />

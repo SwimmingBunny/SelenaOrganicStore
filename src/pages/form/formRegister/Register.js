@@ -5,7 +5,6 @@ import { Row, Col, Alert } from "antd";
 import { Form, Input, Button, Checkbox,message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomerApi } from "../../../redux/reducers/customerSlice";
-import { saveCurrentLocation } from "../../../redux/reducers/customerSlice";
 import validateMessages from "../ValidateMessage";
 import "../../../style/form.scss";
 import { useHistory } from "react-router";
@@ -17,17 +16,19 @@ const Register = () => {
     fullName:"",
     username: "",
     email: "",
+    address: "",
+    phone: "",
     password: "",
     confirmPassword: ""
   });
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const { success } = useSelector((state) => state.listCustomer);
 
   const handleRegister = () => {
     if (formValue.password === formValue.confirmPassword) {
       message.success('Register Success', 3);
+      history.push("/login")
       return dispatch(addCustomerApi({ ...formValue }));
     }
     
@@ -39,13 +40,6 @@ const Register = () => {
       setFormValue({ ...formValue });
     }
   };
-
-  React.useEffect(() => {
-    if (success) {
-      dispatch(saveCurrentLocation(history.goBack()));
-    }
-  }, [dispatch, success, history]);
-
   return (
     <div className='container'>
       <Row gutter={[16]}>
@@ -101,6 +95,17 @@ const Register = () => {
                 />
               </Form.Item>
               <Form.Item
+                name='phone'
+                rules={[{ required: true}]}>
+                <Input
+                  className='form__group--input'
+                  placeholder='Enter your Phone'
+                  name='phone'
+                  onChange={(e) => handelOnChange(e)}
+                  value={formValue.phone}
+                />
+              </Form.Item>
+              <Form.Item
                 name='password'
                 rules={[
                   { required: true, message: "Please input your password!" },
@@ -126,6 +131,18 @@ const Register = () => {
                   value={formValue.confirmPassword}
                 />
               </Form.Item>
+              <Form.Item
+                name='address'
+                rules={[{ required: true}]}>
+                <Input
+                  className='form__group--input'
+                  placeholder='Enter your Address'
+                  name='address'
+                  onChange={(e) => handelOnChange(e)}
+                  value={formValue.address}
+                />
+              </Form.Item>
+              
               <Form.Item>
                 <Button
                   type='primary'

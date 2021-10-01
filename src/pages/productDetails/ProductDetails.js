@@ -156,6 +156,8 @@ const ProductDetail = () => {
     dispatch(
       addCommentApi({ contentVl, rate, product_id, customer_id: list.id })
     );
+    setContentVl("");
+    setRate("");
   };
 
   const renderComments = () => {
@@ -306,7 +308,7 @@ const ProductDetail = () => {
                 <div className="detail__middle__review--sb">
                   <h3>Comment:</h3>
                   <Input
-                    className="form__group--input"
+                    className="form__group--input comment__inp"
                     placeholder="Enter review product..."
                     onChange={(e) => {
                       setContentVl(e.target.value);

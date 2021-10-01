@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
-import { Form, Button, Radio, Input, Space, DatePicker } from "antd";
+import { Form, Button, Radio, Input, Space, message } from "antd";
 
 import { useSelector,useDispatch } from "react-redux";
 import validateMessages from "../form/ValidateMessage";
@@ -125,7 +125,9 @@ const AccountUser = () => {
           htmlType='submit'
           size='large'
           className='form__btn'
-          onClick={() => handleSave(list.id)}
+          onClick={() => {
+            message.success('Update your profile success!', 3);
+            handleSave(list.id)}}
           >
           SAVE CHANGE
         </Button>

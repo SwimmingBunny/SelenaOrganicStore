@@ -491,6 +491,8 @@ const listProduct = createSlice({
       state.listProductApi = [...state.listProductInit]
         .map((item, index) => {
           let condition = false;
+          let price = item.price.toString();
+          let stock = item.stock.toString();
           if (item.name.toUpperCase().includes(value)) {
             condition = true;
           }
@@ -498,6 +500,12 @@ const listProduct = createSlice({
             condition = true;
           }
           if (item.type.includes(value)) {
+            condition = true;
+          }
+          if (price.includes(value)) {
+            condition = true;
+          }
+          if (stock.includes(value)) {
             condition = true;
           }
           if (item.color.includes(value)) {

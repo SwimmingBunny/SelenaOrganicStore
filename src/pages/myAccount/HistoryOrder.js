@@ -3,14 +3,11 @@
 import React from "react";
 import "./Modal.scss";
 import {
-  EditFilled,
   DeleteOutlined,
-  SaveOutlined,
-  CloseOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getListProductApi, setSort } from "../../redux/reducers/productSlice";
-import { Button, Input, Select, Modal, message } from "antd";
+import { Button, Input, Select, Modal,message } from "antd";
 import { useState } from "react";
 import {
   deleteOrderApi,
@@ -31,7 +28,6 @@ const HistoryOrder = () => {
   );
   const [visible, setVisible] = useState(false);
   const [idBill, setIdBill] = useState();
-
   const { Option } = Select;
   React.useEffect(() => {
     dispatch(getListProductApi());
@@ -45,6 +41,8 @@ const HistoryOrder = () => {
   React.useEffect(() => {
     dispatch(getOrderFindOneApi(idBill));
   }, [idBill]);
+  
+
   const [formNewVl, setFormNewVl] = useState({
     name: "",
     fullName: "",
@@ -65,24 +63,22 @@ const HistoryOrder = () => {
   const handleSearch = () => {
     dispatch(searchItem(formNewVl.search));
   };
-  // console.log("--",listOrderFindOneApi);
   const renderBill = () => {
-    console.log(listOrderFindOneApi);
     return listOrderFindOneApi?.map((item) => {
       const product_id = item.product_id;
 
-      const infoProduct = listProductApi?.filter((item) => {
+      const infoProduct = listProductApi.filter((item) => {
         return item.id === product_id;
       });
-      const renderProduct = infoProduct.map((item) => {
-        return (
+      const renderProduct = infoProduct.map((item)=>{
+        return(
           <>
             <td>{item.id}</td>
             <td>{item.name}</td>
             <td>{item.price}</td>
           </>
-        );
-      });
+        )
+      })
       return (
         <tr>
           {renderProduct}
@@ -91,7 +87,6 @@ const HistoryOrder = () => {
       );
     });
   };
-  // console.log("listOrderUserApi",listOrderUserApi);
   const setIsShow = () => {
     setVisible(false);
   };
@@ -105,74 +100,30 @@ const HistoryOrder = () => {
           <td>{moment(item.date).format("DD-MM-YYYY")}</td>
           <td>
             <Button
-              type="primary"
+              type='primary'
               onClick={() => {
                 setIdBill(item.id);
                 setVisible(true);
-              }}
-            >
+              }}>
               View
             </Button>
           </td>
-          <td className="icon">
-            <DeleteOutlined
-              onClick={async () => {
-                window.confirm(
-                  "Are you sure to delete this bill from your Oders?"
-                );
-
-                await dispatch(deleteOrderApi(item.id));
-                message.success("Delete success", 2);
-                dispatch(getOrderUserApi());
-              }}
-            />
+          <td className='icon'>
+            <DeleteOutlined onClick={async()=>{
+              await dispatch(deleteOrderApi(item.id));
+              dispatch(getOrderUserApi());
+              window.location.reload()
+            }}/>
           </td>
         </tr>
       );
     });
   };
-  return (
-    <div className="admin__users">
-      <div className="top top--flex">
-        <div>
-          <Select
-            defaultValue="All"
-            style={{ width: 120 }}
-            onChange={handleChange}
-          >
-            <Option value="All">All</Option>
-            <Option value="Name">Name (A-Z)</Option>
-            <Option value="total">Total (L-H)</Option>
-            <Option value="status">Status</Option>
-          </Select>
-        </div>
-        <div className="top--width top--flex">
-          <Input
-            placeholder="Search..."
-            name="search"
-            onChange={(e) => {
-              handelOnChange(e);
-            }}
-            value={formNewVl.search}
-          />
-          <Button htmlType="html" onClick={handleSearch}>
-            Search
-          </Button>
-        </div>
-      </div>
-      <table>
-        <tr>
-          <th className="id">STT</th>
-          <th className="total">Price($)</th>
-          <th className="status">Status</th>
-          <th className="date">Date</th>
-          <th className="view">View</th>
-          <th className="delete">Delete</th>
-        </tr>
-        {renderListOrder()}
-      </table>
-      {visible ? (
-        <div className="modal" onClick={setIsShow}>
+
+  const renderView = ()=>{
+    // console.log(" {renderBill()}", renderBill())
+    return(
+      <div className="modal" onClick={setIsShow}>
           <div className="content1">
             <table>
               <tr>
@@ -190,7 +141,53 @@ const HistoryOrder = () => {
             </div>
           </div>
         </div>
-      ) : null}
+    )
+  }
+  
+  return (
+    <div className='admin__users'>
+      <div className='top top--flex'>
+        <div>
+          <Select
+            defaultValue='All'
+            style={{ width: 120 }}
+            onChange={handleChange}>
+            <Option value='All'>All</Option>
+            <Option value='Name'>Name (A-Z)</Option>
+            <Option value='total'>Total (L-H)</Option>
+            <Option value='status'>Status</Option>
+          </Select>
+        </div>
+        <div className='top--width top--flex'>
+          <Input
+            placeholder='Search...'
+            name='search'
+            onChange={(e) => {
+              handelOnChange(e);
+            }}
+            value={formNewVl.search}
+          />
+          <Button htmlType='html' onClick={handleSearch}>
+            Search
+          </Button>
+        </div>
+      </div>
+      <table>
+        <tr>
+          <th className='id'>STT</th>
+          <th className='total'>Price($)</th>
+          <th className='status'>Status</th>
+          <th className='date'>Date</th>
+          <th className='view'>View</th>
+          <th className='delete'>Delete</th>
+        </tr>
+        {renderListOrder()}
+      </table>
+      {visible ? 
+        renderView()
+        
+       : null}
+       
     </div>
   );
 };
