@@ -20,6 +20,9 @@
       }
     }
   }
+  .header__top-account {
+    order: 0 !important;
+  }
   .slider {
     padding: 0 1rem;
   }
@@ -154,7 +157,12 @@
     display: flex;
     justify-content: center;
   }
-
+  .header__top-account {
+    order: 1;
+  }
+  .header__top-search {
+    margin: 1rem 0;
+  }
   .shipping {
     margin-top: 12.6rem !important;
   }

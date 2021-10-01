@@ -9,7 +9,10 @@ import { useEffect } from "react";
 import "../../style/checkout.scss";
 import "../../style/form.scss";
 import "../../style/aboutus.scss";
-import { getListProductApi } from "../../redux/reducers/productSlice";
+import {
+  getListProductApi,
+  clearItemCart,
+} from "../../redux/reducers/productSlice";
 import { addOrderApi } from "../../redux/reducers/orderSlice";
 import { useHistory } from "react-router";
 const Checkout = () => {
@@ -30,6 +33,7 @@ const Checkout = () => {
 
   useEffect(() => {
     dispatch(getListProductApi());
+    window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
     setFormVl(list);
@@ -61,6 +65,7 @@ const Checkout = () => {
       listId,
     };
     dispatch(addOrderApi(request));
+    dispatch(clearItemCart(-1));
     history.push('/my-account')
   };
 

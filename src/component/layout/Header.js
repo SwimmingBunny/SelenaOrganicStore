@@ -143,8 +143,8 @@ const Header = () => {
               </Button>
             </Menu.Item>
           </NavLink>
-          <NavLink to={ROUTE.CART} exact>
-            <Menu.Item to={ROUTE.CHECKOUT} exact>
+          <NavLink to={ROUTE.CHECKOUT} exact>
+            <Menu.Item>
               <Button id="header__top-container-btn" type="primary">
                 Check Out
               </Button>
@@ -203,7 +203,7 @@ const Header = () => {
                 <Col
                   className="header__top-account"
                   lg={{ span: 8 }}
-                  md={{ span: 8 }}
+                  md={{ span: 12 }}
                   xs={{ span: 12 }}
                 >
                   <Dropdown overlay={accountMenu}>
@@ -228,7 +228,7 @@ const Header = () => {
                 <Col
                   className="header__top-search"
                   lg={{ span: 12 }}
-                  md={{ span: 12 }}
+                  md={{ span: 24 }}
                   xs={{ span: 24 }}
                 >
                   <Search
@@ -244,7 +244,7 @@ const Header = () => {
                 </Col>
                 <Col
                   lg={{ span: 4 }}
-                  md={{ span: 6 }}
+                  md={{ span: 12 }}
                   className="header__top-cart"
                   xs={{ span: 12 }}
                 >

@@ -13,6 +13,7 @@ const CartTable = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getListProductApi());
+    window.scrollTo(0, 0);
   }, []);
   // render cart đển component
   const { cart } = useSelector((state) => state.listProduct);

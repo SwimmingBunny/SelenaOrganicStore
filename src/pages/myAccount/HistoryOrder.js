@@ -64,7 +64,6 @@ const HistoryOrder = () => {
     dispatch(searchItem(formNewVl.search));
   };
   const renderBill = () => {
-    console.log("--",listOrderFindOneApi);
     return listOrderFindOneApi?.map((item) => {
       const product_id = item.product_id;
 
