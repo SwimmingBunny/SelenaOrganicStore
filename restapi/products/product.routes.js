@@ -6,5 +6,11 @@ module.exports = app => {
   
     app.get("/products/search", Products.getProducts);
 
+    // day la update lam lan 2
+    app.put("/products/update/:id", Products.update);
+
+    // Delete a product with Id
+    app.delete("/products/delete/:id", Products.delete);
+
   };
 

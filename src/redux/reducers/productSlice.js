@@ -47,7 +47,7 @@ export const updateProductApi = createAsyncThunk(
   "product/updateProductApi",
   async (payload) => {
     const res = await axios
-      .put(`http://localhost:5000/products/search?KeySearch${payload.id}`, {
+      .put(`http://localhost:5000/products/update/${payload.id}`, {
         name: payload.name,
         type: payload.type,
         price: payload.price,
@@ -67,7 +67,7 @@ export const deleteListProductApi = createAsyncThunk(
   "product/deleteApiData",
   async (id) => {
     const res = await axios
-      .delete(`http://localhost:5000/products/search?KeySearch${id}`)
+      .delete(`http://localhost:5000/products/delete/${id}`)
       .then((res) => {
         // console.log(".listProductApi ~ res", res);
         return res;

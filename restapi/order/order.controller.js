@@ -65,50 +65,48 @@ exports.findByCustomer = (req, res) => {
       });
 };
 
-
-
-// // Update a Customer identified by the customerId in the request
-// exports.update = (req, res) => {
-//     // Validate Request
-//     if (!req.body) {
-//         res.status(400).send({
-//           message: "Content can not be empty!"
-//         });
-//       }
+// Update a Customer identified by the customerId in the request
+exports.update = (req, res) => {
+    // Validate Request
+    if (!req.body) {
+        res.status(400).send({
+          message: "Content can not be empty!"
+        });
+      }
     
-//       Comment.updateById(
-//         req.params.commentId,
-//         new Comment(req.body),
-//         (err, data) => {
-//           if (err) {
-//             if (err.kind === "not_found") {
-//               res.status(404).send({
-//                 message: `Not found Customer with id ${req.params.commentId}.`
-//               });
-//             } else {
-//               res.status(500).send({
-//                 message: "Error updating Customer with id " + req.params.commentId
-//               });
-//             }
-//           } else res.send(data);
-//         }
-//       );
-// };
+      Order.updateStatusByIdOrder(
+        req.params.id,
+        new Order(req.body),
+        (err, data) => {
+          if (err) {
+            if (err.kind === "not_found") {
+              res.status(404).send({
+                message: `Not found order with id ${req.params.id}.`
+              });
+            } else {
+              res.status(500).send({
+                message: "Error updating order with id " + req.params.id
+              });
+            }
+          } else res.send(data);
+        }
+      );
+};
 
-// // Delete a Customer with the specified customerId in the request
-// exports.delete = (req, res) => {
-//   Comment.remove(req.params.commentId, (err, data) => {
-//         if (err) {
-//           if (err.kind === "not_found") {
-//             res.status(404).send({
-//               message: `Not found Customer with id ${req.params.commentId}.`
-//             });
-//           } else {
-//             res.status(500).send({
-//               message: "Could not delete Customer with id " + req.params.commentId
-//             });
-//           }
-//         } else res.send({ message: `Customer was deleted successfully!` });
-//       });
-// };
+// Delete a Order with the specified Order_id in the request
+exports.delete = (req, res) => {
+  Order.remove(req.params.order_id, (err, data) => {
+        if (err) {
+          if (err.kind === "not_found") {
+            res.status(404).send({
+              message: `Not found Order with id ${req.params.order_id}.`
+            });
+          } else {
+            res.status(500).send({
+              message: "Could not delete order with id " + req.params.order_id
+            });
+          }
+        } else res.send({ message: `Order was deleted successfully!` });
+      });
+};
 
