@@ -13,7 +13,7 @@ import {
   MenuOutlined,
   ShopOutlined,
   ShoppingCartOutlined,
-  AppstoreAddOutlined
+  AppstoreAddOutlined,
 } from "@ant-design/icons";
 import { ROUTE } from "../../constant/router.js";
 import { useHistory } from "react-router-dom";
@@ -26,14 +26,14 @@ import {
   Route,
   Link,
   NavLink,
-  useRouteMatch,useParams
+  useRouteMatch,
+  useParams,
 } from "react-router-dom";
 import "./admin.scss";
 import Dashboard from "./admin.DashBoard.js";
 import ProductRow from "./ProductRow.js";
-import Order from "./admin.Order.js"
+import Order from "./admin.Order.js";
 import AddProduct from "./admin.AddProduct.js";
-
 
 const Admin = () => {
   let { path, url } = useRouteMatch();
@@ -84,7 +84,7 @@ const Admin = () => {
           </li>
           <li>
             <ShopOutlined className='icon' />
-              Add Product
+            Add Product
           </li>
         </ul>
       </Menu.Item>
@@ -99,11 +99,13 @@ const Admin = () => {
           <Col span={isMoblie ? 24 : 6}>
             <NavLink to={ROUTE.HOME} className='col-img' exact>
               <ScrollToTop />
-              <img src={`http://localhost:3000/Images/logo/logo.png`} alt='Logo image' />
+              <img
+                src={`http://localhost:3000/Images/logo/logo.png`}
+                alt='Logo image'
+              />
             </NavLink>
           </Col>
-          <Col span={isMoblie ? 20 : 14} className='col-img'>
-          </Col>
+          <Col span={isMoblie ? 20 : 14} className='col-img'></Col>
           <Col span={isMoblie ? 4 : 4} className='col-icon'>
             {isMoblie ? (
               <Dropdown overlay={menu}>
@@ -141,59 +143,64 @@ const Admin = () => {
           ) : (
             <Col span={6}>
               <ul className='admin-select'>
-                <li>
-                  <NavLink className='admin-text' to={`${url}${ROUTE.DASHBOARD}`}>
+                <NavLink className='admin-text' to={`${url}${ROUTE.DASHBOARD}`}>
+                  <li>
                     <LayoutOutlined className='icon' />
                     Dashboard
-                  </NavLink>
-                </li>
-                <li>
-                  <Link className='admin-text' to={`${url}${ROUTE.CUSTOMER}`}>
+                  </li>
+                </NavLink>
+
+                <NavLink className='admin-text' to={`${url}${ROUTE.CUSTOMER}`}>
+                  <li>
                     <UserOutlined className='icon' />
-                      User
-                  </Link>
-                </li>
-                <li>
-                  <Link className='admin-text' to={`${url}${ROUTE.ORDERS}`}>
+                    User
+                  </li>
+                </NavLink>
+
+                <NavLink className='admin-text' to={`${url}${ROUTE.ORDERS}`}>
+                  <li>
                     <ShoppingCartOutlined className='icon' />
                     Orders
-                  </Link>
-                </li>
-                <li>
-                  <Link className='admin-text' to={`${url}${ROUTE.PRODUCTS}`}>
+                  </li>
+                </NavLink>
+
+                <NavLink className='admin-text' to={`${url}${ROUTE.PRODUCTS}`}>
+                  <li>
                     <ShopOutlined className='icon' />
                     Products
-                  </Link>
-                </li>
-                <li>
-                  <Link className='admin-text' to={`${url}${ROUTE.ADDPRODUCT}`}>
+                  </li>
+                </NavLink>
+                <NavLink
+                  className='admin-text'
+                  to={`${url}${ROUTE.ADDPRODUCT}`}>
+                  <li>
                     <AppstoreAddOutlined className='icon' />
-                  Add Products
-                  </Link>
-                </li>
+                    Add Products
+                  </li>
+                </NavLink>
               </ul>
             </Col>
           )}
 
           <Col span={isMoblie ? 24 : 18}>
-            <div className="admin__content">
-            <Switch>
-            <Route path={`${path}${ROUTE.DASHBOARD}`} exact>
-                <Dashboard/>
-              </Route>
-              <Route path={`${path}${ROUTE.CUSTOMER}`} exact>
-                    <AdminRow />
-              </Route>
-              <Route path={`${path}${ROUTE.ORDERS}`} exact>
-                    <Order/>
-              </Route>
-              <Route path={`${path}${ROUTE.PRODUCTS}`} exact>
-                  <ProductRow/>
-              </Route>
-              <Route path={`${path}${ROUTE.ADDPRODUCT}`} exact>
-                  <AddProduct/>
-              </Route>
-            </Switch>
+            <div className='admin__content'>
+              <Switch>
+                <Route path={`${path}${ROUTE.DASHBOARD}`} exact>
+                  <Dashboard />
+                </Route>
+                <Route path={`${path}${ROUTE.CUSTOMER}`} exact>
+                  <AdminRow />
+                </Route>
+                <Route path={`${path}${ROUTE.ORDERS}`} exact>
+                  <Order />
+                </Route>
+                <Route path={`${path}${ROUTE.PRODUCTS}`} exact>
+                  <ProductRow />
+                </Route>
+                <Route path={`${path}${ROUTE.ADDPRODUCT}`} exact>
+                  <AddProduct />
+                </Route>
+              </Switch>
             </div>
           </Col>
         </Row>

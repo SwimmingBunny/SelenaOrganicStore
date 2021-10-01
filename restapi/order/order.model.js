@@ -95,6 +95,23 @@ const Order = function(order) {
       result({ kind: "not_found" }, null);
     });
   };
+  Order.findByCustomerId = (customer_id, result) => {
+    sql.query(`SELECT * FROM orders WHERE customer_id = ${customer_id}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      };
+  
+      if (res.length) {
+        console.log("found order: ", res);
+        result(null, res);
+        return;
+      };
+      // not found comment with the id
+      result({ kind: "not_found" }, null);
+    });
+  };
   
   Order.getAll = result => {
     sql.query("SELECT * FROM orders", (err, res) => {

@@ -9,20 +9,17 @@ import {
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteListProductApi,
   getListProductApi,
   setSort,
-  updateProductApi,
-  searchItem,
 } from "../../redux/reducers/productSlice";
 import { Button, Input, Select } from "antd";
 import { useState } from "react";
-import { getOrderApi } from "../../redux/reducers/orderSlice";
+import { getOrderApi, searchItem } from "../../redux/reducers/orderSlice";
 import { getListCustomerApi } from "../../redux/reducers/customerSlice";
+import moment from "moment";
 
 const Order = () => {
   const dispatch = useDispatch();
-  const { listProductApi } = useSelector((state) => state.listProduct);
   const { listOrderApi } = useSelector((state) => state.listOrder);
   const { listCustomerApi } = useSelector((state) => state.listCustomer);
   const [edit, setEdit] = useState();
@@ -57,7 +54,6 @@ const Order = () => {
   const renderListOrder = () => {
     return listOrderApi.map((item) => {
       const userId = item.customer_id;
-      const productId = item.product_id;
       const listUser = listCustomerApi.filter((item) => {
         return item.id === userId;
       });
@@ -70,23 +66,12 @@ const Order = () => {
           </>
         );
       });
-      const listProduct = listProductApi.filter((item) => {
-        return item.id === productId;
-      });
-      const product = listProduct.map((item) => {
-        return (
-          <td>{item.name}</td>
-        );
-      });
       return (
         <tr>
           <td>{item.id}</td>
           {user}
-          {/* {product} */}
-          <td>rau</td>
-          <td>5kg</td>
           <td>{item.status}</td>
-          <td>{item.date}</td>
+          <td>{moment(item.date).format("DD-MM-YYYY")}</td>
           <td>{item.total}</td>
           <td className='icon'>
             <EditFilled />
@@ -109,8 +94,8 @@ const Order = () => {
             onChange={handleChange}>
             <Option value='All'>All</Option>
             <Option value='Name'>Name (A-Z)</Option>
-            <Option value='Price'>Price (S-L)</Option>
-            <Option value='Stock'>Stock (S-L)</Option>
+            <Option value='total'>Total (L-H)</Option>
+            <Option value='status'>Status</Option>
           </Select>
         </div>
         <div className='top--width top--flex'>
@@ -133,8 +118,6 @@ const Order = () => {
           <th className='fullName'>Full Name</th>
           <th className='phone'>Phone</th>
           <th className='address'>Address</th>
-          <th className='product'>Product</th>
-          <th className='quantity'>Quantity</th>
           <th className='status'>Status</th>
           <th className='date'>Date</th>
           <th className='total'>Total ($)</th>

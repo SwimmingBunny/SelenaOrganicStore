@@ -77,7 +77,7 @@ const Header = () => {
   const { cart } = useSelector((state) => state.listProduct);
   const totalProduct = cart.length;
   const renderDataCart = () => {
-    return cart.slice(0, 5).map((item, index) => {
+    return cart.map((item, index) => {
       return <HeaderCart key={index} {...item} />;
     });
   };
@@ -133,14 +133,8 @@ const Header = () => {
     <Menu className="header__top-cart-sub">
       {totalProduct ? (
         <>
-          {renderDataCart()}
-
           <Menu.Item>
-            {totalProduct > 5 ? (
-              <span className="header__top-container-icon">
-                <DownOutlined />
-              </span>
-            ) : null}
+            <div className="header__top-cart-cover">{renderDataCart()}</div>
           </Menu.Item>
           <NavLink to={ROUTE.CART} exact>
             <Menu.Item>

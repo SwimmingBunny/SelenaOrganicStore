@@ -16,8 +16,9 @@ const AddProduct = () => {
     price: "",
     type: "",
     color: "",
-    Stock: "",
+    stock: "",
     description: "",
+    img:""
   });
 
   const handleOnChange = (e) => {
@@ -31,15 +32,14 @@ const AddProduct = () => {
 
   const handleSave = () => {
     if (!!formVl) {
+      message.success('Add product success!', 3);
       dispatch(postListProductApi({ ...formVl }));
-      alert("add success!");
     } else {
-      alert("add fail!");
     }
   };
   const props = {
     name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    action: formVl.img,
     headers: {
       authorization: 'authorization-text',
     },

@@ -7,13 +7,15 @@ exports.create = (req, res) => {
         });
     };
     const product = new Products ({
-        name: req.body.name,
-        price: req.body.price,
-        description: req.body.description,
-        img: req.body.img,
-        type: req.body.type,
-    
-      });
+      name: req.body.name,
+      price: req.body.price,
+      description: req.body.description,
+      // img: req.body.img,
+      type: req.body.type,
+      color: req.body.color,
+      stock: req.body.stock,
+  
+    });
       Products.create(product, (err, data) => {
         if (err)
           res.status(500).send({

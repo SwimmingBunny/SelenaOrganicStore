@@ -38,16 +38,34 @@ exports.findOne = (req, res) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found comment with order_id ${req.params.order_id}.`
+              message: `Not found  order_detail with order_id ${req.params.order_id}.`
             });
           } else {
             res.status(500).send({
-              message: "Error retrieving comment with order_id " + req.params.order_id
+              message: "Error retrieving  order_detail with order_id " + req.params.order_id
             });
           }
         } else res.send(data);
       });
 };
+
+exports.findByCustomer = (req, res) => {
+  Order.findByCustomerId(req.params.customer_id, (err, data) => {
+        if (err) {
+          if (err.kind === "not_found") {
+            res.status(404).send({
+              message: `Not found  order with customer_id ${req.params.customer_id}.`
+            });
+          } else {
+            res.status(500).send({
+              message: "Error retrieving  order with customer_id " + req.params.customer_id
+            });
+          }
+        } else res.send(data);
+      });
+};
+
+
 
 // // Update a Customer identified by the customerId in the request
 // exports.update = (req, res) => {

@@ -20,6 +20,13 @@ const Dashboard = () => {
   
   const lengthCustomer = listCustomerApi.length;
   const lengthOrder = listOrderApi.length;
+
+  const renderTotal = () =>{
+    const priceItem = listOrderApi.map((item)=>item.total);
+    let total = 0;
+    total = total + parseInt(priceItem)
+    return <h1>$ {total}</h1>
+  }
   return (
     <div className='dashBoard'>
       <Row >
@@ -46,7 +53,7 @@ const Dashboard = () => {
           </div>
           <div>
             <h2>Total Sales</h2>
-            <h1>$ 999.000</h1>
+            {renderTotal()}
           </div></Col>
       </Row>
       <Row >

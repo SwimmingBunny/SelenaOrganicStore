@@ -1,13 +1,15 @@
 const sql = require('../db_connection');
 
-const Products = (products)  => {
-    this.name = products.name;
-    this.price = products.price;
-    this.description = products.description;
-    this.img = products.img;
-    this.type = products.type;
-    
-  };
+const Products = function (products) {
+  this.name = products.name;
+  this.price = products.price;
+  this.description = products.description;
+  // this.img = products.img;
+  this.type = products.type;
+  this.color = products.color;
+  this.stock = products.stock;
+  
+};
 
 
   Products.create = (newProduct, result) => {
