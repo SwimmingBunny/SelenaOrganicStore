@@ -51,7 +51,7 @@ const SideBar = () => {
         </Menu.ItemGroup>
       </Menu>
       {/* split */}
-      <Slider range step={10} defaultValue={[20, 50]} onChange={onChange} />
+      <Slider range step={10} defaultValue={[0, 100]} onChange={onChange} />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <span>1$</span>
         <span>30$</span>

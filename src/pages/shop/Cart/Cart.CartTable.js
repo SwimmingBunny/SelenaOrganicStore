@@ -22,17 +22,13 @@ const CartTable = () => {
     });
   };
   // Function đơn giản
-  const getTotal = () => {
-    let total = 0;
+  const getTotal = (ship) => {
+    let total = ship || 0;
     cart.forEach((element) => {
       return (total += element.total);
     });
-    return total.toLocaleString(undefined, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
+    return total.toFixed(2);
   };
-
   return (
     <>
       <div className="cart__responsive">
@@ -63,7 +59,7 @@ const CartTable = () => {
 
         <div className="cart__total-conten">
           <p className="cart__total-conten--total"> Total ($)</p>
-          <p className="cart__total-conten--total"> {+getTotal() + 10}.00 </p>
+          <p className="cart__total-conten--total"> {getTotal(10)} </p>
         </div>
         <Button className="cart__total-btn" type="primary">
           <NavLink to={ROUTE.CHECKOUT} exact>

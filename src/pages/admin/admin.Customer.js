@@ -50,7 +50,6 @@ const AdminRow = () => {
   const handleEdit = (id) => {
     setEdit(id);
   };
-
   const handleSave = async (id) => {
     await dispatch(updateCustomerApi({ ...formNewVl, id }));
     message.success("You have successfully saved!", 4);

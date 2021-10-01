@@ -143,12 +143,13 @@ const Header = () => {
               </Button>
             </Menu.Item>
           </NavLink>
-
-          <Menu.Item>
-            <Button id="header__top-container-btn" type="primary">
-              Check Out
-            </Button>
-          </Menu.Item>
+          <NavLink to={ROUTE.CART} exact>
+            <Menu.Item to={ROUTE.CHECKOUT} exact>
+              <Button id="header__top-container-btn" type="primary">
+                Check Out
+              </Button>
+            </Menu.Item>
+          </NavLink>
         </>
       ) : (
         <Menu.Item>
