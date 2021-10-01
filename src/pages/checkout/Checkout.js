@@ -1,17 +1,7 @@
 /** @format */
 
 import React from "react";
-import {
-  Row,
-  Col,
-  Form,
-  Button,
-  Radio,
-  Input,
-  Space,
-  Modal,
-  message,
-} from "antd";
+import { Row, Col, Form, Button, Radio, Input, Space, message } from "antd";
 import validateMessages from "../form/ValidateMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -21,7 +11,9 @@ import "../../style/form.scss";
 import "../../style/aboutus.scss";
 import { getListProductApi } from "../../redux/reducers/productSlice";
 import { addOrderApi } from "../../redux/reducers/orderSlice";
-const Checkout = (props) => {
+import { useHistory } from "react-router";
+const Checkout = () => {
+  const history = useHistory()
   const list = JSON.parse(localStorage.getItem("inforUser"));
 
   const [form] = Form.useForm();
@@ -69,6 +61,7 @@ const Checkout = (props) => {
       listId,
     };
     dispatch(addOrderApi(request));
+    history.push('/my-account')
   };
 
   const getTotal = (ship) => {
@@ -78,7 +71,6 @@ const Checkout = (props) => {
     });
     return total.toFixed(2);
   };
-
   return (
     <>
       <div className="aboutUs__header">
@@ -216,12 +208,8 @@ const Checkout = (props) => {
                       type="primary"
                       size="large"
                       htmlType="submit"
-                      className="form__btn"
-                      onClick={() => {
-                      
-                        handleSbm(list.id);
-                      }}
-                    >
+                      className='form__btn'
+                      onClick={async()=>{handleSbm(list.id)}}>
                       PLACE ORDER
                     </Button>
                   </Form.Item>

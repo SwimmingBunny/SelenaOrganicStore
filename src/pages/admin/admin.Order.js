@@ -72,6 +72,7 @@ const Order = () => {
     dispatch(updateOrderApi({ status, id }));
     message.success("Update Success", 4);
     dispatch(getOrderApi());
+    setStatus("");
     setEdit();
   };
   const renderListOrder = () => {
@@ -102,9 +103,9 @@ const Order = () => {
                     style={{ width: 120 }}
                     onChange={handleStatusChange}
                   >
-                    <Option value="Pending">Pending</Option>
-                    <Option value="Delivery">Delivery</Option>
-                    <Option value="Done">Done</Option>
+                    <Option value="Pending"><span style={{color:"red"}}>Pending</span></Option>
+                    <Option value="Delivery"><span style={{color:"red"}}>Delivery</span></Option>
+                    <Option value="Done"><span style={{color:"#62d2a2"}}>Done</span></Option>
                   </Select>
                 </td>
                 <td>{moment(item.date).format("DD-MM-YYYY")}</td>
@@ -129,7 +130,7 @@ const Order = () => {
               <tr>
                 <td>{item.id}</td>
                 {user}
-                <td>{item.status}</td>
+                <td><span style={{color: item.status === 'Done' ? "#62d2a2" : "red"}}>{item.status}</span></td>
                 <td>{moment(item.date).format("DD-MM-YYYY")}</td>
                 <td>{item.total}</td>
                 <td className="icon">
