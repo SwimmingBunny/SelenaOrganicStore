@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { Row, Col, Form, Button, Radio, Input, Space, Modal } from "antd";
+import { Row, Col, Form, Button, Radio, Input, Space, message } from "antd";
 import validateMessages from "../form/ValidateMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -11,9 +11,8 @@ import "../../style/form.scss";
 import "../../style/aboutus.scss";
 import { getListProductApi } from "../../redux/reducers/productSlice";
 import { addOrderApi } from "../../redux/reducers/orderSlice";
-const Checkout = (props) => {
+const Checkout = () => {
   const list = JSON.parse(localStorage.getItem("inforUser"));
-  const [isShowCart, setIsShowCart] = React.useState(true);
 
   const [form] = Form.useForm();
   const [formVl, setFormVl] = React.useState(
@@ -49,9 +48,8 @@ const Checkout = (props) => {
   
 
   const handleSbm = (listId) => {
-    warning();
+    // warning();
     let total = 10; //10 ship
-    const discount = 50;
     const cartApi = cart.map((vl) => {
       total = total + vl.total;
 
@@ -79,12 +77,12 @@ const Checkout = (props) => {
     });
   };
   // Modal warning
-  function warning() {
-    Modal.success({
-      title: "Place order succses!",
-      content: "Thanks for your support ^^",
-    });
-  }
+  // function warning() {
+  //   Modal.success({
+  //     title: "Place order succses!",
+  //     content: "Thanks for your support ^^",
+  //   });
+  // }
   return (
     <>
       <div className="aboutUs__header">
@@ -215,7 +213,7 @@ const Checkout = (props) => {
                       size="large"
                       htmlType="submit"
                       className='form__btn'
-                      onClick={()=>handleSbm(list.id)}>
+                      onClick={async()=>{handleSbm(list.id)}}>
                       PLACE ORDER
                     </Button>
                   </Form.Item>

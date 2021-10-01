@@ -2,16 +2,14 @@
 
 import React from "react";
 import {
-  EditFilled,
   DeleteOutlined,
-  SaveOutlined,
-  CloseOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getListProductApi, setSort } from "../../redux/reducers/productSlice";
 import { Button, Input, Select, Modal } from "antd";
 import { useState } from "react";
 import {
+  deleteOrderApi,
   getOrderApi,
   getOrderFindOneApi,
   getOrderUserApi,
@@ -29,13 +27,13 @@ const HistoryOrder = () => {
   );
   const [visible, setVisible] = useState(false);
   const [idBill, setIdBill] = useState();
-  console.log("🚀 ~ file: HistoryOrder.js ~ line 32 ~ HistoryOrder ~ idBill", idBill)
   const { Option } = Select;
   React.useEffect(() => {
     dispatch(getListProductApi());
     dispatch(getOrderFindOneApi(idBill));
     dispatch(getOrderApi());
     dispatch(getListCustomerApi());
+    dispatch(getOrderUserApi());
   }, []);
   React.useEffect(() => {
     dispatch(getOrderUserApi(list.id));
@@ -62,7 +60,7 @@ const HistoryOrder = () => {
   };
   // console.log("--",listOrderFindOneApi);
   const renderBill = () => {
-    return listOrderFindOneApi.map((item) => {
+    return listOrderFindOneApi?.map((item) => {
       const product_id = item.product_id;
 
       const infoProduct = listProductApi.filter((item) => {
@@ -87,7 +85,7 @@ const HistoryOrder = () => {
   };
   // console.log("listOrderUserApi",listOrderUserApi);
   const renderListOrder = () => {
-    return listOrderUserApi.map((item) => {
+    return listOrderUserApi?.map((item) => {
       return (
         <tr>
           <td>{item.id}</td>
@@ -105,7 +103,10 @@ const HistoryOrder = () => {
             </Button>
           </td>
           <td className='icon'>
-            <DeleteOutlined />
+            <DeleteOutlined onClick={async()=>{
+              await dispatch(deleteOrderApi(item.id));
+              dispatch(getOrderUserApi());
+            }}/>
           </td>
         </tr>
       );
@@ -143,7 +144,7 @@ const HistoryOrder = () => {
         <tr>
           <th className='id'>STT</th>
           <th className='total'>Price($)</th>
-          <th className='status'>Name</th>
+          <th className='status'>Status</th>
           <th className='date'>Date</th>
           <th className='view'>View</th>
           <th className='delete'>Delete</th>

@@ -67,7 +67,6 @@ const CartTable = () => {
         </div>
         <Button className="cart__total-btn" type="primary">
           <NavLink to={ROUTE.CHECKOUT} exact>
-            {" "}
             PROCEED CHECKOUT
           </NavLink>
         </Button>
