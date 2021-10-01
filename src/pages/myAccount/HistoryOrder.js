@@ -29,6 +29,7 @@ const HistoryOrder = () => {
   );
   const [visible, setVisible] = useState(false);
   const [idBill, setIdBill] = useState();
+  console.log("🚀 ~ file: HistoryOrder.js ~ line 32 ~ HistoryOrder ~ idBill", idBill)
   const { Option } = Select;
   React.useEffect(() => {
     dispatch(getListProductApi());
@@ -59,7 +60,7 @@ const HistoryOrder = () => {
   const handleSearch = () => {
     dispatch(searchItem(formNewVl.search));
   };
-  console.log("--",listOrderFindOneApi);
+  // console.log("--",listOrderFindOneApi);
   const renderBill = () => {
     return listOrderFindOneApi.map((item) => {
       const product_id = item.product_id;
@@ -84,7 +85,7 @@ const HistoryOrder = () => {
       );
     });
   };
-
+  // console.log("listOrderUserApi",listOrderUserApi);
   const renderListOrder = () => {
     return listOrderUserApi.map((item) => {
       return (

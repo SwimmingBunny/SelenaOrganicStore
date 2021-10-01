@@ -46,13 +46,9 @@ const Checkout = (props) => {
     }
   };
 
+  
+
   const handleSbm = (listId) => {
-    setIsShowCart(false);
-
-    let total = 10; //10 ship
-    
-
-  const handleSbm = () => {
     warning();
     let total = 10; //10 ship
     const discount = 50;
@@ -230,7 +226,7 @@ const Checkout = (props) => {
         </Row>
       </div>
     </>
-  )};
+  );
 };
 
 export default Checkout;
