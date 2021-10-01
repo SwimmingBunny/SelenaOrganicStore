@@ -1,19 +1,16 @@
 /** @format */
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import Modal from "../../component/Modal/Modal.js";
 import {
   Row,
   Col,
-  Popover,
   Rate,
   Button,
   Tabs,
   Space,
   Input,
-  Form,
   Comment,
-  Tooltip,Avatar
+  Tooltip,Avatar,Modal
 } from "antd";
 import { PlusOutlined, MinusOutlined,HeartOutlined} from "@ant-design/icons";
 
@@ -37,17 +34,12 @@ import {
 import { getListCustomerApi } from "../../redux/reducers/customerSlice.js";
 const ProductDetail = () => {
   // Tên Biến
-  const [isShowCart, setIsShowCart] = React.useState(true);
-  const [isShowWishlist, setisShowWishlist] = React.useState(true);
   const [itemDetail, setItemDetail] = React.useState();
   const [contentVl, setContentVl] = React.useState("");
   const [rate, setRate] = React.useState("");
   const [countPD, setCountPD] = React.useState(1);
   const list = JSON.parse(localStorage.getItem("inforUser"));
 
-  const isMoblie = useMediaQuery({
-    query: "(max-width: 480px)",
-  });
   const dispatch = useDispatch();
   const { listProductApi } = useSelector((state) => state.listProduct);
   const { listCommentInit } = useSelector((state) => state.listComment);
@@ -57,6 +49,37 @@ const ProductDetail = () => {
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
   const [check, setCheck] = React.useState(true);
   const [checkStock, setCheckStock] = React.useState(true);
+  let { id } = useParams();
+  React.useEffect(() => {
+    window.scrollTo(0, 50);
+  }, []);
+  // use Media
+  const isMoblie = useMediaQuery({
+    query: "(max-width: 480px)",
+  });
+  // Get đc listProductApi
+  React.useEffect(() => {
+    dispatch(getListCommentApi());
+    dispatch(getListCustomerApi())
+
+  }, []);
+  React.useEffect(() => {
+    const d = listProductApi.find((item) => item.id === +id); //find e in arr
+    setItemDetail(d);
+  }, [listProductApi, id]);
+ 
+  React.useEffect(() => {
+    dispatch(getListCommentApi());
+  }, [listCommentInit]);
+  React.useEffect(() => {
+    const d = listProductApi.find((item) => item.id === +id); //find e in arr
+    setItemDetail(d);
+  }, [listProductApi, id]);
+  // func Đơn Giản
+  const handleChange = (value) => {
+    setRate(value);
+  };
+  // Css cho button Count
   const countStyle = {
     minWidth: "3.7rem",
     textAlign: "center",
@@ -75,6 +98,7 @@ const ProductDetail = () => {
     justifyContent: "space-between",
     maxHeight: "3.4rem",
   };
+  // Func cho biến count
   const Plus = () => {
     if (countPD === 1) {
       setCheck(true);
@@ -97,52 +121,34 @@ const ProductDetail = () => {
       dispatch(editCartItem({ ...itemDetail, count: countPD - 1 }));
     }
   };
-  let { id } = useParams();
-  React.useEffect(() => {
-    dispatch(getListCustomerApi())
-  }, []);
-  React.useEffect(() => {
-    dispatch(getListCommentApi());
-  }, [listCommentInit]);
-  React.useEffect(() => {
-    const d = listProductApi.find((item) => item.id === +id); //find e in arr
-    setItemDetail(d);
-  }, [listProductApi, id]);
-  const handleChange = (value) => {
-    setRate(value);
-  };
+  
+ 
+ 
 
   const handleAddCart = () => {
-    dispatch(
-      addToCart({
-        ...itemDetail,
-        total: itemDetail.price,
-        count: countPD,
-      })
-    );
-    setIsShowCart(false);
+    if (itemDetail?.stock === 0) {
+      error();
+    } else {
+      cartModal();
+      dispatch(
+        addToCart({
+          ...itemDetail,
+          total: itemDetail.price,
+          count: countPD,
+        })
+      );
+    }
   };
-
   const handleAddWishlist = () => {
+    wlModal();
     dispatch(addToWishlist({ ...itemDetail }));
-    setisShowWishlist(false);
   };
-  React.useEffect(() => {
-    window.scrollTo(0, 50);
-  }, []);
-  const handleIsShow = () => {
-    setIsShowCart(true);
-  };
-  const handleIsShowWishlist = () => {
-    setisShowWishlist(true);
-  };
-
+  // Func cho cái cmt
   const handelComment = (product_id) => {
     dispatch(
       addCommentApi({ contentVl, rate, product_id, customer_id: list.id })
     );
   };
-  
  
 
   const renderComments = () => { 
@@ -183,63 +189,92 @@ const ProductDetail = () => {
       
     });
   };
+  //  Modal
+  function cartModal() {
+    let secondsToGo = 1;
+    const modal = Modal.success({
+      title: "Add to cart susccess",
+    });
+    setTimeout(() => {
+      modal.destroy();
+    }, secondsToGo * 1000);
+  }
+  function wlModal() {
+    let secondsToGo = 1;
+    const modal = Modal.success({
+      title: "Add to wishlist susccess",
+    });
+    setTimeout(() => {
+      modal.destroy();
+    }, secondsToGo * 1000);
+  }
+  function error() {
+    Modal.error({
+      title: "Sorry! Stock Out",
+      content: "We will refill soon",
+    });
+  }
   return (
     <>
-      <div className='container detail'>
-        <Row className='detail__top'>
-          <Col lg={{ span: 8 }} className='detail__img'>
+      <div className="container detail">
+        <Row className="detail__top">
+          <Col lg={{ span: 8 }} className="detail__img">
             <img
-              className='detail__img--size'
+              className="detail__img--size"
               src={`http://localhost:3000/${itemDetail?.img}`}
             />
           </Col>
-          <Col lg={{ span: 16 }} className='detail__info'>
+          <Col lg={{ span: 16 }} className="detail__info">
             <div style={{ paddingLeft: isMoblie ? "2rem" : "8rem" }}>
               <Rate value={itemDetail?.rating} />
               <h2>{itemDetail?.name}</h2>
               <div></div>
-              <h2 className='detail__info--price'>$ {itemDetail?.price}.00</h2>
-              <p className='detail__info--descrip'>{itemDetail?.description}</p>
+              <h2 className="detail__info--price">$ {itemDetail?.price}.00</h2>
+              <p className="detail__info--descrip">{itemDetail?.description}</p>
               <Button
-                className='form__btn detail__info--cart'
-                size='large'
-                onClick={handleAddCart}>
+                className="form__btn detail__info--cart"
+                size="large"
+                onClick={handleAddCart}
+              >
                 ADD TO CART
               </Button>
 
               <Button
-                className='detail__info--heart'
-                size='large'
-                onClick={handleAddWishlist}>
+                className="detail__info--heart"
+                size="large"
+                onClick={handleAddWishlist}
+              >
                 <HeartOutlined />
               </Button>
               <div style={{ display: "flex" }}>
                 <div style={borderStyle}>
                   {check ? (
-                    <Button onClick={Minus} size='small' style={btnStyle}>
+                    <Button onClick={Minus} size="small" style={btnStyle}>
                       <MinusOutlined />
                     </Button>
                   ) : (
                     <Button
                       onClick={Minus}
                       disabled
-                      size='small'
-                      style={btnStyle}>
+                      size="small"
+                      style={btnStyle}
+                    >
                       <MinusOutlined />
                     </Button>
                   )}
 
                   <p style={countStyle}>{countPD}</p>
-                  {checkStock ? (
-                    <Button onClick={Plus} size='small' style={btnStyle}>
+                  {countPD < itemDetail?.stock ? (
+                    <Button onClick={Plus} size="small" style={btnStyle}>
                       <PlusOutlined />
                     </Button>
                   ) : (
                     <Button
                       onClick={Plus}
-                      size='small'
+                      size="small"
                       disabled
-                      style={btnStyle}>
+                      style={btnStyle}
+                    >
                       <PlusOutlined />
                     </Button>
                   )}
@@ -252,14 +287,15 @@ const ProductDetail = () => {
             </div>
           </Col>
         </Row>
-        <Row className='detail__middle'>
+        <Row className="detail__middle">
           <Space style={{ marginBottom: 24 }}></Space>
           <Tabs tabPosition={isMoblie ? "top" : "left"}>
             <TabPane
-              tab='Description'
-              key='1'
-              className='detail__middle--boder'>
-              <p className='detail__info--descrip'>{itemDetail?.description}</p>
+              tab="Description"
+              key="1"
+              className="detail__middle--boder"
+            >
+              <p className="detail__info--descrip">{itemDetail?.description}</p>
             </TabPane>
             <TabPane
               tab='Reviews'
@@ -277,7 +313,7 @@ const ProductDetail = () => {
                     }}
                     value={contentVl}
                   />
-                  <div className='detail__middle__review--sb--rate'>
+                  <div className="detail__middle__review--sb--rate">
                     <h3>Rate:</h3>
                     <Rate
                       tooltips={desc}
@@ -285,7 +321,7 @@ const ProductDetail = () => {
                       value={rate}
                     />
                     {rate ? (
-                      <span className='ant-rate-text'> : {desc[rate - 1]}</span>
+                      <span className="ant-rate-text"> : {desc[rate - 1]}</span>
                     ) : (
                       ""
                     )}
@@ -306,9 +342,9 @@ const ProductDetail = () => {
             </TabPane>
           </Tabs>
         </Row>
-        <Row className='detail__bottom'>
-          <h1 className='detail__bottom--related'>Related Product</h1>
-          <div className='detail__bottom--boder'></div>
+        <Row className="detail__bottom">
+          <h1 className="detail__bottom--related">Related Product</h1>
+          <div className="detail__bottom--boder"></div>
           <Row gutter={16}>
             <ProductItem
               img={`http://localhost:3000/${itemDetail?.img}`}
@@ -330,18 +366,6 @@ const ProductDetail = () => {
             />
           </Row>
         </Row>
-      </div>
-      <div
-        className='modal'
-        onClick={handleIsShow}
-        style={{ display: isShowCart ? "none" : "flex" }}>
-        <Modal name='Add to cart suscces' />
-      </div>
-      <div
-        className='modal'
-        onClick={handleIsShowWishlist}
-        style={{ display: isShowWishlist ? "none" : "flex" }}>
-        <Modal name='Add to wishlist suscces' />
       </div>
     </>
   );

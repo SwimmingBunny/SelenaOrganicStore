@@ -158,16 +158,191 @@ const listProduct = createSlice({
     },
     setSortItem: (state, action) => {
       state.sortPrice = action.payload;
+      state.currentPage = 1;
+      const value = action.payload;
+      console.log(value[0], "slider");
+      console.log(value[1], "slider1");
       state.listProductApi = [...state.listProductInit].filter(
         (item, index) => {
-          if (action.payload === 0) {
-            return item.price < 10 && item.price > 1;
+          if (value[0] === 0 && value[1] === 10) {
+            return item.price < 10;
           }
-          if (action.payload === 1) {
-            return item.price < 50 && item.price > 10;
+          if (value[0] === 0 && value[1] === 20) {
+            return item.price < 20;
           }
-          if (action.payload === 2) {
-            return item.price > 50;
+          if (value[0] === 0 && value[1] === 30) {
+            return item.price < 30;
+          }
+          if (value[0] === 0 && value[1] === 40) {
+            return item.price < 40;
+          }
+          if (value[0] === 0 && value[1] === 50) {
+            return item.price < 50;
+          }
+          if (value[0] === 0 && value[1] === 60) {
+            return item.price < 60;
+          }
+          if (value[0] === 0 && value[1] === 70) {
+            return item.price < 70;
+          }
+          if (value[0] === 0 && value[1] === 80) {
+            return item.price < 80;
+          }
+          if (value[0] === 0 && value[1] === 90) {
+            return item.price < 90;
+          }
+          if (value[0] === 0 && value[1] === 100) {
+            return item.price > 0 && item.price < 150;
+          }
+          // split 10
+          if (value[0] === 10 && value[1] === 20) {
+            return item.price > 10 && item.price < 20;
+          }
+          if (value[0] === 10 && value[1] === 30) {
+            return item.price > 10 && item.price < 30;
+          }
+          if (value[0] === 10 && value[1] === 40) {
+            return item.price > 10 && item.price < 40;
+          }
+          if (value[0] === 10 && value[1] === 50) {
+            return item.price > 10 && item.price < 50;
+          }
+          if (value[0] === 10 && value[1] === 60) {
+            return item.price > 10 && item.price < 60;
+          }
+          if (value[0] === 10 && value[1] === 70) {
+            return item.price > 10 && item.price < 70;
+          }
+          if (value[0] === 10 && value[1] === 80) {
+            return item.price > 10 && item.price < 80;
+          }
+          if (value[0] === 10 && value[1] === 90) {
+            return item.price > 10 && item.price < 90;
+          }
+          if (value[0] === 10 && value[1] === 100) {
+            return item.price > 10 && item.price < 150;
+          }
+          // split 20
+          if (value[0] === 20 && value[1] === 30) {
+            return item.price > 20 && item.price < 30;
+          }
+          if (value[0] === 20 && value[1] === 40) {
+            return item.price > 20 && item.price < 40;
+          }
+          if (value[0] === 20 && value[1] === 50) {
+            return item.price > 20 && item.price < 50;
+          }
+          if (value[0] === 20 && value[1] === 60) {
+            return item.price > 20 && item.price < 60;
+          }
+          if (value[0] === 20 && value[1] === 70) {
+            return item.price > 20 && item.price < 70;
+          }
+          if (value[0] === 20 && value[1] === 80) {
+            return item.price > 20 && item.price < 80;
+          }
+          if (value[0] === 20 && value[1] === 90) {
+            return item.price > 20 && item.price < 90;
+          }
+          if (value[0] === 20 && value[1] === 100) {
+            return item.price > 20 && item.price < 150;
+          }
+          // split 30
+          if (value[0] === 30 && value[1] === 40) {
+            return item.price > 30 && item.price < 40;
+          }
+          if (value[0] === 30 && value[1] === 50) {
+            return item.price > 30 && item.price < 50;
+          }
+          if (value[0] === 30 && value[1] === 60) {
+            return item.price > 30 && item.price < 60;
+          }
+          if (value[0] === 30 && value[1] === 70) {
+            return item.price > 30 && item.price < 70;
+          }
+          if (value[0] === 30 && value[1] === 80) {
+            return item.price > 30 && item.price < 80;
+          }
+          if (value[0] === 30 && value[1] === 90) {
+            return item.price > 30 && item.price < 90;
+          }
+          if (value[0] === 30 && value[1] === 100) {
+            return item.price > 30 && item.price < 150;
+          }
+          // split 40
+          if (value[0] === 40 && value[1] === 50) {
+            return item.price > 40 && item.price < 50;
+          }
+          if (value[0] === 40 && value[1] === 60) {
+            return item.price > 40 && item.price < 60;
+          }
+          if (value[0] === 40 && value[1] === 70) {
+            return item.price > 40 && item.price < 70;
+          }
+          if (value[0] === 40 && value[1] === 80) {
+            return item.price > 40 && item.price < 80;
+          }
+          if (value[0] === 40 && value[1] === 90) {
+            return item.price > 40 && item.price < 90;
+          }
+          if (value[0] === 40 && value[1] === 100) {
+            return item.price > 40 && item.price < 150;
+          }
+          // split 50
+          if (value[0] === 50 && value[1] === 50) {
+            return item.price > 50 && item.price < 50;
+          }
+          if (value[0] === 50 && value[1] === 60) {
+            return item.price > 50 && item.price < 60;
+          }
+          if (value[0] === 50 && value[1] === 70) {
+            return item.price > 50 && item.price < 70;
+          }
+          if (value[0] === 50 && value[1] === 80) {
+            return item.price > 50 && item.price < 80;
+          }
+          if (value[0] === 50 && value[1] === 90) {
+            return item.price > 50 && item.price < 90;
+          }
+          if (value[0] === 50 && value[1] === 100) {
+            return item.price > 50 && item.price < 150;
+          }
+          // split 60
+
+          if (value[0] === 60 && value[1] === 70) {
+            return item.price > 60 && item.price < 70;
+          }
+          if (value[0] === 60 && value[1] === 80) {
+            return item.price > 60 && item.price < 80;
+          }
+          if (value[0] === 60 && value[1] === 90) {
+            return item.price > 60 && item.price < 90;
+          }
+          if (value[0] === 60 && value[1] === 100) {
+            return item.price > 60 && item.price < 150;
+          }
+          // split 70
+          if (value[0] === 70 && value[1] === 80) {
+            return item.price > 70 && item.price < 80;
+          }
+          if (value[0] === 70 && value[1] === 90) {
+            return item.price > 70 && item.price < 90;
+          }
+          if (value[0] === 70 && value[1] === 100) {
+            return item.price > 70 && item.price < 150;
+          }
+          // split 80
+
+          if (value[0] === 80 && value[1] === 90) {
+            return item.price > 80 && item.price < 90;
+          }
+          if (value[0] === 80 && value[1] === 100) {
+            return item.price > 80 && item.price < 150;
+          }
+          // split 90
+
+          if (value[0] === 90 && value[1] === 100) {
+            return item.price > 90 && item.price < 150;
           }
         }
       );
@@ -205,7 +380,11 @@ const listProduct = createSlice({
       state.currentPage = 1;
       state.listProductApi = [...state.listProductInit]
         .filter((item) => {
-          return !state.filterType || state.filterType === item.type;
+          if (state.filterType === "all") {
+            return (state.listProductApi = [...state.listProductInit]);
+          } else {
+            return !state.filterType || state.filterType === item.type;
+          }
         })
         .filter((item) => {
           const id = action.payload.key;

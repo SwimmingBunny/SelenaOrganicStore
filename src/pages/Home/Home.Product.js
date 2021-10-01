@@ -19,6 +19,9 @@ const Product = () => {
         .filter((item, index) => {
           return item.type === "vegetables";
         })
+        .sort((a, b) => {
+          return b.rating - a.rating;
+        })
         .slice(0, 6);
       setListProduct(list);
     }
@@ -26,6 +29,9 @@ const Product = () => {
       const list = listProductApi
         .filter((item, index) => {
           return item.type === "fruits";
+        })
+        .sort((a, b) => {
+          return b.rating - a.rating;
         })
         .slice(0, 6);
       setListProduct(list);
@@ -35,6 +41,9 @@ const Product = () => {
         .filter((item, index) => {
           return item.type === "juice";
         })
+        .sort((a, b) => {
+          return b.rating - a.rating;
+        })
         .slice(0, 6);
       setListProduct(list);
     }
@@ -42,6 +51,9 @@ const Product = () => {
       const list = listProductApi
         .filter((item, index) => {
           return item.type === "meats";
+        })
+        .sort((a, b) => {
+          return b.rating - a.rating;
         })
         .slice(0, 6);
       setListProduct(list);

@@ -10,6 +10,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getListProductApi());
+    window.scrollTo(0, 50);
   }, []);
   const { cart } = useSelector((state) => state.listProduct);
   return (

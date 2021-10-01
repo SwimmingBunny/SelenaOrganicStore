@@ -3,7 +3,7 @@
 import React from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { Alert, Button } from "antd";
+import { Alert, Button, Modal } from "antd";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,11 +18,12 @@ library.add(faTrash);
 const TableRow = (props) => {
   // Tên biến
   const { id, name, price, img, stock, count } = props;
+
   const [count1, setCount] = React.useState(count);
   const [check, setCheck] = React.useState(true);
   const [checkStock, setCheckStock] = React.useState(true);
   const dispatch = useDispatch();
-// Style cho Button Count
+  // Style cho Button Count
   const countStyle = {
     minWidth: "3.7rem",
     textAlign: "center",
@@ -47,9 +48,8 @@ const TableRow = (props) => {
       setCheck(true);
     }
     setCount(count1 + 1);
-    if (count1 >= stock - 1) {
-      setCheckStock(false);
-      alert("alo");
+    if (count1 === stock - 1) {
+      error();
     } else {
       dispatch(editCartItem({ ...props, count: count1 + 1 }));
     }
@@ -60,12 +60,30 @@ const TableRow = (props) => {
     }
     if (count > 1) {
       setCheck(true);
-      setCount(count - 1);
+      setCount(count1 - 1);
       setCheckStock(true);
       dispatch(editCartItem({ ...props, count: count1 - 1 }));
     }
   };
-
+  // Func Đơn Giản
+  const deletePD = () => {
+    const isCancel = window.confirm("Are you sure to delete this product");
+    if (isCancel) {
+      dispatch(deleteItemCart(id));
+    }
+  };
+  //  Modal
+  function confirm() {
+    Modal.confirm({
+      title: "Confirm",
+    });
+  }
+  function error() {
+    Modal.error({
+      title: "Sorry! Stock Out",
+      content: "We will refill soon",
+    });
+  }
   return (
     <tr className="cart__table-tr">
       <td className="cart__table-tr--td ">
@@ -87,7 +105,7 @@ const TableRow = (props) => {
             )}
 
             <p style={countStyle}>{count1}</p>
-            {checkStock ? (
+            {count1 < stock ? (
               <Button onClick={Plus} size="small" style={btnStyle}>
                 <PlusOutlined />
               </Button>
@@ -104,9 +122,7 @@ const TableRow = (props) => {
         <FontAwesomeIcon
           icon="trash"
           className="cart__table-tr--td--icon"
-          onClick={() => {
-            dispatch(deleteItemCart(id));
-          }}
+          onClick={deletePD}
         />
       </td>
     </tr>

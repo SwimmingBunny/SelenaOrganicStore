@@ -1,11 +1,10 @@
 /** @format */
 
 import React from "react";
-import { Row, Col, Form, Button, Radio, Input, Space } from "antd";
+import { Row, Col, Form, Button, Radio, Input, Space, Modal } from "antd";
 import validateMessages from "../form/ValidateMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Modal from "../../component/Modal/Modal.js";
 
 import "../../style/checkout.scss";
 import "../../style/form.scss";
@@ -46,9 +45,6 @@ const Checkout = (props) => {
       setIsShow(true);
     }
   };
-  const handleIsShow = () => {
-    setIsShowCart(true);
-  };
 
   const handleSbm = (listId) => {
     setIsShowCart(false);
@@ -56,6 +52,10 @@ const Checkout = (props) => {
     let total = 10; //10 ship
     
 
+  const handleSbm = () => {
+    warning();
+    let total = 10; //10 ship
+    const discount = 50;
     const cartApi = cart.map((vl) => {
       total = total + vl.total;
 
@@ -82,18 +82,24 @@ const Checkout = (props) => {
       maximumFractionDigits: 2,
     });
   };
-
+  // Modal warning
+  function warning() {
+    Modal.success({
+      title: "Place order succses!",
+      content: "Thanks for your support ^^",
+    });
+  }
   return (
     <>
-      <div className='aboutUs__header'>
-        <h1 className='aboutUs__header-h1'>Shop</h1>
-        <h3 className='aboutUs__header-h3'>Checkout</h3>
+      <div className="aboutUs__header">
+        <h1 className="aboutUs__header-h1">Shop</h1>
+        <h3 className="aboutUs__header-h3">Checkout</h3>
       </div>
-      <div className='container'>
-        <Row gutter={20} className='checkout'>
+      <div className="container">
+        <Row gutter={20} className="checkout">
           <Col xs={{ span: 24 }} lg={{ span: 12 }}>
-            <h2 className='checkout--borderbot'>Billing Details</h2>
-            <div className='checkout__info'>
+            <h2 className="checkout--borderbot">Billing Details</h2>
+            <div className="checkout__info">
               <Form
                 Form={form}
                 name='basic'
@@ -107,21 +113,23 @@ const Checkout = (props) => {
                       required: true,
                       message: "Please input your Full Name",
                     },
-                  ]}>
+                  ]}
+                >
                   <Input
-                    name='fullname'
-                    className='form__group--input form__group--backgroundColor'
-                    placeholder='Full Name'
+                    name="fullname"
+                    className="form__group--input form__group--backgroundColor"
+                    placeholder="Full Name"
                   />
                 </Form.Item>
                 <Form.Item
-                  label='Email Address'
+                  label="Email Address"
                   name={"email"}
-                  rules={[{ required: true, type: "email" }]}>
+                  rules={[{ required: true, type: "email" }]}
+                >
                   <Input
                     name={"email"}
-                    className='form__group--input form__group--backgroundColor'
-                    placeholder='Enter your Email'
+                    className="form__group--input form__group--backgroundColor"
+                    placeholder="Enter your Email"
                   />
                 </Form.Item>
                 <Form.Item
@@ -141,7 +149,8 @@ const Checkout = (props) => {
                     {
                       required: true,
                     },
-                  ]}>
+                  ]}
+                >
                   <Input
                     name='address'
                     className='form__group--input form__group--backgroundColor'
@@ -149,27 +158,27 @@ const Checkout = (props) => {
                   />
                 </Form.Item>
                 <Form.Item
-                  label='Note'
-                  name='note'
+                  label="Note"
+                  name="note"
                   rules={[
                     {
                       required: true,
                       message: "Please input your Full Name",
                     },
-                  ]}>
+                  ]}
+                >
                   <Input.TextArea
-                    name='note'
-                    className='form__group--input form__group--backgroundColor'
-                    placeholder='Note'
+                    name="note"
+                    className="form__group--input form__group--backgroundColor"
+                    placeholder="Note"
                   />
                 </Form.Item>
-                
               </Form>
             </div>
           </Col>
           <Col xs={{ span: 24 }} lg={{ span: 12 }}>
-            <h2 className='checkout--borderbot'>Your Order Summary</h2>
-            <div className='checkout__order'>
+            <h2 className="checkout--borderbot">Your Order Summary</h2>
+            <div className="checkout__order">
               <table>
                 <tr>
                   <td>Sub Total</td>
@@ -185,28 +194,29 @@ const Checkout = (props) => {
                   <th>${+getTotal() + 10}.00</th>
                 </tr>
               </table>
-              <div className='checkout__order--padding'>
+              <div className="checkout__order--padding">
                 <Radio.Group
                   onChange={onChange}
-                  className='checkout__order--radio'
-                  defaultValue={1}>
-                  <Space direction='vertical'>
+                  className="checkout__order--radio"
+                  defaultValue={1}
+                >
+                  <Space direction="vertical">
                     <Radio value={1}>Payment on delivery</Radio>
                     <Radio value={2}>Momo</Radio>
                     <ul style={{ display: `${isShow ? "none" : "block"}` }}>
                       <img
                         style={{ width: "40%" }}
-                        src='Images/payment/payment.jpg'
+                        src="Images/payment/payment.jpg"
                       />
                     </ul>
                   </Space>
                 </Radio.Group>
                 <br />
-                <div className='checkout__order--center checkout__order--padding'>
+                <div className="checkout__order--center checkout__order--padding">
                   <Form.Item>
                     <Button
-                      type='primary'
-                      size='large'
+                      type="primary"
+                      size="large"
                       htmlType="submit"
                       className='form__btn'
                       onClick={()=>handleSbm(list.id)}>
@@ -219,15 +229,8 @@ const Checkout = (props) => {
           </Col>
         </Row>
       </div>
-      <div
-        className="modal"
-        onClick={handleIsShow}
-        style={{ display: isShowCart ? "none" : "flex" }}
-      >
-        <Modal name="Payment success! Thanks for your support" />
-      </div>
     </>
-  );
+  )};
 };
 
 export default Checkout;

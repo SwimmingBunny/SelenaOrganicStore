@@ -1,42 +1,65 @@
 /** @format */
 
 import React from "react";
-import Modal from "../../../component/Modal/Modal";
 import ViewProduct from "./ViewProduct";
 import { useMediaQuery } from "react-responsive";
-import { Row, Col, Rate, Button } from "antd";
+import { Row, Col, Rate, Button, Modal } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { ROUTE } from "../../../constant/router";
-import {
-  addToCart,
-  addToWishlist,
-  addToDetail,
-} from "../../../redux/reducers/productSlice";
+import { addToCart, addToWishlist } from "../../../redux/reducers/productSlice";
 import "./productList.scss";
 import { useDispatch } from "react-redux";
 
 const ProductList = (props) => {
-  const [isShowCart, setIsShowCart] = React.useState(true);
-  const [isShowWishlist, setisShowWishlist] = React.useState(true);
-  const { id, name, img, price, stock, description, rating } = props;
+  const token = localStorage.getItem("accessToken");
+  const { id, name, img, price, stock, description, rating, count } = props;
   const dispatch = useDispatch();
+  const history = useHistory();
   const handleAddCart = () => {
-    dispatch(
-      addToCart({ id, img, name, price, stock, total: price, count: 1 })
-    );
-    setIsShowCart(false);
+    if (stock === 0) {
+      warning();
+    } else {
+      if (token) {
+        dispatch(
+          addToCart({ id, img, name, price, stock, total: price, count })
+        );
+        cartModal();
+      } else {
+        history.push("/login");
+      }
+    }
   };
   const handleAddWishlist = () => {
     dispatch(addToWishlist({ id, img, name, price, stock }));
-    setisShowWishlist(false);
+    wlModal();
   };
-  const handleIsShow = () => {
-    setIsShowCart(true);
-  };
-  const handleIsShowWishlist = () => {
-    setisShowWishlist(true);
-  };
+  //  Modal
+  function cartModal() {
+    let secondsToGo = 1;
+    const modal = Modal.success({
+      title: "Add to cart susccess",
+    });
+    setTimeout(() => {
+      modal.destroy();
+    }, secondsToGo * 1000);
+  }
+  function wlModal() {
+    let secondsToGo = 1;
+    const modal = Modal.success({
+      title: "Add to wishlist susccess",
+    });
+    setTimeout(() => {
+      modal.destroy();
+    }, secondsToGo * 1000);
+  }
+  // Modal warning
+  function warning() {
+    Modal.error({
+      title: "Sorry! Stock Out",
+      content: "We will refill soon",
+    });
+  }
   return (
     <div className="product-list">
       <Row>
@@ -49,7 +72,16 @@ const ProductList = (props) => {
         <Col lg={{ span: 18 }} xs={{ span: 24 }}>
           <div className="content">
             <Rate value={rating} />
-            <h2>{props.name}</h2>
+            <div>
+              {stock === 0 ? (
+                <>
+                  <h2>{props.name}</h2>
+                  <p className="stockout "> Stock Out</p>
+                </>
+              ) : (
+                <h2>{props.name}</h2>
+              )}
+            </div>
             <h3>$ {price}.00</h3>
             <p>{description}</p>
             <Button size="large" className="add" onClick={handleAddCart}>
@@ -62,20 +94,6 @@ const ProductList = (props) => {
           </div>
         </Col>
       </Row>
-      <div
-        className="modal"
-        onClick={handleIsShow}
-        style={{ display: isShowCart ? "none" : "flex" }}
-      >
-        <Modal name="Add to cart suscces" />
-      </div>
-      <div
-        className="modal"
-        onClick={handleIsShowWishlist}
-        style={{ display: isShowWishlist ? "none" : "flex" }}
-      >
-        <Modal name="Add to wishlist suscces" />
-      </div>
     </div>
   );
 };
