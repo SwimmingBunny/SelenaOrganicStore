@@ -65,7 +65,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log("error", error);
-        message.error('Login Fail!', 3);
+        message.error('Login Fail!', 2);
       });
   };
   return (

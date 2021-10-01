@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import "./Modal.scss";
 import {
   EditFilled,
   DeleteOutlined,
@@ -9,9 +10,10 @@ import {
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getListProductApi, setSort } from "../../redux/reducers/productSlice";
-import { Button, Input, Select, Modal } from "antd";
+import { Button, Input, Select, Modal, message } from "antd";
 import { useState } from "react";
 import {
+  deleteOrderApi,
   getOrderApi,
   getOrderFindOneApi,
   getOrderUserApi,
@@ -29,13 +31,14 @@ const HistoryOrder = () => {
   );
   const [visible, setVisible] = useState(false);
   const [idBill, setIdBill] = useState();
-  console.log("🚀 ~ file: HistoryOrder.js ~ line 32 ~ HistoryOrder ~ idBill", idBill)
+
   const { Option } = Select;
   React.useEffect(() => {
     dispatch(getListProductApi());
     dispatch(getOrderFindOneApi(idBill));
     dispatch(getOrderApi());
     dispatch(getListCustomerApi());
+    dispatch(getOrderUserApi());
   }, []);
   React.useEffect(() => {
     dispatch(getOrderUserApi(list.id));
@@ -62,21 +65,21 @@ const HistoryOrder = () => {
   };
   // console.log("--",listOrderFindOneApi);
   const renderBill = () => {
-    return listOrderFindOneApi.map((item) => {
+    return listOrderFindOneApi?.map((item) => {
       const product_id = item.product_id;
 
-      const infoProduct = listProductApi.filter((item) => {
+      const infoProduct = listProductApi?.filter((item) => {
         return item.id === product_id;
       });
-      const renderProduct = infoProduct.map((item)=>{
-        return(
+      const renderProduct = infoProduct.map((item) => {
+        return (
           <>
             <td>{item.id}</td>
             <td>{item.name}</td>
             <td>{item.price}</td>
           </>
-        )
-      })
+        );
+      });
       return (
         <tr>
           {renderProduct}
@@ -86,8 +89,11 @@ const HistoryOrder = () => {
     });
   };
   // console.log("listOrderUserApi",listOrderUserApi);
+  const setIsShow = () => {
+    setVisible(false);
+  };
   const renderListOrder = () => {
-    return listOrderUserApi.map((item) => {
+    return listOrderUserApi?.map((item) => {
       return (
         <tr>
           <td>{item.id}</td>
@@ -96,78 +102,92 @@ const HistoryOrder = () => {
           <td>{moment(item.date).format("DD-MM-YYYY")}</td>
           <td>
             <Button
-              type='primary'
+              type="primary"
               onClick={() => {
                 setIdBill(item.id);
                 setVisible(true);
-              }}>
+              }}
+            >
               View
             </Button>
           </td>
-          <td className='icon'>
-            <DeleteOutlined />
+          <td className="icon">
+            <DeleteOutlined
+              onClick={async () => {
+                window.confirm(
+                  "Are you sure to delete this bill from your Oders?"
+                );
+
+                await dispatch(deleteOrderApi(item.id));
+                message.success("Delete success", 2);
+                dispatch(getOrderUserApi());
+              }}
+            />
           </td>
         </tr>
       );
     });
   };
   return (
-    <div className='admin__users'>
-      <div className='top top--flex'>
+    <div className="admin__users">
+      <div className="top top--flex">
         <div>
           <Select
-            defaultValue='All'
+            defaultValue="All"
             style={{ width: 120 }}
-            onChange={handleChange}>
-            <Option value='All'>All</Option>
-            <Option value='Name'>Name (A-Z)</Option>
-            <Option value='total'>Total (L-H)</Option>
-            <Option value='status'>Status</Option>
+            onChange={handleChange}
+          >
+            <Option value="All">All</Option>
+            <Option value="Name">Name (A-Z)</Option>
+            <Option value="total">Total (L-H)</Option>
+            <Option value="status">Status</Option>
           </Select>
         </div>
-        <div className='top--width top--flex'>
+        <div className="top--width top--flex">
           <Input
-            placeholder='Search...'
-            name='search'
+            placeholder="Search..."
+            name="search"
             onChange={(e) => {
               handelOnChange(e);
             }}
             value={formNewVl.search}
           />
-          <Button htmlType='html' onClick={handleSearch}>
+          <Button htmlType="html" onClick={handleSearch}>
             Search
           </Button>
         </div>
       </div>
       <table>
         <tr>
-          <th className='id'>STT</th>
-          <th className='total'>Price($)</th>
-          <th className='status'>Name</th>
-          <th className='date'>Date</th>
-          <th className='view'>View</th>
-          <th className='delete'>Delete</th>
+          <th className="id">STT</th>
+          <th className="total">Price($)</th>
+          <th className="status">Status</th>
+          <th className="date">Date</th>
+          <th className="view">View</th>
+          <th className="delete">Delete</th>
         </tr>
         {renderListOrder()}
       </table>
-      <Modal
-        className='admin__users'
-        title='Bill Detail'
-        centered
-        visible={visible}
-        onOk={() => setVisible(false)}
-        onCancel={() => setVisible(false)}
-        width={1000}>
-        <table>
-          <tr>
-            <th className='id'>STT</th>
-            <th className='name'>Product</th>
-            <th className='total'>Price ($)</th>
-            <th className='quantity'>Quantity</th>
-          </tr>
-          {renderBill()}
-        </table>
-      </Modal>
+      {visible ? (
+        <div className="modal" onClick={setIsShow}>
+          <div className="content">
+            <table>
+              <tr>
+                <th className="id">STT</th>
+                <th className="name">Product</th>
+                <th className="total">Price ($)</th>
+                <th className="quantity">Quantity</th>
+              </tr>
+              {renderBill()}
+            </table>
+            <div className="modal-btn">
+              <Button type="primary" onClick={setIsShow} id="btn">
+                OK
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
