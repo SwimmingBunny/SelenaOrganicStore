@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/SelenaOrganicStore/static/css/main.9919f929.chunk.css",
+    "main.js": "/SelenaOrganicStore/static/js/main.ebf3a28d.chunk.js",
+    "main.js.map": "/SelenaOrganicStore/static/js/main.ebf3a28d.chunk.js.map",
+    "runtime-main.js": "/SelenaOrganicStore/static/js/runtime-main.d4d74fc9.js",
+    "runtime-main.js.map": "/SelenaOrganicStore/static/js/runtime-main.d4d74fc9.js.map",
+    "static/css/2.786ae0dd.chunk.css": "/SelenaOrganicStore/static/css/2.786ae0dd.chunk.css",
+    "static/js/2.6e4fd3b6.chunk.js": "/SelenaOrganicStore/static/js/2.6e4fd3b6.chunk.js",
+    "static/js/2.6e4fd3b6.chunk.js.map": "/SelenaOrganicStore/static/js/2.6e4fd3b6.chunk.js.map",
+    "static/js/3.fcf4173d.chunk.js": "/SelenaOrganicStore/static/js/3.fcf4173d.chunk.js",
+    "static/js/3.fcf4173d.chunk.js.map": "/SelenaOrganicStore/static/js/3.fcf4173d.chunk.js.map",
+    "index.html": "/SelenaOrganicStore/index.html",
+    "static/css/2.786ae0dd.chunk.css.map": "/SelenaOrganicStore/static/css/2.786ae0dd.chunk.css.map",
+    "static/css/main.9919f929.chunk.css.map": "/SelenaOrganicStore/static/css/main.9919f929.chunk.css.map",
+    "static/js/2.6e4fd3b6.chunk.js.LICENSE.txt": "/SelenaOrganicStore/static/js/2.6e4fd3b6.chunk.js.LICENSE.txt",
+    "static/media/wishlist.scss": "/SelenaOrganicStore/static/media/breadcrumb-banner.22ffa3a1.jpg",
+    "static/media/aboutus.scss": "/SelenaOrganicStore/static/media/testimonials_bg.9dc67713.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d4d74fc9.js",
+    "static/css/2.786ae0dd.chunk.css",
+    "static/js/2.6e4fd3b6.chunk.js",
+    "static/css/main.9919f929.chunk.css",
+    "static/js/main.ebf3a28d.chunk.js"
+  ]
+}
