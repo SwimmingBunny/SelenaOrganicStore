@@ -1,8 +1,8 @@
 /** @format */
 
-import React from "react";
-import AdminRow from "./admin.Customer.js";
-import { Input, Avatar, Row, Col, Menu, Dropdown } from "antd";
+import React from 'react';
+import AdminRow from './admin.Customer.js';
+import { Input, Avatar, Row, Col, Menu, Dropdown } from 'antd';
 import {
   UserOutlined,
   MessageOutlined,
@@ -15,13 +15,13 @@ import {
   ShoppingCartOutlined,
   AppstoreAddOutlined,
   LogoutOutlined,
-} from "@ant-design/icons";
-import { setCurrentPage } from "../../redux/reducers/productSlice";
+} from '@ant-design/icons';
+import { setCurrentPage } from '../../redux/reducers/productSlice';
 
-import { ROUTE } from "../../constant/router.js";
-import { useHistory } from "react-router-dom";
-import ScrollToTop from "../../component/commont/ScrollToTop";
-import { useMediaQuery } from "react-responsive";
+import { ROUTE } from '../../constant/router.js';
+import { useHistory } from 'react-router-dom';
+import ScrollToTop from '../../component/commont/ScrollToTop';
+import { useMediaQuery } from 'react-responsive';
 
 import {
   BrowserRouter as Router,
@@ -31,37 +31,34 @@ import {
   NavLink,
   useRouteMatch,
   useParams,
-} from "react-router-dom";
-import "./admin.scss";
-import Dashboard from "./admin.DashBoard.js";
-import ProductRow from "./ProductRow.js";
-import Order from "./admin.Order.js";
-import AddProduct from "./admin.AddProduct.js";
-import { useDispatch } from "react-redux";
-
-
-  
+} from 'react-router-dom';
+import './admin.scss';
+import Dashboard from './admin.DashBoard.js';
+import ProductRow from './ProductRow.js';
+import Order from './admin.Order.js';
+import AddProduct from './admin.AddProduct.js';
+import { useDispatch } from 'react-redux';
 
 const Admin = () => {
-  const name = JSON.parse(localStorage.getItem("inforUser"));
-  const dispatch = useDispatch()
+  const name = JSON.parse(localStorage.getItem('inforUser'));
+  const dispatch = useDispatch();
   let { path, url } = useRouteMatch();
   const isMoblie = useMediaQuery({
-    query: "(max-width: 480px)",
+    query: '(max-width: 480px)',
   });
   const history = useHistory();
   const logOut = () => {
-    const isSure = window.confirm("Are you sure to logout?");
+    const isSure = window.confirm('Are you sure to logout?');
     if (isSure) {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("inforUser");
-      history.push("/");
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('inforUser');
+      history.push('/');
     }
   };
   const iconDrop = (
-    <Menu className="sub-dropdown">
+    <Menu className='sub-dropdown'>
       <Menu.Item>
-        <div className="cover">
+        <div className='cover'>
           <p>Nothing Here</p>
         </div>
       </Menu.Item>
@@ -69,10 +66,10 @@ const Admin = () => {
   );
   const drop = (
     <Menu>
-      <Menu.Item key="0">
-        <p className="admin__text" onClick={logOut}>
+      <Menu.Item key='0'>
+        <p className='admin__text' onClick={logOut}>
           <span>
-            <LogoutOutlined />{" "}
+            <LogoutOutlined />{' '}
           </span>
           Log Out
         </p>
@@ -81,27 +78,27 @@ const Admin = () => {
   );
 
   const submenu = (
-    <Menu className="admin-submenu" style={{ zIndex: "1000" }}>
+    <Menu className='admin-submenu' style={{ zIndex: '1000' }}>
       <Menu.Item>
-        <ul className="admin-select">
+        <ul className='admin-select'>
           <li>
-            <LayoutOutlined className="icon" />
+            <LayoutOutlined className='icon' />
             Layouts
           </li>
           <li>
-            <AppstoreOutlined className="icon" />
+            <AppstoreOutlined className='icon' />
             User interface
           </li>
           <li>
-            <UserOutlined className="icon" />
+            <UserOutlined className='icon' />
             User
           </li>
           <li>
-            <ShopOutlined className="icon" />
+            <ShopOutlined className='icon' />
             Product
           </li>
           <li>
-            <ShopOutlined className="icon" />
+            <ShopOutlined className='icon' />
             Add Product
           </li>
         </ul>
@@ -111,127 +108,121 @@ const Admin = () => {
     </Menu>
   );
   return (
-    <div className="container">
-      <div className="admin">
-        <Row className="admin-header">
+    <div>
+      <div className='admin'>
+        <Row className='admin-header'>
           <Col span={isMoblie ? 24 : 6}>
-            <NavLink to={ROUTE.HOME} className="col-img" exact>
+            <NavLink to={ROUTE.HOME} className='col-img' exact>
               <ScrollToTop />
               <img
                 src={`http://localhost:3000/Images/logo/logo.png`}
-                alt="Logo image"
+                alt='Logo image'
               />
             </NavLink>
           </Col>
           <Col span={isMoblie ? 0 : 8}></Col>
-          <Col span={isMoblie ? 24 : 8} className="col-icon">
+          <Col span={isMoblie ? 24 : 8} className='col-icon'>
             {isMoblie ? (
               <>
-                <Dropdown overlay={drop} trigger={["click"]}>
+                <Dropdown overlay={drop} trigger={['click']}>
                   <a
-                    className="ant-dropdown-link"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <Avatar size="medium" icon={<UserOutlined />} />
+                    className='ant-dropdown-link'
+                    onClick={(e) => e.preventDefault()}>
+                    <Avatar size='medium' icon={<UserOutlined />} />
 
-                    <span style={{ color: "#62d2a2", marginLeft: "10px" }}>
-                      {name.fullName}{" "}
+                    <span style={{ color: '#62d2a2', marginLeft: '10px' }}>
+                      {name.fullName}{' '}
                     </span>
                   </a>
                 </Dropdown>
-                <Dropdown overlay={iconDrop} trigger={["click"]}>
+                <Dropdown overlay={iconDrop} trigger={['click']}>
                   <a
-                    className="ant-dropdown-link"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <BellOutlined className="icon" />
+                    className='ant-dropdown-link'
+                    onClick={(e) => e.preventDefault()}>
+                    <BellOutlined className='icon' />
                   </a>
                 </Dropdown>
-                <Dropdown overlay={iconDrop} trigger={["click"]}>
+                <Dropdown overlay={iconDrop} trigger={['click']}>
                   <a
-                    className="ant-dropdown-link"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <MessageOutlined className="icon" />
+                    className='ant-dropdown-link'
+                    onClick={(e) => e.preventDefault()}>
+                    <MessageOutlined className='icon' />
                   </a>
                 </Dropdown>
               </>
             ) : (
               <>
-                <Dropdown overlay={drop} trigger={["click"]}>
+                <Dropdown overlay={drop} trigger={['click']}>
                   <a
-                    className="ant-dropdown-link"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <Avatar size="medium" icon={<UserOutlined />} />
+                    className='ant-dropdown-link'
+                    onClick={(e) => e.preventDefault()}>
+                    <Avatar size='medium' icon={<UserOutlined />} />
 
-                    <span style={{ color: "#62d2a2", marginLeft: "10px" }}>
-                      {name.fullName}{" "}
+                    <span style={{ color: '#62d2a2', marginLeft: '10px' }}>
+                      {name.fullName}{' '}
                     </span>
                   </a>
                 </Dropdown>
-                <Dropdown overlay={iconDrop} trigger={["click"]}>
-                  <BellOutlined className="icon" />
+                <Dropdown overlay={iconDrop} trigger={['click']}>
+                  <BellOutlined className='icon' />
                 </Dropdown>
-                <Dropdown overlay={iconDrop} trigger={["click"]}>
-                  <MessageOutlined className="icon" />
+                <Dropdown overlay={iconDrop} trigger={['click']}>
+                  <MessageOutlined className='icon' />
                 </Dropdown>
               </>
             )}
           </Col>
         </Row>
-        <Row className="admin-body">
+        <Row className='admin-body'>
           {isMoblie ? (
             <Col span={24}>
               <Dropdown
                 overlay={submenu}
-                className="admin-menu"
-                placement="bottomCenter"
-              >
+                className='admin-menu'
+                placement='bottomCenter'>
                 <p>
                   Menu
                   <DownOutlined
-                    style={{ fontWeight: "500", fontSize: "1.4rem" }}
+                    style={{ fontWeight: '500', fontSize: '1.4rem' }}
                   />
                 </p>
               </Dropdown>
             </Col>
           ) : (
-            <Col span={6}>
-              <ul className="admin-select">
-                <NavLink className="admin-text" to={`${url}${ROUTE.DASHBOARD}`}>
+            <Col span={4}>
+              <ul className='admin-select'>
+                <NavLink className='admin-text' to={`${url}${ROUTE.DASHBOARD}`}>
                   <li onClick={dispatch(setCurrentPage(1))}>
-                    <LayoutOutlined className="icon" />
+                    <LayoutOutlined className='icon' />
                     Dashboard
                   </li>
                 </NavLink>
 
-                <NavLink className="admin-text" to={`${url}${ROUTE.CUSTOMER}`}>
+                <NavLink className='admin-text' to={`${url}${ROUTE.CUSTOMER}`}>
                   <li onClick={dispatch(setCurrentPage(1))}>
-                    <UserOutlined className="icon" />
+                    <UserOutlined className='icon' />
                     User
                   </li>
                 </NavLink>
 
-                <NavLink className="admin-text" to={`${url}${ROUTE.ORDERS}`}>
+                <NavLink className='admin-text' to={`${url}${ROUTE.ORDERS}`}>
                   <li onClick={dispatch(setCurrentPage(1))}>
-                    <ShoppingCartOutlined className="icon" />
+                    <ShoppingCartOutlined className='icon' />
                     Orders
                   </li>
                 </NavLink>
 
-                <NavLink className="admin-text" to={`${url}${ROUTE.PRODUCTS}`}>
+                <NavLink className='admin-text' to={`${url}${ROUTE.PRODUCTS}`}>
                   <li onClick={dispatch(setCurrentPage(1))}>
-                    <ShopOutlined className="icon" />
+                    <ShopOutlined className='icon' />
                     Products
                   </li>
                 </NavLink>
                 <NavLink
-                  className="admin-text"
-                  to={`${url}${ROUTE.ADDPRODUCT}`}
-                >
+                  className='admin-text'
+                  to={`${url}${ROUTE.ADDPRODUCT}`}>
                   <li>
-                    <AppstoreAddOutlined className="icon" />
+                    <AppstoreAddOutlined className='icon' />
                     Add Products
                   </li>
                 </NavLink>
@@ -239,8 +230,8 @@ const Admin = () => {
             </Col>
           )}
 
-          <Col span={isMoblie ? 24 : 18}>
-            <div className="admin__content">
+          <Col span={isMoblie ? 24 : 20}>
+            <div className='admin__content'>
               <Switch>
                 <Route path={`${path}${ROUTE.DASHBOARD}`}>
                   <Dashboard />

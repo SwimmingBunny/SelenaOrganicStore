@@ -51,7 +51,6 @@ exports.update = (req, res) => {
         message: "Content can not be empty!"
       });
     }
-  
     Products.updateById(
       req.params.id,
       new Products(req.body),
